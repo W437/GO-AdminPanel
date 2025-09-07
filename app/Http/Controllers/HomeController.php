@@ -39,6 +39,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // Landing page disabled - redirect to admin login
+        return redirect('/login/admin');
         $datas =  DataSetting::with('translations')->where('type','admin_landing_page')->get();
         $data = [];
         foreach ($datas as $key => $value) {

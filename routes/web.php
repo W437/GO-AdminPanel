@@ -30,7 +30,7 @@ use App\Http\Controllers\SslCommerzPaymentController;
 */
 
 Route::post('/subscribeToTopic', [FirebaseController::class, 'subscribeToTopic']);
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', function() { return redirect('/login/admin'); })->name('home');
 Route::view('subscription/payment/view' , 'Subscription_payment_view')->name('subscription_payment_view');
 Route::get('maintenance-mode', 'HomeController@maintenanceMode')->name('maintenance_mode');
 // ->middleware('maintenance')->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
@@ -55,15 +55,17 @@ Route::get('otp-resent', 'LoginController@otp_resent')->name('otp_resent');
 
 
 Route::get('lang/{locale}', 'HomeController@lang')->name('lang');
-Route::get('terms-and-conditions', 'HomeController@terms_and_conditions')->name('terms-and-conditions');
-Route::get('about-us', 'HomeController@about_us')->name('about-us');
-Route::match(['get', 'post'],'contact-us', 'HomeController@contact_us')->name('contact-us');
-Route::get('privacy-policy', 'HomeController@privacy_policy')->name('privacy-policy');
+// Landing page routes redirected to admin login
+Route::get('terms-and-conditions', function() { return redirect('/login/admin'); })->name('terms-and-conditions');
+Route::get('about-us', function() { return redirect('/login/admin'); })->name('about-us');
+Route::match(['get', 'post'],'contact-us', function() { return redirect('/login/admin'); })->name('contact-us');
+Route::get('privacy-policy', function() { return redirect('/login/admin'); })->name('privacy-policy');
 Route::post('newsletter/subscribe', 'NewsletterController@newsLetterSubscribe')->name('newsletter.subscribe');
 
-Route::get('refund-policy', 'HomeController@refund_policy')->name('refund-policy');
-Route::get('shipping-policy', 'HomeController@shipping_policy')->name('shipping-policy');
-Route::get('cancellation-policy', 'HomeController@cancellation_policy')->name('cancellation-policy');
+// Policy page routes redirected to admin login
+Route::get('refund-policy', function() { return redirect('/login/admin'); })->name('refund-policy');
+Route::get('shipping-policy', function() { return redirect('/login/admin'); })->name('shipping-policy');
+Route::get('cancellation-policy', function() { return redirect('/login/admin'); })->name('cancellation-policy');
 
 
 

@@ -38,14 +38,15 @@ $order_sch = Cache::rememberForever('order_scheduled_stats', function () {
         <div class="navbar-vertical-container">
             <div class="navbar__brand-wrapper navbar-brand-wrapper justify-content-between">
                 <!-- Logo -->
-                @php($restaurant_logo = \App\Models\BusinessSetting::where(['key' => 'logo'])->first())
-                <a class="navbar-brand d-block p-0" href="{{ route('admin.dashboard') }}" aria-label="Front">
+                <a class="navbar-brand d-block p-0" href="{{ route('admin.dashboard') }}" aria-label="GO Admin Panel">
                     <img class="navbar-brand-logo sidebar--logo-design"
-                        src="{{ Helpers::get_full_url('business', $restaurant_logo?->value, $restaurant_logo?->storage[0]?->value ?? 'public', 'favicon') }}"
-                        alt="image">
+                        src="{{ dynamicAsset('/public/assets/admin/img/go-logo.png') }}"
+                        alt="GO Admin Panel"
+                        onerror="this.src='{{ dynamicAsset('/public/assets/admin/img/logo.png') }}'">
                     <img class="navbar-brand-logo-mini sidebar--logo-design-2"
-                        src="{{ Helpers::get_full_url('business', $restaurant_logo?->value, $restaurant_logo?->storage[0]?->value ?? 'public', 'favicon') }}"
-                        alt="image">
+                        src="{{ dynamicAsset('/public/assets/admin/img/go-logo.png') }}"
+                        alt="GO"
+                        onerror="this.src='{{ dynamicAsset('/public/assets/admin/img/logo.png') }}'">
                 </a>
                 <!-- End Logo -->
 

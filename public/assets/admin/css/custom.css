@@ -165,3 +165,374 @@ ol.breadcrumb {
 .div_size {
     margin-inline-end: 60px;
 }
+
+/* GO Clean White Sidebar Styling */
+.navbar-vertical-aside {
+    background: #f8f9fa !important;
+    border-color: #e9ecef !important;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05) !important;
+}
+
+.navbar-vertical-aside .navbar-vertical-content,
+.navbar-vertical-aside .bg--title {
+    background: transparent !important;
+}
+
+.navbar-vertical-aside .nav-link {
+    color: #2c3e50 !important;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.navbar-vertical-aside .nav-link:hover,
+.navbar-vertical-aside .nav-link:focus {
+    color: #1a252f !important;
+    background-color: #e9ecef !important;
+    border-radius: 6px;
+    margin: 2px 8px;
+}
+
+.navbar-vertical-aside .navbar-vertical-aside-has-menu.active > .nav-link,
+.navbar-vertical-aside .navbar-vertical-aside-has-menu.active > .js-navbar-vertical-aside-menu-link {
+    background-color: rgba(255, 107, 0, 0.08) !important;
+    color: #2c3e50 !important;
+    font-weight: 600;
+    border-left: 3px solid #ff6b00 !important;
+}
+
+.navbar-vertical-aside .navbar-vertical-aside-has-menu.active > .nav-link:before {
+    display: none !important;
+}
+
+.navbar-vertical-aside .navbar-vertical-aside-has-menu.active > .nav-link:hover {
+    background-color: rgba(255, 107, 0, 0.12) !important;
+    color: #2c3e50 !important;
+}
+
+.navbar-vertical-aside .navbar-brand-wrapper,
+.navbar-vertical-aside .navbar__brand-wrapper {
+    background: #ffffff !important;
+    border-bottom: 1px solid #e9ecef !important;
+}
+
+.navbar-vertical-aside .navbar-brand-logo,
+.navbar-vertical-aside .navbar-brand-logo-mini {
+    filter: none;
+}
+
+.navbar-vertical-aside .js-navbar-vertical-aside-toggle-invoker {
+    color: #6c757d !important;
+}
+
+.navbar-vertical-aside .js-navbar-vertical-aside-toggle-invoker:hover {
+    color: #2c3e50 !important;
+    background-color: #e9ecef !important;
+}
+
+/* Vendor sidebar specific styling */
+.navbar-vertical-aside .sidebar-logo-container h6 {
+    color: #2c3e50 !important;
+    font-weight: 600;
+}
+
+/* Submenu styling */
+.navbar-vertical-aside .navbar-vertical-aside-mini-mode .navbar-nav .nav-link {
+    color: #2c3e50 !important;
+}
+
+.navbar-vertical-aside .navbar-nav .navbar-vertical-aside-has-menu .navbar-vertical-aside-menu,
+.navbar-vertical-aside .navbar-vertical-aside-menu {
+    background-color: #ffffff !important;
+    border-radius: 8px;
+    margin: 4px 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e9ecef !important;
+}
+
+.navbar-vertical-aside .navbar-nav .navbar-vertical-aside-has-menu .navbar-vertical-aside-menu .nav-link,
+.navbar-vertical-aside .navbar-vertical-aside-menu .nav-link,
+.navbar-vertical-aside .nav-sub .nav-link,
+.navbar-vertical-aside .js-navbar-vertical-aside-submenu .nav-link {
+    color: #2c3e50 !important;
+    font-weight: 500;
+    padding-left: 2.5rem;
+    background-color: transparent !important;
+}
+
+.navbar-vertical-aside .navbar-nav .navbar-vertical-aside-has-menu .navbar-vertical-aside-menu .nav-link:hover,
+.navbar-vertical-aside .navbar-vertical-aside-menu .nav-link:hover {
+    color: #2c3e50 !important;
+    background-color: #f8f9fa !important;
+    border-radius: 4px;
+}
+
+.navbar-vertical-aside .navbar-nav .navbar-vertical-aside-has-menu .navbar-vertical-aside-menu .nav-link.active,
+.navbar-vertical-aside .navbar-vertical-aside-menu .nav-link.active {
+    background-color: #ff6b00 !important;
+    color: #ffffff !important;
+    border-radius: 4px;
+}
+
+/* Fix any remaining blue submenu backgrounds */
+.navbar-vertical-aside .navbar-nav .show > .nav-link,
+.navbar-vertical-aside .navbar-nav .nav-link[aria-expanded="true"] {
+    background-color: rgba(255, 107, 0, 0.1) !important;
+    color: #2c3e50 !important;
+}
+
+.navbar-vertical-aside .collapse.show,
+.navbar-vertical-aside .collapsing {
+    background-color: transparent !important;
+}
+
+/* Icons styling */
+.navbar-vertical-aside .nav-icon {
+    color: #6c757d !important;
+}
+
+.navbar-vertical-aside .navbar-vertical-aside-has-menu.active .nav-icon {
+    color: #ff6b00 !important;
+}
+
+/* Search Menu Component Styling */
+.navbar-vertical-aside .navbar-search,
+.navbar-vertical-aside .input-group,
+.navbar-vertical-aside .search-form,
+.navbar-vertical-aside .navbar-vertical-content .search-wrapper,
+.navbar-vertical-aside .navbar-vertical-content > .p-3,
+.navbar-vertical-aside .navbar-vertical-content .p-3,
+.navbar-vertical-aside [class*="p-3"],
+.navbar-vertical-aside .px-3,
+.navbar-vertical-aside .py-3 {
+    background-color: transparent !important;
+}
+
+.navbar-vertical-aside .navbar-vertical-content .form-control,
+.navbar-vertical-aside .navbar-search .form-control {
+    background-color: #ffffff !important;
+    border: 1px solid #e9ecef !important;
+    color: #2c3e50 !important;
+}
+
+.navbar-vertical-aside .navbar-vertical-content .form-control:focus,
+.navbar-vertical-aside .navbar-search .form-control:focus {
+    background-color: #ffffff !important;
+    border-color: #ff6b00 !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 0, 0.15) !important;
+    color: #2c3e50 !important;
+}
+
+.navbar-vertical-aside .navbar-vertical-content .form-control::placeholder,
+.navbar-vertical-aside .navbar-search .form-control::placeholder {
+    color: #6c757d !important;
+}
+
+.navbar-vertical-aside .input-group-text {
+    background-color: #ffffff !important;
+    border: 1px solid #e9ecef !important;
+    color: #6c757d !important;
+}
+
+.navbar-vertical-aside .btn-outline-light {
+    background-color: #ffffff !important;
+    border-color: #e9ecef !important;
+    color: #6c757d !important;
+}
+
+.navbar-vertical-aside .btn-outline-light:hover {
+    background-color: #e9ecef !important;
+    border-color: #e9ecef !important;
+    color: #2c3e50 !important;
+}
+
+/* Fix any blue container backgrounds */
+.navbar-vertical-aside .bg-primary,
+.navbar-vertical-aside .bg-info,
+.navbar-vertical-aside .text-bg-primary,
+.navbar-vertical-aside .bg-soft-primary {
+    background-color: transparent !important;
+    color: #2c3e50 !important;
+}
+
+/* Additional submenu fixes */
+.navbar-vertical-aside .navbar-nav .navbar-vertical-aside-has-menu.show .navbar-vertical-aside-menu,
+.navbar-vertical-aside .navbar-nav .navbar-vertical-aside-has-menu.show > .navbar-vertical-aside-menu,
+.navbar-vertical-aside .collapse.show,
+.navbar-vertical-aside .navbar-collapse.show,
+.navbar-vertical-aside .navbar-nav .show {
+    background-color: #f8f9fa !important;
+    border: none !important;
+}
+
+.navbar-vertical-aside .navbar-nav .nav-item .nav-link {
+    background-color: transparent !important;
+}
+
+/* Force all submenu containers to be light gray */
+.navbar-vertical-aside .navbar-nav .navbar-vertical-aside-has-menu .collapse,
+.navbar-vertical-aside .navbar-nav .navbar-vertical-aside-has-menu .navbar-collapse,
+.navbar-vertical-aside .navbar-nav .navbar-vertical-aside-has-menu .show,
+.navbar-vertical-aside .bg-soft-primary,
+.navbar-vertical-aside .bg-light-primary {
+    background-color: #f8f9fa !important;
+}
+
+/* Override any Bootstrap primary colors in sidebar */
+.navbar-vertical-aside .text-primary {
+    color: #2c3e50 !important;
+}
+
+.navbar-vertical-aside .border-primary {
+    border-color: #e9ecef !important;
+}
+
+/* Comprehensive blue background override */
+.navbar-vertical-aside [class*="bg-primary"],
+.navbar-vertical-aside [class*="bg-info"],
+.navbar-vertical-aside [style*="background-color: #377dff"],
+.navbar-vertical-aside [style*="background: #377dff"],
+.navbar-vertical-aside .bg--title,
+.navbar-vertical-aside .text-bg-primary,
+.navbar-vertical-aside .bg-334257 {
+    background-color: transparent !important;
+    background: transparent !important;
+}
+
+/* Ultimate nuclear option - override ALL backgrounds and colors */
+.navbar-vertical-aside,
+.navbar-vertical-aside *,
+.navbar-vertical-aside *::before,
+.navbar-vertical-aside *::after {
+    background-color: transparent !important;
+    background: transparent !important;
+    background-image: none !important;
+}
+
+/* Force remove any specific blue backgrounds */
+.navbar-vertical-aside [style*="background"],
+.navbar-vertical-aside [class*="bg-primary"],
+.navbar-vertical-aside [class*="bg-info"],
+.navbar-vertical-aside [class*="bg-soft"],
+.navbar-vertical-aside .bg--title,
+.navbar-vertical-aside .text-bg-primary,
+.navbar-vertical-aside .bg-334257 {
+    background-color: transparent !important;
+    background: transparent !important;
+}
+
+/* Then restore only what we want */
+.navbar-vertical-aside {
+    background: #f8f9fa !important;
+}
+
+.navbar-vertical-aside .navbar-brand-wrapper,
+.navbar-vertical-aside .navbar__brand-wrapper {
+    background: #ffffff !important;
+}
+
+.navbar-vertical-aside .form-control,
+.navbar-vertical-aside .input-group-text,
+.navbar-vertical-aside .btn-outline-light {
+    background-color: #ffffff !important;
+}
+
+.navbar-vertical-aside .navbar-vertical-aside-has-menu.active > .nav-link,
+.navbar-vertical-aside .navbar-vertical-aside-has-menu.active > .js-navbar-vertical-aside-menu-link {
+    background-color: rgba(255, 107, 0, 0.08) !important;
+}
+
+/* All submenu containers should be light gray */
+.navbar-vertical-aside .navbar-nav .navbar-vertical-aside-has-menu .navbar-vertical-aside-menu,
+.navbar-vertical-aside .navbar-vertical-aside-menu,
+.navbar-vertical-aside .collapse.show,
+.navbar-vertical-aside .navbar-collapse.show,
+.navbar-vertical-aside .show {
+    background-color: #f8f9fa !important;
+}
+
+/* Active submenu item */
+.navbar-vertical-aside .navbar-nav .navbar-vertical-aside-has-menu .navbar-vertical-aside-menu .nav-link.active,
+.navbar-vertical-aside .navbar-vertical-aside-menu .nav-link.active {
+    background-color: #ff6b00 !important;
+    color: #ffffff !important;
+}
+
+/* Force .nav-sub (submenu) background to be light gray instead of dark */
+.navbar-vertical-aside .nav-sub,
+.navbar-vertical-aside .js-navbar-vertical-aside-submenu {
+    background: #f8f9fa !important;
+    background-color: #f8f9fa !important;
+}
+
+/* Restore and fix dropdown arrows for menu items with submenus */
+.navbar-vertical-aside .navbar-vertical-aside-has-menu > .nav-link-toggle::after {
+    display: inline-block !important;
+    width: 1rem !important;
+    height: 1rem !important;
+    background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='%236c757d' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.72,15.78a.75.75,0,0,1-.53.22h-.38a.77.77,0,0,1-.53-.22L6.15,10.64a.5.5,0,0,1,0-.71l.71-.71a.49.49,0,0,1,.7,0L12,13.67l4.44-4.45a.5.5,0,0,1,.71,0l.7.71a.5.5,0,0,1,0,.71Z'/%3E%3C/svg%3E") no-repeat right center/1rem 1rem !important;
+    content: "" !important;
+    margin-inline-start: auto !important;
+    margin-inline-end: 0.1875rem !important;
+    transition: 0.3s ease !important;
+}
+
+.navbar-vertical-aside .navbar-vertical-aside-has-menu.show > .nav-link-toggle::after {
+    transform: rotate(-180deg) !important;
+    background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='%232c3e50' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.72,15.78a.75.75,0,0,1-.53.22h-.38a.77.77,0,0,1-.53-.22L6.15,10.64a.5.5,0,0,1,0-.71l.71-.71a.49.49,0,0,1,.7,0L12,13.67l4.44-4.45a.5.5,0,0,1-.71,0l.7.71a.5.5,0,0,1,0,.71Z'/%3E%3C/svg%3E") no-repeat right center/1rem 1rem !important;
+}
+
+/* Ensure expanded submenus have light background */
+.navbar-vertical-aside .navbar-nav .navbar-vertical-aside-has-menu.show .navbar-vertical-aside-menu,
+.navbar-vertical-aside .navbar-vertical-aside-has-menu[aria-expanded="true"] .navbar-vertical-aside-menu {
+    background-color: #f8f9fa !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Dashboard Order Statistics Cards - Muted gray color */
+.dashboard--card.bg--2,
+.dashboard--card.bg--3,
+.dashboard--card.bg--5,
+.dashboard--card.bg--14 {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+    border-color: #dee2e6 !important;
+}
+
+.dashboard--card.bg--2 .title,
+.dashboard--card.bg--3 .title,
+.dashboard--card.bg--5 .title,
+.dashboard--card.bg--14 .title {
+    color: #2c3e50 !important;
+    font-weight: 600 !important;
+}
+
+.dashboard--card.bg--2 .subtitle,
+.dashboard--card.bg--3 .subtitle,
+.dashboard--card.bg--5 .subtitle,
+.dashboard--card.bg--14 .subtitle {
+    color: #495057 !important;
+}
+
+/* Bottom Dashboard Order Cards - Muted gray color */
+.order--card__color-1,
+.order--card__color-2,
+.order--card__color-3,
+.order--card__color-4 {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+    border-color: #dee2e6 !important;
+}
+
+.order--card__color-1 .card-title,
+.order--card__color-2 .card-title,
+.order--card__color-3 .card-title,
+.order--card__color-4 .card-title {
+    color: #2c3e50 !important;
+    font-weight: 600 !important;
+}
+
+.order--card__color-1 .card-subtitle,
+.order--card__color-2 .card-subtitle,
+.order--card__color-3 .card-subtitle,
+.order--card__color-4 .card-subtitle {
+    color: #495057 !important;
+}
