@@ -3,13 +3,13 @@
 @section('content')
     <!-- Title -->
     <div class="text-center text-white mb-4">
-        <h2>Stackfood Software Installation</h2>
+        <h2>GO Admin Panel Installation</h2>
         <h6 class="fw-normal">Please proceed step by step with proper data according to instructions</h6>
     </div>
 
     <!-- Progress -->
     <div class="pb-2 px-2 px-sm-5 mx-xl-4">
-        <div class="progress cursor-pointer" role="progressbar" aria-label="Stackfood Software Installation"
+        <div class="progress cursor-pointer" role="progressbar" aria-label="GO Admin Panel Installation"
              aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" data-bs-toggle="tooltip"
              data-bs-placement="top" data-bs-custom-class="custom-progress-tooltip" data-bs-title="Intro Step!"
              data-bs-delay='{"hide":1000}'>
@@ -28,7 +28,7 @@
                     <h6 class="fw-bold text-uppercase fs m-0 letter-spacing" style="--fs: 14px">Required
                         Database Information
                     </h6>
-                    <a href="https://docs.6amtech.com/docs-stack-food/admin-panel/install-on-server"
+                    <a href="mailto:support@go-delivery.com"
                        target="_blank">Where to get this information?</a>
                 </div>
 

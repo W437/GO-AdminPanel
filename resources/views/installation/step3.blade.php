@@ -3,13 +3,13 @@
 @section('content')
     <!-- Title -->
     <div class="text-center text-white mb-4">
-        <h2>Stackfood Software Installation</h2>
+        <h2>GO Admin Panel Installation</h2>
         <h6 class="fw-normal">Please proceed step by step with proper data according to instructions</h6>
     </div>
 
     <!-- Progress -->
     <div class="pb-2">
-        <div class="progress cursor-pointer" role="progressbar" aria-label="Stackfood Software Installation"
+        <div class="progress cursor-pointer" role="progressbar" aria-label="GO Admin Panel Installation"
              aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-bs-toggle="tooltip"
              data-bs-placement="top" data-bs-custom-class="custom-progress-tooltip" data-bs-title="Third Step!"
              data-bs-delay='{"hide":1000}'>
@@ -35,8 +35,8 @@
                 <h5 class="fw-normal">Update Database Information</h5>
             </div>
             <p class="mb-4">Provide your database information.
-                <a href="https://docs.6amtech.com/docs-stack-food/admin-panel/install-on-server" target="_blank">
-                    Where to get this information ?</a>
+                <a href="mailto:support@go-delivery.com">
+                    Need help with database setup?</a>
             </p>
 
             @if (isset($error) || session()->has('error'))

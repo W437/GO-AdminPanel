@@ -3204,13 +3204,8 @@ class Helpers
     }
 
     public static function react_activation_check($react_domain, $react_license_code){
-        $scheme = str_contains($react_domain, 'localhost')?'http://':'https://';
-        $url = empty(parse_url($react_domain)['scheme']) ? $scheme . ltrim($react_domain, '/') : $react_domain;
-        $response = Http::post('https://store.6amtech.com/api/v1/customer/license-check', [
-            'domain_name' => str_ireplace('www.', '', parse_url($url, PHP_URL_HOST)),
-            'license_code' => $react_license_code
-        ]);
-        return ($response->successful() && isset($response->json('content')['is_active']) && $response->json('content')['is_active']);
+        // License check disabled for custom deployment
+        return true;
     }
 
     public static function activation_submit($purchase_key)
@@ -3218,6 +3213,8 @@ class Helpers
         $post = [
             'purchase_key' => $purchase_key
         ];
+        // 6amtech license check disabled for custom deployment
+        return true;
         $live = 'https://check.6amtech.com';
         $ch = curl_init($live . '/api/v1/software-check');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
