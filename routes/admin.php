@@ -472,7 +472,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::get('site_direction', 'BusinessSettingsController@site_direction')->name('site_direction');
 
             Route::get('email-setup/{type}/{tab?}', 'BusinessSettingsController@email_index')->name('email-setup');
-            Route::POST('email-setup/{type}/{tab?}', 'BusinessSettingsController@update_email_index')->name('email-setup');
+            Route::post('email-setup/{type}/{tab?}', 'BusinessSettingsController@update_email_index')->name('email-setup.update');
             Route::get('email-status/{type}/{tab}/{status}', 'BusinessSettingsController@update_email_status')->name('email-status');
             // Offline payment Methods
             Route::get('/offline-payment', 'OfflinePaymentMethodController@index')->name('offline');
