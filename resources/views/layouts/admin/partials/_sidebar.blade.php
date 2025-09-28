@@ -735,6 +735,18 @@ $order_sch = Cache::rememberForever('order_scheduled_stats', function () {
                     @endif
                     <!-- End Campaign -->
 
+                    @if (Helpers::module_permission_check('stories'))
+                        <li
+                            class="navbar-vertical-aside-has-menu {{ Request::is('admin/stories*') ? 'active' : '' }}">
+                            <a class="js-navbar-vertical-aside-menu-link nav-link"
+                                href="{{ route('admin.stories.index') }}"
+                                title="{{ translate('messages.stories') }}">
+                                <i class="tio-video-camera nav-icon"></i>
+                                <span
+                                    class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('messages.stories') }}</span>
+                            </a>
+                        </li>
+                    @endif
 
 
                     <!-- Coupon -->

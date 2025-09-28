@@ -60,6 +60,7 @@ class Restaurant extends Model
         'reviews_comments_count'=>'integer',
         'package_id'=>'integer',
         'distance' => 'float',
+        'stories_enabled' => 'boolean',
     ];
 
     protected $appends = ['gst_status','gst_code','free_delivery_distance_status','free_delivery_distance_value','logo_full_url','cover_photo_full_url','meta_image_full_url','tin_certificate_image_full_url'];
@@ -191,6 +192,11 @@ class Restaurant extends Model
     public function foods()
     {
         return $this->hasMany(Food::class);
+    }
+
+    public function stories()
+    {
+        return $this->hasMany(Story::class);
     }
     public function foods_for_reorder()
     {

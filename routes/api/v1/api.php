@@ -21,6 +21,9 @@ Route::group(['namespace' => 'Api\V1', 'middleware'=>['localization','react']], 
     Route::get('advertisement/list', 'AdvertisementController@get_adds');
     Route::get('addon-category/list', 'AddonCategoryController@getList');
 
+    Route::get('stories', 'StoryFeedController@index');
+    Route::post('stories/{story}/view', 'StoryViewController@store');
+
 
     Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
         Route::post('sign-up', 'CustomerAuthController@register');
@@ -158,6 +161,15 @@ Route::group(['namespace' => 'Api\V1', 'middleware'=>['localization','react']], 
         Route::get('get-order-report', 'ReportController@order_report');
         Route::get('get-campaign-order-report', 'ReportController@campaign_order_report');
         Route::get('get-food-wise-report', 'ReportController@food_wise_report');
+
+        Route::group(['prefix' => 'stories'], function () {
+            Route::get('/', 'StoryController@index');
+            Route::post('/', 'StoryController@store');
+            Route::post('{story}/media', 'StoryController@attachMedia');
+            Route::patch('{story}', 'StoryController@update');
+            Route::delete('{story}', 'StoryController@destroy');
+            Route::delete('{story}/media/{media}', 'StoryController@deleteMedia');
+        });
         Route::get('get-disbursement-report', 'ReportController@disbursement_report');
         Route::get('subscription-transaction', 'SubscriptionController@transaction');
 

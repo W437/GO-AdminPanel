@@ -25,7 +25,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-
+        if (config('stories.enabled', true)) {
+            $schedule->command('stories:expire')->everyTenMinutes()->withoutOverlapping();
+        }
     }
 
     /**

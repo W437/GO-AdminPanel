@@ -128,6 +128,13 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::get('food-campaign-order-list-export', 'CampaignController@food_campaign_list_export')->name('food_campaign_list_export');
         });
 
+        Route::group(['prefix' => 'stories', 'as' => 'stories.', 'middleware' => ['module:stories']], function () {
+            Route::get('/', 'StoryController@index')->name('index');
+            Route::post('{story}/expire', 'StoryController@expire')->name('expire');
+            Route::delete('{story}', 'StoryController@destroy')->name('destroy');
+            Route::post('restaurant/{restaurant}/toggle', 'StoryController@toggleRestaurant')->name('restaurant.toggle');
+        });
+
         Route::group([ 'prefix' => 'advertisement', 'as' => 'advertisement.' ,'middleware' => ['module:advertisement']], function () {
 
             Route::get('/', 'AdvertisementController@index')->name('index');
@@ -913,4 +920,3 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
     }); //Admin auth middleware
     Route::get('zone/get-coordinates/{id}', 'ZoneController@get_coordinates')->name('zone.get-coordinates');
 });
-

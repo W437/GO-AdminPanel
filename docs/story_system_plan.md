@@ -68,7 +68,7 @@ MySQL housekeeping:
   - Generate video thumbnails (FFmpeg integration) and re-encode to H.264 MP4 baseline with fallback when enabled.
   - Resize/compress images to webp/jpg variants.
   - Update `story_media` rows with final paths/durations.
-- Add `PurgeStoryMedia` job to delete storage files when stories expire or are deleted.
+- Add jobs `ProcessStoryMedia` and `PurgeStoryMedia` to normalize uploads and remove files when stories expire or are deleted.
 - Expose config flag `stories.enable_video_processing` so environments without FFmpeg can skip re-encoding and rely on straight upload validation.
 
 ## API Endpoints
@@ -110,7 +110,7 @@ Follow RESTful conventions with dedicated controllers under `App\Http\Controller
 
 ## Scheduling & Queues
 - Add scheduler entries in `app/Console/Kernel.php`:
-  - `StoryExpirationCommand` runs every 10 minutes to mark expired stories, dispatch purge jobs, and enforce retention.
+  - `StoryExpirationCommand` (`stories:expire`) runs every 10 minutes to mark expired stories, dispatch purge jobs, and enforce retention.
   - `StoryMetricsCommand` (optional, post-MVP) runs hourly to aggregate views into `story_metrics` for reporting.
 - Ensure queue workers have FFmpeg/processing dependencies installed when video processing is enabled (document for DevOps).
 
@@ -127,7 +127,7 @@ Follow RESTful conventions with dedicated controllers under `App\Http\Controller
 ## Testing Strategy
 - Feature tests for vendor endpoints (auth, validation, publishing flow).
 - Feature tests for consumer feed (ensures only published stories <24h appear, sorted by `publish_at`).
-- Job tests for `ProcessStoryMedia` (mock storage & FFmpeg) and `StoryExpirationCommand`.
+- Job tests for `ProcessStoryMedia` (mock storage & FFmpeg) and `StoryExpirationCommand` plus feature coverage for feed and view endpoints.
 - Policy tests verifying vendor ownership restrictions.
 - Database factory updates to generate story data for tests & seeds.
 
