@@ -1,8 +1,8 @@
 [phases.setup]
-nixPkgs = ['php82', 'php82Extensions.gd', 'php82Extensions.zip', 'php82Extensions.bcmath', 'php82Extensions.curl', 'php82Extensions.dom', 'php82Extensions.fileinfo', 'php82Extensions.intl', 'php82Extensions.mbstring', 'php82Extensions.openssl', 'php82Extensions.pdo', 'php82Extensions.pdo_mysql', 'php82Extensions.tokenizer', 'php82Extensions.xml', 'php82Extensions.xmlreader', 'php82Extensions.xmlwriter', 'php82Extensions.simplexml', 'nodejs-18_x']
+nixPkgs = ['php83', 'php83Extensions.gd', 'php83Extensions.zip', 'php83Extensions.bcmath', 'php83Extensions.curl', 'php83Extensions.dom', 'php83Extensions.fileinfo', 'php83Extensions.intl', 'php83Extensions.mbstring', 'php83Extensions.openssl', 'php83Extensions.pdo', 'php83Extensions.pdo_mysql', 'php83Extensions.tokenizer', 'php83Extensions.xml', 'nodejs-18_x']
 
 [phases.install]
-cmds = ['npm ci', 'composer install --no-dev --optimize-autoloader']
+cmds = ['npm ci', 'composer install --no-dev --optimize-autoloader --ignore-platform-req=ext-gd --ignore-platform-req=ext-zip']
 
 [phases.build]
 cmds = ['npm run production', 'php artisan config:cache', 'php artisan route:cache', 'php artisan view:cache']
