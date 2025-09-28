@@ -290,7 +290,8 @@
                 </div>
             </div>
 
-            <!-- Captcha -->
+            <!-- Captcha - Disabled for admin login -->
+            {{--
             @php($recaptcha = \App\CentralLogics\Helpers::get_business_settings('recaptcha'))
             @if(isset($recaptcha) && $recaptcha['status'] == 1)
                 <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
@@ -298,13 +299,13 @@
                 <div class="captcha-container d-none" id="reload-captcha">
                     <div class="row">
                         <div class="col-6 pr-0">
-                            <input type="text" 
-                                   class="form-control border-0" 
+                            <input type="text"
+                                   class="form-control border-0"
                                    name="custome_recaptcha"
-                                   id="custome_recaptcha" 
-                                   required 
-                                   placeholder="{{translate('Enter recaptcha value')}}" 
-                                   autocomplete="off" 
+                                   id="custome_recaptcha"
+                                   required
+                                   placeholder="{{translate('Enter recaptcha value')}}"
+                                   autocomplete="off"
                                    value="{{env('APP_MODE')=='dev'? session('six_captcha'):''}}">
                         </div>
                         <div class="col-6 bg-white rounded d-flex">
@@ -319,13 +320,13 @@
                 <div class="captcha-container" id="reload-captcha">
                     <div class="row">
                         <div class="col-6 pr-0">
-                            <input type="text" 
-                                   class="form-control border-0" 
+                            <input type="text"
+                                   class="form-control border-0"
                                    name="custome_recaptcha"
-                                   id="custome_recaptcha" 
-                                   required 
-                                   placeholder="{{translate('Enter recaptcha value')}}" 
-                                   autocomplete="off" 
+                                   id="custome_recaptcha"
+                                   required
+                                   placeholder="{{translate('Enter recaptcha value')}}"
+                                   autocomplete="off"
                                    value="{{env('APP_MODE')=='dev'? session('six_captcha'):''}}">
                         </div>
                         <div class="col-6 bg-white rounded d-flex">
@@ -337,6 +338,7 @@
                     </div>
                 </div>
             @endif
+            --}}
 
             <!-- Login Button -->
             <button type="submit" class="btn btn-login" id="signInBtn">

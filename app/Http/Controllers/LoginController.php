@@ -150,28 +150,29 @@ class LoginController extends Controller
             'role' => 'required'
         ]);
 
-        $recaptcha = Helpers::get_business_settings('recaptcha');
-        if (isset($recaptcha) && $recaptcha['status'] == 1 && !$request?->set_default_captcha) {
-            $request->validate([
-                'g-recaptcha-response' => [
-                    function ($attribute, $value, $fail) {
-                        $secret_key = Helpers::get_business_settings('recaptcha')['secret_key'];
-                        $gResponse = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-                            'secret' => $secret_key,
-                            'response' => $value,
-                            'remoteip' => \request()->ip(),
-                        ]);
+        // Captcha validation disabled for admin login
+        // $recaptcha = Helpers::get_business_settings('recaptcha');
+        // if (isset($recaptcha) && $recaptcha['status'] == 1 && !$request?->set_default_captcha) {
+        //     $request->validate([
+        //         'g-recaptcha-response' => [
+        //             function ($attribute, $value, $fail) {
+        //                 $secret_key = Helpers::get_business_settings('recaptcha')['secret_key'];
+        //                 $gResponse = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+        //                     'secret' => $secret_key,
+        //                     'response' => $value,
+        //                     'remoteip' => \request()->ip(),
+        //                 ]);
 
-                        if (!$gResponse->successful()) {
-                            $fail(translate('ReCaptcha Failed'));
-                        }
-                    },
-                ],
-            ]);
-        } else if (strtolower(session('six_captcha')) != strtolower($request->custome_recaptcha)) {
-            Toastr::error(translate('messages.ReCAPTCHA Failed'));
-            return back();
-        }
+        //                 if (!$gResponse->successful()) {
+        //                     $fail(translate('ReCaptcha Failed'));
+        //                 }
+        //             },
+        //         ],
+        //     ]);
+        // } else if (strtolower(session('six_captcha')) != strtolower($request->custome_recaptcha)) {
+        //     Toastr::error(translate('messages.ReCAPTCHA Failed'));
+        //     return back();
+        // }
         if($request->role == 'admin_employee'){
             $data= Admin::where('email', $request->email)->where('role_id',1)->exists();
             if($data){

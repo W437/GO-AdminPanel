@@ -6929,4 +6929,5 @@
   'all_Restaurants' => 'All Restaurants',
   'Restaurant_Tax_Reports' => 'Restaurant Tax Reports',
   'All_the_translations_may_not_be_fully_accurate.' => 'All the translations may not be fully accurate.',
+  'Failed_to_send_mail' => 'Failed to send mail',
 );
