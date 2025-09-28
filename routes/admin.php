@@ -296,7 +296,6 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
                 Route::get('edit/{id}', 'CategoryController@edit')->name('edit');
                 Route::post('update/{id}', 'CategoryController@update')->name('update');
                 Route::get('update-priority/{category}', 'CategoryController@update_priority')->name('priority');
-                Route::post('store', 'CategoryController@store')->name('store');
                 Route::get('status/{id}/{status}', 'CategoryController@status')->name('status');
                 Route::delete('delete/{id}', 'CategoryController@delete')->name('delete');
                 Route::get('export-categories', 'CategoryController@export_categories')->name('export-categories');
@@ -797,8 +796,6 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::post('/switch-to-commission/{id}', 'SubscriptionController@switchToCommission')->name('switchToCommission');
             Route::get('/package-view/{id}/{store_id}', 'SubscriptionController@packageView')->name('packageView');
             Route::post('/cancel-subscription/{id}', 'SubscriptionController@cancelSubscription')->name('cancelSubscription');
-            Route::post('/switch-to-commission/{id}',  'SubscriptionController@switchToCommission')->name('switchToCommission');
-            Route::get('/package-view/{id}/{store_id}', 'SubscriptionController@packageView')->name('packageView');
             Route::post('/package-buy', 'SubscriptionController@packageBuy')->name('packageBuy');
 
         });
@@ -912,7 +909,6 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
         Route::group(['prefix' => 'dm-disbursement', 'as' => 'dm-disbursement.', 'middleware' => ['module:disbursement']], function () {
             Route::get('list', 'DeliveryManDisbursementController@list')->name('list');
             Route::get('details/{id}', 'DeliveryManDisbursementController@view')->name('view');
-            Route::get('export/{id}/{type?}', 'DeliveryManDisbursementController@export')->name('export');
             Route::get('status', 'DeliveryManDisbursementController@status')->name('status');
             Route::get('change-status/{id}/{status}', 'DeliveryManDisbursementController@statusById')->name('change-status');
             Route::get('export/{id}/{type?}', 'DeliveryManDisbursementController@export')->name('export');
