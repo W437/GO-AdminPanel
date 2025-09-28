@@ -197,7 +197,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
         Route::group(['prefix' => 'restaurant', 'as' => 'restaurant.','middleware'=>['module:restaurant']], function () {
             Route::get('get-restaurants-data/{restaurant}', 'VendorController@get_restaurant_data')->name('get-restaurants-data');
             Route::get('restaurant-filter/{id}', 'VendorController@restaurant_filter')->name('restaurantfilter');
-            Route::get('get-account-data/{restaurant}', 'VendorController@get_account_data')->name('restaurantfilter');
+            Route::get('get-account-data/{restaurant}', 'VendorController@get_account_data')->name('account-data');
             Route::get('get-addons', 'VendorController@get_addons')->name('get_addons');
             Route::group(['middleware' => ['module:restaurant']], function () {
                 Route::get('update-application/{id}/{status}', 'VendorController@update_application')->name('application');
@@ -602,7 +602,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
 
         Route::group(['prefix' => 'delivery-man', 'as' => 'delivery-man.'], function () {
             Route::get('get-deliverymen', 'DeliveryManController@get_deliverymen')->name('get-deliverymen');
-            Route::get('get-account-data/{deliveryman}', 'DeliveryManController@get_account_data')->name('restaurantfilter');
+            Route::get('get-account-data/{deliveryman}', 'DeliveryManController@get_account_data')->name('account-data');
             Route::group(['middleware' => ['module:deliveryman']], function () {
                 Route::get('add', 'DeliveryManController@index')->name('add');
                 Route::post('store', 'DeliveryManController@store')->name('store');
