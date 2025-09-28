@@ -6,7 +6,7 @@
 - Track views and completion metrics without localization or mute functionality.
 
 ## Architecture Overview
-- Follow existing Laravel modular structure (Controllers → Services → Repositories → Models).
+- Layer new logic with thin service classes that cooperate with current Controllers → CentralLogics/Services → Models pattern (no standalone repository layer needed).
 - Use MySQL with Eloquent models, queue workers for media processing & expiration, and storage disks (S3/local) for media.
 - Reuse current authentication guards: public consumer API (token optional), vendor API (JWT/Passport), admin panel guard for moderation.
 
@@ -14,23 +14,23 @@
 Create new migration batch with the following tables and indexes:
 
 1. `stories`
-   - `id` (PK, ULID/UUID recommended), `restaurant_id` (FK → restaurants.id, indexed), `title` (nullable, 120 chars), `status` enum (`draft`, `scheduled`, `published`, `expired`, `deleted`), `publish_at` (nullable), `expire_at` (nullable), `created_at`, `updated_at`, `deleted_at` (soft delete).
-   - Constraints: `CHECK (expire_at IS NULL OR expire_at > publish_at)`. Default `expire_at` filled via DB trigger or model observer to `publish_at + INTERVAL 24 HOUR`.
-   - Indexes: `index_stories_restaurant_status` on (`restaurant_id`,`status`,`publish_at` desc); `index_stories_expire_at` on (`expire_at`).
+   - `id` (PK, unsigned big integer auto-increment), `restaurant_id` (FK → restaurants.id, indexed), `title` (nullable, 120 chars), `status` enum stored as string (`draft`, `scheduled`, `published`, `expired`, `deleted`), `publish_at` (nullable), `expire_at` (nullable), `created_at`, `updated_at`, `deleted_at` (soft delete).
+   - Application-level validation ensures `expire_at` > `publish_at`. `publish` workflow calculates `expire_at = publish_at + 24h`.
+   - Indexes: composite index on (`restaurant_id`,`status`,`publish_at` desc); secondary index on `expire_at`.
 
 2. `story_media`
-   - `id` (PK ULID), `story_id` (FK → stories.id, cascade delete), `sequence` (unsigned tinyint), `media_type` enum (`image`, `video`), `media_path`, `thumbnail_path` (nullable for images), `duration_seconds` (default 5), `caption` (nullable, 240 chars), `cta_label` (nullable), `cta_url` (nullable), `created_at`, `updated_at`.
-   - Unique constraint on (`story_id`, `sequence`). Index on (`media_type`).
+   - `id` (PK unsigned big integer), `story_id` (FK → stories.id, cascade delete), `sequence` (unsigned tinyint), `media_type` enum (`image`, `video`), `media_path`, `thumbnail_path` (nullable for images), `duration_seconds` (default 5), `caption` (nullable, 240 chars), `cta_label` (nullable), `cta_url` (nullable), `created_at`, `updated_at`.
+   - Unique constraint on (`story_id`, `sequence`). Index on `media_type`.
 
 3. `story_views`
-   - `id` (PK ULID), `story_id` (FK → stories.id, cascade), `customer_id` (nullable for guest views), `session_key` (nullable string for guests), `viewed_at`, `completed` (boolean default false).
-   - Unique composite index on (`story_id`, `customer_id`, `session_key`) to prevent duplicates.
-   - Additional index on (`story_id`, `viewed_at`).
+   - `id` (PK unsigned big integer), `story_id` (FK → stories.id, cascade), `customer_id` (nullable for guest views), `session_key` (nullable string for guests), `viewer_key` (string, not null), `viewed_at`, `completed` (boolean default false).
+   - Unique composite index on (`story_id`, `viewer_key`) to prevent duplicates regardless of auth state.
+   - Additional index on (`story_id`, `viewed_at`). Service layer builds `viewer_key` from customer or session values.
 
 4. Optional metrics table (if summarized nightly): `story_metrics` storing aggregated counts per story per day.
 
 MySQL housekeeping:
-- Add event or scheduled job to hard-delete stories + media older than configurable retention (e.g. 7 days) to keep storage lean.
+- Scheduled command purges expired stories + media older than configurable retention (e.g. 7 days) to keep storage lean.
 - Update `restaurants` seeder/factory to optionally generate sample stories for QA.
 
 ## Eloquent Models & Relationships
@@ -43,7 +43,7 @@ MySQL housekeeping:
 
 - `StoryMedia` model: casts `duration_seconds`, accessors for CDN URLs via `Storage::disk()` helpers.
 
-- `StoryView` model: cast `completed` boolean; static method to record view idempotently.
+- `StoryView` model: cast `completed` boolean; static method to record view idempotently while generating `viewer_key`.
 
 ## Services & Business Logic
 - `StoryService`
@@ -59,18 +59,21 @@ MySQL housekeeping:
 
 - `StoryExpirationService`
   - Cron-friendly service invoked by scheduler to mark expired stories and queue media purge job.
+  - Also enforces retention policy for soft-deleted stories.
 
 ## Media Handling
 - Use Laravel `Storage` facade with dedicated disk (e.g., `stories`).
 - Implement queued job `ProcessStoryMedia` to:
   - Validate MIME/size (images ≤ 1080x1920, videos ≤ 15s & <20MB).
-  - Generate video thumbnails (FFmpeg integration) and re-encode to H.264 MP4 baseline with fallback.
+  - Generate video thumbnails (FFmpeg integration) and re-encode to H.264 MP4 baseline with fallback when enabled.
   - Resize/compress images to webp/jpg variants.
   - Update `story_media` rows with final paths/durations.
 - Add `PurgeStoryMedia` job to delete storage files when stories expire or are deleted.
+- Expose config flag `stories.enable_video_processing` so environments without FFmpeg can skip re-encoding and rely on straight upload validation.
 
 ## API Endpoints
 Follow RESTful conventions with dedicated controllers under `App\Http\Controllers\Api` namespaces.
+- Register routes inside existing `routes/api/v1/api.php` groupings so localization/react middleware and guard scopes continue to apply (vendor endpoints remain inside the vendor subgroup).
 
 ### Consumer API (Public)
 - `GET /api/v1/stories` → `StoryFeedController@index`
@@ -93,23 +96,23 @@ Follow RESTful conventions with dedicated controllers under `App\Http\Controller
 - `DELETE /api/v1/vendor/stories/{story}` → soft delete.
 - `DELETE /api/v1/vendor/stories/{story}/media/{media}` → remove specific media, re-sequence remaining items.
 
-### Admin Panel (Laravel Nova / custom blade)
-- Add section under Marketing → Stories.
+### Admin Panel (Blade)
+- Add section under Marketing → Stories with new `module:stories` permission gate so existing role middleware applies.
 - CRUD screens: list by status, search by restaurant, manually expire, view metrics. Expose toggle to feature/unfeature stories if future functionality desired.
-- Add ability to ban a restaurant from stories (boolean column on `restaurants` table). Controllers enforce check before allowing creation.
+- Add ability to ban a restaurant from stories (boolean column on `restaurants` table). Admin controllers enforce check before allowing creation; vendor controllers respect flag.
 
 ## Request Validation & Policies
 - Form Request classes per endpoint (e.g., `StoreStoryRequest`, `UploadStoryMediaRequest`). Enforce allowed formats, file size (use `max:`), and CTA URL validation (`url` rule with allowed schemes http/https).
 - Authorization via policies:
   - `StoryPolicy@update/delete` ensures vendor owns the story.
   - Admin guard bypass.
-- Middleware to ensure restaurants with suspended status cannot publish stories.
+- Middleware to ensure restaurants with suspended status (or stories-disabled flag) cannot publish stories.
 
 ## Scheduling & Queues
 - Add scheduler entries in `app/Console/Kernel.php`:
-  - `StoryExpirationCommand` runs every 10 minutes to mark expired stories and dispatch purge jobs.
-  - `StoryMetricsCommand` (optional) runs hourly to aggregate views into `story_metrics` for reporting.
-- Ensure queue workers have FFmpeg/processing dependencies installed (document for DevOps).
+  - `StoryExpirationCommand` runs every 10 minutes to mark expired stories, dispatch purge jobs, and enforce retention.
+  - `StoryMetricsCommand` (optional, post-MVP) runs hourly to aggregate views into `story_metrics` for reporting.
+- Ensure queue workers have FFmpeg/processing dependencies installed when video processing is enabled (document for DevOps).
 
 ## Config & Environment
 - Add `config/stories.php` with keys:
@@ -117,6 +120,7 @@ Follow RESTful conventions with dedicated controllers under `App\Http\Controller
   - `max_media_per_story` (default 10).
   - `default_duration` (5 seconds for images).
   - `retention_days` (7).
+  - `enable_video_processing` (default true).
 - `.env` additions: `STORY_MEDIA_DISK`, `STORY_MAX_MEDIA`, `STORY_ENABLED`.
 - Register config in `config/app.php` providers if needed.
 
@@ -140,4 +144,3 @@ Follow RESTful conventions with dedicated controllers under `App\Http\Controller
 - No per-language localization; `caption` saved as plain text.
 - Stories auto-expire exactly 24h after `publish_at` with no manual extension (only early deletion).
 - No consumer mute/block functionality at this phase (future enhancement slot noted but not implemented).
-
