@@ -7,7 +7,6 @@ use App\Traits\AddonHelper;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Sheet;
 use App\CentralLogics\Helpers;
-use App\Traits\ActivationClass;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Pagination\Paginator;
@@ -19,7 +18,7 @@ use Illuminate\Support\Facades\Redirect;
 ini_set("memory_limit",-1);
 class AppServiceProvider extends ServiceProvider
 {
-    use ActivationClass,AddonHelper;
+    use AddonHelper;
 
     /**
      * Register any application services.

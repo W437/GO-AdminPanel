@@ -21,11 +21,9 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Cache;
 use App\Models\SubscriptionTransaction;
 use Illuminate\Support\Facades\Session;
-use App\Traits\ActivationClass;
 
 class HomeController extends Controller
 {
-     use ActivationClass;
     /**
      * Create a new controller instance.
      *
@@ -533,22 +531,5 @@ class HomeController extends Controller
         $mpdf_view = View::make('subscription-invoice', compact('transaction','BusinessData','logo'));
         Helpers::gen_mpdf(view: $mpdf_view,file_prefix: 'Subscription',file_postfix: $id);
         return back();
-    }
-
-
-    public function getActivationCheckView(Request $request)
-    {
-        return view('installation.activation-check');
-    }
-
-    public function activationCheck(Request $request)
-    {
-        $response = $this->getRequestConfig(
-            username: $request['username'],
-            purchaseKey: $request['purchase_key'],
-            softwareType: $request->get('software_type', base64_decode('cHJvZHVjdA=='))
-        );
-        $this->updateActivationConfig(app: 'admin_panel', response: $response);
-        return redirect(url('/'));
     }
 }

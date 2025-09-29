@@ -5,7 +5,7 @@ use App\Http\Controllers\Vendor\SubscriptionController;
 
 
 Route::group(['namespace' => 'Vendor', 'as' => 'vendor.'], function () {
-    Route::group(['middleware' => ['vendor' ,'maintenance','actch:admin_panel']], function () {
+    Route::group(['middleware' => ['vendor' ,'maintenance']], function () {
         Route::get('lang/{locale}', 'LanguageController@lang')->name('lang');
 
         Route::post('search-routing', 'SearchRoutingController@index')->name('search.routing');

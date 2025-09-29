@@ -37,12 +37,8 @@ Route::get('maintenance-mode', 'HomeController@maintenanceMode')->name('maintena
 
 //login
 
-Route::get('activation-check', 'HomeController@getActivationCheckView')->name('system.activation-check');
-Route::post('activation-check', 'HomeController@activationCheck');
-
-
 Route::get('login/{tab}', 'LoginController@login')->name('login');
-Route::post('login_submit', 'LoginController@submit')->name('login_post')->middleware('actch');
+Route::post('login_submit', 'LoginController@submit')->name('login_post');
 Route::get('logout', 'LoginController@logout')->name('logout');
 Route::get('/reload-captcha', 'LoginController@reloadCaptcha')->name('reload-captcha');
 Route::get('/reset-password', 'LoginController@reset_password_request')->name('reset-password');

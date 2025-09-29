@@ -1832,15 +1832,6 @@ $order_sch = Cache::rememberForever('order_scheduled_stats', function () {
                         </span>
                     </a>
                 </li>
-                <li
-                    class="navbar-vertical-aside-has-menu {{ Request::is('admin/addon-activation*') ? 'active' : '' }}">
-                    <a class="nav-link "
-                        href="{{ route('admin.addon-activation.index') }}"
-                        title="{{ translate('messages.Addon_Activation') }}">
-                        <span class="tio-appointment nav-icon"></span>
-                        <span class="text-truncate">{{ translate('messages.Addon_Activation') }}</span>
-                    </a>
-                </li>
 
                 <!-- End web & adpp Settings -->
 

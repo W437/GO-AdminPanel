@@ -1,7 +1,6 @@
 <?php
 
 const POINT_SRID = 0; // For MariaDB use 4326
-const SOFTWARE_ID = 'MzM1NzE3NTA=';
 const TELEPHONE_CODES = [
     ["name" => 'UK (+44)', "code" => '+44'],
     ["name" => 'USA (+1)', "code" => '+1'],

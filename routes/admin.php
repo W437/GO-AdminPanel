@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\CashBackController;
 
 Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
 
-    Route::group(['middleware' => ['admin','actch:admin_panel']], function () {
+    Route::group(['middleware' => ['admin']], function () {
         Route::post('search-routing', 'SearchRoutingController@index')->name('search.routing');
         Route::get('recent-search', 'SearchRoutingController@recentSearch')->name('recent.search');
         Route::post('store-clicked-route', 'SearchRoutingController@storeClickedRoute')->name('store.clicked.route');
@@ -258,10 +258,6 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
         Route::get('addon/system-addons', function (){
             return to_route('admin.system-addon.index');
         })->name('addon.index');
-        Route::group(['prefix' => 'addon-activation', 'as' => 'addon-activation.'], function () {
-            Route::get('', 'System\AddonActivationController@index')->name('index');
-            Route::post('activation', 'System\AddonActivationController@activation')->name('activation');
-        });
 
         Route::group(['prefix' => 'addon', 'as' => 'addon.', 'middleware' => ['module:addon']], function () {
 
