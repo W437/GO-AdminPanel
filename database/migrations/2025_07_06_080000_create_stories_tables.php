@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('stories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('restaurant_id');
-            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
             $table->string('title', 120)->nullable();
             $table->string('status', 20)->default('draft');
             $table->timestamp('publish_at')->nullable();
@@ -31,7 +30,6 @@ return new class extends Migration
         Schema::create('story_media', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('story_id');
-            $table->foreign('story_id')->references('id')->on('stories')->onDelete('cascade');
             $table->unsignedTinyInteger('sequence');
             $table->string('media_type', 20);
             $table->string('media_path', 2048);
@@ -42,6 +40,7 @@ return new class extends Migration
             $table->string('cta_url', 2048)->nullable();
             $table->timestamps();
 
+            $table->index('story_id');
             $table->unique(['story_id', 'sequence']);
             $table->index('media_type');
         });
@@ -49,15 +48,15 @@ return new class extends Migration
         Schema::create('story_views', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('story_id');
-            $table->foreign('story_id')->references('id')->on('stories')->onDelete('cascade');
             $table->unsignedBigInteger('customer_id')->nullable();
-            $table->foreign('customer_id')->references('id')->on('users')->onDelete('set null');
             $table->string('session_key', 191)->nullable();
             $table->string('viewer_key', 191);
             $table->timestamp('viewed_at');
             $table->boolean('completed')->default(false);
             $table->timestamps();
 
+            $table->index('story_id');
+            $table->index('customer_id');
             $table->unique(['story_id', 'viewer_key']);
             $table->index(['story_id', 'viewed_at']);
         });
