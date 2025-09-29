@@ -62,7 +62,6 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\RestaurantNotificationSetting;
 use MatanYadaev\EloquentSpatial\Objects\Point;
 use App\Models\SubscriptionBillingAndRefundHistory;
-use Laravelpkg\Laravelchk\Http\Controllers\LaravelchkController;
 use App\Traits\NotificationDataSetUpTrait;
 
 class Helpers
@@ -3210,54 +3209,8 @@ class Helpers
 
     public static function activation_submit($purchase_key)
     {
-        $post = [
-            'purchase_key' => $purchase_key
-        ];
-        // 6amtech license check disabled for custom deployment
+        // License validation removed - always return true
         return true;
-        $live = 'https://check.6amtech.com';
-        $ch = curl_init($live . '/api/v1/software-check');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-        $response = curl_exec($ch);
-        curl_close($ch);
-        $response_body = json_decode($response, true);
-
-        try {
-            if ($response_body['is_valid'] && $response_body['result']['item']['id'] == env('REACT_APP_KEY')) {
-                $previous_active = json_decode(BusinessSetting::where('key', 'app_activation')->first()->value ?? '[]');
-                $found = 0;
-                foreach ($previous_active as $key => $item) {
-                    if ($item->software_id == env('REACT_APP_KEY')) {
-                        $found = 1;
-                    }
-                }
-                if (!$found) {
-                    $previous_active[] = [
-                        'software_id' => env('REACT_APP_KEY'),
-                        'is_active' => 1
-                    ];
-                    Helpers::businessUpdateOrInsert(['key' => 'app_activation'], [
-                        'value' => json_encode($previous_active)
-                    ]);
-                }
-                return true;
-            }
-
-        } catch (\Exception $e) {
-            info(["line___{$e->getLine()}",$e->getMessage()]);
-
-            $previous_active[] = [
-                'software_id' => env('REACT_APP_KEY'),
-                'is_active' => 1
-            ];
-            Helpers::businessUpdateOrInsert(['key' => 'app_activation'], [
-                'value' => json_encode($previous_active)
-            ]);
-
-            return true;
-        }
-        return false;
     }
 
     public static function react_domain_status_check(){

@@ -118,7 +118,7 @@ $config = \App\CentralLogics\Helpers::get_business_settings('landing_page');
                                         <label class="form-label text-capitalize">
                                             {{ translate('landing_page_url') }}
                                         </label>
-                                        <input type="url" placeholder="{{ translate('messages.Ex: https://stackfood-admin.6amtech.com/') }}" class="form-control h--45px" name="redirect_url" value="{{ $redirect_url }}">
+                                        <input type="url" placeholder="{{ translate('messages.Ex: https://example.com/') }}" class="form-control h--45px" name="redirect_url" value="{{ $redirect_url }}">
                                     </div>
                                 </div>
                             </div>

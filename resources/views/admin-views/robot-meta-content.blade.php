@@ -45,7 +45,7 @@
                             <span class="font-semibold text-title">Brands</span>
                         </td>
                         <td>
-                            <a href="" class="text-primary text-underline">https://Stackfood.6amtech.com </a>
+                            <a href="" class="text-primary text-underline">https://example.com </a>
                         </td>
                         <td>
                             <div class="text-center">
@@ -59,7 +59,7 @@
                             <span class="font-semibold text-title">Category</span>
                         </td>
                         <td>
-                            <a href="" class="text-primary text-underline">https://Stackfood.6amtech.com </a>
+                            <a href="" class="text-primary text-underline">https://example.com </a>
                         </td>
                         <td>
                             <div class="text-center">

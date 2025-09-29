@@ -176,7 +176,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         // Grimzy\LaravelMysqlSpatial\SpatialServiceProvider::class,
         App\Providers\ConfigServiceProvider::class,
-        Laravelpkg\Laravelchk\LaravelchkServiceProvider::class,
         // FruitCake\Cors\CorsServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         App\Providers\FirebaseServiceProvider::class,

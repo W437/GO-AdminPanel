@@ -98,7 +98,7 @@
                 <h4 class="card-title align-items-center">
                     {{translate('S3_Credential')}}
                 </h4>
-                <span>{{ translate('The_Access_Key_ID_is_a_publicly_accessible_identifier_used_to_authenticate_requests_to_S3.') }} <a target="_blank" href="https://6amtech.com/blog/s3-storage-setup/">{{ translate('Learn_More') }}</a></span>            </div>
+                <span>{{ translate('The_Access_Key_ID_is_a_publicly_accessible_identifier_used_to_authenticate_requests_to_S3.') }} <a target="_blank" href="https://docs.aws.amazon.com/s3/">{{ translate('Learn_More') }}</a></span>            </div>
             <div class="card-body">
                 <div class="mt-2 px-3">
                     <form

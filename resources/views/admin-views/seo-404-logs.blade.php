@@ -46,7 +46,7 @@
                                 <span class="check-item-2">
                                     <input type="checkbox" name="url">
                                 </span>
-                                <a href="" class="text-primary text-underline">https://Stackfood.6amtech.com </a>
+                                <a href="" class="text-primary text-underline">https://example.com </a>
                             </div>
                         </td>
                         <td class="text-center">
@@ -69,7 +69,7 @@
                                 <span class="check-item-2">
                                     <input type="checkbox" name="url">
                                 </span>
-                                <a href="" class="text-primary text-underline">https://Stackfood.6amtech.com </a>
+                                <a href="" class="text-primary text-underline">https://example.com </a>
                             </div>
                         </td>
                         <td class="text-center">
@@ -92,7 +92,7 @@
                                 <span class="check-item-2">
                                     <input type="checkbox" name="url">
                                 </span>
-                                <a href="" class="text-primary text-underline">https://Stackfood.6amtech.com </a>
+                                <a href="" class="text-primary text-underline">https://example.com </a>
                             </div>
                         </td>
                         <td class="text-center">

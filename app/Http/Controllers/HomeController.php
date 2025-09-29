@@ -175,7 +175,7 @@ class HomeController extends Controller
             'earn_money_delivery_req_button_link'=>   $settings['earn_money_delivery_man_req_button_link']??  null ,
             'earn_money_restaurant_req_button_link'=>   $settings['earn_money_restaurant_req_button_link'] ??  null ,
 
-            'business_name' =>  $business_settings['business_name'] ?? 'Stackfood',
+            'business_name' =>  $business_settings['business_name'] ?? 'GO Admin Panel',
 
             'available_zone_status' => (int)((isset($settings['available_zone_status'])) ? $settings['available_zone_status'] : 0),
             'available_zone_title' => (isset($settings['available_zone_title'])) ? $settings['available_zone_title'] : null,
@@ -303,7 +303,7 @@ class HomeController extends Controller
             ];
             ContactMessage::create($messageData);
 
-            $business_name=Helpers::get_settings('business_name') ?? 'Stackfood';
+            $business_name=Helpers::get_settings('business_name') ?? 'GO Admin Panel';
             $subject='Enquiry from '.$business_name;
             try{
                 if(config('mail.status')) {

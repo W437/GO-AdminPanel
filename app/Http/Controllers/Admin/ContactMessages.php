@@ -56,7 +56,7 @@ class ContactMessages extends Controller
         $data = array('body' => $request['mail_body'],
                         'name' => $contact->name
                         );
-        $business_name=Helpers::get_settings('business_name') ?? 'Stackfood';
+        $business_name=Helpers::get_settings('business_name') ?? 'GO Admin Panel';
 
         try {
             Mail::send('email-templates.customer-message', $data, function ($message) use ($contact,$business_name, $request) {

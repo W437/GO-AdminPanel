@@ -1,6 +1,6 @@
-# StackFood Admin Panel Documentation
+# GO Admin Panel Documentation
 
-Welcome to the StackFood Admin Panel documentation! This comprehensive food delivery management system is built with Laravel 10 and provides powerful tools for managing restaurants, orders, deliveries, and more.
+Welcome to the GO Admin Panel documentation! This comprehensive food delivery management system is built with Laravel 10 and provides powerful tools for managing restaurants, orders, deliveries, and more.
 
 ## 📚 Documentation Index
 
