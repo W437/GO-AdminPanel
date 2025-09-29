@@ -5,7 +5,7 @@ nixPkgs = ['php83', 'php83Extensions.gd', 'php83Extensions.zip', 'php83Extension
 cmds = ['npm ci', 'composer install --no-dev --optimize-autoloader']
 
 [phases.build]
-cmds = ['npm run production', 'php artisan config:cache', 'php artisan view:cache', 'php artisan migrate --force']
+cmds = ['npm run production', 'php artisan config:cache', 'php artisan view:cache']
 
 [start]
-cmd = 'php artisan serve --host=0.0.0.0 --port=$PORT'
+cmd = 'php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT'
