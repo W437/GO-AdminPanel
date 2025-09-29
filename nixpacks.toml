@@ -1,8 +1,8 @@
 [phases.setup]
-nixPkgs = ['php83', 'php83Extensions.gd', 'php83Extensions.zip', 'php83Extensions.bcmath', 'php83Extensions.curl', 'php83Extensions.dom', 'php83Extensions.fileinfo', 'php83Extensions.intl', 'php83Extensions.mbstring', 'php83Extensions.openssl', 'php83Extensions.pdo', 'php83Extensions.pdo_mysql', 'php83Extensions.mysqli', 'php83Extensions.tokenizer', 'php83Extensions.xml', 'nodejs-18_x']
+nixPkgs = ['php83', 'php83Extensions.gd', 'php83Extensions.zip', 'php83Extensions.bcmath', 'php83Extensions.curl', 'php83Extensions.dom', 'php83Extensions.fileinfo', 'php83Extensions.intl', 'php83Extensions.mbstring', 'php83Extensions.openssl', 'php83Extensions.pdo', 'php83Extensions.pdo_mysql', 'php83Extensions.mysqli', 'php83Extensions.tokenizer', 'php83Extensions.xml', 'php83Packages.composer', 'nodejs-18_x']
 
 [phases.install]
-cmds = ['npm ci', 'composer install --no-dev --optimize-autoloader --ignore-platform-req=ext-gd --ignore-platform-req=ext-zip']
+cmds = ['npm ci', 'composer install --no-dev --optimize-autoloader']
 
 [phases.build]
 cmds = ['npm run production', 'php artisan config:cache', 'php artisan view:cache']
