@@ -214,6 +214,41 @@ Route::get('/test',function (){
     return view('errors.404');
 });
 
+Route::get('/storage-test', function () {
+    try {
+        // Write a test file
+        $testContent = 'Storage test at ' . now()->toDateTimeString();
+        \Storage::put('test.txt', $testContent);
+
+        // Read it back
+        $readContent = \Storage::get('test.txt');
+
+        // Check if file exists
+        $exists = \Storage::exists('test.txt');
+
+        // Get the full path
+        $path = storage_path('app');
+
+        return response()->json([
+            'status' => 'success',
+            'storage_path' => $path,
+            'railway_mount' => env('RAILWAY_VOLUME_MOUNT_PATH', 'not set'),
+            'file_exists' => $exists,
+            'written_content' => $testContent,
+            'read_content' => $readContent,
+            'match' => $testContent === $readContent,
+            'disk' => config('filesystems.default'),
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage(),
+            'storage_path' => storage_path('app'),
+            'railway_mount' => env('RAILWAY_VOLUME_MOUNT_PATH', 'not set'),
+        ], 500);
+    }
+});
+
 Route::get('authentication-failed', function () {
     $errors = [];
     array_push($errors, ['code' => 'auth-001', 'message' => 'Unauthorized.']);
