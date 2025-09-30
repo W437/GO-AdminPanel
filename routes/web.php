@@ -249,6 +249,64 @@ Route::get('/storage-test', function () {
     }
 });
 
+Route::get('/storage-fix', function () {
+    try {
+        $results = [];
+
+        // Check current disk
+        $disk = \Storage::disk('public');
+        $results['current_disk'] = 'public';
+        $results['root_path'] = storage_path('app/public');
+
+        // Check if directories exist
+        $results['app_exists'] = is_dir(storage_path('app'));
+        $results['app_public_exists'] = is_dir(storage_path('app/public'));
+
+        // Create public directory if it doesn't exist
+        if (!$results['app_public_exists']) {
+            mkdir(storage_path('app/public'), 0755, true);
+            $results['created_public_dir'] = true;
+        }
+
+        // Check if symlink exists
+        $results['symlink_exists'] = is_link(public_path('storage'));
+
+        // Try to create symlink
+        if (!$results['symlink_exists']) {
+            if (file_exists(public_path('storage'))) {
+                $results['symlink_blocked'] = 'File/dir exists at public/storage';
+            } else {
+                symlink(storage_path('app/public'), public_path('storage'));
+                $results['symlink_created'] = true;
+            }
+        }
+
+        // Check permissions
+        $results['app_writable'] = is_writable(storage_path('app'));
+        $results['app_public_writable'] = is_writable(storage_path('app/public'));
+
+        // Test write to public disk
+        try {
+            $disk->put('test/upload-test.txt', 'Test upload at ' . now());
+            $results['test_write'] = 'success';
+            $results['test_file_exists'] = $disk->exists('test/upload-test.txt');
+        } catch (\Exception $e) {
+            $results['test_write'] = 'failed: ' . $e->getMessage();
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'results' => $results,
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage(),
+            'trace' => $e->getTraceAsString(),
+        ], 500);
+    }
+});
+
 Route::get('authentication-failed', function () {
     $errors = [];
     array_push($errors, ['code' => 'auth-001', 'message' => 'Unauthorized.']);
