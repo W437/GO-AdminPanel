@@ -4,12 +4,9 @@
         <div class="navbar-nav-wrap">
             <div class="navbar-brand-wrapper">
                 <!-- Logo -->
-                {{-- @php($restaurant_logo=\App\Models\BusinessSetting::where(['key'=>'logo'])->first()) --}}
-                @php($restaurant_logo=\App\CentralLogics\Helpers::getSettingsDataFromConfig(settings:'logo',relations:['storage']))
-
                 <a class="navbar-brand d-none d-md-block" href="{{route('admin.dashboard')}}" aria-label="">
                          <img class="navbar-brand-logo brand--logo-design-2"
-                         src="{{ \App\CentralLogics\Helpers::get_full_url('business',$restaurant_logo?->value,$restaurant_logo?->storage[0]?->value ?? 'public', 'favicon') }}"
+                         src="{{ dynamicAsset('public/assets/admin/img/go-logo.png') }}"
                          alt="image">
                          <img class="navbar-brand-logo-mini brand--logo-design-2"
                          src="{{ dynamicAsset('public/assets/admin/img/go-logo.png') }}"
