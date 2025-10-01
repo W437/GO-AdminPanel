@@ -1779,60 +1779,6 @@ $order_sch = Cache::rememberForever('order_scheduled_stats', function () {
                     </a>
                 </li>
 
-                <li
-                    class="navbar-vertical-aside-has-menu   {{ Request::is('admin/react-landing-page*') || Request::is('admin/landing-page*') ? 'active' : '' }}">
-                    <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:"
-                        title="{{ translate('landing_page_settings') }}">
-                        <span class="tio-files nav-icon"></span>
-                        <span
-                            class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('messages.landing_page_settings') }}</span>
-                    </a>
-                    <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
-                        style="display: {{ Request::is('admin/react-landing-page*') || Request::is('admin/landing-page*') ? 'block' : 'none' }}">
-
-                        <li class="nav-item {{ Request::is('admin/landing-page*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('admin.landing_page.header') }}"
-                                title="{{ translate('messages.Admin_landing_page') }} ">
-                                <span class="tio-circle nav-indicator-icon"></span>
-                                <span
-                                    class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('messages.Admin_landing_page') }}</span>
-                            </a>
-                        </li>
-
-                        <li class="nav-item {{ Request::is('admin/react-landing-page*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('admin.react_landing_page.react_header') }}"
-                                title="{{ translate('messages.React_landing_page') }} ">
-                                <span class="tio-circle nav-indicator-icon"></span>
-                                <span
-                                    class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{ translate('messages.React_landing_page') }}</span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-
-                <li
-                    class="navbar-vertical-aside-has-menu {{ Request::is('admin/business-settings/react*') ? 'active' : '' }}">
-                    <a class="nav-link " href="{{ route('admin.business-settings.react-setup') }}"
-                        title="{{ translate('messages.react_site') }}">
-                        <span class="tio-rear-window-defrost nav-icon"></span>
-                        <span class="text-truncate">{{ translate('messages.react_site') }}</span>
-                    </a>
-                </li>
-
-
-                <li
-                    class="navbar-vertical-aside-has-menu {{ Request::is('admin/business-settings/db-index') ? 'active' : '' }}">
-                    <a class="js-navbar-vertical-aside-menu-link nav-link"
-                        href="{{ route('admin.business-settings.db-index') }}"
-                        title="{{ translate('messages.clean_database') }}">
-                        <i class="tio-cloud nav-icon"></i>
-                        <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
-                            {{ translate('messages.clean_database') }}
-                        </span>
-                    </a>
-                </li>
-
                 <!-- End web & adpp Settings -->
 
                 <li class="nav-item">

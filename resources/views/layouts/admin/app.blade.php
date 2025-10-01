@@ -34,9 +34,45 @@
     <link rel="stylesheet" href="{{dynamicAsset('public/assets/admin/intltelinput/css/intlTelInput.css')}}">
     @stack('css_or_js')
     <link rel="stylesheet" href="{{ dynamicAsset('public/assets/admin/css/toastr.css') }}">
+
+    <style>
+        /* Prevent FOUC - hide content by default */
+        #content,
+        #styleSwitcherDropdown,
+        .header,
+        .navbar-vertical {
+            opacity: 0 !important;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Show content when loaded */
+        body.loaded #content,
+        body.loaded #styleSwitcherDropdown,
+        body.loaded .header,
+        body.loaded .navbar-vertical {
+            opacity: 1 !important;
+        }
+
+        /* Ensure preloader is visible immediately */
+        #pre--loader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
 </head>
 
 <body class="footer-offset">
+<script>
+    // Add loaded class immediately if page is from cache (bfcache)
+    if (document.readyState === 'complete') {
+        document.body.classList.add('loaded');
+    }
+</script>
 
     @if(env('APP_MODE')=='demo')
     <div id="direction-toggle" class="direction-toggle">
@@ -232,7 +268,8 @@
             "use strict";
     setTimeout(hide_loader, 1000);
     function hide_loader(){
-        $('#pre--loader').removeClass("pre--loader");;
+        $('body').addClass('loaded');
+        $('#pre--loader').removeClass("pre--loader");
     }
 
     </script>
@@ -741,7 +778,10 @@
         if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write(
             '<script src="{{ dynamicAsset('public/assets/admin') }}/vendor/babel-polyfill/polyfill.min.js"><\/script>');
 
-        $(window).on('load', ()=> $('.pre--loader').fadeOut(600))
+        $(window).on('load', ()=> {
+            $('body').addClass('loaded');
+            $('.pre--loader').fadeOut(600);
+        })
 
         $('.log-out').on('click',function (){
                 Swal.fire({
