@@ -6,13 +6,14 @@
                 <!-- Logo -->
                 {{-- @php($restaurant_logo=\App\Models\BusinessSetting::where(['key'=>'logo'])->first()) --}}
                 @php($restaurant_logo=\App\CentralLogics\Helpers::getSettingsDataFromConfig(settings:'logo',relations:['storage']))
+                @php($restaurant_icon=\App\CentralLogics\Helpers::getSettingsDataFromConfig(settings:'icon',relations:['storage']))
 
                 <a class="navbar-brand d-none d-md-block" href="{{route('admin.dashboard')}}" aria-label="">
                          <img class="navbar-brand-logo brand--logo-design-2"
                          src="{{ \App\CentralLogics\Helpers::get_full_url('business',$restaurant_logo?->value,$restaurant_logo?->storage[0]?->value ?? 'public', 'favicon') }}"
                          alt="image">
                          <img class="navbar-brand-logo-mini brand--logo-design-2"
-                         src="{{ \App\CentralLogics\Helpers::get_full_url('business',$restaurant_logo?->value,$restaurant_logo?->storage[0]?->value ?? 'public', 'favicon') }}"
+                         src="{{ \App\CentralLogics\Helpers::get_full_url('business',$restaurant_icon?->value ?? $restaurant_logo?->value,$restaurant_icon?->storage[0]?->value ?? $restaurant_logo?->storage[0]?->value ?? 'public', 'favicon') }}"
                          alt="image">
                 </a>
                 <!-- End Logo -->

@@ -220,13 +220,6 @@ ol.breadcrumb {
     filter: none;
 }
 
-/* Hide mini logo on tablet screens when sidebar is collapsed */
-@media (min-width: 768px) and (max-width: 1199px) {
-    .navbar-brand-logo-mini {
-        display: none !important;
-    }
-}
-
 .navbar-vertical-aside .js-navbar-vertical-aside-toggle-invoker {
     color: #6c757d !important;
 }
