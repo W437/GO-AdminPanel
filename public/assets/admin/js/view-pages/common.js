@@ -836,16 +836,19 @@ $(document).on("keyup", "#get-text-note", function () {
     $("#" + text_data + "_note").val($(this).val());
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    const activeLink = document.querySelector(".nav-link.active");
+// Wait for full page load (including CSS) to prevent forced layout reflow
+window.addEventListener("load", function () {
+    requestAnimationFrame(function() {
+        const activeLink = document.querySelector(".nav-link.active");
 
-    if (activeLink) {
-        activeLink.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest",
-            inline: "center",
-        });
-    }
+        if (activeLink) {
+            activeLink.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest",
+                inline: "center",
+            });
+        }
+    });
 });
 
 document.addEventListener("DOMContentLoaded", function () {

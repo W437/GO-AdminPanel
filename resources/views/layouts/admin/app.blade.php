@@ -266,6 +266,11 @@
 
     <script>
             "use strict";
+    // Suppress jQuery Migrate console messages
+    if (typeof jQuery !== 'undefined') {
+        jQuery.migrateMute = true;
+    }
+
     setTimeout(hide_loader, 1000);
     function hide_loader(){
         $('body').addClass('loaded');
@@ -641,7 +646,6 @@
 
         function conversationList() {
             var tab = getUrlParameter('tab');
-            console.log(tab)
             $.ajax({
                     url: "{{ route('admin.message.list') }}"+ '?tab=' + tab,
                     success: function(data) {
