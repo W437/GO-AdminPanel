@@ -1,11 +1,25 @@
+# nixpacks.toml - Railway build configuration for Laravel
+
 [phases.setup]
-nixPkgs = ['php83', 'php83Extensions.gd', 'php83Extensions.zip', 'php83Extensions.bcmath', 'php83Extensions.curl', 'php83Extensions.dom', 'php83Extensions.fileinfo', 'php83Extensions.intl', 'php83Extensions.mbstring', 'php83Extensions.openssl', 'php83Extensions.pdo', 'php83Extensions.pdo_mysql', 'php83Extensions.mysqli', 'php83Extensions.tokenizer', 'php83Extensions.xml', 'php83Packages.composer', 'nodejs-18_x']
+nixPkgs = ["php83", "php83Extensions.gd", "php83Extensions.zip", "php83Extensions.pdo", "php83Extensions.pdo_mysql", "php83Extensions.mbstring", "php83Extensions.curl", "php83Extensions.bcmath", "php83Extensions.xml", "php83Extensions.dom", "php83Extensions.fileinfo", "php83Extensions.tokenizer", "php83Extensions.openssl", "php83Extensions.simplexml", "nodejs_18", "composer"]
 
 [phases.install]
-cmds = ['npm ci', 'composer install --no-dev --optimize-autoloader']
+cmds = [
+    "composer install --no-dev --optimize-autoloader",
+    "npm ci --production || npm install --production"
+]
 
 [phases.build]
-cmds = ['npm run production', 'php artisan config:cache', 'php artisan view:cache']
+cmds = [
+    "php artisan config:cache",
+    "php artisan route:cache",
+    "php artisan view:cache",
+    "php artisan storage:link",
+    "chmod -R 755 storage bootstrap/cache"
+]
 
 [start]
-cmd = 'php artisan migrate --force || true && php artisan serve --host=0.0.0.0 --port=$PORT'
+cmd = "php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"
+
+[variables]
+APP_ENV = "production"
