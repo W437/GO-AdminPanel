@@ -239,7 +239,7 @@
                         <div class="row g-3 mt-3">
                             <div class="col-md-6">
                                 <h5 class="card-title mb-3">
-                                    <img src="http://localhost/stackfood/public/assets/admin/img/andriod.png" class="mr-2" alt="">
+                                    <img src="http://localhost/go/public/assets/admin/img/andriod.png" class="mr-2" alt="">
                                     {{ translate('messages.Playstore_Button') }}
                                 </h5>
                                 <div class="__bg-F8F9FC-card">
@@ -274,7 +274,7 @@
                             </div>
                             <div class="col-md-6">
                                 <h5 class="card-title mb-3">
-                                    <img src="http://localhost/stackfood/public/assets/admin/img/apple.png" class="mr-2" alt="">
+                                    <img src="http://localhost/go/public/assets/admin/img/apple.png" class="mr-2" alt="">
                                     {{ translate('messages.App_Store_Button') }}
                                 </h5>
                                 <div class="__bg-F8F9FC-card">

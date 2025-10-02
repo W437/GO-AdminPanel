@@ -1322,7 +1322,7 @@ class Helpers
                 ],
                 "android" => [
                     "notification" => [
-                        "channelId" => 'stackfood',
+                        "channelId" => 'go',
                     ]
                 ],
                 "apns" => [
@@ -1374,7 +1374,7 @@ class Helpers
                     ],
                     "android" => [
                         "notification" => [
-                            "channelId" => 'stackfood',
+                            "channelId" => 'go',
                         ]
                     ],
                     "apns" => [
@@ -1407,7 +1407,7 @@ class Helpers
                     ],
                     "android" => [
                         "notification" => [
-                            "channelId" => 'stackfood',
+                            "channelId" => 'go',
                         ]
                     ],
                     "apns" => [

@@ -330,7 +330,7 @@
 {{--                    <tr>--}}
 {{--                        <td style="text-align:center">--}}
 {{--                            <a style=" color: #000000; text-align:center;--}}
-{{--                    text-decoration: none;" href="www.stackfood.inc">www.stackfood.inc</a>--}}
+{{--                    text-decoration: none;" href="www.go.inc">www.go.inc</a>--}}
 {{--                        </td>--}}
 {{--                        <td style="text-align:center">--}}
 {{--                            <a style=" color: #000000; text-align:center;--}}

@@ -73,7 +73,7 @@ $company_name = App\Models\BusinessSetting::where('key', 'business_name')->first
                     </a>
                 </span>
                 <span class="copyright" id="mail-copyright">
-                    {{ $data['copyright_text']?? translate('Copyright_2023_Stackfood._All_right_reserved') }}
+                    {{ $data['copyright_text']?? translate('Copyright_2023_go._All_right_reserved') }}
                 </span>
             </td>
         </tr>

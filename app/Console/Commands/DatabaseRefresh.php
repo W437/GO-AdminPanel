@@ -49,9 +49,9 @@ class DatabaseRefresh extends Command
             'description' => 'demo_reset',
             'image' => '',
             'order_id' => '',
-            'type' => 'stackfood_demo_reset',
+            'type' => 'go_demo_reset',
         ];
-        Helpers::send_push_notif_for_demo_reset($data, $data['type'], 'stackfood_demo_reset');
+        Helpers::send_push_notif_for_demo_reset($data, $data['type'], 'go_demo_reset');
     } catch (\Throwable $th) {
         info('Failed_to_sent_demo_reset_notification');
     }

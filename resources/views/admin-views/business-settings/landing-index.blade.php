@@ -192,7 +192,7 @@ $config = \App\CentralLogics\Helpers::get_business_settings('landing_page');
                                     <div class="text-center max-w-595 mx-auto py-4">
                                         <img src="{{dynamicAsset('/public/assets/admin/img/landing-icon-2.png')}}" class="mb-3" alt="">
                                         <p class="m-0">
-                                            {{ translate('Currently_you_are_using_Stackfood_Default_Admin_Landing_Page_Theme.') }}
+                                            {{ translate('Currently_you_are_using_GO_Default_Admin_Landing_Page_Theme.') }}
                                             <a href="{{ route('home') }}" class="text--primary text-underline">{{ translate('Visit_Landing_Page') }}</a>
                                         </p>
                                     </div>
@@ -221,7 +221,7 @@ $config = \App\CentralLogics\Helpers::get_business_settings('landing_page');
         <div class="text-center max-w-595 mx-auto py-4">
             <img src="{{dynamicAsset('/public/assets/admin/img/landing-icon-2.png')}}" class="mb-3" alt="">
             <p class="m-0">
-                {{ translate('Currently_you_are_using_Stackfood_Default_Admin_Landing_Page_Theme.') }}
+                {{ translate('Currently_you_are_using_GO_Default_Admin_Landing_Page_Theme.') }}
                 <a href="{{ route('home') }}" class="text--primary text-underline">{{ translate('Visit_Landing_Page') }}</a>
             </p>
         </div>

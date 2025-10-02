@@ -66,7 +66,7 @@
                                 <div class="from-group">
                                     <label for="first-name" class="d-flex align-items-center gap-2 mb-2">Business Name</label>
                                     <input type="text" id="first-name" class="form-control" name="web_name"
-                                           required placeholder="Ex: Stackfood">
+                                           required placeholder="Ex: go">
                                 </div>
                             </div>
                             <div class="col-md-6">

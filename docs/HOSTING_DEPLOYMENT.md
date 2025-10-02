@@ -1,4 +1,4 @@
-# StackFood Admin Panel - Hosting & Deployment Guide
+# GO Admin Panel - Hosting & Deployment Guide
 
 ## Hosting Options
 
@@ -213,6 +213,6 @@ SESSION_HTTP_ONLY=true
 ## Getting Help
 
 - **Laravel Documentation**: https://laravel.com/docs
-- **StackFood Community**: Check GitHub issues
+- **GO Community**: Check GitHub issues
 - **Laravel Community**: https://laracasts.com/discuss
 - **Server Management**: Consider managed hosting for easier maintenance

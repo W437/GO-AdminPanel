@@ -38,7 +38,7 @@ trait VatTaxConfiguration
                 'payer_types'=> [ 'vendor','rental_provider','parcel', 'prescription'],
 
             ],
-            'stackfood' => [
+            'go' => [
                 'tax_calculate_from' => ['Calculate_Tax_on_Billing_Address_Location'],
                 'tax_calculate_on' => ['order_wise', 'product_wise', 'category_wise'],
                 'additional_tax' => ['tax_on_packaging_charge'],
@@ -62,7 +62,7 @@ trait VatTaxConfiguration
                 'tax_list' =>  'taxmodule::tax.tax_list',
                 'system_tax_setup' =>  'taxmodule::tax.system_tax_setup',
             ],
-            'stackfood' => [
+            'go' => [
                 'tax_list_export' =>  'taxmodule::file-exports.tax_list_export',
                 'tax_list' =>  'taxmodule::tax.tax_list',
                 'system_tax_setup' =>  'taxmodule::tax.system_tax_setup',
@@ -91,7 +91,7 @@ trait VatTaxConfiguration
                 'parcel_category' =>  'App\Models\ParcelCategory',
                 'campaign_product' =>  'App\Models\ItemCampaign',
             ],
-            'stackfood' => [
+            'go' => [
                 'product' => 'App\Models\Food',
                 'category' =>  'App\Models\Category',
                 'addon' =>  'App\Models\AddOn',

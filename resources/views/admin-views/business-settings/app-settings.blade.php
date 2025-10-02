@@ -446,7 +446,7 @@
                                 </div>
                                 <ul>
                                     <li>
-                                        {{ translate('This_app_version_defines_the_Restaurant,_Deliveryman,_and_User_app_version_of_StackFood.') }}
+                                        {{ translate('This_app_version_defines_the_Restaurant,_Deliveryman,_and_User_app_version_of_go.') }}
                                     </li>
                                     <li>
                                         {{ translate('It_doesn’t_represent_the_Play_Store_or_App_Store_version') }}

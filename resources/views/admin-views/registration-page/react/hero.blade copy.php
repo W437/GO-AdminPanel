@@ -27,7 +27,7 @@
             </div>
         </div>
 
-         <!-- StackFood 8.2 Version Structure -->
+         <!-- GO 8.2 Version Structure -->
         <!-- Registration From -->
         <div class="">  
            <h1 class="page-header-title mb-5">Registration from</h1>

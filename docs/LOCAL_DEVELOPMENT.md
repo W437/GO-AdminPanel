@@ -1,4 +1,4 @@
-# StackFood Admin Panel - Local Development Guide
+# GO Admin Panel - Local Development Guide
 
 ## Prerequisites
 
@@ -98,7 +98,7 @@ php artisan view:clear
 ### Database Connection Issues
 1. Ensure MySQL is running: `brew services list | grep mysql`
 2. Check database credentials in `.env` file
-3. Test connection: `mysql -u root -p stackfood`
+3. Test connection: `mysql -u root -p go`
 
 ### Permission Issues
 ```bash
@@ -118,7 +118,7 @@ APP_URL=http://localhost:8000
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=stackfood
+DB_DATABASE=go
 DB_USERNAME=root
 DB_PASSWORD=
 ```

@@ -234,7 +234,7 @@
                         @endif
                     </span>
                     <span class="copyright" id="mail-copyright">
-                        {{ $copyright_text?? translate('Copyright_2023_Stackfood._All_right_reserved') }}
+                        {{ $copyright_text?? translate('Copyright_2023_go._All_right_reserved') }}
                     </span>
                 </td>
             </tr>
