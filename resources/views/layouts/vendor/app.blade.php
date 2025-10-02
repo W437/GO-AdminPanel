@@ -39,24 +39,7 @@
     <link rel="stylesheet" href="{{dynamicAsset('public/assets/admin/css/toastr.css')}}">
 
     <style>
-        /* Prevent FOUC - hide content by default */
-        #content,
-        #styleSwitcherDropdown,
-        .header,
-        .navbar-vertical {
-            opacity: 0 !important;
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        /* Show content when loaded */
-        body.loaded #content,
-        body.loaded #styleSwitcherDropdown,
-        body.loaded .header,
-        body.loaded .navbar-vertical {
-            opacity: 1 !important;
-        }
-
-        /* Ensure preloader is visible immediately */
+        /* Preloader styling */
         #pre--loader {
             position: fixed;
             inset: 0;
@@ -66,15 +49,50 @@
             align-items: center;
             justify-content: center;
         }
+
+        /* Smooth fade-in animation when page loads */
+        @keyframes fadeInPage {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Apply fade-in only after body gets loaded class */
+        body.loaded #content,
+        body.loaded .header,
+        body.loaded .navbar-vertical {
+            animation: fadeInPage 0.3s ease-in-out;
+        }
+
+        /* CSS-only fallback: ensure content is visible after 2 seconds max */
+        #content,
+        .header,
+        .navbar-vertical {
+            animation: fadeInPage 2s ease-in-out;
+        }
     </style>
 </head>
 
 <body class="footer-offset">
 <script>
-    // Add loaded class immediately if page is from cache (bfcache)
-    if (document.readyState === 'complete') {
-        document.body.classList.add('loaded');
-    }
+    // Robust loading handler with multiple fallbacks
+    (function() {
+        'use strict';
+
+        function addLoadedClass() {
+            document.body.classList.add('loaded');
+        }
+
+        // Method 1: If page is from cache or already loaded
+        if (document.readyState === 'complete') {
+            addLoadedClass();
+        }
+
+        // Method 2: On DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', addLoadedClass);
+
+        // Method 3: Fallback timeout (ensure visibility within 2 seconds)
+        setTimeout(addLoadedClass, 2000);
+    })();
 </script>
 
     @if (env('APP_MODE')=='demo')
