@@ -463,7 +463,8 @@ class VendorController extends Controller
 
     public function view($restaurant,Request $request, $tab = null, $sub_tab = 'cash')
     {
-        $key = explode(' ', $request['search']);
+        $search = $request->get('search');
+        $key = isset($search) ? explode(' ', $search) : null;
 
         $restaurant= Restaurant::find($restaurant);
         $wallet = $restaurant?->vendor?->wallet;
