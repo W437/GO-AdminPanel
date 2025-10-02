@@ -47,24 +47,29 @@
             justify-content: center;
         }
 
+        /* Hide preloader when loaded */
+        body.loaded #pre--loader {
+            display: none !important;
+        }
+
         /* Smooth fade-in animation when page loads */
         @keyframes fadeInPage {
             from { opacity: 0; }
             to { opacity: 1; }
         }
 
-        /* Apply fade-in only after body gets loaded class */
+        /* Apply fade-in to correct elements */
         body.loaded #content,
-        body.loaded .header,
-        body.loaded .navbar-vertical {
+        body.loaded #header,
+        body.loaded .navbar-vertical-aside {
             animation: fadeInPage 0.3s ease-in-out;
         }
 
-        /* CSS-only fallback: ensure content is visible after 2 seconds max */
+        /* CSS-only fallback: ensure content is visible */
         #content,
-        .header,
-        .navbar-vertical {
-            animation: fadeInPage 2s ease-in-out;
+        #header,
+        .navbar-vertical-aside {
+            opacity: 1 !important; /* Ensure visibility */
         }
     </style>
 </head>
@@ -292,7 +297,7 @@
     setTimeout(hide_loader, 1000);
     function hide_loader(){
         $('body').addClass('loaded');
-        $('#pre--loader').removeClass("pre--loader");
+        $('#pre--loader').hide(); // Properly hide the preloader
     }
 
     </script>
@@ -802,7 +807,7 @@
 
         $(window).on('load', ()=> {
             $('body').addClass('loaded');
-            $('.pre--loader').fadeOut(600);
+            $('#pre--loader').fadeOut(600); // Fixed selector
         })
 
         $('.log-out').on('click',function (){
