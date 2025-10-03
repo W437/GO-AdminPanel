@@ -210,6 +210,8 @@ class CustomerController extends Controller
             'email' => 'required|unique:users,email,' . $request?->user()?->id,
             'image' => 'nullable|max:2048',
             'password' => ['nullable', Password::min(8)],
+            'profile_emoji' => 'nullable|string|max:10',
+            'profile_bg_color' => ['nullable', 'regex:/^#[0-9A-Fa-f]{6}$/'],
 
         ]);
 
@@ -489,6 +491,15 @@ class CustomerController extends Controller
         $user->password = $pass;
         $user->phone = $request->phone;
         $user->email = $request->email;
+
+        // Update emoji profile fields if provided
+        if ($request->has('profile_emoji')) {
+            $user->profile_emoji = $request->profile_emoji;
+        }
+        if ($request->has('profile_bg_color')) {
+            $user->profile_bg_color = $request->profile_bg_color;
+        }
+
         $user->save();
 
         if ($user->userinfo) {

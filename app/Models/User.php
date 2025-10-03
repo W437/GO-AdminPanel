@@ -29,7 +29,9 @@ class User extends Authenticatable
         'login_medium',
         'ref_code',
         'ref_by',
-        'social_id'
+        'social_id',
+        'profile_emoji',
+        'profile_bg_color'
     ];
 
     /**
@@ -60,7 +62,7 @@ class User extends Authenticatable
         'social_id' => 'integer',
     ];
 
-    protected $appends = ['image_full_url'];
+    protected $appends = ['image_full_url', 'has_emoji_profile'];
     public function getImageFullUrlAttribute(){
         $value = $this->image;
         if (count($this->storage) > 0) {
@@ -72,6 +74,10 @@ class User extends Authenticatable
         }
 
         return Helpers::get_full_url('profile',$value,'public');
+    }
+
+    public function getHasEmojiProfileAttribute(){
+        return !empty($this->profile_emoji) && !empty($this->profile_bg_color);
     }
 
     public function userinfo()
