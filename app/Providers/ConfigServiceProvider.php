@@ -242,8 +242,14 @@ class ConfigServiceProvider extends ServiceProvider
                 Config::set('filesystems.disks.s3.secret', $credentials['secret']);
                 Config::set('filesystems.disks.s3.region', $credentials['region']);
                 Config::set('filesystems.disks.s3.bucket', $credentials['bucket']);
-                Config::set('filesystems.disks.s3.url', $credentials['url']);
-                Config::set('filesystems.disks.s3.endpoint', $credentials['end_point']);
+                // For standard AWS S3, don't set url/endpoint - let AWS SDK auto-generate them
+                // Only set if explicitly provided in database (for S3-compatible services like MinIO)
+                if (isset($credentials['url'])) {
+                    Config::set('filesystems.disks.s3.url', $credentials['url']);
+                }
+                if (isset($credentials['end_point'])) {
+                    Config::set('filesystems.disks.s3.endpoint', $credentials['end_point']);
+                }
             }
 
             if(Cache::has('maintenance')){

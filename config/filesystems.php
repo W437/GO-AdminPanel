@@ -49,8 +49,8 @@ return [
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
-            'endpoint' => env('AWS_ENDPOINT'),
+            // Don't set url/endpoint for standard AWS S3 - AWS SDK auto-generates them
+            // ConfigServiceProvider will set these if needed for S3-compatible services
         ],
 
     ],
