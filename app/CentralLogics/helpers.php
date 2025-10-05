@@ -2152,8 +2152,11 @@ class Helpers
                 $imageName = 'def.png';
             }
         } catch (\Exception $e) {
+            info('Upload failed: ' . $e->getMessage());
+            info('Disk: ' . self::getDisk());
+            throw $e;
         }
-        return $imageName;
+        return $imageName ?? 'def.png';
     }
 
     public static function update(string $dir, $old_image, string $format, $image = null)
