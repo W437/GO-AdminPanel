@@ -235,9 +235,9 @@ class ConfigServiceProvider extends ServiceProvider
                 $credentials = json_decode($data['value'], true);
             }
 
-            $config = (boolean)BusinessSetting::where(['key' => 'local_storage'])->first()?->value;
+            $config = BusinessSetting::where(['key' => 'local_storage'])->first()?->value;
             if ($credentials) {
-                Config::set('filesystems.default', $config ? ($config == 0 ? 's3' : 'local') : 'local');
+                Config::set('filesystems.default', $config == 0 ? 's3' : 'local');
                 Config::set('filesystems.disks.s3.key', $credentials['key']);
                 Config::set('filesystems.disks.s3.secret', $credentials['secret']);
                 Config::set('filesystems.disks.s3.region', $credentials['region']);
