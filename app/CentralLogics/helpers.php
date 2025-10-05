@@ -2152,9 +2152,14 @@ class Helpers
                 $imageName = 'def.png';
             }
         } catch (\Exception $e) {
-            info('Upload failed: ' . $e->getMessage());
-            info('Disk: ' . self::getDisk());
-            throw $e;
+            \Illuminate\Support\Facades\Log::error('S3 Upload Error', [
+                'disk' => self::getDisk(),
+                'dir' => $dir,
+                'error' => $e->getMessage(),
+                'code' => $e->getCode()
+            ]);
+            // Fall back to default image on S3 failure
+            $imageName = 'def.png';
         }
         return $imageName ?? 'def.png';
     }
