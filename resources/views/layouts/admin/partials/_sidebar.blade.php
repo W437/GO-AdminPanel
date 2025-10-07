@@ -1779,6 +1779,19 @@ $order_sch = Cache::rememberForever('order_scheduled_stats', function () {
                     </a>
                 </li>
 
+
+                <li
+                    class="navbar-vertical-aside-has-menu {{ Request::is('admin/business-settings/db-index') ? 'active' : '' }}">
+                    <a class="js-navbar-vertical-aside-menu-link nav-link"
+                        href="{{ route('admin.business-settings.db-index') }}"
+                        title="{{ translate('messages.clean_database') }}">
+                        <i class="tio-cloud nav-icon"></i>
+                        <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
+                            {{ translate('messages.clean_database') }}
+                        </span>
+                    </a>
+                </li>
+
                 <!-- End web & adpp Settings -->
 
                 <li class="nav-item">
