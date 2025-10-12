@@ -1582,14 +1582,15 @@ $order_sch = Cache::rememberForever('order_scheduled_stats', function () {
                     </a>
                 </li>
 
-                <li
+                {{-- Temporarily hidden Theme Settings --}}
+                {{-- <li
                     class="navbar-vertical-aside-has-menu {{ Request::is('admin/business-settings/theme-settings*') ? 'active' : '' }}">
                     <a class="nav-link " href="{{ route('admin.business-settings.theme-settings') }}"
                         title="{{ translate('messages.theme_settings') }}">
                         <span class="tio-brush nav-icon"></span>
                         <span class="text-truncate">{{ translate('messages.theme_settings') }}</span>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="navbar-vertical-aside-has-menu {{ Request::is('admin/file-manager*') ? 'active' : '' }}">
                     <a class="nav-link " href="{{ route('admin.file-manager.index') }}"
