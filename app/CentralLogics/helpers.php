@@ -2144,10 +2144,21 @@ class Helpers
         try {
             if ($image != null) {
                 $imageName = \Carbon\Carbon::now()->toDateString() . "-" . uniqid() . "." . $format;
-                if (!Storage::disk(self::getDisk())->exists($dir)) {
-                    Storage::disk(self::getDisk())->makeDirectory($dir);
+                $disk = self::getDisk();
+
+                if (!Storage::disk($disk)->exists($dir)) {
+                    Storage::disk($disk)->makeDirectory($dir);
                 }
-                Storage::disk(self::getDisk())->putFileAs($dir, $image, $imageName);
+
+                if ($disk === 's3') {
+                    // For S3 (AWS & DigitalOcean Spaces)
+                    // Don't set visibility/ACL - rely on bucket policy for public access
+                    // This works for both ACL-disabled buckets (modern AWS) and DO Spaces
+                    Storage::disk($disk)->put($dir . $imageName, file_get_contents($image->getRealPath()));
+                } else {
+                    // For local storage, use putFileAs as before
+                    Storage::disk($disk)->putFileAs($dir, $image, $imageName);
+                }
             } else {
                 $imageName = 'def.png';
             }
@@ -2156,7 +2167,8 @@ class Helpers
                 'disk' => self::getDisk(),
                 'dir' => $dir,
                 'error' => $e->getMessage(),
-                'code' => $e->getCode()
+                'code' => $e->getCode(),
+                'line' => $e->getLine()
             ]);
             // Fall back to default image on S3 failure
             $imageName = 'def.png';

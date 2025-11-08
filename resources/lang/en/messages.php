@@ -6936,4 +6936,7 @@
   'Select Restaurant' => 'Select Restaurant',
   'failed_to_update' => 'Failed to update',
   'settings_updated_successfully' => 'Settings updated successfully',
+  'DigitalOcean Spaces Docs' => 'DigitalOcean Spaces Docs',
+  'Required only for DigitalOcean Spaces or S3-compatible services' => 'Required only for DigitalOcean Spaces or S3-compatible services',
+  'e.g., https://nyc3.digitaloceanspaces.com' => 'E.g., https://nyc3.digitaloceanspaces.com',
 );

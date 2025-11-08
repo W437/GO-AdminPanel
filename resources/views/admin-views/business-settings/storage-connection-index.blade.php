@@ -92,13 +92,50 @@
                 </div>
             </div>
         </div>
+
+        {{-- Configuration Note for Local vs Production --}}
+        <div class="alert alert-soft-info mt-3" role="alert">
+            <div class="d-flex align-items-start">
+                <div class="alert-icon">
+                    <i class="tio-info-outined"></i>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <h5 class="alert-heading mb-2">{{translate('Storage Configuration Guide')}}</h5>
+                    <div class="mb-2">
+                        <strong>{{translate('For Local Testing (AWS S3)')}}:</strong>
+                        <ul class="mb-1">
+                            <li>Configure credentials in <code>.env</code> file (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION, AWS_BUCKET)</li>
+                            <li>Set <code>AWS_ACL=bucket-owner-full-control</code> for modern AWS buckets with ACLs disabled</li>
+                            <li>Leave endpoint fields empty (AWS SDK auto-generates URLs)</li>
+                            <li>Add bucket policy for public access (see docs/S3_STORAGE_SETUP.md)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>{{translate('For Production (DigitalOcean Spaces)')}}:</strong>
+                        <ul class="mb-1">
+                            <li>Get Spaces credentials from DigitalOcean Control Panel</li>
+                            <li>Enter credentials below OR in .env file</li>
+                            <li>Endpoint: <code>https://REGION.digitaloceanspaces.com</code> (e.g., nyc3, sgp1, fra1)</li>
+                            <li>Set Space to "Public" in DO control panel</li>
+                            <li>Optional: Enable Spaces CDN for better performance</li>
+                        </ul>
+                    </div>
+                    <p class="mb-0 mt-2">
+                        <i class="tio-info mr-1"></i>
+                        <strong>Note:</strong> Credentials in .env file take priority. Leave these fields empty if configured in .env.
+                        See <code>docs/S3_STORAGE_SETUP.md</code> for detailed setup instructions.
+                    </p>
+                </div>
+            </div>
+        </div>
+
         @php($config=\App\CentralLogics\Helpers::get_business_settings('s3_credential'))
         <div class="card mt-3">
             <div class="p-4 card-header-shadow">
                 <h4 class="card-title align-items-center">
                     {{translate('S3_Credential')}}
                 </h4>
-                <span>{{ translate('The_Access_Key_ID_is_a_publicly_accessible_identifier_used_to_authenticate_requests_to_S3.') }} <a target="_blank" href="https://docs.aws.amazon.com/s3/">{{ translate('Learn_More') }}</a></span>            </div>
+                <span>{{ translate('The_Access_Key_ID_is_a_publicly_accessible_identifier_used_to_authenticate_requests_to_S3.') }} <a target="_blank" href="https://docs.aws.amazon.com/s3/">{{ translate('Learn_More') }}</a> | <a target="_blank" href="https://docs.digitalocean.com/products/spaces/">{{ translate('DigitalOcean Spaces Docs') }}</a></span>            </div>
             <div class="card-body">
                 <div class="mt-2 px-3">
                     <form
@@ -155,25 +192,27 @@
                                 </div>
                                 <div class="border pt-5 radius-10 row mb-3">
                                     <div class="col-lg-4 col-sm-6 p-10px">
-                                        <label for="url" class="form-label">{{translate('messages.url')}}</label>
+                                        <label for="url" class="form-label">{{translate('messages.url')}} <small class="text-muted">({{translate('Optional - Leave empty for AWS S3')}})</small></label>
                                     </div>
                                     <div class="col-lg-8 col-sm-6">
                                         <div class="form-group">
-                                            <input required id="url" type="text" class="form-control mb-2" name="url"
+                                            <input id="url" type="text" class="form-control mb-2" name="url"
+                                                   placeholder="{{translate('Leave empty for AWS S3, required for DigitalOcean Spaces')}}"
                                                    value="{{env('APP_MODE')!='demo'?$config['url']??"":''}}">
-
+                                            <small class="form-text text-muted">{{translate('For DigitalOcean Spaces: https://your-space.region.digitaloceanspaces.com')}}</small>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="border pt-5 radius-10 row mb-3">
                                     <div class="col-lg-4 col-sm-6 p-10px">
-                                        <label for="end_point" class="form-label">{{translate('messages.end_point')}}</label>
+                                        <label for="end_point" class="form-label">{{translate('messages.end_point')}} <small class="text-muted">({{translate('Optional - Leave empty for AWS S3')}})</small></label>
                                     </div>
                                     <div class="col-lg-8 col-sm-6">
                                         <div class="form-group">
-                                            <input required id="end_point" type="text" class="form-control mb-2" name="end_point"
+                                            <input id="end_point" type="text" class="form-control mb-2" name="end_point"
+                                                   placeholder="{{translate('e.g., https://nyc3.digitaloceanspaces.com')}}"
                                                    value="{{env('APP_MODE')!='demo'?$config['end_point']??"":''}}">
-
+                                            <small class="form-text text-muted">{{translate('Required only for DigitalOcean Spaces or S3-compatible services')}}</small>
                                         </div>
                                     </div>
                                 </div>

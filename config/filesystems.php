@@ -50,7 +50,12 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
             'throw' => false,
-            'use_path_style_endpoint' => false,
+            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+            'options' => [
+                // For modern AWS S3 buckets with ACLs disabled (Object Ownership: Bucket owner enforced)
+                // For DigitalOcean Spaces, this will be overridden if ACLs are enabled
+                'ACL' => env('AWS_ACL', 'bucket-owner-full-control'),
+            ],
             // Don't set url/endpoint for standard AWS S3 - AWS SDK auto-generates them
             // ConfigServiceProvider will set these if needed for S3-compatible services
         ],
