@@ -275,7 +275,11 @@ class LanguageController extends Controller
             $new_messages_path = base_path('resources/lang/' . $lang . '/new-messages.php');
             $count=0;
             $start_time = now();
-            $items_processed = 20;
+
+            // Use larger batch size for OpenAI (faster), smaller for Google
+            $provider = BusinessSetting::where('key', 'translation_provider')->first();
+            $isOpenAI = ($provider?->value === 'openai' && config('services.openai.key'));
+            $items_processed = $isOpenAI ? config('services.openai.batch_size', 100) : 20;
             if(!file_exists($new_messages_path)){
                 $str = "<?php return " . var_export($data_filtered, true) . ";";
                 file_put_contents(base_path('resources/lang/' . $lang . '/new-messages.php'), $str);
