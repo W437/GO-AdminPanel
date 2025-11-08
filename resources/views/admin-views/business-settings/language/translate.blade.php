@@ -219,19 +219,40 @@
                             <div class="progress-circle-container mb-4">
                                 <img width="80px" src="{{dynamicAsset('/public/assets/admin/img/loader-icon.gif')}}" alt="">
                             </div>
-                            <h4 class="mb-2">{{ translate('Translating_may_take_up_to') }} <span id="time-data"> {{ translate('Hours') }}</span></h4>
-                            <p class="mb-4">
-                                {{ translate('Please_wait_&_don’t_close/terminate_your_tab_or_browser') }}
+                            <h4 class="mb-2 translation-title">
+                                @php
+                                    $provider = App\CentralLogics\Helpers::get_business_settings('translation_provider') ?? 'google';
+                                    $isOpenAI = $provider === 'openai' && config('services.openai.key');
+                                @endphp
+                                @if($isOpenAI)
+                                    <span class="badge badge-primary mb-2">🤖 OpenAI Batch Translation</span><br>
+                                    {{ translate('Estimated_time') }}: <span id="time-data">{{ translate('Minutes') }}</span>
+                                @else
+                                    <span class="badge badge-secondary mb-2">🌐 Google Translate</span><br>
+                                    {{ translate('Translating_may_take_up_to') }} <span id="time-data">{{ translate('Hours') }}</span>
+                                @endif
+                            </h4>
+                            <p class="mb-3">
+                                {{ translate('Please_wait_&_don't_close/terminate_your_tab_or_browser') }}
                             </p>
-                            <div class="max-w-215px mx-auto">
+                            <div class="max-w-300px mx-auto">
                                 <div class="d-flex flex-wrap mb-1 justify-content-between font-semibold text--title">
                                     <span>{{ translate('In_Progress') }}</span>
                                     <span class="translating-modal-success-rate">0.4%</span>
                                 </div>
-                                <div class="progress mb-3 h-5px">
+                                <div class="progress mb-3 h-10px">
                                     <div class="progress-bar bg-success rounded-pill translating-modal-success-bar" style="width: 0.4%"></div>
                                 </div>
+                                <div class="d-flex justify-content-between text-sm text-muted mb-3">
+                                    <span id="items-translated">0</span>
+                                    <span id="items-total">0</span>
+                                </div>
                             </div>
+                            @if($isOpenAI)
+                            <p class="mb-3 text-muted small">
+                                <strong>🚀 Fast Batch Processing:</strong> Translating 50 items per request
+                            </p>
+                            @endif
                             <p class="mb-4 text-9EADC1">
                                 <span class="text-dark">{{ translate('note:') }}</span> {{ translate('All_the_translations_may_not_be_fully_accurate.') }}
                             </p>
@@ -377,14 +398,21 @@
                     if(response.data === 'data_prepared'){
                         $('#translating-modal').modal('show')
                         $('#translating-count').val(response.total)
+                        $('#items-total').html('of ' + response.total + ' items');
                         auto_translate_all();
                     } else if(response.data === 'translating' &&  response.status === 'pending' ){
                         if($('#translating-count').val() == 0  ){
                             $('#translating-count').val(response.total)
                         }
 
+                        var total = parseInt($('#translating-count').val());
+                        var remaining = response.status === 'pending' ? (total - Math.floor(total * response.percentage / 100)) : 0;
+                        var translated = total - remaining;
+
                         $('.translating-modal-success-rate').html(response.percentage + '%');
                         $('.translating-modal-success-bar').attr('style', 'width:' + response.percentage + '%');
+                        $('#items-translated').html(translated + ' translated');
+                        $('#items-total').html('of ' + total + ' items');
 
 
                             if(response.hours > 0){
