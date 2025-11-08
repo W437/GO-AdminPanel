@@ -279,7 +279,9 @@ class LanguageController extends Controller
             // Use larger batch size for OpenAI (faster), smaller for Google
             $provider = BusinessSetting::where('key', 'translation_provider')->first();
             $isOpenAI = ($provider?->value === 'openai' && config('services.openai.key'));
-            $items_processed = $isOpenAI ? config('services.openai.batch_size', 100) : 20;
+            // OpenAI: Process 500 items per iteration (5x batches of 100)
+            // Google: Process 20 items per iteration
+            $items_processed = $isOpenAI ? 500 : 20;
             if(!file_exists($new_messages_path)){
                 $str = "<?php return " . var_export($data_filtered, true) . ";";
                 file_put_contents(base_path('resources/lang/' . $lang . '/new-messages.php'), $str);
