@@ -412,7 +412,7 @@ INSERT INTO `business_settings` (`id`, `key`, `value`, `created_at`, `updated_at
 (41, 'app_minimum_version', '0', NULL, NULL),
 (42, 'tax', NULL, NULL, NULL),
 (43, 'admin_commission', '0', NULL, NULL),
-(44, 'country', 'AF', NULL, NULL),
+(44, 'country', 'IL', NULL, NULL),
 (45, 'app_url', 'up_comming', NULL, NULL),
 (46, 'default_location', '{\"lat\":\"0\",\"lng\":\"0\"}', NULL, NULL),
 (47, 'twilio_sms', '{\"status\":\"0\",\"sid\":null,\"messaging_service_id\":null,\"token\":null,\"from\":null,\"otp_template\":\"Your otp is #OTP#.\"}', '2021-10-16 03:10:30', '2021-10-16 03:10:30'),
@@ -2199,8 +2199,8 @@ CREATE TABLE `oauth_clients` (
 --
 
 INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `provider`, `redirect`, `personal_access_client`, `password_client`, `revoked`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'Laravel Personal Access Client', 'qFAwGhxq8A6SDmolyxZunXyQ4mxOH0jEezXsgaxP', NULL, 'http://localhost', 1, 0, 0, '2021-06-19 03:27:59', '2021-06-19 03:27:59'),
-(2, NULL, 'Laravel Password Grant Client', 'qdV021R3MGGAwRxvvqG0mWgnypwzolzusBq1L5W6', 'users', 'http://localhost', 0, 1, 0, '2021-06-19 03:27:59', '2021-06-19 03:27:59');
+(1, NULL, 'GO Admin Panel Personal Access Client', 'u0Cm5GjCu3qiIMP5Q8at1mALbbSljhtQvkFXcOHW', NULL, 'http://localhost', 1, 0, 0, '2021-06-19 03:27:59', '2021-06-19 03:27:59'),
+(2, NULL, 'GO Admin Panel Password Grant Client', 'UEirmWDY9MwuievEHZI8zqsD51yZgOVDezhDuh2x', 'users', 'http://localhost', 0, 1, 0, '2021-06-19 03:27:59', '2021-06-19 03:27:59');
 
 -- --------------------------------------------------------
 

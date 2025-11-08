@@ -178,7 +178,48 @@ QUEUE_CONNECTION=redis
 
 ## Security Considerations
 
-### 1. Environment Security
+### 🔴 **1. CRITICAL: Regenerate OAuth Passport Clients**
+
+**⚠️ MUST DO THIS IMMEDIATELY AFTER FIRST PRODUCTION DEPLOYMENT!**
+
+The SQL dump includes default OAuth secrets shared with all CodeCanyon customers. These MUST be regenerated for production security.
+
+**Why?**
+- Default OAuth secrets are in the SQL dump = known to all customers
+- Security risk: unauthorized API access possible
+- Best practice: unique secrets per installation
+
+**How to Regenerate:**
+```bash
+# SSH into your production server
+ssh root@your-droplet-ip
+
+# Navigate to application
+cd /var/www/GO-AdminPanel  # or your path
+
+# Regenerate Passport clients (creates new unique secrets)
+php artisan passport:install --force
+
+# Output confirms:
+# Personal access client created successfully.
+# Password grant client created successfully.
+```
+
+**Do Mobile Apps Need Updates?**
+**NO! ✅** Mobile apps don't need any changes because:
+- This app uses Personal Access Tokens (not Password Grant)
+- OAuth clients are server-side only
+- Mobile apps only need API URL, not OAuth secrets
+
+**Verify Regeneration:**
+```bash
+mysql -u root -p your_db -e "SELECT id, name, secret FROM oauth_clients;"
+# You should see DIFFERENT secrets than in the SQL dump
+```
+
+---
+
+### 2. Environment Security
 ```bash
 # Generate new application key for production
 php artisan key:generate --force
@@ -188,13 +229,13 @@ SESSION_SECURE_COOKIE=true
 SESSION_HTTP_ONLY=true
 ```
 
-### 2. Server Security
+### 3. Server Security
 - Keep PHP and server software updated
 - Use firewall (UFW, CloudFlare)
 - Disable unnecessary services
 - Regular security updates
 
-### 3. Application Security
+### 4. Application Security
 - Enable CSRF protection
 - Validate all inputs
 - Use HTTPS everywhere
