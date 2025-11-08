@@ -38,12 +38,16 @@
                                 <p class="mb-0 text-muted">{{ translate('Choose between Google Translate (free) or OpenAI (better quality)') }}</p>
                             </div>
                             <div class="d-flex align-items-center">
+                                @php
+                                    $providerSetting = App\Models\BusinessSetting::where('key', 'translation_provider')->first();
+                                    $currentProvider = $providerSetting?->value ?? 'google';
+                                @endphp
                                 <select class="form-control mr-2" id="translation-provider" style="min-width: 200px;">
-                                    <option value="google" {{ (App\CentralLogics\Helpers::get_business_settings('translation_provider') ?? 'google') === 'google' ? 'selected' : '' }}>
-                                        🌐 Google Translate (Free)
+                                    <option value="google" {{ $currentProvider === 'google' ? 'selected' : '' }}>
+                                        Google Translate (Free)
                                     </option>
-                                    <option value="openai" {{ (App\CentralLogics\Helpers::get_business_settings('translation_provider') ?? 'google') === 'openai' ? 'selected' : '' }}>
-                                        🤖 OpenAI (GPT)
+                                    <option value="openai" {{ $currentProvider === 'openai' ? 'selected' : '' }}>
+                                        OpenAI (GPT)
                                     </option>
                                 </select>
                                 <button type="button" class="btn btn--primary" id="save-translation-provider">
@@ -53,7 +57,7 @@
                         </div>
                         @if(!config('services.openai.key'))
                         <div class="alert alert-warning mt-3 mb-0">
-                            <strong>⚠️ OpenAI API Key Not Configured</strong><br>
+                            <strong>WARNING: OpenAI API Key Not Configured</strong><br>
                             To use OpenAI translation, add your API key to the .env file: <code>OPENAI_API_KEY=your-key-here</code>
                         </div>
                         @endif
@@ -230,10 +234,10 @@
                                     }
                                 @endphp
                                 @if($isOpenAI)
-                                    <span class="badge badge-primary mb-2">🤖 OpenAI Batch Translation</span><br>
+                                    <span class="badge badge-primary mb-2">OpenAI Batch Translation</span><br>
                                     {{ translate('Estimated_time') }}: <span id="time-data">{{ translate('Minutes') }}</span>
                                 @else
-                                    <span class="badge badge-secondary mb-2">🌐 Google Translate</span><br>
+                                    <span class="badge badge-secondary mb-2">Google Translate</span><br>
                                     {{ translate('Translating_may_take_up_to') }} <span id="time-data">{{ translate('Hours') }}</span>
                                 @endif
                             </h4>
@@ -255,7 +259,7 @@
                             </div>
                             @if($isOpenAI)
                             <p class="mb-3 text-muted small">
-                                <strong>🚀 Fast Batch Processing:</strong> Translating 50 items per request
+                                <strong>Fast Batch Processing:</strong> Translating 50 items per request
                             </p>
                             @endif
                             <p class="mb-4 text-9EADC1">
