@@ -3593,13 +3593,13 @@ class Helpers
             $targetLanguage = self::getLanguageName($tl);
             $sourceLanguage = self::getLanguageName($sl);
 
-            // Build context-aware prompt
-            $prompt = "Translate the following text from {$sourceLanguage} to {$targetLanguage}. This is for a food delivery and restaurant management application. Maintain the tone and context appropriate for restaurant/food/delivery industry. Only return the translated text, nothing else.\n\nText: {$q}";
+            // Build context-aware prompt with specific instructions
+            $prompt = self::buildTranslationPrompt($q, $sourceLanguage, $targetLanguage, $tl);
 
             $response = $client->chat()->create([
                 'model' => config('services.openai.model', 'gpt-3.5-turbo'),
                 'messages' => [
-                    ['role' => 'system', 'content' => 'You are a professional translator specializing in food delivery and restaurant applications. Provide accurate, natural translations that maintain the original tone and context.'],
+                    ['role' => 'system', 'content' => self::getTranslationSystemMessage($tl)],
                     ['role' => 'user', 'content' => $prompt],
                 ],
                 'temperature' => 0.3, // Lower temperature for more consistent translations
@@ -3614,6 +3614,45 @@ class Helpers
             // Fallback to Google if OpenAI fails
             return self::translate_with_google($q, $sl, $tl);
         }
+    }
+
+    public static function getTranslationSystemMessage($targetLanguageCode)
+    {
+        // Base system message
+        $baseMessage = 'You are a professional translator specializing in food delivery and restaurant management applications. Your translations must be clear, consistent, and culturally appropriate for the target audience.';
+
+        // Add language-specific instructions
+        if ($targetLanguageCode === 'ar') {
+            $baseMessage .= "\n\nIMPORTANT: For Arabic translations, use the Palestinian dialect of Israeli Arabs. This dialect should be natural, conversational, and familiar to Palestinians living in Israel. Avoid overly formal Modern Standard Arabic unless the context requires it (e.g., legal terms, official notifications).";
+        }
+
+        return $baseMessage;
+    }
+
+    public static function buildTranslationPrompt($text, $sourceLanguage, $targetLanguage, $targetLanguageCode)
+    {
+        $prompt = "Translate the following text from {$sourceLanguage} to {$targetLanguage}.\n\n";
+
+        $prompt .= "CONTEXT: This is for a food delivery and restaurant management application used in Israel/Palestine.\n\n";
+
+        $prompt .= "INSTRUCTIONS:\n";
+        $prompt .= "1. If the source text is poorly written, grammatically incorrect, or unclear, improve it while translating\n";
+        $prompt .= "2. Maintain clarity and consistency in terminology throughout\n";
+        $prompt .= "3. Use language appropriate for the restaurant/food delivery industry\n";
+        $prompt .= "4. Keep the tone professional yet friendly (suitable for customers and restaurant staff)\n";
+
+        // Add language-specific instructions
+        if ($targetLanguageCode === 'ar') {
+            $prompt .= "5. Use Palestinian dialect spoken by Israeli Arabs - natural, everyday language\n";
+            $prompt .= "6. Avoid formal Modern Standard Arabic unless the text is official/legal\n";
+            $prompt .= "7. Use terms familiar to Palestinians in Israel (e.g., for 'delivery' use 'توصيل' not 'إيصال')\n";
+            $prompt .= "8. Numbers and times should be clear and match local usage\n";
+        }
+
+        $prompt .= "\nONLY return the translated text, nothing else. Do NOT include explanations, notes, or the original text.\n\n";
+        $prompt .= "Text to translate: {$text}";
+
+        return $prompt;
     }
 
     public static function getLanguageName($code)
