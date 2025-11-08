@@ -2154,7 +2154,7 @@ class Helpers
                     // For S3 (AWS & DigitalOcean Spaces)
                     // Don't set visibility/ACL - rely on bucket policy for public access
                     // This works for both ACL-disabled buckets (modern AWS) and DO Spaces
-                    Storage::disk($disk)->put($dir . $imageName, file_get_contents($image->getRealPath()));
+                    Storage::disk($disk)->put($dir . $imageName, file_get_contents($image->getRealPath()), 'public');
                 } else {
                     // For local storage, use putFileAs as before
                     Storage::disk($disk)->putFileAs($dir, $image, $imageName);
