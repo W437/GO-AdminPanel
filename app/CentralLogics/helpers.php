@@ -65,7 +65,7 @@ use App\Models\SubscriptionBillingAndRefundHistory;
 use App\Traits\NotificationDataSetUpTrait;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\TransferException;
-use GuzzleHttp\Promise\Utils;
+use GuzzleHttp\Pool;
 
 class Helpers
 {
@@ -3685,57 +3685,76 @@ class Helpers
             ]);
 
             $batches = array_chunk($items, $batchSize, true);
+            $batchMap = [];
             $allTranslations = [];
 
-            foreach (array_chunk($batches, $parallelWorkers, true) as $batchGroup) {
-                $promises = [];
+            $requests = function () use ($client, $batches, $apiKey, $systemMessage, $model, $sourceLanguage, $targetLanguage, $tl, &$batchMap) {
+                foreach ($batches as $index => $batch) {
+                    $batchMap[$index] = $batch;
 
-                foreach ($batchGroup as $batchIndex => $batch) {
-                    $promises[$batchIndex] = $client->postAsync('chat/completions', [
-                        'headers' => [
-                            'Authorization' => 'Bearer ' . $apiKey,
-                            'Content-Type' => 'application/json',
-                        ],
-                        'json' => [
-                            'model' => $model,
-                            'messages' => [
-                                ['role' => 'system', 'content' => $systemMessage],
-                                ['role' => 'user', 'content' => self::buildBatchTranslationPrompt($batch, $sourceLanguage, $targetLanguage, $tl)],
+                    yield $index => function () use ($client, $apiKey, $systemMessage, $model, $sourceLanguage, $targetLanguage, $tl, $batch) {
+                        return $client->postAsync('chat/completions', [
+                            'headers' => [
+                                'Authorization' => 'Bearer ' . $apiKey,
+                                'Content-Type' => 'application/json',
                             ],
-                            'temperature' => 0.2,
-                            'max_tokens' => 8000,
-                        ],
-                    ]);
+                            'json' => [
+                                'model' => $model,
+                                'messages' => [
+                                    ['role' => 'system', 'content' => $systemMessage],
+                                    ['role' => 'user', 'content' => self::buildBatchTranslationPrompt($batch, $sourceLanguage, $targetLanguage, $tl)],
+                                ],
+                                'temperature' => 0.2,
+                                'max_tokens' => 8000,
+                            ],
+                        ]);
+                    };
                 }
+            };
 
-                $responses = Utils::settle($promises)->wait();
-
-                foreach ($responses as $batchIndex => $result) {
-                    $batch = $batchGroup[$batchIndex];
-
-                    if ($result['state'] === 'fulfilled') {
-                        $body = (string) $result['value']->getBody();
-                        $payload = json_decode($body, true);
-                        $content = $payload['choices'][0]['message']['content'] ?? null;
-                        $parsedTranslations = self::parseBatchTranslationResponse($content, $batch);
-
-                        if (!empty($parsedTranslations)) {
-                            $allTranslations = array_replace($allTranslations, $parsedTranslations);
-                            \Log::info('OpenAI Batch Translation Success: Translated ' . count($parsedTranslations) . ' items');
-                            continue;
-                        }
-
-                        \Log::warning('OpenAI Batch Translation Warning: Unable to parse response. Falling back to Google for this batch.');
-                    } else {
-                        $reason = $result['reason'] ?? null;
-                        $message = $reason instanceof TransferException ? $reason->getMessage() : 'Unknown error';
-                        \Log::error('OpenAI Translation Request Failed: ' . $message);
+            $pool = new Pool($client, $requests(), [
+                'concurrency' => $parallelWorkers,
+                'fulfilled' => function ($response, $index) use (&$allTranslations, &$batchMap, $sl, $tl) {
+                    $batch = $batchMap[$index] ?? [];
+                    if (empty($batch)) {
+                        return;
                     }
 
-                    $fallbackTranslations = self::translateBatchWithGoogle($batch, $sl, $tl);
-                    $allTranslations = array_replace($allTranslations, $fallbackTranslations);
-                }
-            }
+                    $status = $response->getStatusCode();
+                    if ($status >= 300) {
+                        $bodySnippet = substr((string) $response->getBody(), 0, 500);
+                        \Log::error('OpenAI Batch Translation HTTP ' . $status . ': ' . $bodySnippet);
+                        $fallback = self::translateBatchWithGoogle($batch, $sl, $tl);
+                        $allTranslations = array_replace($allTranslations, $fallback);
+                        return;
+                    }
+
+                    $payload = json_decode((string) $response->getBody(), true);
+                    $content = $payload['choices'][0]['message']['content'] ?? null;
+                    $parsedTranslations = self::parseBatchTranslationResponse($content, $batch);
+
+                    if (!empty($parsedTranslations)) {
+                        $allTranslations = array_replace($allTranslations, $parsedTranslations);
+                        \Log::info('OpenAI Batch Translation Success: Translated ' . count($parsedTranslations) . ' items');
+                        return;
+                    }
+
+                    \Log::warning('OpenAI Batch Translation Warning: Unable to parse response. Falling back to Google for this batch.');
+                    $fallback = self::translateBatchWithGoogle($batch, $sl, $tl);
+                    $allTranslations = array_replace($allTranslations, $fallback);
+                },
+                'rejected' => function ($reason, $index) use (&$allTranslations, &$batchMap, $sl, $tl) {
+                    $batch = $batchMap[$index] ?? [];
+                    $message = $reason instanceof TransferException ? $reason->getMessage() : (string) $reason;
+                    \Log::error('OpenAI Translation Request Failed: ' . $message);
+                    if (!empty($batch)) {
+                        $fallback = self::translateBatchWithGoogle($batch, $sl, $tl);
+                        $allTranslations = array_replace($allTranslations, $fallback);
+                    }
+                },
+            ]);
+
+            $pool->promise()->wait();
 
             return $allTranslations;
 

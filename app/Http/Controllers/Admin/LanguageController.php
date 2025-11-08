@@ -244,6 +244,9 @@ class LanguageController extends Controller
 
             $str = "<?php\n\nreturn " . var_export($full_data, true) . ";\n";
             file_put_contents($messagesPath, $str, LOCK_EX);
+            if (function_exists('opcache_invalidate')) {
+                @opcache_invalidate($messagesPath, true);
+            }
 
             $newMessagesPath = base_path('resources/lang/' . $lang . '/new-messages.php');
             if (file_exists($newMessagesPath)) {
@@ -252,6 +255,9 @@ class LanguageController extends Controller
                     unset($pending[$validated['key']]);
                     $pendingStr = "<?php\n\nreturn " . var_export($pending, true) . ";\n";
                     file_put_contents($newMessagesPath, $pendingStr, LOCK_EX);
+                    if (function_exists('opcache_invalidate')) {
+                        @opcache_invalidate($newMessagesPath, true);
+                    }
                 }
             }
 
