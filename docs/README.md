@@ -7,6 +7,14 @@ Welcome to the GO Admin Panel documentation! This comprehensive food delivery ma
 ### Getting Started
 - **[Local Development Guide](LOCAL_DEVELOPMENT.md)** - How to run the server locally
 - **[Hosting & Deployment Guide](HOSTING_DEPLOYMENT.md)** - Production deployment options
+- **[Redis Deployment Guide](REDIS_DEPLOYMENT.md)** - Redis installation and configuration
+- **[Performance Optimization Guide](PERFORMANCE_OPTIMIZATION_GUIDE.md)** - Performance tuning tips
+- **[Quick Deploy Checklist](QUICK_DEPLOY_CHECKLIST.md)** - Deployment checklist
+
+### Additional Documentation
+- **[Story System Plan](story_system_plan.md)** - Story feature planning
+- **[Story System Summary](story_system_summary.md)** - Story feature summary
+- **[Deployment Guide](deployment-guide.md)** - General deployment guide
 
 ## 🚀 Quick Start
 
@@ -53,9 +61,13 @@ php artisan serve
 ├── app/                    # Application logic
 ├── resources/views/        # Blade templates
 ├── public/                # Public assets
-├── database/migrations/   # Database migrations
+├── database/
+│   ├── migrations/        # Database migrations
+│   ├── scripts/          # SQL scripts and data imports
+│   └── seeders/          # Database seeders
 ├── routes/                # Route definitions
 ├── config/                # Configuration files
+├── scripts/               # Utility scripts
 └── docs/                  # Documentation (this folder)
 ```
 

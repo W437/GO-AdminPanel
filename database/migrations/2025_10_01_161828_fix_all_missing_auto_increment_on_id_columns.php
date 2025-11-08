@@ -27,7 +27,7 @@ return new class extends Migration
         ");
 
         foreach ($tables as $table) {
-            $tableName = $table->table_name;
+            $tableName = $table->TABLE_NAME ?? $table->table_name;
 
             // Check if PRIMARY KEY exists
             $hasPrimaryKey = DB::select("

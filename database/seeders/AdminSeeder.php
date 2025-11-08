@@ -18,11 +18,12 @@ class AdminSeeder extends Seeder
         DB::table('admins')->insert([
             'id' => 1,
             'f_name' => 'Master Admin',
-            'l_name' => 'Khandakar',
+            'l_name' => 'Moka',
             'phone' => '01759412381',
             'email' => 'admin@admin.com',
             'image' => 'def.png',
             'password' => bcrypt(12345678),
+            'role_id' => 1,
             'remember_token' =>Str::random(10),
             'created_at'=>now(),
             'updated_at'=>now()

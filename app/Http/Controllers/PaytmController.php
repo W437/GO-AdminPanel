@@ -33,7 +33,7 @@ class PaytmController extends Controller
         } elseif (!is_null($config) && $config->mode == 'test') {
             $this->config_values = json_decode($config->test_values);
         }
-        if (isset($config)) {
+        if (isset($config) && isset($this->config_values)) {
 
             $PAYTM_STATUS_QUERY_NEW_URL = 'https://securegw-stage.paytm.in/merchant-status/getTxnStatus';
             $PAYTM_TXN_URL = 'https://securegw-stage.paytm.in/theia/processTransaction';

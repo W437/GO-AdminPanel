@@ -12,8 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Add auto increment and primary key to id column
-        DB::statement('ALTER TABLE taxables MODIFY COLUMN id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY');
+        // Check if primary key already exists before attempting to modify
+        $primaryKey = DB::select("SHOW KEYS FROM taxables WHERE Key_name = 'PRIMARY'");
+
+        if (empty($primaryKey)) {
+            // Only add primary key if it doesn't exist
+            DB::statement('ALTER TABLE taxables MODIFY COLUMN id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY');
+        }
+        // If primary key already exists, skip - table is already correctly configured
     }
 
     /**

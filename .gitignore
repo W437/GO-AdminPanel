@@ -1,3 +1,4 @@
+# Laravel Core
 /node_modules
 /public/hot
 /public/storage
@@ -5,6 +6,7 @@
 /vendor
 .env
 .env.backup
+.env.production
 .phpunit.result.cache
 docker-compose.override.yml
 Homestead.json
@@ -12,8 +14,75 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 error_log
+
 # Docker-related
 docker-compose.yml
 Dockerfile
 docker/
 /docker-local
+
+# macOS System Files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# IDE and Editor Files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+.project
+.settings/
+.buildpath
+
+# SSL/Security Files
+.rnd
+*.pem
+*.key
+*.crt
+*.csr
+
+# Database and SQL Files
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+
+# Log Files
+*.log
+storage/logs/*.log
+
+# Backup Files
+*.bak
+*.backup
+*~
+*.orig
+
+# Compiled Files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Package Files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# OS Generated Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini

@@ -6931,4 +6931,6 @@
   'All_the_translations_may_not_be_fully_accurate.' => 'All the translations may not be fully accurate.',
   'Failed_to_send_mail' => 'Failed to send mail',
   'stories' => 'Stories',
+  'The password must be at least 6 characters.' => 'The password must be at least 6 characters.',
+  'installHook.js.map' => 'InstallHook.js.map',
 );
