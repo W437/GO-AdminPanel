@@ -230,16 +230,37 @@ class LanguageController extends Controller
     public function translate_submit(Request $request, $lang)
     {
         try {
-            $full_data = include(base_path('resources/lang/' . $lang . '/messages.php'));
-            $data_filtered = [];
-            foreach ($full_data as $key => $data) {
-                $data_filtered[$key] = $data;
-            }
-            $data_filtered[$request['key']] = $request['value'];
-            $str = "<?php return " . var_export($data_filtered, true) . ";";
-            file_put_contents(base_path('resources/lang/' . $lang . '/messages.php'), $str);
+            $validated = $request->validate([
+                'key' => 'required|string',
+                'value' => 'nullable|string',
+            ]);
 
-            return response()->json(['success' => true, 'message' => 'Translation updated']);
+            $messagesPath = base_path('resources/lang/' . $lang . '/messages.php');
+            $full_data = include($messagesPath);
+            if (!is_array($full_data)) {
+                $full_data = [];
+            }
+            $full_data[$validated['key']] = $validated['value'] ?? '';
+
+            $str = "<?php\n\nreturn " . var_export($full_data, true) . ";\n";
+            file_put_contents($messagesPath, $str, LOCK_EX);
+
+            $newMessagesPath = base_path('resources/lang/' . $lang . '/new-messages.php');
+            if (file_exists($newMessagesPath)) {
+                $pending = include($newMessagesPath);
+                if (is_array($pending) && array_key_exists($validated['key'], $pending)) {
+                    unset($pending[$validated['key']]);
+                    $pendingStr = "<?php\n\nreturn " . var_export($pending, true) . ";\n";
+                    file_put_contents($newMessagesPath, $pendingStr, LOCK_EX);
+                }
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Translation updated',
+                'key' => $validated['key'],
+                'value' => $validated['value'] ?? '',
+            ]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }

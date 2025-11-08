@@ -63,6 +63,9 @@ use App\Models\RestaurantNotificationSetting;
 use MatanYadaev\EloquentSpatial\Objects\Point;
 use App\Models\SubscriptionBillingAndRefundHistory;
 use App\Traits\NotificationDataSetUpTrait;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\TransferException;
+use GuzzleHttp\Promise\Utils;
 
 class Helpers
 {
@@ -3660,126 +3663,192 @@ class Helpers
             }
 
             $apiKey = config('services.openai.key');
+            if (empty($apiKey)) {
+                \Log::warning('OpenAI API key missing. Falling back to Google Translate for batch job.');
+                return self::translateBatchWithGoogle($items, $sl, $tl);
+            }
+
+            $batchSize = max(1, (int) config('services.openai.batch_size', 100));
+            $parallelWorkers = max(1, (int) config('services.openai.parallel_workers', 8));
+            $timeout = (int) config('services.openai.timeout', 120);
+            $model = config('services.openai.model', 'gpt-4o-mini');
+
             $targetLanguage = self::getLanguageName($tl);
             $sourceLanguage = self::getLanguageName($sl);
             $systemMessage = self::getTranslationSystemMessage($tl);
 
-            // Use MUCH larger batches since gpt-4o-mini has 128k context
-            // Each batch can handle 200-300 items easily
-            $batchSize = config('services.openai.batch_size', 100);
-            $batches = array_chunk($items, $batchSize, true);
+            $client = new Client([
+                'base_uri' => 'https://api.openai.com/v1/',
+                'timeout' => $timeout,
+                'connect_timeout' => 10,
+                'http_errors' => false,
+            ]);
 
-            // TRUE PARALLEL PROCESSING: Send multiple concurrent requests
-            $parallelWorkers = config('services.openai.parallel_workers', 10);
+            $batches = array_chunk($items, $batchSize, true);
             $allTranslations = [];
 
-            // Process batches in parallel chunks
-            foreach (array_chunk($batches, $parallelWorkers) as $batchChunk) {
+            foreach (array_chunk($batches, $parallelWorkers, true) as $batchGroup) {
                 $promises = [];
 
-                // Create concurrent HTTP requests using Laravel HTTP Pool
-                foreach ($batchChunk as $batchIndex => $batch) {
-                    // Build a single prompt with multiple translations
-                    $batchPrompt = "Translate the following texts from {$sourceLanguage} to {$targetLanguage}.\n\n";
-                    $batchPrompt .= "CONTEXT: This is for a food delivery and restaurant management application used in Israel/Palestine.\n\n";
-                    $batchPrompt .= "INSTRUCTIONS:\n";
-                    $batchPrompt .= "1. If the source text is poorly written, grammatically incorrect, or unclear, improve it while translating\n";
-                    $batchPrompt .= "2. Maintain clarity and consistency in terminology throughout\n";
-                    $batchPrompt .= "3. Use language appropriate for the restaurant/food delivery industry\n";
-                    $batchPrompt .= "4. Keep the tone professional yet friendly\n";
-
-                    if ($tl === 'ar') {
-                        $batchPrompt .= "5. Use Palestinian dialect spoken by Israeli Arabs - natural, everyday language\n";
-                        $batchPrompt .= "6. Avoid formal Modern Standard Arabic unless the text is official/legal\n";
-                        $batchPrompt .= "7. Use terms familiar to Palestinians in Israel\n";
-                    }
-
-                    $batchPrompt .= "\nReturn ONLY the translations in the format:\n";
-                    $batchPrompt .= "KEY|TRANSLATION\n\n";
-                    $batchPrompt .= "Texts to translate:\n";
-
-                    foreach ($batch as $key => $text) {
-                        $cleanText = str_replace('_', ' ', $text);
-                        $batchPrompt .= "{$key}|{$cleanText}\n";
-                    }
-
-                    $promises[$batchIndex] = [
-                        'batch' => $batch,
-                        'prompt' => $batchPrompt
-                    ];
-                }
-
-                // Execute ALL requests concurrently using HTTP Pool
-                $responses = \Illuminate\Support\Facades\Http::pool(function ($pool) use ($promises, $apiKey, $systemMessage) {
-                    $requests = [];
-                    foreach ($promises as $batchIndex => $data) {
-                        $requests[$batchIndex] = $pool->withHeaders([
+                foreach ($batchGroup as $batchIndex => $batch) {
+                    $promises[$batchIndex] = $client->postAsync('chat/completions', [
+                        'headers' => [
                             'Authorization' => 'Bearer ' . $apiKey,
                             'Content-Type' => 'application/json',
-                        ])->timeout(120)->post('https://api.openai.com/v1/chat/completions', [
-                            'model' => config('services.openai.model', 'gpt-4o-mini'),
+                        ],
+                        'json' => [
+                            'model' => $model,
                             'messages' => [
                                 ['role' => 'system', 'content' => $systemMessage],
-                                ['role' => 'user', 'content' => $data['prompt']],
+                                ['role' => 'user', 'content' => self::buildBatchTranslationPrompt($batch, $sourceLanguage, $targetLanguage, $tl)],
                             ],
-                            'temperature' => 0.3,
+                            'temperature' => 0.2,
                             'max_tokens' => 8000,
-                        ]);
-                    }
-                    return $requests;
-                });
+                        ],
+                    ]);
+                }
 
-                // Process all responses from this parallel chunk
-                foreach ($responses as $batchIndex => $response) {
-                    if ($response->successful()) {
-                        $batch = $promises[$batchIndex]['batch'];
-                        $responseData = $response->json();
-                        $responseText = $responseData['choices'][0]['message']['content'] ?? '';
-                        $lines = explode("\n", trim($responseText));
+                $responses = Utils::settle($promises)->wait();
 
-                        foreach ($lines as $line) {
-                            $line = trim($line);
-                            if (empty($line)) continue;
+                foreach ($responses as $batchIndex => $result) {
+                    $batch = $batchGroup[$batchIndex];
 
-                            $parts = explode('|', $line, 2);
-                            if (count($parts) === 2) {
-                                $key = trim($parts[0]);
-                                $translation = trim($parts[1]);
-                                if (isset($batch[$key])) {
-                                    $allTranslations[$key] = $translation;
-                                }
-                            }
+                    if ($result['state'] === 'fulfilled') {
+                        $body = (string) $result['value']->getBody();
+                        $payload = json_decode($body, true);
+                        $content = $payload['choices'][0]['message']['content'] ?? null;
+                        $parsedTranslations = self::parseBatchTranslationResponse($content, $batch);
+
+                        if (!empty($parsedTranslations)) {
+                            $allTranslations = array_replace($allTranslations, $parsedTranslations);
+                            \Log::info('OpenAI Batch Translation Success: Translated ' . count($parsedTranslations) . ' items');
+                            continue;
                         }
 
-                        // Log success for monitoring
-                        \Log::info('OpenAI Batch Translation Success: Translated ' . count($batch) . ' items');
+                        \Log::warning('OpenAI Batch Translation Warning: Unable to parse response. Falling back to Google for this batch.');
                     } else {
-                        $errorBody = $response->body();
-                        \Log::error('OpenAI Translation Request Failed: ' . $errorBody);
-
-                        // Fallback to Google Translate for failed batch
-                        $batch = $promises[$batchIndex]['batch'];
-                        \Log::warning('Falling back to Google Translate for ' . count($batch) . ' items');
-                        foreach ($batch as $key => $text) {
-                            try {
-                                $allTranslations[$key] = self::translate_with_google($text, $sl, $tl);
-                            } catch (\Exception $e) {
-                                \Log::error('Google Translate fallback failed for key: ' . $key);
-                                $allTranslations[$key] = $text; // Keep original if all fails
-                            }
-                        }
+                        $reason = $result['reason'] ?? null;
+                        $message = $reason instanceof TransferException ? $reason->getMessage() : 'Unknown error';
+                        \Log::error('OpenAI Translation Request Failed: ' . $message);
                     }
+
+                    $fallbackTranslations = self::translateBatchWithGoogle($batch, $sl, $tl);
+                    $allTranslations = array_replace($allTranslations, $fallbackTranslations);
                 }
             }
 
             return $allTranslations;
 
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             \Log::error('Batch OpenAI Translation Error: ' . $e->getMessage());
             return [];
         }
     }
 
+    protected static function buildBatchTranslationPrompt(array $batch, string $sourceLanguage, string $targetLanguage, string $targetLanguageCode): string
+    {
+        $lines = [
+            "Translate the following user interface texts from {$sourceLanguage} to {$targetLanguage}.",
+            '',
+            'Context: Food delivery and restaurant management application used in Israel/Palestine.',
+            'Rules:',
+            '1. Improve grammar if the source text is unclear while keeping the meaning.',
+            '2. Preserve placeholders (e.g., :name, {count}, %s) exactly as they appear.',
+            '3. Keep terminology consistent and professional yet friendly.',
+            '4. Return ONLY valid JSON. Do not wrap the response in Markdown.',
+        ];
+
+        if ($targetLanguageCode === 'ar') {
+            $lines[] = '5. Use Palestinian dialect spoken by Israeli Arabs; avoid overly formal MSA unless legally required.';
+        }
+
+        $payload = [];
+        foreach ($batch as $key => $text) {
+            $payload[] = [
+                'key' => $key,
+                'text' => str_replace('_', ' ', (string) $text),
+            ];
+        }
+
+        $jsonPayload = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+
+        $lines[] = '';
+        $lines[] = 'Return format: [{"key": "translation_key", "translation": "Translated text"}]';
+        $lines[] = '';
+        $lines[] = 'Input JSON:';
+        $lines[] = $jsonPayload;
+
+        return implode(PHP_EOL, $lines);
+    }
+
+    protected static function parseBatchTranslationResponse(?string $content, array $batch): array
+    {
+        if (empty($content)) {
+            return [];
+        }
+
+        $cleanContent = trim($content);
+        if (Str::startsWith($cleanContent, '```')) {
+            $cleanContent = preg_replace('/^```(?:json)?/i', '', $cleanContent);
+            $cleanContent = preg_replace('/```$/', '', $cleanContent);
+            $cleanContent = trim($cleanContent);
+        }
+
+        $decoded = json_decode($cleanContent, true);
+        $translations = [];
+
+        if (json_last_error() === JSON_ERROR_NONE) {
+            $rows = $decoded;
+            if (isset($decoded['translations']) && is_array($decoded['translations'])) {
+                $rows = $decoded['translations'];
+            }
+
+            if (is_array($rows)) {
+                foreach ($rows as $row) {
+                    $key = $row['key'] ?? null;
+                    $translation = $row['translation'] ?? null;
+                    if ($key !== null && array_key_exists($key, $batch) && $translation !== null) {
+                        $translations[$key] = trim($translation);
+                    }
+                }
+
+                if (!empty($translations)) {
+                    return $translations;
+                }
+            }
+        }
+
+        // Fallback parser for KEY|VALUE responses
+        $lines = preg_split("/\r\n|\r|\n/", $cleanContent);
+        foreach ($lines as $line) {
+            $line = trim($line);
+            if (empty($line) || strpos($line, '|') === false) {
+                continue;
+            }
+            [$key, $value] = array_map('trim', explode('|', $line, 2));
+            if ($key !== '' && array_key_exists($key, $batch)) {
+                $translations[$key] = $value;
+            }
+        }
+
+        return $translations;
+    }
+
+    protected static function translateBatchWithGoogle(array $batch, $sl, $tl): array
+    {
+        $translations = [];
+        foreach ($batch as $key => $text) {
+            try {
+                $translations[$key] = self::translate_with_google($text, $sl, $tl);
+            } catch (\Exception $e) {
+                \Log::error('Google Translate fallback failed for key: ' . $key . '. ' . $e->getMessage());
+                $translations[$key] = $text;
+            }
+        }
+        return $translations;
+    }
+
+    
     public static function getTranslationSystemMessage($targetLanguageCode)
     {
         // Base system message
