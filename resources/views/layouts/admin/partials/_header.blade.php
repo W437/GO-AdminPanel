@@ -28,58 +28,11 @@
             </div>
 
             <!-- Secondary Content -->
-            <div class="navbar-nav-wrap-content-right">
-                <!-- Navbar -->
+            <div class="navbar-nav-wrap-content-right d-flex align-items-center justify-content-between w-100">
+                <!-- Left Section: Messages & Orders -->
                 <ul class="navbar-nav align-items-center flex-row">
-                    <li class="nav-item max-sm-m-0 w-md-200px">
-                        <button type="button" id="modalOpener" class="title-color bg--secondary border-0 rounded justify-content-between w-100 align-items-center py-2 px-2 px-md-3 d-flex gap-1" data-toggle="modal" data-target="#staticBackdrop">
-                            <div class="d-flex gap-1 align-items-center">
-                                <i class="tio-search"></i>
-                                <span class="d-none d-md-block text-muted">{{translate('Search')}}</span>
-                            </div>
-                            <span class="bg-card text-muted border rounded-3 p-1 fs-12 fw-bold lh-1 ms-1 ctrlplusk d-none d-md-block">Ctrl+K</span>
-                        </button>
-                    </li>
                     <li class="nav-item d-none d-sm-inline-block mr-2">
-                        <div class="hs-unfold">
-                            <div>
-                                @php( $local = session()->has('local')?session('local'):null)
-                                @php($lang = \App\CentralLogics\Helpers::getSettingsDataFromConfig(settings: 'system_language'))
-                                {{-- @php($lang = \App\Models\BusinessSetting::where('key', 'system_language')->first()) --}}
-                                @if ($lang)
-                                <div
-                                    class="topbar-text dropdown disable-autohide text-capitalize d-flex">
-                                    <a class=" text-dark dropdown-toggle d-flex align-items-center nav-link "
-                                    href="#" data-toggle="dropdown">
-                                    @foreach(json_decode($lang['value'],true) as $data)
-                                        @if($data['code']==$local)
-                                            <img class="rounded mr-1"  width="20" src="{{ dynamicAsset('/public/assets/admin/img/lang.png') }}" alt="">
-                                            {{$data['code']}}
-                                        @elseif(!$local &&  $data['default'] == true)
-                                                <img class="rounded mr-1"  width="20" src="{{ dynamicAsset('/public/assets/admin/img/lang.png') }}" alt="">
-                                                    {{$data['code']}}
-                                        @endif
-                                    @endforeach
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        @foreach(json_decode($lang['value'],true) as $key =>$data)
-                                            @if($data['status']==1)
-                                                <li>
-                                                    <a class="dropdown-item py-1"
-                                                        href="{{route('admin.lang',[$data['code']])}}">
-                                                        <span class="text-capitalize">{{$data['code']}}</span>
-                                                    </a>
-                                                </li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                @endif
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav-item d-none d-sm-inline-block mr-4">
-                        <!-- Notification -->
+                        <!-- Messages -->
                         <div class="hs-unfold">
                             <a class="js-hs-unfold-invoker btn btn-icon btn-soft-secondary rounded-circle"
                                 href="{{route('admin.message.list', ['tab'=> 'customer'])}}">
@@ -93,10 +46,10 @@
                                 @endif
                             </a>
                         </div>
-                        <!-- End Notification -->
+                        <!-- End Messages -->
                     </li>
-                    <li class="nav-item d-none d-sm-inline-block mr-4">
-                        <!-- Notification -->
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <!-- Orders -->
                         <div class="hs-unfold">
                             <a class="js-hs-unfold-invoker btn btn-icon btn-soft-secondary rounded-circle"
                                 href="{{route('admin.order.list',['status'=>'pending'])}}">
@@ -107,7 +60,55 @@
                                     @endif
                             </a>
                         </div>
-                        <!-- End Notification -->
+                        <!-- End Orders -->
+                    </li>
+                </ul>
+
+                <!-- Center Section: Search -->
+                <div class="nav-item mx-auto" style="max-width: 400px; width: 100%;">
+                    <button type="button" id="modalOpener" class="title-color bg--secondary border-0 rounded justify-content-between w-100 align-items-center py-2 px-2 px-md-3 d-flex gap-1" data-toggle="modal" data-target="#staticBackdrop">
+                        <div class="d-flex gap-1 align-items-center">
+                            <i class="tio-search"></i>
+                            <span class="d-none d-md-block text-muted">{{translate('Search')}}</span>
+                        </div>
+                        <span class="bg-card text-muted border rounded-3 p-1 fs-12 fw-bold lh-1 ms-1 ctrlplusk d-none d-md-block">Ctrl+K</span>
+                    </button>
+                </div>
+
+                <!-- Right Section: Language & Profile -->
+                <ul class="navbar-nav align-items-center flex-row">
+                    <li class="nav-item d-none d-sm-inline-block mr-2">
+                        <div class="hs-unfold">
+                            <div>
+                                @php( $local = session()->has('local')?session('local'):null)
+                                @php($lang = \App\CentralLogics\Helpers::getSettingsDataFromConfig(settings: 'system_language'))
+                                @if ($lang)
+                                <div class="topbar-text dropdown disable-autohide text-capitalize d-flex">
+                                    <a class="text-dark dropdown-toggle d-flex align-items-center nav-link" href="#" data-toggle="dropdown">
+                                        <i class="tio-world mr-1"></i>
+                                        @foreach(json_decode($lang['value'],true) as $data)
+                                            @if($data['code']==$local)
+                                                {{$data['code']}}
+                                            @elseif(!$local &&  $data['default'] == true)
+                                                {{$data['code']}}
+                                            @endif
+                                        @endforeach
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        @foreach(json_decode($lang['value'],true) as $key =>$data)
+                                            @if($data['status']==1)
+                                                <li>
+                                                    <a class="dropdown-item py-1" href="{{route('admin.lang',[$data['code']])}}">
+                                                        <span class="text-capitalize">{{$data['code']}}</span>
+                                                    </a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                @endif
+                            </div>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <!-- Account -->

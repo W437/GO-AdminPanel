@@ -72,7 +72,7 @@
                     <!-- Header -->
                     <div class="card-header align-items-center">
                         <h5 class="d-flex gap-2 align-items-center">
-                            <img src="{{dynamicAsset('/public/assets/admin/img/dashboard/statistics.png')}}" alt="dashboard" class="card-header-icon">
+                            <i class="tio-chart-pie-1 card-header-icon"></i>
                             <span>{{translate('user_statistics')}}</span>
                         </h5>
                         <div id="stat_zone">
