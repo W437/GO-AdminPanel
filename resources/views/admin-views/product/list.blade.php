@@ -443,8 +443,8 @@
                 },
                 language: {
                     zeroRecords: '<div class="text-center p-4">' +
-                        '<img class="w-7rem mb-3" src="{{ dynamicAsset('public/assets/admin/svg/illustrations/sorry.svg') }}" alt="Image Description">' +
-                        '<p class="mb-0">{{ translate('No_data_to_show') }}</p>' +
+                        '<i class="tio-inbox d-block mb-3" style="font-size: 64px; color: #d1d5db;"></i>' +
+                        '<p class="mb-0 text-muted">{{ translate('No_data_to_show') }}</p>' +
                         '</div>'
                 }
             });
