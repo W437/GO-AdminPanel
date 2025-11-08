@@ -3,6 +3,17 @@
 @section('title',translate('messages.language'))
 
 @section('content')
+    @php
+        // Check translation provider once at the top for use throughout template
+        try {
+            $providerSetting = App\Models\BusinessSetting::where('key', 'translation_provider')->first();
+            $currentProvider = $providerSetting?->value ?? 'google';
+            $isOpenAI = $currentProvider === 'openai' && config('services.openai.key');
+        } catch (\Exception $e) {
+            $currentProvider = 'google';
+            $isOpenAI = false;
+        }
+    @endphp
     <div class="content container-fluid">
         <div class="page-header">
             <div class="d-flex flex-wrap justify-content-between align-items-start">
@@ -38,10 +49,6 @@
                                 <p class="mb-0 text-muted">{{ translate('Choose between Google Translate (free) or OpenAI (better quality)') }}</p>
                             </div>
                             <div class="d-flex align-items-center">
-                                @php
-                                    $providerSetting = App\Models\BusinessSetting::where('key', 'translation_provider')->first();
-                                    $currentProvider = $providerSetting?->value ?? 'google';
-                                @endphp
                                 <select class="form-control mr-2" id="translation-provider" style="min-width: 200px;">
                                     <option value="google" {{ $currentProvider === 'google' ? 'selected' : '' }}>
                                         Google Translate (Free)
@@ -224,15 +231,6 @@
                                 <img width="80px" src="{{dynamicAsset('/public/assets/admin/img/loader-icon.gif')}}" alt="">
                             </div>
                             <h4 class="mb-2 translation-title">
-                                @php
-                                    try {
-                                        $providerSetting = App\Models\BusinessSetting::where('key', 'translation_provider')->first();
-                                        $provider = $providerSetting?->value ?? 'google';
-                                        $isOpenAI = $provider === 'openai' && config('services.openai.key');
-                                    } catch (\Exception $e) {
-                                        $isOpenAI = false;
-                                    }
-                                @endphp
                                 @if($isOpenAI)
                                     <span class="badge badge-primary mb-2">OpenAI Batch Translation</span><br>
                                     {{ translate('Estimated_time') }}: <span id="time-data">{{ translate('Minutes') }}</span>
