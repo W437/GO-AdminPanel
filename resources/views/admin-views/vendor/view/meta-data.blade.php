@@ -43,7 +43,7 @@
                 <div class="card-header">
                     <h5 class="card-title">
                         <span class="card-header-icon">
-                            <img class="w--22" src="{{dynamicAsset('public/assets/admin/img/restaurant.png')}}" alt="">
+                            <i class="tio-restaurant card-header-icon"></i>
                         </span>
                         <span class="p-md-1"> {{translate('messages.restaurant_meta_data')}}</span>
                     </h5>

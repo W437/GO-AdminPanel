@@ -33,7 +33,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
 
             <h1 class="page-header-title text-capitalize">
                 <div class="card-header-icon d-inline-flex mr-2 img">
-                    <img src="{{dynamicAsset('/public/assets/admin/img/orders.png')}}" alt="public">
+                    <i class="tio-shopping-cart card-header-icon"></i>
                 </div>
                 <span>
                     {{translate('messages.order_details')}}

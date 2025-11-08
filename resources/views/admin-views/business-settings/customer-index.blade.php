@@ -41,7 +41,7 @@
                     <div class="card mb-3">
                         <div class="card-header card-header-shadow">
                             <h5 class="card-title d-flex align-items-center">
-                                <img src="{{dynamicAsset('/public/assets/admin/img/ic_round-campaign.png')}}" alt="" class="card-header-icon align-self-center mr-1">
+                                <i class="tio-megaphone card-header-icon align-self-center mr-1"></i>
                                 <span>
                                     {{translate('Customer_Setup')}}
                                 </span>
@@ -237,7 +237,7 @@
                     <div class="card mb-3">
                         <div class="card-header card-header-shadow">
                             <h5 class="card-title">
-                                <img src="{{dynamicAsset('/public/assets/admin/img/loyalty.png')}}" alt="" class="card-header-icon align-self-center mr-1">
+                                <i class="tio-gift card-header-icon align-self-center mr-1"></i>
                                 <span>
                                     {{ translate('Customer_Loyalty_Point_Settings') }}
                                 </span>

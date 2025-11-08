@@ -37,7 +37,7 @@
         <div class="card border-0">
             <div class="card-header card-header-shadow">
                 <h5 class="card-title align-items-center">
-                    <img src="{{dynamicAsset('/public/assets/admin/img/payment-method.png')}}" class="mr-1" alt="">
+                    <i class="tio-credit-card mr-1 card-header-icon"></i>
                     {{translate('Payment Method')}}
                 </h5>
             </div>

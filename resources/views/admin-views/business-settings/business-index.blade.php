@@ -143,7 +143,7 @@
         <form action="{{ route('admin.business-settings.update-setup') }}" method="post" enctype="multipart/form-data">
             @csrf
             <h4 class="card-title mb-3 mt-1">
-                <img src="{{dynamicAsset('/public/assets/admin/img/company.png')}}" class="card-header-icon mr-2" alt="">
+                <i class="tio-business card-header-icon mr-2"></i>
                 <span>{{ translate('Company_Information') }}</span>
             </h4>
             <div class="card mb-3">

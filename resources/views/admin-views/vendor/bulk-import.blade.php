@@ -11,7 +11,7 @@
         <div class="page-header">
             <h1 class="page-header-title mb-2 text-capitalize">
                 <div class="card-header-icon d-inline-flex mr-2 img">
-                    <img src="{{dynamicAsset('/public/assets/admin/img/export.png')}}" alt="">
+                    <i class="tio-download card-header-icon"></i>
                 </div>
                     {{translate('messages.Restaurant_bulk_import')}}
             </h1>

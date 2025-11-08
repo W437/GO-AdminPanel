@@ -10,7 +10,7 @@
                 <div class="col-sm mb-2 mb-sm-0">
                     <h2 class="page-header-title text-capitalize">
                         <div class="card-header-icon d-inline-flex mr-2 img">
-                            <img src="{{dynamicAsset('public/assets/admin/img/zone.png')}}" alt="">
+                            <i class="tio-globe card-header-icon"></i>
                         </div>
                         <span>
                             {{translate('cuisine')}}
