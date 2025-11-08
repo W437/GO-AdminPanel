@@ -33,8 +33,9 @@ return [
     'openai' => [
         'key' => env('OPENAI_API_KEY'),
         'model' => env('OPENAI_TRANSLATION_MODEL', 'gpt-4o-mini'),
-        'parallel_workers' => env('OPENAI_PARALLEL_WORKERS', 10),
-        'batch_size' => env('OPENAI_BATCH_SIZE', 100),
+        'parallel_workers' => env('OPENAI_PARALLEL_WORKERS', 20),
+        'batch_size' => env('OPENAI_BATCH_SIZE', 200),
+        'items_per_iteration' => env('OPENAI_ITEMS_PER_ITERATION', 4000),
     ],
 
 ];

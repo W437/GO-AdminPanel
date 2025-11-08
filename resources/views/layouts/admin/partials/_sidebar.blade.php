@@ -40,11 +40,11 @@ $order_sch = Cache::rememberForever('order_scheduled_stats', function () {
                 <!-- Logo -->
                 <a class="navbar-brand d-block p-0" href="{{ route('admin.dashboard') }}" aria-label="GO Admin Panel">
                     <img class="navbar-brand-logo sidebar--logo-design"
-                        src="{{ dynamicAsset('/public/assets/admin/img/go-logo.png') }}"
+                        src="{{ dynamicAsset('/public/assets/admin/img/hopa-logo.png') }}"
                         alt="GO Admin Panel"
                         onerror="this.src='{{ dynamicAsset('/public/assets/admin/img/logo.png') }}'">
                     <img class="navbar-brand-logo-mini sidebar--logo-design-2"
-                        src="{{ dynamicAsset('/public/assets/admin/img/go-logo.png') }}"
+                        src="{{ dynamicAsset('/public/assets/admin/img/hopa-logo.png') }}"
                         alt="GO"
                         onerror="this.src='{{ dynamicAsset('/public/assets/admin/img/logo.png') }}'">
                 </a>

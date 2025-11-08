@@ -32,7 +32,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #ff6b00 0%, #ff8533 100%);
+            background: linear-gradient(135deg, #9463ac 0%, #a97dc4 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -95,8 +95,8 @@
         }
         
         .form-control:focus {
-            border-color: #ff6b00;
-            box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1);
+            border-color: #9463ac;
+            box-shadow: 0 0 0 3px rgba(148, 99, 172, 0.1);
             outline: none;
         }
         
@@ -114,7 +114,7 @@
         }
         
         .btn-login {
-            background: linear-gradient(135deg, #ff6b00 0%, #ff8533 100%);
+            background: linear-gradient(135deg, #9463ac 0%, #a97dc4 100%);
             border: none;
             border-radius: 8px;
             padding: 14px 24px;
@@ -128,7 +128,7 @@
         
         .btn-login:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
+            box-shadow: 0 8px 25px rgba(148, 99, 172, 0.4);
             color: white;
         }
         
@@ -147,14 +147,14 @@
         }
         
         .forgot-password {
-            color: #ff6b00;
+            color: #9463ac;
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
         }
-        
+
         .forgot-password:hover {
-            color: #ff8533;
+            color: #a97dc4;
             text-decoration: none;
         }
         
@@ -214,8 +214,8 @@
     <div class="login-container">
         <!-- Logo -->
         <div class="logo-container">
-            <img src="{{ dynamicAsset('/public/assets/admin/img/go-logo.png') }}" 
-                 alt="GO Admin Panel" 
+            <img src="{{ dynamicAsset('/public/assets/admin/img/hopa-logo.png') }}"
+                 alt="GO Admin Panel"
                  onerror="this.src='{{ dynamicAsset('/public/assets/admin/img/logo.png') }}'">
         </div>
         
@@ -355,7 +355,7 @@
                             <div><strong>Email:</strong> admin@admin.com</div>
                             <div><strong>Password:</strong> 12345678</div>
                         </div>
-                        <button class="btn btn-sm" id="copy_cred" style="background: #ff6b00; color: white; border: none; border-radius: 4px; padding: 8px 12px;">
+                        <button class="btn btn-sm" id="copy_cred" style="background: #9463ac; color: white; border: none; border-radius: 4px; padding: 8px 12px;">
                             <i class="tio-copy"></i>
                         </button>
                     </div>
@@ -368,7 +368,7 @@
                             <div><strong>Email:</strong> test.restaurant@gmail.com</div>
                             <div><strong>Password:</strong> 12345678</div>
                         </div>
-                        <button class="btn btn-sm" id="copy_cred2" style="background: #ff6b00; color: white; border: none; border-radius: 4px; padding: 8px 12px;">
+                        <button class="btn btn-sm" id="copy_cred2" style="background: #9463ac; color: white; border: none; border-radius: 4px; padding: 8px 12px;">
                             <i class="tio-copy"></i>
                         </button>
                     </div>

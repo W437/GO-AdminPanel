@@ -257,7 +257,7 @@
                             </div>
                             @if($isOpenAI)
                             <p class="mb-3 text-muted small">
-                                <strong>Fast Batch Processing:</strong> Translating 100 items per request
+                                <strong>Ultra-Fast Parallel Processing:</strong> {{ config('services.openai.parallel_workers', 20) }} concurrent workers × {{ config('services.openai.batch_size', 200) }} items = {{ config('services.openai.items_per_iteration', 4000) }} items per iteration
                             </p>
                             @endif
                             <p class="mb-4 text-9EADC1">

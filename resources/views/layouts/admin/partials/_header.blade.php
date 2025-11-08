@@ -6,10 +6,10 @@
                 <!-- Logo -->
                 <a class="navbar-brand d-none d-md-block" href="{{route('admin.dashboard')}}" aria-label="">
                          <img class="navbar-brand-logo brand--logo-design-2"
-                         src="{{ dynamicAsset('public/assets/admin/img/go-logo.png') }}"
+                         src="{{ dynamicAsset('public/assets/admin/img/hopa-logo.png') }}"
                          alt="image">
                          <img class="navbar-brand-logo-mini brand--logo-design-2"
-                         src="{{ dynamicAsset('public/assets/admin/img/go-logo.png') }}"
+                         src="{{ dynamicAsset('public/assets/admin/img/hopa-logo.png') }}"
                          alt="image">
                 </a>
                 <!-- End Logo -->

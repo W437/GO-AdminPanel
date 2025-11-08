@@ -194,10 +194,10 @@ ol.breadcrumb {
 
 .navbar-vertical-aside .navbar-vertical-aside-has-menu.active > .nav-link,
 .navbar-vertical-aside .navbar-vertical-aside-has-menu.active > .js-navbar-vertical-aside-menu-link {
-    background-color: rgba(255, 107, 0, 0.08) !important;
+    background-color: rgba(148, 99, 172, 0.08) !important;
     color: #2c3e50 !important;
     font-weight: 600;
-    border-left: 3px solid #ff6b00 !important;
+    border-left: 3px solid #9463ac !important;
 }
 
 .navbar-vertical-aside .navbar-vertical-aside-has-menu.active > .nav-link:before {
@@ -205,7 +205,7 @@ ol.breadcrumb {
 }
 
 .navbar-vertical-aside .navbar-vertical-aside-has-menu.active > .nav-link:hover {
-    background-color: rgba(255, 107, 0, 0.12) !important;
+    background-color: rgba(148, 99, 172, 0.12) !important;
     color: #2c3e50 !important;
 }
 
@@ -268,7 +268,7 @@ ol.breadcrumb {
 
 .navbar-vertical-aside .navbar-nav .navbar-vertical-aside-has-menu .navbar-vertical-aside-menu .nav-link.active,
 .navbar-vertical-aside .navbar-vertical-aside-menu .nav-link.active {
-    background-color: #ff6b00 !important;
+    background-color: #9463ac !important;
     color: #ffffff !important;
     border-radius: 4px;
 }
@@ -276,7 +276,7 @@ ol.breadcrumb {
 /* Fix any remaining blue submenu backgrounds */
 .navbar-vertical-aside .navbar-nav .show > .nav-link,
 .navbar-vertical-aside .navbar-nav .nav-link[aria-expanded="true"] {
-    background-color: rgba(255, 107, 0, 0.1) !important;
+    background-color: rgba(148, 99, 172, 0.1) !important;
     color: #2c3e50 !important;
 }
 
@@ -291,7 +291,7 @@ ol.breadcrumb {
 }
 
 .navbar-vertical-aside .navbar-vertical-aside-has-menu.active .nav-icon {
-    color: #ff6b00 !important;
+    color: #9463ac !important;
 }
 
 /* Search Menu Component Styling */
@@ -317,8 +317,8 @@ ol.breadcrumb {
 .navbar-vertical-aside .navbar-vertical-content .form-control:focus,
 .navbar-vertical-aside .navbar-search .form-control:focus {
     background-color: #ffffff !important;
-    border-color: #ff6b00 !important;
-    box-shadow: 0 0 0 0.2rem rgba(255, 107, 0, 0.15) !important;
+    border-color: #9463ac !important;
+    box-shadow: 0 0 0 0.2rem rgba(148, 99, 172, 0.15) !important;
     color: #2c3e50 !important;
 }
 
@@ -438,7 +438,7 @@ ol.breadcrumb {
 
 .navbar-vertical-aside .navbar-vertical-aside-has-menu.active > .nav-link,
 .navbar-vertical-aside .navbar-vertical-aside-has-menu.active > .js-navbar-vertical-aside-menu-link {
-    background-color: rgba(255, 107, 0, 0.08) !important;
+    background-color: rgba(148, 99, 172, 0.08) !important;
 }
 
 /* All submenu containers should be light gray */
@@ -453,7 +453,7 @@ ol.breadcrumb {
 /* Active submenu item */
 .navbar-vertical-aside .navbar-nav .navbar-vertical-aside-has-menu .navbar-vertical-aside-menu .nav-link.active,
 .navbar-vertical-aside .navbar-vertical-aside-menu .nav-link.active {
-    background-color: #ff6b00 !important;
+    background-color: #9463ac !important;
     color: #ffffff !important;
 }
 

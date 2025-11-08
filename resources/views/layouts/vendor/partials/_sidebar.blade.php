@@ -8,11 +8,11 @@
                     @php($restaurant_data=\App\CentralLogics\Helpers::get_restaurant_data())
                     <a class="navbar-brand pt-0 pb-0" href="{{route('vendor.dashboard')}}" aria-label="GO Admin Panel">
                         <img class="navbar-brand-logo"
-                             src="{{ dynamicAsset('/public/assets/admin/img/go-logo.png') }}"
+                             src="{{ dynamicAsset('/public/assets/admin/img/hopa-logo.png') }}"
                              alt="GO Admin Panel"
                              onerror="this.src='{{ dynamicAsset('/public/assets/admin/img/logo.png') }}'">
                         <img class="navbar-brand-logo-mini"
-                             src="{{ dynamicAsset('/public/assets/admin/img/go-logo.png') }}"
+                             src="{{ dynamicAsset('/public/assets/admin/img/hopa-logo.png') }}"
                              alt="GO"
                              onerror="this.src='{{ dynamicAsset('/public/assets/admin/img/logo.png') }}'">
 
