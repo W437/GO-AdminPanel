@@ -242,7 +242,7 @@
                                 @endif
                             </h4>
                             <p class="mb-3">
-                                {{ translate('Please_wait_&_don't_close/terminate_your_tab_or_browser') }}
+                                {{ translate('Please_wait_and_do_not_close_your_tab_or_browser') }}
                             </p>
                             <div class="max-w-300px mx-auto">
                                 <div class="d-flex flex-wrap mb-1 justify-content-between font-semibold text--title">
