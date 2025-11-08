@@ -39,6 +39,7 @@
         "mercadopago/dx-php": "3.0.7",
         "mpdf/mpdf": "^8.1",
         "nwidart/laravel-modules": "^10.0",
+        "openai-php/client": "^0.18.0",
         "paypal/paypal-checkout-sdk": "^1.0",
         "predis/predis": "^3.2",
         "rap2hpoutre/fast-excel": "^5.2",

@@ -862,6 +862,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::get('language/delete/{lang}', 'LanguageController@delete')->name('delete');
             Route::any('ajax-language/auto-translate/{lang}', 'LanguageController@auto_translate')->name('auto-translate');
             Route::get('ajax-language/auto-translate-all/{lang}', 'LanguageController@auto_translate_all')->name('auto_translate_all');
+            Route::post('language/update-translation-provider', 'LanguageController@update_translation_provider')->name('update-translation-provider');
         });
 
         Route::group(['prefix' => 'business-settings', 'as' => 'refund.', 'middleware' => ['module:order']], function () {

@@ -429,4 +429,17 @@ class LanguageController extends Controller
         session()->put('site_direction', $direction);
         return redirect()->back();
     }
+
+    public function update_translation_provider(Request $request)
+    {
+        $request->validate([
+            'provider' => 'required|in:google,openai'
+        ]);
+
+        Helpers::businessUpdateOrInsert(['key' => 'translation_provider'], [
+            'value' => $request->provider
+        ]);
+
+        return response()->json(['message' => 'Translation provider updated successfully']);
+    }
 }

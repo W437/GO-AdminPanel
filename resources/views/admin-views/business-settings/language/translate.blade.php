@@ -30,6 +30,36 @@
 
         <div class="row __mt-20">
             <div class="col-md-12">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="mb-2">{{ translate('Translation Provider') }}</h5>
+                                <p class="mb-0 text-muted">{{ translate('Choose between Google Translate (free) or OpenAI (better quality)') }}</p>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <select class="form-control mr-2" id="translation-provider" style="min-width: 200px;">
+                                    <option value="google" {{ (App\CentralLogics\Helpers::get_business_settings('translation_provider') ?? 'google') === 'google' ? 'selected' : '' }}>
+                                        🌐 Google Translate (Free)
+                                    </option>
+                                    <option value="openai" {{ (App\CentralLogics\Helpers::get_business_settings('translation_provider') ?? 'google') === 'openai' ? 'selected' : '' }}>
+                                        🤖 OpenAI (GPT)
+                                    </option>
+                                </select>
+                                <button type="button" class="btn btn--primary" id="save-translation-provider">
+                                    {{ translate('Save') }}
+                                </button>
+                            </div>
+                        </div>
+                        @if(!config('services.openai.key'))
+                        <div class="alert alert-warning mt-3 mb-0">
+                            <strong>⚠️ OpenAI API Key Not Configured</strong><br>
+                            To use OpenAI translation, add your API key to the .env file: <code>OPENAI_API_KEY=your-key-here</code>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+
                 <div class="card">
                     <div class="card-header">
                         <div class="search--button-wrapper justify-content-between">
@@ -221,6 +251,33 @@
 
     <script>
         "use strict"
+
+        // Save translation provider
+        $(document).on('click', '#save-translation-provider', function () {
+            let provider = $('#translation-provider').val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{route('admin.language.update-translation-provider')}}",
+                method: 'POST',
+                data: {
+                    provider: provider
+                },
+                beforeSend: function () {
+                    $('#loading').show();
+                },
+                success: function () {
+                    toastr.success('{{translate('Translation provider updated successfully')}}');
+                },
+                complete: function () {
+                    $('#loading').hide();
+                },
+            });
+        });
+
         $(document).on('click', '.update-language-btn', function () {
             let key = $(this).data('key');
             let id = $(this).data('id');

@@ -3560,9 +3560,86 @@ class Helpers
 
     public static function auto_translator($q, $sl, $tl)
     {
-        $res = file_get_contents("https://translate.googleapis.com/translate_a/single?client=gtx&ie=UTF-8&oe=UTF-8&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&sl=" . $sl . "&tl=" . $tl . "&hl=hl&q=" . urlencode($q), $_SERVER['DOCUMENT_ROOT'] . "/transes.html");
-        $res = json_decode($res);
-        return str_replace('_',' ',$res[0][0][0]);
+        // Get translation provider setting (default to google)
+        $provider = BusinessSetting::where('key', 'translation_provider')->first();
+        $provider = $provider?->value ?? 'google';
+
+        if ($provider === 'openai' && config('services.openai.key')) {
+            return self::translate_with_openai($q, $sl, $tl);
+        }
+
+        // Fallback to Google Translate
+        return self::translate_with_google($q, $sl, $tl);
+    }
+
+    public static function translate_with_google($q, $sl, $tl)
+    {
+        try {
+            $res = file_get_contents("https://translate.googleapis.com/translate_a/single?client=gtx&ie=UTF-8&oe=UTF-8&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&dt=at&sl=" . $sl . "&tl=" . $tl . "&hl=hl&q=" . urlencode($q), $_SERVER['DOCUMENT_ROOT'] . "/transes.html");
+            $res = json_decode($res);
+            return str_replace('_',' ',$res[0][0][0]);
+        } catch (\Exception $e) {
+            \Log::error('Google Translate Error: ' . $e->getMessage());
+            return $q; // Return original text if translation fails
+        }
+    }
+
+    public static function translate_with_openai($q, $sl, $tl)
+    {
+        try {
+            $client = \OpenAI::client(config('services.openai.key'));
+
+            // Get language names for better context
+            $targetLanguage = self::getLanguageName($tl);
+            $sourceLanguage = self::getLanguageName($sl);
+
+            // Build context-aware prompt
+            $prompt = "Translate the following text from {$sourceLanguage} to {$targetLanguage}. This is for a food delivery and restaurant management application. Maintain the tone and context appropriate for restaurant/food/delivery industry. Only return the translated text, nothing else.\n\nText: {$q}";
+
+            $response = $client->chat()->create([
+                'model' => config('services.openai.model', 'gpt-3.5-turbo'),
+                'messages' => [
+                    ['role' => 'system', 'content' => 'You are a professional translator specializing in food delivery and restaurant applications. Provide accurate, natural translations that maintain the original tone and context.'],
+                    ['role' => 'user', 'content' => $prompt],
+                ],
+                'temperature' => 0.3, // Lower temperature for more consistent translations
+                'max_tokens' => 500,
+            ]);
+
+            $translated = $response->choices[0]->message->content;
+            return str_replace('_',' ', trim($translated));
+
+        } catch (\Exception $e) {
+            \Log::error('OpenAI Translation Error: ' . $e->getMessage());
+            // Fallback to Google if OpenAI fails
+            return self::translate_with_google($q, $sl, $tl);
+        }
+    }
+
+    public static function getLanguageName($code)
+    {
+        $languages = [
+            'en' => 'English',
+            'ar' => 'Arabic',
+            'es' => 'Spanish',
+            'fr' => 'French',
+            'de' => 'German',
+            'it' => 'Italian',
+            'pt' => 'Portuguese',
+            'ru' => 'Russian',
+            'zh' => 'Chinese',
+            'ja' => 'Japanese',
+            'ko' => 'Korean',
+            'hi' => 'Hindi',
+            'bn' => 'Bengali',
+            'ur' => 'Urdu',
+            'tr' => 'Turkish',
+            'nl' => 'Dutch',
+            'pl' => 'Polish',
+            'sv' => 'Swedish',
+            'he' => 'Hebrew',
+        ];
+        return $languages[$code] ?? ucfirst($code);
     }
     public static function language_load()
     {
