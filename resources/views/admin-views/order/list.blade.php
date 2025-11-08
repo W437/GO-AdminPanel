@@ -13,7 +13,7 @@
         <div class="page-header">
             <h1 class="page-header-title mb-2 text-capitalize">
                 <div class="card-header-icon d-inline-flex mr-2 img">
-                    <img src="{{ dynamicAsset('/public/assets/admin/img/orders.png') }}" alt="public">
+                    <i class="tio-shopping-cart"></i>
                 </div>
                 <span>
                     {{ translate(str_replace('_', ' ', $status)) }} {{ translate('messages.orders') }}
@@ -401,8 +401,8 @@
                 </table>
                 @if (count($orders) === 0)
                     <div class="empty--data">
-                        <img src="{{ dynamicAsset('/public/assets/admin/img/empty.png') }}" alt="public">
-                        <h5>
+                        <i class="tio-receipt" style="font-size: 64px; color: #d1d5db;"></i>
+                        <h5 class="text-muted">
                             {{ translate('no_data_found') }}
                         </h5>
                     </div>

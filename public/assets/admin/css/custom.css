@@ -535,3 +535,55 @@ ol.breadcrumb {
 .order--card__color-4 .card-subtitle {
     color: #495057 !important;
 }
+
+/* Dashboard Icon Sizing */
+.resturant-card .resturant-icon {
+    font-size: 48px !important;
+    max-width: none !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+.oder--card-icon,
+.card-header-icon {
+    font-size: 24px !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+/* Global Empty State Icon Replacement */
+.empty--data img[src*="empty.png"],
+.empty--data img[src*="empty.svg"] {
+    display: none !important;
+}
+
+.empty--data::before {
+    content: "\e91e" !important; /* tio-inbox icon */
+    font-family: 'The-Icon-of' !important;
+    font-size: 64px !important;
+    color: #d1d5db !important;
+    display: block !important;
+    margin-bottom: 1rem !important;
+}
+
+.empty--data h5,
+.empty--data h4 {
+    color: #9ca3af !important;
+}
+
+/* Global Page Header Icon Styling */
+.page-header-title .card-header-icon img,
+.card-header-icon img[src*="/img/"] {
+    display: none !important;
+}
+
+/* Add icon font support to card-header-icon divs */
+.page-header-title .card-header-icon,
+.page-header .card-header-icon {
+    font-size: 28px !important;
+    width: auto !important;
+    height: auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}

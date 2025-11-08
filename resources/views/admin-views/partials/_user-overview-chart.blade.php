@@ -52,9 +52,9 @@
     </div>
     @else
     <div class="d-flex justify-content-center align-items-center h-100 min-h-200">
-        <div class="d-flex flex-column gap-3 justify-content-center align-items-center">
-            <img src="{{dynamicAsset('public/assets/admin/img/dashboard/user_stat.svg')}}" alt="">
-            <h4>{{translate('No user available in this zone')}}</h4>
+        <div class="d-flex flex-column gap-3 justify-content-center align-items-center text-center">
+            <i class="tio-users" style="font-size: 64px; color: #d1d5db;"></i>
+            <h4 class="text-muted">{{translate('No user available in this zone')}}</h4>
         </div>
     </div>
     @endif

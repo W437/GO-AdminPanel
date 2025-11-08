@@ -1,8 +1,7 @@
 <!-- Header -->
 <div class="card-header">
     <h5 class="card-header-title">
-        <img src="{{ dynamicAsset('/public/assets/admin/img/dashboard/most-popular.png') }}" alt="dashboard"
-            class="card-header-icon">
+        <i class="tio-star card-header-icon"></i>
         {{ translate('Most_Popular_Restaurants') }}
         <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('most_popular_restaurants_based_on_users_wishlisted_Foods')}}" class="input-label-secondary"><img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.Most_Popular_Restaurants_Based_on_Users_Wishlisted_Foods.') }}"></span>
 
@@ -37,9 +36,9 @@
         </ul>
     @else
         <div class="d-flex justify-content-center align-items-center h-100 min-h-200">
-            <div class="d-flex flex-column gap-3 justify-content-center align-items-center">
-                <img src="{{dynamicAsset('public/assets/admin/img/dashboard/mp_restaurant.svg')}}" alt="">
-                <h4>{{translate('No restaurant available in this zone')}}</h4>
+            <div class="d-flex flex-column gap-3 justify-content-center align-items-center text-center">
+                <i class="tio-restaurant" style="font-size: 64px; color: #d1d5db;"></i>
+                <h4 class="text-muted">{{translate('No restaurant available in this zone')}}</h4>
             </div>
         </div>
     @endif

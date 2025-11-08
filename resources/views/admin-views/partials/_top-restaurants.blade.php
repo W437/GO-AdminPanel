@@ -1,7 +1,7 @@
 <!-- Header -->
 <div class="card-header">
     <h5 class="card-header-title">
-        <img src="{{dynamicAsset('/public/assets/admin/img/dashboard/top-resturant.png')}}" alt="dashboard" class="card-header-icon">
+        <i class="tio-trophy card-header-icon"></i>
         <span>{{ translate('Top_Restaurants') }}</span>
     </h5>
     @php($params=session('dash_params'))
@@ -35,9 +35,9 @@
         </ul>
     @else
         <div class="d-flex justify-content-center align-items-center h-100 min-h-200">
-            <div class="d-flex flex-column gap-3 justify-content-center align-items-center">
-                <img src="{{dynamicAsset('public/assets/admin/img/dashboard/mp_restaurant.svg')}}" alt="">
-                <h4>{{translate('No restaurant available in this zone')}}</h4>
+            <div class="d-flex flex-column gap-3 justify-content-center align-items-center text-center">
+                <i class="tio-restaurant" style="font-size: 64px; color: #d1d5db;"></i>
+                <h4 class="text-muted">{{translate('No restaurant available in this zone')}}</h4>
             </div>
         </div>
     @endif

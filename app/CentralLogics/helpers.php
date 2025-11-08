@@ -3775,10 +3775,13 @@ class Helpers
             '2. Preserve placeholders (e.g., :name, {count}, %s) exactly as they appear.',
             '3. Keep terminology consistent and professional yet friendly.',
             '4. Return ONLY valid JSON. Do not wrap the response in Markdown.',
+            '5. Preserve any leading or trailing symbols (e.g., *, #, •) exactly as provided.',
         ];
 
         if ($targetLanguageCode === 'ar') {
-            $lines[] = '5. Use Palestinian dialect spoken by Israeli Arabs; avoid overly formal MSA unless legally required.';
+            $lines[] = '6. Use Palestinian dialect spoken by Israeli Arabs; avoid overly formal MSA unless legally required.';
+        } elseif ($targetLanguageCode === 'he') {
+            $lines[] = '6. Use modern Israeli Hebrew without niqqud (no vowel dots) and keep the tone natural.';
         }
 
         $payload = [];
@@ -3876,6 +3879,8 @@ class Helpers
         // Add language-specific instructions
         if ($targetLanguageCode === 'ar') {
             $baseMessage .= "\n\nIMPORTANT: For Arabic translations, use the Palestinian dialect of Israeli Arabs. This dialect should be natural, conversational, and familiar to Palestinians living in Israel. Avoid overly formal Modern Standard Arabic unless the text requires it (e.g., legal terms, official notifications).";
+        } elseif ($targetLanguageCode === 'he') {
+            $baseMessage .= "\n\nIMPORTANT: For Hebrew translations, write in modern Israeli Hebrew without niqqud (vowel dots) and keep the tone friendly yet professional.";
         }
 
         return $baseMessage;
@@ -3892,13 +3897,16 @@ class Helpers
         $prompt .= "2. Maintain clarity and consistency in terminology throughout\n";
         $prompt .= "3. Use language appropriate for the restaurant/food delivery industry\n";
         $prompt .= "4. Keep the tone professional yet friendly (suitable for customers and restaurant staff)\n";
+        $prompt .= "5. Preserve any leading or trailing symbols (e.g., *, #, •) exactly as provided.\n";
 
         // Add language-specific instructions
         if ($targetLanguageCode === 'ar') {
-            $prompt .= "5. Use Palestinian dialect spoken by Israeli Arabs - natural, everyday language\n";
-            $prompt .= "6. Avoid formal Modern Standard Arabic unless the text is official/legal\n";
-            $prompt .= "7. Use terms familiar to Palestinians in Israel (e.g., for 'delivery' use 'توصيل' not 'إيصال')\n";
-            $prompt .= "8. Numbers and times should be clear and match local usage\n";
+            $prompt .= "6. Use Palestinian dialect spoken by Israeli Arabs - natural, everyday language\n";
+            $prompt .= "7. Avoid formal Modern Standard Arabic unless the text is official/legal\n";
+            $prompt .= "8. Use terms familiar to Palestinians in Israel (e.g., for 'delivery' use 'توصيل' not 'إيصال')\n";
+            $prompt .= "9. Numbers and times should be clear and match local usage\n";
+        } elseif ($targetLanguageCode === 'he') {
+            $prompt .= "6. Use modern Israeli Hebrew without niqqud (no vowel dots) and keep the tone natural and friendly\n";
         }
 
         $prompt .= "\nONLY return the translated text, nothing else. Do NOT include explanations, notes, or the original text.\n\n";

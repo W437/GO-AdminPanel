@@ -1,7 +1,7 @@
 <!-- Header -->
 <div class="card-header">
     <h5 class="card-header-title">
-        <img src="{{dynamicAsset('/public/assets/admin/img/dashboard/statistics.png')}}" alt="dashboard" class="card-header-icon">
+        <i class="tio-users card-header-icon"></i>
         <span>{{translate('messages.top_customers')}}</span>
     </h5>
     @php($params=session('dash_params'))
