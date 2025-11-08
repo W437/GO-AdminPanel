@@ -6933,4 +6933,7 @@
   'stories' => 'Stories',
   'The password must be at least 6 characters.' => 'The password must be at least 6 characters.',
   'installHook.js.map' => 'InstallHook.js.map',
+  'Select Restaurant' => 'Select Restaurant',
+  'failed_to_update' => 'Failed to update',
+  'settings_updated_successfully' => 'Settings updated successfully',
 );

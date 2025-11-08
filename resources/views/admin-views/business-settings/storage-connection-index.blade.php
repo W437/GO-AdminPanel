@@ -190,3 +190,33 @@
 
 
 @endsection
+
+@push('script_2')
+<script>
+    // Fix for storage toggle not updating correctly
+    $(document).ready(function() {
+        // Intercept form submissions for storage toggles
+        $('#local_storage_status_form, #3rd_party_storage_status_form').on('submit', function(e) {
+            e.preventDefault();
+            var form = $(this);
+
+            $.ajax({
+                url: form.attr('action'),
+                method: form.attr('method'),
+                data: form.serialize(),
+                success: function(response) {
+                    toastr.success('{{translate('messages.settings_updated_successfully')}}');
+                    // Reload page to show correct toggle states
+                    setTimeout(function() {
+                        location.reload();
+                    }, 500);
+                },
+                error: function() {
+                    toastr.error('{{translate('messages.failed_to_update')}}');
+                    location.reload();
+                }
+            });
+        });
+    });
+</script>
+@endpush
