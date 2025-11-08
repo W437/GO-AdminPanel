@@ -13,7 +13,7 @@
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
                     <h1 class="page-header-title">
-                        <img src="{{dynamicAsset('/public/assets/admin/img/zone.png')}}" alt="" class="mr-2"> {{translate('messages.Add_New_Business_Zone')}}
+                        <i class="tio-globe mr-2"></i> {{translate('messages.Add_New_Business_Zone')}}
                     </h1>
                 </div>
             </div>
@@ -296,8 +296,8 @@
                         </table>
                         @if(count($zones) === 0)
                         <div class="empty--data">
-                            <img src="{{dynamicAsset('/public/assets/admin/img/empty.png')}}" alt="public">
-                            <h5>
+                            <i class="tio-inbox" style="font-size: 64px; color: #d1d5db;"></i>
+                            <h5 class="text-muted">
                                 {{translate('no_data_found')}}
                             </h5>
                         </div>

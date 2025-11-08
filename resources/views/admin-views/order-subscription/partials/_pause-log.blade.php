@@ -6,7 +6,7 @@ $logs = $subscription->pause()->latest()->get();
 
 <div class="py-5 text-center">
     <div class="py-sm-5">
-        <img src="{{dynamicAsset('public/assets/admin/img/empty-log.png')}}" alt="">
+        <i class="tio-time" style="font-size: 64px; color: #d1d5db;"></i>
         <div class="mt-3">{{translate('messages.No pause logs found!')}}</div>
     </div>
 </div>

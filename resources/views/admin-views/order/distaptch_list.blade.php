@@ -12,7 +12,7 @@
         <div class="page-header">
             <h1 class="page-header-title mb-2 text-capitalize">
                 <div class="card-header-icon d-inline-flex mr-2 img">
-                    <img src="{{dynamicAsset('/public/assets/admin/img/orders.png')}}" alt="">
+                    <i class="tio-shopping-cart"></i>
                 </div>
                 {{translate('messages.'.$status)}} {{translate('messages.orders')}} <span class="badge badge-soft-dark ml-2">{{$total}}</span>
             </h1>
@@ -334,8 +334,8 @@
             </div>
             @if (count($orders) === 0)
             <div class="empty--data">
-                <img src="{{dynamicAsset('/public/assets/admin/img/empty.png')}}" alt="public">
-                <h5>
+                <i class="tio-inbox" style="font-size: 64px; color: #d1d5db;"></i>
+                <h5 class="text-muted">
                     {{translate('no_data_found')}}
                 </h5>
             </div>
@@ -598,8 +598,8 @@
                 },
                 language: {
                     zeroRecords: '<div class="text-center p-4">' +
-                        '<img class="mb-3 w-7rem" src="{{dynamicAsset('public/assets/admin')}}/svg/illustrations/sorry.svg" alt="Image Description">' +
-                        '<p class="mb-0">{{ translate('No_data_to_show') }}</p>' +
+                        '<i class="tio-inbox mb-3" style="font-size: 64px; color: #d1d5db;"></i>' +
+                        '<p class="mb-0 text-muted">{{ translate('No_data_to_show') }}</p>' +
                         '</div>'
                 }
             });

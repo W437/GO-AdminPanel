@@ -297,12 +297,6 @@ class LanguageController extends Controller
             $translating_count= $request?->translating_count <= 0 ? 1: $request->translating_count ;
             $lang_code = Helpers::getLanguageCode($lang);
 
-            if($lang === 'en'){
-                return response()->json([
-                    'message' => translate('All_datas_are_translated') , 'data' => 'success'
-                ]);
-            }
-
             $data_filtered = [];
             $data_filtered_2 = [];
             $new_messages_path = base_path('resources/lang/' . $lang . '/new-messages.php');

@@ -84,9 +84,7 @@
                                 </div>
                             </form>
                             </div>
-                            @if ($lang !== 'en')
                             <button class="btn btn--primary ml-2" id="translate-confirm-btn" >{{ translate('Translate_All') }}</button>
-                            @endif
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -143,7 +141,7 @@
                             </div>
                             @if(count($full_data) === 0)
                             <div class="empty--data">
-                                <img src="{{dynamicAsset('/public/assets/admin/img/empty.png')}}" alt="public">
+                                <i class="tio-inbox" style="font-size: 64px; color: #d1d5db;"></i>
                                 <h5>
                                     {{translate('no_data_found')}}
                                 </h5>

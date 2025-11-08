@@ -21,7 +21,7 @@
                                 <div class="page-header">
                                     <div class="d-flex flex-wrap justify-content-between align-items-center __gap-15px">
                                         <h1 class="page-header-title">
-                                            <img src="{{dynamicAsset('public/assets/admin/img/orders.png')}}" class="mr-1" alt=""> {{translate('messages.subscription_order_details')}}
+                                            <i class="tio-appointment mr-1 card-header-icon"></i> {{translate('messages.subscription_order_details')}}
                                         </h1>
                                     </div>
                                 </div>

@@ -8,7 +8,7 @@
         <div class="page-header">
             <div class="d-flex flex-wrap justify-content-between align-items-center __gap-15px">
                 <h1 class="page-header-title">
-                    <img src="{{dynamicAsset('public/assets/admin/img/orders.png')}}" class="mr-1" alt=""> {{translate('messages.subscription_order_list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$subscriptions->total()}}</span>
+                    <i class="tio-appointment mr-1 card-header-icon"></i> {{translate('messages.subscription_order_list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$subscriptions->total()}}</span>
                 </h1>
                 <div class="text--primary-2 py-1 d-flex flex-wrap align-items-center" type="button" data-toggle="modal" data-target="#how-it-works">
                     <strong class="mr-2">{{translate('See_how_it_works')}}</strong>
@@ -150,7 +150,7 @@
                 </div>
                 @if(count($subscriptions) === 0)
                 <div class="empty--data">
-                    <img src="{{dynamicAsset('/public/assets/admin/svg/illustrations/sorry.svg')}}" alt="public">
+                    <i class="tio-inbox" style="font-size: 64px; color: #d1d5db;"></i>
                     <h5>
                         {{translate('no_data_found')}}
                     </h5>

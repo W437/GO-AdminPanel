@@ -159,7 +159,7 @@ active
                 </table>
                 @if(count($adds) === 0)
                 <div class="empty--data">
-                    <img src="{{dynamicAsset('/public/assets/admin/img/empty.png')}}" alt="public">
+                    <i class="tio-inbox" style="font-size: 64px; color: #d1d5db;"></i>
                     <h5>
                         {{translate('no_data_found')}}
                     </h5>
