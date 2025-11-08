@@ -257,7 +257,7 @@
                             </div>
                             @if($isOpenAI)
                             <p class="mb-3 text-muted small">
-                                <strong>Fast Batch Processing:</strong> Translating 50 items per request
+                                <strong>Fast Batch Processing:</strong> Translating 100 items per request
                             </p>
                             @endif
                             <p class="mb-4 text-9EADC1">
