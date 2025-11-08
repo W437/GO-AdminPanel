@@ -3652,6 +3652,87 @@ class Helpers
         }
     }
 
+    public static function translate_batch_parallel($items, $sl, $tl)
+    {
+        try {
+            if (empty($items)) {
+                return [];
+            }
+
+            $client = \OpenAI::client(config('services.openai.key'));
+            $targetLanguage = self::getLanguageName($tl);
+            $sourceLanguage = self::getLanguageName($sl);
+            $systemMessage = self::getTranslationSystemMessage($tl);
+
+            // Split items into batches for concurrent processing
+            $batchSize = config('services.openai.batch_size', 50);
+            $batches = array_chunk($items, $batchSize, true);
+
+            $allTranslations = [];
+
+            foreach ($batches as $batch) {
+                // Build a single prompt with multiple translations
+                $batchPrompt = "Translate the following texts from {$sourceLanguage} to {$targetLanguage}.\n\n";
+                $batchPrompt .= "CONTEXT: This is for a food delivery and restaurant management application used in Israel/Palestine.\n\n";
+                $batchPrompt .= "INSTRUCTIONS:\n";
+                $batchPrompt .= "1. If the source text is poorly written, grammatically incorrect, or unclear, improve it while translating\n";
+                $batchPrompt .= "2. Maintain clarity and consistency in terminology throughout\n";
+                $batchPrompt .= "3. Use language appropriate for the restaurant/food delivery industry\n";
+                $batchPrompt .= "4. Keep the tone professional yet friendly\n";
+
+                if ($tl === 'ar') {
+                    $batchPrompt .= "5. Use Palestinian dialect spoken by Israeli Arabs - natural, everyday language\n";
+                    $batchPrompt .= "6. Avoid formal Modern Standard Arabic unless the text is official/legal\n";
+                    $batchPrompt .= "7. Use terms familiar to Palestinians in Israel\n";
+                }
+
+                $batchPrompt .= "\nReturn ONLY the translations in the format:\n";
+                $batchPrompt .= "KEY|TRANSLATION\n\n";
+                $batchPrompt .= "Texts to translate:\n";
+
+                foreach ($batch as $key => $text) {
+                    $cleanText = str_replace('_', ' ', $text);
+                    $batchPrompt .= "{$key}|{$cleanText}\n";
+                }
+
+                // Send batch request
+                $response = $client->chat()->create([
+                    'model' => config('services.openai.model', 'gpt-4o-mini'),
+                    'messages' => [
+                        ['role' => 'system', 'content' => $systemMessage],
+                        ['role' => 'user', 'content' => $batchPrompt],
+                    ],
+                    'temperature' => 0.3,
+                    'max_tokens' => 4000,
+                ]);
+
+                // Parse batch response
+                $responseText = $response->choices[0]->message->content;
+                $lines = explode("\n", trim($responseText));
+
+                foreach ($lines as $line) {
+                    $line = trim($line);
+                    if (empty($line)) continue;
+
+                    $parts = explode('|', $line, 2);
+                    if (count($parts) === 2) {
+                        $key = trim($parts[0]);
+                        $translation = trim($parts[1]);
+                        if (isset($batch[$key])) {
+                            $allTranslations[$key] = $translation;
+                        }
+                    }
+                }
+            }
+
+            return $allTranslations;
+
+        } catch (\Exception $e) {
+            \Log::error('Batch OpenAI Translation Error: ' . $e->getMessage());
+            return [];
+        }
+    }
+
     public static function getTranslationSystemMessage($targetLanguageCode)
     {
         // Base system message
@@ -3659,7 +3740,7 @@ class Helpers
 
         // Add language-specific instructions
         if ($targetLanguageCode === 'ar') {
-            $baseMessage .= "\n\nIMPORTANT: For Arabic translations, use the Palestinian dialect of Israeli Arabs. This dialect should be natural, conversational, and familiar to Palestinians living in Israel. Avoid overly formal Modern Standard Arabic unless the context requires it (e.g., legal terms, official notifications).";
+            $baseMessage .= "\n\nIMPORTANT: For Arabic translations, use the Palestinian dialect of Israeli Arabs. This dialect should be natural, conversational, and familiar to Palestinians living in Israel. Avoid overly formal Modern Standard Arabic unless the text requires it (e.g., legal terms, official notifications).";
         }
 
         return $baseMessage;

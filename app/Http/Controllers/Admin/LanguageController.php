@@ -286,15 +286,32 @@ class LanguageController extends Controller
             $translated_data_count= count($translated_data);
 
             if($translated_data_count > 0){
-                foreach ($translated_data as $key_1 => $data_1) {
-                    if($count > $items_processed){
-                        break;
+                // Check if using OpenAI - use batch translation for efficiency
+                $provider = BusinessSetting::where('key', 'translation_provider')->first();
+                $isOpenAI = ($provider?->value === 'openai' && config('services.openai.key'));
+
+                if ($isOpenAI) {
+                    // OpenAI Batch Translation (much faster)
+                    $itemsToTranslate = array_slice($translated_data, 0, $items_processed, true);
+                    $batchTranslations = Helpers::translate_batch_parallel($itemsToTranslate, 'en', $lang);
+
+                    foreach ($batchTranslations as $key => $translation) {
+                        $data_filtered_2[$key] = $translation;
+                        unset($translated_data[$key]);
+                        $count++;
                     }
-                    $translated=  str_replace('_', ' ', Helpers::remove_invalid_charcaters($key_1));
-                    $translated = Helpers::auto_translator($translated, 'en', $lang);
-                    $data_filtered_2[$key_1] = $translated;
-                    unset($translated_data[$key_1]);
-                    $count++;
+                } else {
+                    // Google Translate (one-by-one)
+                    foreach ($translated_data as $key_1 => $data_1) {
+                        if($count > $items_processed){
+                            break;
+                        }
+                        $translated=  str_replace('_', ' ', Helpers::remove_invalid_charcaters($key_1));
+                        $translated = Helpers::auto_translator($translated, 'en', $lang);
+                        $data_filtered_2[$key_1] = $translated;
+                        unset($translated_data[$key_1]);
+                        $count++;
+                    }
                 }
 
 

@@ -32,7 +32,9 @@ return [
 
     'openai' => [
         'key' => env('OPENAI_API_KEY'),
-        'model' => env('OPENAI_TRANSLATION_MODEL', 'gpt-3.5-turbo'),
+        'model' => env('OPENAI_TRANSLATION_MODEL', 'gpt-4o-mini'),
+        'parallel_workers' => env('OPENAI_PARALLEL_WORKERS', 10),
+        'batch_size' => env('OPENAI_BATCH_SIZE', 50),
     ],
 
 ];
