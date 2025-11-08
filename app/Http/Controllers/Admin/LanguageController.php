@@ -328,7 +328,9 @@ class LanguageController extends Controller
             } else{
 
                     foreach ($full_data as $key => $data) {
-                        if (preg_match('/^[\x20-\x7E\x{2019}]+$/u', $data)) {
+                        // Only include items that are English text AND need translation
+                        // Skip numbers, symbols, placeholders, etc.
+                        if (preg_match('/^[\x20-\x7E\x{2019}]+$/u', $data) && Helpers::needsTranslation($data)) {
                             $data_filtered[$key] = $data;
                             $str = "<?php return " . var_export($data_filtered, true) . ";";
                             file_put_contents(base_path('resources/lang/' . $lang . '/new-messages.php'), $str);

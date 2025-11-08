@@ -3560,6 +3560,11 @@ class Helpers
 
     public static function auto_translator($q, $sl, $tl)
     {
+        // Skip translation if text doesn't need it (numbers, symbols only, etc.)
+        if (!self::needsTranslation($q)) {
+            return $q;
+        }
+
         // Get translation provider setting (default to google)
         $provider = BusinessSetting::where('key', 'translation_provider')->first();
         $provider = $provider?->value ?? 'google';
@@ -3570,6 +3575,37 @@ class Helpers
 
         // Fallback to Google Translate
         return self::translate_with_google($q, $sl, $tl);
+    }
+
+    public static function needsTranslation($text)
+    {
+        // Remove whitespace for checking
+        $trimmed = trim($text);
+
+        // Empty or very short strings
+        if (empty($trimmed) || strlen($trimmed) <= 1) {
+            return false;
+        }
+
+        // Check if string contains ONLY numbers, spaces, and common symbols
+        // This will match: "$00", "123", "10%", "$5.99", etc.
+        if (preg_match('/^[\d\s\$\€\£\¥\₪\%\.\,\-\+\=\(\)\[\]\{\}\/\\\:\;]+$/u', $trimmed)) {
+            return false;
+        }
+
+        // Check if string is ONLY symbols/punctuation (no letters or numbers)
+        if (preg_match('/^[\p{P}\p{S}\s]+$/u', $trimmed)) {
+            return false;
+        }
+
+        // Check for strings that are just variable placeholders
+        // e.g., ":name", "{count}", "[total]", etc.
+        if (preg_match('/^[\:\{\[\<][a-zA-Z0-9_]+[\:\}\]\>]$/u', $trimmed)) {
+            return false;
+        }
+
+        // String needs translation
+        return true;
     }
 
     public static function translate_with_google($q, $sl, $tl)
