@@ -221,8 +221,13 @@
                             </div>
                             <h4 class="mb-2 translation-title">
                                 @php
-                                    $provider = App\CentralLogics\Helpers::get_business_settings('translation_provider') ?? 'google';
-                                    $isOpenAI = $provider === 'openai' && config('services.openai.key');
+                                    try {
+                                        $providerSetting = App\Models\BusinessSetting::where('key', 'translation_provider')->first();
+                                        $provider = $providerSetting?->value ?? 'google';
+                                        $isOpenAI = $provider === 'openai' && config('services.openai.key');
+                                    } catch (\Exception $e) {
+                                        $isOpenAI = false;
+                                    }
                                 @endphp
                                 @if($isOpenAI)
                                     <span class="badge badge-primary mb-2">🤖 OpenAI Batch Translation</span><br>
