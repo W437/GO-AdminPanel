@@ -86,3 +86,4 @@ storage/logs/*.log
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+DEPLOY_KEY_FOR_GITHUB.md
