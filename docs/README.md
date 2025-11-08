@@ -26,7 +26,7 @@ cd /Users/drvanhoover/Documents/GitHub/GO-AdminPanel
 # Start MySQL service
 brew services start mysql
 
-# Start Laravel development server
+# Start Laravel development server-
 php artisan serve
 ```
 
