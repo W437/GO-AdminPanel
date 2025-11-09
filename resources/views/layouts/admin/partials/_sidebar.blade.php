@@ -38,14 +38,14 @@ $order_sch = Cache::rememberForever('order_scheduled_stats', function () {
         <div class="navbar-vertical-container">
             <div class="navbar__brand-wrapper navbar-brand-wrapper justify-content-between">
                 <!-- Logo -->
-                <a class="navbar-brand d-block p-0" href="{{ route('admin.dashboard') }}" aria-label="GO Admin Panel">
+                <a class="navbar-brand d-block p-0" href="{{ route('admin.dashboard') }}" aria-label="Hopa! Control Center">
                     <img class="navbar-brand-logo sidebar--logo-design"
                         src="{{ dynamicAsset('/public/assets/admin/img/hopa-logo.png') }}"
-                        alt="GO Admin Panel"
+                        alt="Hopa! Control Center"
                         onerror="this.src='{{ dynamicAsset('/public/assets/admin/img/logo.png') }}'">
                     <img class="navbar-brand-logo-mini sidebar--logo-design-2"
                         src="{{ dynamicAsset('/public/assets/admin/img/hopa-logo.png') }}"
-                        alt="GO"
+                        alt="Hopa!"
                         onerror="this.src='{{ dynamicAsset('/public/assets/admin/img/logo.png') }}'">
                 </a>
                 <!-- End Logo -->

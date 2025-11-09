@@ -6,19 +6,19 @@
                 <!-- Logo -->
                 <div class="sidebar-logo-container">
                     @php($restaurant_data=\App\CentralLogics\Helpers::get_restaurant_data())
-                    <a class="navbar-brand pt-0 pb-0" href="{{route('vendor.dashboard')}}" aria-label="GO Admin Panel">
+                    <a class="navbar-brand pt-0 pb-0" href="{{route('vendor.dashboard')}}" aria-label="Hopa! Control Center">
                         <img class="navbar-brand-logo"
                              src="{{ dynamicAsset('/public/assets/admin/img/hopa-logo.png') }}"
-                             alt="GO Admin Panel"
+                             alt="Hopa! Control Center"
                              onerror="this.src='{{ dynamicAsset('/public/assets/admin/img/logo.png') }}'">
                         <img class="navbar-brand-logo-mini"
                              src="{{ dynamicAsset('/public/assets/admin/img/hopa-logo.png') }}"
-                             alt="GO"
+                             alt="Hopa!"
                              onerror="this.src='{{ dynamicAsset('/public/assets/admin/img/logo.png') }}'">
 
                         <div class="ps-2">
                             <h6>
-                                {{ $restaurant_data ? \Illuminate\Support\Str::limit($restaurant_data->name,15) : 'GO Admin Panel' }}
+                                {{ $restaurant_data ? \Illuminate\Support\Str::limit($restaurant_data->name,15) : 'Hopa! Control Center' }}
                             </h6>
                         </div>
                     </a>

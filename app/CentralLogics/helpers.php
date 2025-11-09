@@ -64,7 +64,11 @@ use MatanYadaev\EloquentSpatial\Objects\Point;
 use App\Models\SubscriptionBillingAndRefundHistory;
 use App\Traits\NotificationDataSetUpTrait;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\TransferException;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Middleware;
 use GuzzleHttp\Pool;
 
 class Helpers
@@ -3572,11 +3576,22 @@ class Helpers
         $provider = BusinessSetting::where('key', 'translation_provider')->first();
         $provider = $provider?->value ?? 'google';
 
-        if ($provider === 'openai' && config('services.openai.key')) {
-            return self::translate_with_openai($q, $sl, $tl);
+        if ($provider === 'openai') {
+            $key = config('services.openai.key');
+            if (!$key) {
+                \Log::warning('OpenAI provider selected but OPENAI_API_KEY is missing.');
+                return $q;
+            }
+
+            try {
+                return self::translate_with_openai($q, $sl, $tl);
+            } catch (\Throwable $e) {
+                \Log::warning('OpenAI Translation Error (single): ' . $e->getMessage());
+                return $q;
+            }
         }
 
-        // Fallback to Google Translate
+        // Google (or any other provider) is selected explicitly
         return self::translate_with_google($q, $sl, $tl);
     }
 
@@ -3650,8 +3665,7 @@ class Helpers
 
         } catch (\Exception $e) {
             \Log::error('OpenAI Translation Error: ' . $e->getMessage());
-            // Fallback to Google if OpenAI fails
-            return self::translate_with_google($q, $sl, $tl);
+            throw $e;
         }
     }
 
@@ -3664,24 +3678,60 @@ class Helpers
 
             $apiKey = config('services.openai.key');
             if (empty($apiKey)) {
-                \Log::warning('OpenAI API key missing. Falling back to Google Translate for batch job.');
-                return self::translateBatchWithGoogle($items, $sl, $tl);
+                \Log::warning('OpenAI API key missing. Unable to run OpenAI batch translation.');
+                return [];
             }
 
             $batchSize = max(1, (int) config('services.openai.batch_size', 100));
             $parallelWorkers = max(1, (int) config('services.openai.parallel_workers', 8));
-            $timeout = (int) config('services.openai.timeout', 120);
+            $timeout = max(10, (int) config('services.openai.timeout', 60));
+            $maxRetries = max(0, (int) config('services.openai.max_retries', 2));
+            $retryDelayMs = max(100, (int) config('services.openai.retry_delay_ms', 500));
             $model = config('services.openai.model', 'gpt-4o-mini');
 
             $targetLanguage = self::getLanguageName($tl);
             $sourceLanguage = self::getLanguageName($sl);
             $systemMessage = self::getTranslationSystemMessage($tl);
 
+            $handlerStack = HandlerStack::create();
+            if ($maxRetries > 0) {
+                $handlerStack->push(Middleware::retry(
+                    function ($retries, $request, $response, $exception) use ($maxRetries) {
+                        if ($retries >= $maxRetries) {
+                            return false;
+                        }
+
+                        if ($exception instanceof ConnectException) {
+                            return true;
+                        }
+
+                        if ($exception instanceof RequestException) {
+                            $context = $exception->getHandlerContext();
+                            if (($context['errno'] ?? null) === 28) {
+                                return true; // cURL timeout
+                            }
+                        }
+
+                        if ($response) {
+                            $status = $response->getStatusCode();
+                            return $status >= 500 || $status === 429;
+                        }
+
+                        return false;
+                    },
+                    function ($retries) use ($retryDelayMs) {
+                        return ($retryDelayMs / 1000) * pow(2, $retries);
+                    }
+                ));
+            }
+
             $client = new Client([
                 'base_uri' => 'https://api.openai.com/v1/',
                 'timeout' => $timeout,
                 'connect_timeout' => 10,
+                'read_timeout' => $timeout,
                 'http_errors' => false,
+                'handler' => $handlerStack,
             ]);
 
             $batches = array_chunk($items, $batchSize, true);
@@ -3714,7 +3764,7 @@ class Helpers
 
             $pool = new Pool($client, $requests(), [
                 'concurrency' => $parallelWorkers,
-                'fulfilled' => function ($response, $index) use (&$allTranslations, &$batchMap, $sl, $tl) {
+                'fulfilled' => function ($response, $index) use (&$allTranslations, &$batchMap) {
                     $batch = $batchMap[$index] ?? [];
                     if (empty($batch)) {
                         return;
@@ -3724,8 +3774,6 @@ class Helpers
                     if ($status >= 300) {
                         $bodySnippet = substr((string) $response->getBody(), 0, 500);
                         \Log::error('OpenAI Batch Translation HTTP ' . $status . ': ' . $bodySnippet);
-                        $fallback = self::translateBatchWithGoogle($batch, $sl, $tl);
-                        $allTranslations = array_replace($allTranslations, $fallback);
                         return;
                     }
 
@@ -3739,18 +3787,12 @@ class Helpers
                         return;
                     }
 
-                    \Log::warning('OpenAI Batch Translation Warning: Unable to parse response. Falling back to Google for this batch.');
-                    $fallback = self::translateBatchWithGoogle($batch, $sl, $tl);
-                    $allTranslations = array_replace($allTranslations, $fallback);
+                    \Log::warning('OpenAI Batch Translation Warning: Unable to parse response.');
                 },
-                'rejected' => function ($reason, $index) use (&$allTranslations, &$batchMap, $sl, $tl) {
+                'rejected' => function ($reason, $index) use (&$batchMap) {
                     $batch = $batchMap[$index] ?? [];
                     $message = $reason instanceof TransferException ? $reason->getMessage() : (string) $reason;
                     \Log::error('OpenAI Translation Request Failed: ' . $message);
-                    if (!empty($batch)) {
-                        $fallback = self::translateBatchWithGoogle($batch, $sl, $tl);
-                        $allTranslations = array_replace($allTranslations, $fallback);
-                    }
                 },
             ]);
 
@@ -3853,20 +3895,6 @@ class Helpers
             }
         }
 
-        return $translations;
-    }
-
-    protected static function translateBatchWithGoogle(array $batch, $sl, $tl): array
-    {
-        $translations = [];
-        foreach ($batch as $key => $text) {
-            try {
-                $translations[$key] = self::translate_with_google($text, $sl, $tl);
-            } catch (\Exception $e) {
-                \Log::error('Google Translate fallback failed for key: ' . $key . '. ' . $e->getMessage());
-                $translations[$key] = $text;
-            }
-        }
         return $translations;
     }
 

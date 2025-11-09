@@ -13,7 +13,7 @@
         $icon = \App\CentralLogics\Helpers::get_business_settings('icon', false);
     @endphp
     <!-- Title -->
-    <title>{{ translate('messages.Password_recovery') }} | {{$app_name??'GO Admin Panel'}}</title>
+    <title>{{ translate('messages.Password_recovery') }} | {{$app_name??'Hopa! Control Center'}}</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{asset($icon ? 'storage/app/public/business/'.$icon : 'public/favicon.ico')}}">
@@ -37,7 +37,7 @@
         <div class="d-flex flex-wrap align-items-center justify-content-between">
             <div class="auth-content">
                 <div class="content">
-                    <h2 class="title text-uppercase">{{translate('messages.welcome_to_app')}} {{ $app_name??'GO Admin Panel' }}</h2>
+                    <h2 class="title text-uppercase">{{translate('messages.welcome_to_app')}} {{ $app_name??'Hopa! Control Center' }}</h2>
                     <p>
                         {{translate('Manage_your_app_&_website_easily')}}
                     </p>

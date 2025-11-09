@@ -306,10 +306,17 @@ class LanguageController extends Controller
             // Use larger batch size for OpenAI (faster), smaller for Google
             $provider = BusinessSetting::where('key', 'translation_provider')->first();
             $isOpenAI = ($provider?->value === 'openai' && config('services.openai.key'));
-            // OpenAI: Process 4000 items per iteration (20 parallel requests x 200 items each)
-            // With true parallelism and optimized settings, we can translate 6000 keys in ~2 minutes
-            // Google: Process 20 items per iteration
-            $items_processed = $isOpenAI ? config('services.openai.items_per_iteration', 4000) : 20;
+
+            $openAiBatchSize = max(1, (int) config('services.openai.batch_size', 100));
+            $openAiWorkers = max(1, (int) config('services.openai.parallel_workers', 20));
+            $itemsPerIteration = (int) config('services.openai.items_per_iteration', $openAiBatchSize * $openAiWorkers);
+            if ($itemsPerIteration <= 0) {
+                $itemsPerIteration = $openAiBatchSize * $openAiWorkers;
+            }
+            $itemsPerIteration = max($openAiBatchSize, $itemsPerIteration);
+
+            // Google fallback stays sequential; OpenAI uses configurable throughput
+            $items_processed = $isOpenAI ? $itemsPerIteration : 20;
             if(!file_exists($new_messages_path)){
                 $str = "<?php return " . var_export($data_filtered, true) . ";";
                 file_put_contents(base_path('resources/lang/' . $lang . '/new-messages.php'), $str);

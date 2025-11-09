@@ -12,7 +12,7 @@
         $icon = \App\CentralLogics\Helpers::get_business_settings('icon', false);
     @endphp
     <!-- Title -->
-    <title>{{ translate('messages.login') }} | {{$app_name??'GO Admin Panel'}}</title>
+    <title>{{ translate('messages.login') }} | {{$app_name??'Hopa! Control Center'}}</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{asset($icon ? 'storage/app/public/business/'.$icon : 'public/favicon.ico')}}">
@@ -215,13 +215,13 @@
         <!-- Logo -->
         <div class="logo-container">
             <img src="{{ dynamicAsset('/public/assets/admin/img/hopa-logo.png') }}"
-                 alt="GO Admin Panel"
+                 alt="Hopa! Control Center"
                  onerror="this.src='{{ dynamicAsset('/public/assets/admin/img/logo.png') }}'">
         </div>
-        
+
         <!-- Title -->
         <h1 class="login-title">Welcome Back</h1>
-        <p class="login-subtitle">Sign in to your GO Admin Panel</p>
+        <p class="login-subtitle">Sign in to your Hopa! Control Center</p>
         
         <!-- Login Form -->
         <form class="login_form" action="{{route('login_post')}}" method="post" id="form-id">

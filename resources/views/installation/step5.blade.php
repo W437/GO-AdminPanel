@@ -3,13 +3,13 @@
 @section('content')
     <!-- Title -->
     <div class="text-center text-white mb-4">
-        <h2>GO Admin Panel Installation</h2>
+        <h2>Hopa! Control Center Installation</h2>
         <h6 class="fw-normal">Please proceed step by step with proper data according to instructions</h6>
     </div>
 
     <!-- Progress -->
     <div class="pb-2">
-        <div class="progress cursor-pointer" role="progressbar" aria-label="GO Admin Panel Installation"
+        <div class="progress cursor-pointer" role="progressbar" aria-label="Hopa! Control Center Installation"
              aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" data-bs-toggle="tooltip"
              data-bs-placement="top" data-bs-custom-class="custom-progress-tooltip" data-bs-title="Final Step!"
              data-bs-delay='{"hide":1000}'>
