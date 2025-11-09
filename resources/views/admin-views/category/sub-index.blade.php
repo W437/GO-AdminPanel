@@ -14,7 +14,7 @@
                 <div class="col-sm mb-2 mb-sm-0">
                     <h1 class="page-header-title">
                         <div class="card-header-icon d-inline-flex mr-2 img">
-                            <img src="{{dynamicAsset('public/assets/admin/img/sub-category.png')}}" alt="">
+                            <i class="tio-category"></i>
                         </div>
                         <span>{{translate('messages.Sub_Category_Setup')}}</span>
                     </h1>

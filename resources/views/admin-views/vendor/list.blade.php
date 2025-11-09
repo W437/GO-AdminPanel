@@ -101,7 +101,7 @@
                 <div class="resturant-card bg--1">
                     <h4 class="title" id="itemCount" >{{$restaurants->total()}}</h4>
                     <span class="subtitle">{{translate('messages.total_restaurants')}}</span>
-                    <img class="resturant-icon" src="{{dynamicAsset('/public/assets/admin/img/resturant/map-pin.png')}}" alt="resturant">
+                    <i class="tio-home resturant-icon"></i>
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6">
@@ -119,7 +119,7 @@
                     @php($active_restaurants = isset($active_restaurants) ? $active_restaurants : 0)
                     <h4 class="title">{{$active_restaurants}}</h4>
                     <span class="subtitle">{{translate('messages.active_restaurants')}}</span>
-                    <img class="resturant-icon" src="{{dynamicAsset('/public/assets/admin/img/resturant/active-rest.png')}}" alt="resturant">
+                    <i class="tio-checkmark-circle resturant-icon"></i>
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6">
@@ -136,7 +136,7 @@
                     @php($inactive_restaurants = isset($inactive_restaurants) ? $inactive_restaurants : 0)
                     <h4 class="title">{{$inactive_restaurants}}</h4>
                     <span class="subtitle">{{translate('messages.inactive_restaurants')}}</span>
-                    <img class="resturant-icon" src="{{dynamicAsset('/public/assets/admin/img/resturant/inactive-rest.png')}}" alt="resturant">
+                    <i class="tio-pause-circle resturant-icon"></i>
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6">
@@ -152,7 +152,7 @@
                     ->count())
                     <h4 class="title">{{$data}}</h4>
                     <span class="subtitle">{{translate('messages.newly_joined_restaurants')}}</span>
-                    <img class="resturant-icon" src="{{dynamicAsset('/public/assets/admin/img/resturant/new-rest.png')}}" alt="resturant">
+                    <i class="tio-add-circle resturant-icon"></i>
                 </div>
             </div>
         </div>

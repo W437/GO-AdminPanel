@@ -11,7 +11,7 @@
         <div class="page-header">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{ dynamicAsset('public/assets/admin/img/category.png') }}" class="w--20" alt="">
+                    <i class="tio-category"></i>
                 </span>
                 <span>
                     {{ translate('add_new_addon_category') }}

@@ -378,18 +378,20 @@ class LanguageController extends Controller
 
             } else{
 
-                    foreach ($full_data as $key => $data) {
-                        // Only include items that are English text AND need translation
-                        // Skip numbers, symbols, placeholders, etc.
-                        if (preg_match('/^[\x20-\x7E\x{2019}]+$/u', $data) && Helpers::needsTranslation($data)) {
-                            $data_filtered[$key] = $data;
-                            $str = "<?php return " . var_export($data_filtered, true) . ";";
-                            file_put_contents(base_path('resources/lang/' . $lang . '/new-messages.php'), $str);
-                            }
+                foreach ($full_data as $key => $data) {
+                    // Only include items that are English text AND need translation
+                    // Skip numbers, symbols, placeholders, etc.
+                    if (preg_match('/^[\x20-\x7E\x{2019}]+$/u', $data) && Helpers::needsTranslation($data)) {
+                        $data_filtered[$key] = $data;
                     }
-                    return response()->json([
-                        'message' =>  translate('data_prepared') , 'data' => 'data_prepared' , 'total' => count($data_filtered)
-                    ]);
+                }
+
+                $str = "<?php return " . var_export($data_filtered, true) . ";";
+                file_put_contents(base_path('resources/lang/' . $lang . '/new-messages.php'), $str);
+
+                return response()->json([
+                    'message' =>  translate('data_prepared') , 'data' => 'data_prepared' , 'total' => count($data_filtered)
+                ]);
 
             }
             return response()->json([

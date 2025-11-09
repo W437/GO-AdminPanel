@@ -14,7 +14,7 @@
                 <div class="col-sm mb-2 mb-sm-0">
                     <h2 class="page-header-title text-capitalize">
                         <div class="card-header-icon d-inline-flex mr-2 img">
-                            <img src="{{dynamicAsset('public/assets/admin/img/sub-category.png')}}" alt="">
+                            <i class="tio-category"></i>
                         </div>
                         <span>
                             {{$category->position?translate('messages.sub').' ':''}}{{translate('messages.Category_Update')}}
