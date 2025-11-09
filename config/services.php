@@ -35,7 +35,7 @@ return [
         'model' => env('OPENAI_TRANSLATION_MODEL', 'gpt-4o-mini'),
         'parallel_workers' => env('OPENAI_PARALLEL_WORKERS', 20),
         'batch_size' => env('OPENAI_BATCH_SIZE', 200),
-        'items_per_iteration' => env('OPENAI_ITEMS_PER_ITERATION') ?? (env('OPENAI_PARALLEL_WORKERS', 20) * env('OPENAI_BATCH_SIZE', 200)),
+        'items_per_iteration' => env('OPENAI_ITEMS_PER_ITERATION') ?: (env('OPENAI_PARALLEL_WORKERS', 20) * env('OPENAI_BATCH_SIZE', 200)),
         'timeout' => env('OPENAI_TIMEOUT', 60),
         'max_retries' => env('OPENAI_MAX_RETRIES', 2),
         'retry_delay_ms' => env('OPENAI_RETRY_DELAY_MS', 500),

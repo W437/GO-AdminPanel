@@ -3777,7 +3777,8 @@ class Helpers
                         return;
                     }
 
-                    $payload = json_decode((string) $response->getBody(), true);
+                    $bodyString = (string) $response->getBody();
+                    $payload = json_decode($bodyString, true);
                     $content = $payload['choices'][0]['message']['content'] ?? null;
                     $parsedTranslations = self::parseBatchTranslationResponse($content, $batch);
 
@@ -3786,8 +3787,7 @@ class Helpers
                         \Log::info('OpenAI Batch Translation Success: Translated ' . count($parsedTranslations) . ' items');
                         return;
                     }
-
-                    \Log::warning('OpenAI Batch Translation Warning: Unable to parse response.');
+                    \Log::warning('OpenAI Batch Translation Warning: Unable to parse response. Payload snippet: ' . \Illuminate\Support\Str::limit($bodyString, 500));
                 },
                 'rejected' => function ($reason, $index) use (&$batchMap) {
                     $batch = $batchMap[$index] ?? [];
@@ -3858,44 +3858,112 @@ class Helpers
             $cleanContent = trim($cleanContent);
         }
 
-        $decoded = json_decode($cleanContent, true);
         $translations = [];
 
-        if (json_last_error() === JSON_ERROR_NONE) {
-            $rows = $decoded;
-            if (isset($decoded['translations']) && is_array($decoded['translations'])) {
-                $rows = $decoded['translations'];
-            }
+        // Attempt strict JSON decode first (entire payload)
+        $translations = self::decodeTranslationJson($cleanContent, $batch);
+        if (!empty($translations)) {
+            return $translations;
+        }
 
-            if (is_array($rows)) {
-                foreach ($rows as $row) {
-                    $key = $row['key'] ?? null;
-                    $translation = $row['translation'] ?? null;
-                    if ($key !== null && array_key_exists($key, $batch) && $translation !== null) {
-                        $translations[$key] = trim($translation);
-                    }
-                }
-
-                if (!empty($translations)) {
-                    return $translations;
-                }
+        // Try to extract embedded JSON snippets (many models prepend text)
+        foreach (self::extractJsonBlocks($cleanContent) as $jsonBlock) {
+            $translations = self::decodeTranslationJson($jsonBlock, $batch);
+            if (!empty($translations)) {
+                return $translations;
             }
         }
 
-        // Fallback parser for KEY|VALUE responses
+        // Fallback parser for KEY|VALUE or KEY:VALUE responses
         $lines = preg_split("/\r\n|\r|\n/", $cleanContent);
         foreach ($lines as $line) {
             $line = trim($line);
-            if (empty($line) || strpos($line, '|') === false) {
+            if (empty($line)) {
                 continue;
             }
-            [$key, $value] = array_map('trim', explode('|', $line, 2));
+
+            $delimiter = null;
+            if (strpos($line, '|') !== false) {
+                $delimiter = '|';
+            } elseif (strpos($line, ':') !== false) {
+                $delimiter = ':';
+            } elseif (stripos($line, '->') !== false) {
+                $delimiter = '->';
+            }
+
+            if ($delimiter === null) {
+                continue;
+            }
+
+            [$key, $value] = array_map('trim', explode($delimiter, $line, 2));
             if ($key !== '' && array_key_exists($key, $batch)) {
                 $translations[$key] = $value;
             }
         }
 
+        if (!empty($translations)) {
+            return $translations;
+        }
+
+        \Log::warning('OpenAI Batch Translation Warning: Response unparseable. Returning original strings. Snippet: ' . Str::limit($cleanContent, 200));
+
+        // Final fallback: keep originals so progress can continue
+        $fallback = [];
+        foreach ($batch as $key => $value) {
+            $fallback[$key] = $value;
+        }
+
+        return $fallback;
+    }
+
+    protected static function decodeTranslationJson(string $json, array $batch): array
+    {
+        $decoded = json_decode($json, true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return [];
+        }
+
+        $rows = $decoded;
+        if (isset($decoded['translations']) && is_array($decoded['translations'])) {
+            $rows = $decoded['translations'];
+        }
+
+        if (!is_array($rows)) {
+            return [];
+        }
+
+        $translations = [];
+        foreach ($rows as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+            $key = $row['key'] ?? null;
+            $translation = $row['translation'] ?? null;
+            if ($key !== null && array_key_exists($key, $batch) && $translation !== null) {
+                $translations[$key] = trim((string) $translation);
+            }
+        }
+
         return $translations;
+    }
+
+    protected static function extractJsonBlocks(string $text): array
+    {
+        $blocks = [];
+
+        $arrayStart = strpos($text, '[');
+        $arrayEnd = strrpos($text, ']');
+        if ($arrayStart !== false && $arrayEnd !== false && $arrayEnd > $arrayStart) {
+            $blocks[] = substr($text, $arrayStart, $arrayEnd - $arrayStart + 1);
+        }
+
+        $objectStart = strpos($text, '{');
+        $objectEnd = strrpos($text, '}');
+        if ($objectStart !== false && $objectEnd !== false && $objectEnd > $objectStart) {
+            $blocks[] = substr($text, $objectStart, $objectEnd - $objectStart + 1);
+        }
+
+        return $blocks;
     }
 
     
