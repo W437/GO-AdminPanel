@@ -8,7 +8,7 @@
         <div class="page-header">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{dynamicAsset('public/assets/admin/img/firebase.png')}}" class="w--26" alt="">
+                    <i class="tio-notifications"></i>
                 </span>
                 <span>{{translate('messages.firebase_push_notification_setup')}}
                 </span>

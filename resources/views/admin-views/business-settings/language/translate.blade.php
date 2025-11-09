@@ -19,7 +19,7 @@
             <div class="d-flex flex-wrap justify-content-between align-items-start">
                 <h1 class="page-header-title text-capitalize">
                     <div class="card-header-icon d-inline-flex mr-2 img">
-                        <img src="{{dynamicAsset('/public/assets/admin/img/notes.png')}}" class="mw-26px" alt="public">
+                        <i class="tio-settings-outlined"></i>
                     </div>
                     <span>
                         {{ translate('messages.business_setup') }}

@@ -12,7 +12,7 @@
                     <div class="blinkings active">
                         <i class="tio-info-outined"></i>
                         <div class="business-notes">
-                            <h6><img src="{{dynamicAsset('/public/assets/admin/img/notes.png')}}" alt=""> {{translate('Note')}}</h6>
+                            <h6><i class="tio-settings-outlined"></i> {{translate('Note')}}</h6>
                             <div>
                                 {{translate('Don’t_forget_to_click_the_‘Save_Information’_button_below_to_save_changes.')}}
                             </div>

@@ -8,7 +8,7 @@
         <div class="d-flex flex-wrap justify-content-between align-items-start">
             <h1 class="page-header-title mr-3">
                 <span class="page-header-icon">
-                    <img src="{{ dynamicAsset('public/assets/admin/img/business.png') }}" class="w--20" alt="">
+                    <i class="tio-business"></i>
                 </span>
                 <span>
                     {{ translate('messages.business_setup') }}
@@ -18,7 +18,7 @@
                 <div class="blinkings active">
                     <i class="tio-info-outined"></i>
                     <div class="business-notes">
-                        <h6><img src="{{dynamicAsset('/public/assets/admin/img/notes.png')}}" alt=""> {{translate('Note')}}</h6>
+                        <h6><i class="tio-settings-outlined"></i> {{translate('Note')}}</h6>
                         <div>
                             {{translate('Click_the_‘+_Add_New_Language’_button_to_add_a_new_language_to_the_system')}}
                         </div>

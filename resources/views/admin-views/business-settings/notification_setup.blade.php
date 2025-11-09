@@ -14,7 +14,7 @@ active
         <div class="page-header d-flex flex-wrap align-items-center justify-content-between">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{dynamicAsset('public/assets/admin/img/api.png')}}" class="w--26" alt="image">
+                    <i class="tio-code"></i>
                 </span>
                 <span>
                     {{translate('messages.Notification Channels Setup')}}

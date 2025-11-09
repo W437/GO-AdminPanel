@@ -6,7 +6,7 @@
         <div class="page-header">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{dynamicAsset('public/assets/admin/img/api.png')}}" class="w--26" alt="image">
+                    <i class="tio-code"></i>
                 </span>
                 <span>
                     {{translate('messages.third_party_apis')}}
@@ -27,7 +27,7 @@
                 <div class="blinkings active lg-top">
                     <i class="tio-info-outined"></i>
                     <div class="business-notes">
-                        <h6><img src="{{dynamicAsset('/public/assets/admin/img/notes.png')}}" alt=""> {{translate('Note')}}</h6>
+                        <h6><i class="tio-settings-outlined"></i> {{translate('Note')}}</h6>
                         <div>
                             {{translate('Without_configuring_this_section_map_functionality_will_not_work_properly._Thus_the_whole_system_will_not_work_as_it_planned')}}
                         </div>

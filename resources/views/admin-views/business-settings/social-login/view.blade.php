@@ -7,7 +7,7 @@
         <div class="page-header">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{dynamicAsset('public/assets/admin/img/captcha.png')}}" class="w--26" alt="">
+                    <i class="tio-security"></i>
                 </span>
                 <span>
                     {{translate('Social_Login_Setup')}}

@@ -20,7 +20,7 @@
                 <!-- Page Header -->
                 <h1 class="page-header-title text-capitalize">
                     <div class="card-header-icon d-inline-flex mr-2 img">
-                        <img src="{{ dynamicAsset('public/assets/admin/img/business.png') }}" class="w--20" alt="">
+                        <i class="tio-business"></i>
                     </div>
                     <span>{{translate('system_addons')}}</span>
 
