@@ -2,7 +2,7 @@ function newdonutChart(id, value, labels, legendPosition = "bottom") {
     var options = {
         series: value,
         labels: labels,
-        colors: ["#93f0cf", "#99d5ff", "#ff7a00", "#167bc3"],
+        colors: ["#93f0cf", "#99d5ff", "#a97dc4", "#167bc3"],
         chart: {
             width: "100%",
             height: 420,

@@ -2,8 +2,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap");
 :root {
-    --theameColor: #006fbd;
-    --primary-clr: #006fbd;
+    --theameColor: #a97dc4;
+    --primary-clr: #a97dc4;
     --cus-warning-light: #F0AF34;
     --cus-warning-clr: #CC952C;
 }
@@ -4300,7 +4300,7 @@ button.resend {
 }
 
 :root {
-    --primary: #ff7a00;
+    --primary: #a97dc4;
 }
 
 .nav--tabs.nav--pills .nav-item .nav-link {
@@ -4328,7 +4328,7 @@ button.resend {
 .blinkings::after,
 .blinkings::before {
     content: "";
-    background: rgba(255, 122, 0, 0.2) !important;
+    background: rgba(169, 125, 196, 0.2) !important;
     border-radius: 50%;
     position: absolute;
     width: 28px;
@@ -4670,7 +4670,7 @@ button.resend {
 .single-item-slider .owl-dots .owl-dot {
     width: 8px;
     height: 6px;
-    background: rgba(255, 122, 0, 0.39);
+    background: rgba(169, 125, 196, 0.39);
     border-radius: 8.35714px;
     transition: all ease 0.3s;
 }
@@ -4686,7 +4686,7 @@ button.resend {
     font-weight: 500;
     font-size: 12px;
     line-height: 14px;
-    background: #ff7a00;
+    background: #a97dc4;
     border-radius: 5px;
     color: #fff;
 }
@@ -5153,7 +5153,7 @@ button.resend {
     display: flex;
     flex-wrap: wrap;
     gap: 50px;
-    --base: #ff7a00;
+    --base: #a97dc4;
 }
 
 .email-format-wrapper .left-content {
@@ -6504,7 +6504,7 @@ textarea.form-control.h-100px {
     background-color: rgba(0, 224, 255, 0.1);
 }
 .order--card__color-1 .card-title {
-    color: #006fbd;
+    color: #a97dc4;
 }
 
 .order--card__color-2 {
@@ -6709,7 +6709,7 @@ textarea.form-control.h-100px {
 }
 .subscription-tabs-group .page-header-tabs .nav-item .nav-link.active {
     color: #ffffff;
-    background: #006fbd;
+    background: #a97dc4;
 }
 .subscription-tabs-group .page-header-tabs .nav-item .nav-link.active img {
     filter: invert(1);
@@ -6771,7 +6771,7 @@ textarea.form-control.h-100px {
     border-radius: 5px;
     border: 1px solid rgba(0, 111, 189, 0.4);
     background: #f6fbff;
-    color: #006fbd;
+    color: #a97dc4;
     font-weight: 600;
     letter-spacing: 0.14px;
     font-size: 14px;
@@ -6827,7 +6827,7 @@ textarea.form-control.h-100px {
     gap: 16px;
 }
 .delivery-logs-area .item .btn--primary {
-    background: #006fbd;
+    background: #a97dc4;
 }
 .delivery-logs-area .item:not(:last-child) {
     margin-bottom: 20px;
@@ -7043,7 +7043,7 @@ textarea.form-control.h-100px {
 }
 
 .edit-content-btn:not(:hover) {
-    background: #006fbd0d !important;
+    background: #a97dc40d !important;
 }
 @media screen and (min-width: 1200px) {
     .p-xl-30 {
@@ -7110,7 +7110,7 @@ textarea.form-control.h-100px {
     opacity: 0;
 }
 .check-item-2 input:checked {
-    background-color: #006fbd;
+    background-color: #a97dc4;
     opacity: 1;
 }
 .max-w-353px {
@@ -7124,7 +7124,7 @@ textarea.form-control.h-100px {
 }
 .sorting-card .form--check .form-check-input[type="radio"]:checked,
 .sorting-card .toggle-switch-input:checked + .toggle-switch-label {
-    background-color: #006fbd !important;
+    background-color: #a97dc4 !important;
 }
 .sorting-card .form-check-input:checked + .form-check-label {
     font-weight: 600;
@@ -7487,7 +7487,7 @@ video#VisaChipCardVideo {
     right: 15px;
     border: 2px solid #fff;
     border-radius: 55px;
-    background: #ff7a00;
+    background: #a97dc4;
     color: white;
     z-index: 9;
     display: flex;
@@ -7506,7 +7506,7 @@ video#VisaChipCardVideo {
     height: 36px;
     border-radius: 50%;
     color: var(--primary-clr);
-    background: #006fbd0d;
+    background: #a97dc40d;
     justify-content: center;
     align-items: center;
     font-size: 20px;
@@ -7934,8 +7934,8 @@ video#VisaChipCardVideo {
 }
 .btn-soft-submit {
     padding: 8px;
-    color: #006fbd;
-    background: #006fbd17;
+    color: #a97dc4;
+    background: #a97dc417;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     cursor: pointer;
@@ -9098,7 +9098,7 @@ input.form-control::placeholder {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ff7a00;
+    background-color: #a97dc4;
     color: #fff;
 }
 
@@ -9139,11 +9139,11 @@ input.form-control::placeholder {
     }
 }
 .generate-code{
-    color: #ff7a00;
+    color: #a97dc4;
     cursor: pointer;
 }
 .highlighted-keyword {
-    background-color: #ff7a00;
+    background-color: #a97dc4;
     color: #fff;
     font-weight: bold;
 }
