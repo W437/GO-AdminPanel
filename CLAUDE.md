@@ -1,1 +1,3 @@
 - See @project_tips folder content.
+- Implementing, fixing, or modifying code - should be done in this repo not the SSH.
+-  The One-Way Flow: Local Repo → Git → Production (SSH)
