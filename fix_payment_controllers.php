@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-// Fix all payment controllers to handle null config values properly
+// Fix all paymsent controllers to handle null config values properly
 $controllers = [
     'FlutterwaveV3Controller.php',
     'LiqPayController.php',
