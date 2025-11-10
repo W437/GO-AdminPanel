@@ -1,0 +1,16 @@
+Table Name          | Migrations Count
+-------------------|------------------
+users              |  13
+restaurants        |  34
+orders             |  33
+order_details      |   7
+categories         |   3
+zones              |   7
+delivery_men       |  10
+admins             |   2
+vendors            |   4
+reviews            |   4
+notifications      |   4
+banners            |   1
+coupons            |   6
+add_ons            |   4

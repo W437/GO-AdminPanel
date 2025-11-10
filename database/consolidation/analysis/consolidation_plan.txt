@@ -1,0 +1,17 @@
+Group 1: Core User System
+- users table and related tables (addresses, wallets, etc.)
+
+Group 2: Restaurant System
+- restaurants, foods, categories, add-ons
+
+Group 3: Order System
+- orders, order_details, order_transactions
+
+Group 4: Configuration
+- business_settings, currencies, zones, translations
+
+Group 5: Marketing & Analytics
+- coupons, banners, reviews, notifications
+
+Group 6: Recent Changes (2024-2025)
+- Keep these as separate migrations for now
