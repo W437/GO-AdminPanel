@@ -20,36 +20,7 @@
             <form action="{{route('admin.zone.update', $zone->id)}}" method="post"  class="shadow--card">
                     @csrf
                     <div class="row">
-                        <div class="col-md-5">
-                            <div class="zone-setup-instructions">
-                                <div class="zone-setup-top">
-                                    <h6 class="subtitle">{{translate('messages.instructions')}}</h6>
-                                    <p>
-                                        {{translate('messages.Create_&_connect_dots_in_a_specific_area_on_the_map_to_add_a_new_business_zone.')}}
-                                    </p>
-                                </div>
-                                <div class="zone-setup-item">
-                                    <div class="zone-setup-icon">
-                                        <i class="tio-hand-draw"></i>
-                                    </div>
-                                    <div class="info">
-                                        {{translate('messages.Use_this_‘Hand_Tool’_to_find_your_target_zone.')}}
-                                    </div>
-                                </div>
-                                <div class="zone-setup-item">
-                                    <div class="zone-setup-icon">
-                                        <i class="tio-free-transform"></i>
-                                    </div>
-                                    <div class="info">
-                                        {{translate('messages.Use this ‘Shape Tool’ to point out the areas and connect the dots. A minimum of 3 points/dots is required.')}}
-                                    </div>
-                                </div>
-                                <div class="instructions-image mt-4">
-                                    <img src={{dynamicAsset('public/assets/admin/img/instructions.gif')}} alt="instructions">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xl-7 zone-setup">
+                        <div class="col-md-12 zone-setup">
                             <div class="form-group">
                                 @php($language=\App\Models\BusinessSetting::where('key','language')->first())
                                 @php($language = $language->value ?? null)
