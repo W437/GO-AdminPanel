@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\DB;
 class DatabaseSettingController extends Controller
 {
     /**
-     * Tables that should never surface in the UI.
+     * Tables that contain sensitive data and should be highlighted in the UI.
      */
-    protected array $restrictedTables = [
+    protected array $sensitiveTables = [
         'admin_roles', 'admins', 'business_settings', 'colors', 'currencies',
         'failed_jobs', 'migrations', 'oauth_access_tokens', 'oauth_auth_codes',
         'oauth_clients', 'oauth_personal_access_clients', 'oauth_refresh_tokens',
@@ -24,6 +24,7 @@ class DatabaseSettingController extends Controller
     ];
 
     protected ?array $cachedAllowedTables = null;
+    protected ?array $cachedAllTables = null;
 
     public function db_index()
     {
@@ -61,7 +62,7 @@ class DatabaseSettingController extends Controller
 
     public function db_manager()
     {
-        $tableMeta = $this->getDatabaseTablesWithMeta();
+        $tableMeta = $this->getDatabaseTablesWithMeta(true);
         $stats = $this->getDatabaseStats($tableMeta);
         $defaultTable = $tableMeta[0]['name'] ?? null;
 
@@ -71,14 +72,14 @@ class DatabaseSettingController extends Controller
     public function tables()
     {
         return response()->json([
-            'tables' => $this->getDatabaseTablesWithMeta(),
+            'tables' => $this->getDatabaseTablesWithMeta(true),
             'stats' => $this->getDatabaseStats(),
         ]);
     }
 
     public function table(Request $request, string $table)
     {
-        $table = $this->ensureAllowedTable($table);
+        $table = $this->ensureTable($table, true);
         $perPage = (int) $request->get('per_page', 50);
         $perPage = max(1, min($perPage, 200));
         $page = max((int) $request->get('page', 1), 1);
@@ -131,7 +132,7 @@ class DatabaseSettingController extends Controller
             ], 403);
         }
 
-        $table = $this->ensureAllowedTable($table);
+        $table = $this->ensureTable($table, true);
         $structure = $this->getTableStructure($table);
         $primaryKey = $structure['primary_key'];
 
@@ -207,19 +208,30 @@ class DatabaseSettingController extends Controller
             return $this->cachedAllowedTables;
         }
 
-        $tables = DB::connection()->getDoctrineSchemaManager()->listTableNames();
-        $filtered = array_values(array_diff($tables, $this->restrictedTables));
+        $tables = $this->getAllTables();
+        $filtered = array_values(array_diff($tables, $this->sensitiveTables));
 
         return $this->cachedAllowedTables = $filtered;
     }
 
-    protected function getDatabaseTablesWithMeta(): array
+    protected function getAllTables(): array
     {
+        if ($this->cachedAllTables !== null) {
+            return $this->cachedAllTables;
+        }
+
+        return $this->cachedAllTables = DB::connection()->getDoctrineSchemaManager()->listTableNames();
+    }
+
+    protected function getDatabaseTablesWithMeta(bool $includeSensitive = false): array
+    {
+        $tables = $includeSensitive ? $this->getAllTables() : $this->getAllowedTables();
         $meta = [];
-        foreach ($this->getAllowedTables() as $table) {
+        foreach ($tables as $table) {
             $meta[] = [
                 'name' => $table,
                 'rows' => DB::table($table)->count(),
+                'sensitive' => $this->isSensitiveTable($table),
             ];
         }
 
@@ -229,7 +241,7 @@ class DatabaseSettingController extends Controller
     protected function getDatabaseStats(array $tableMeta = []): array
     {
         if (empty($tableMeta)) {
-            $tableMeta = $this->getDatabaseTablesWithMeta();
+            $tableMeta = $this->getDatabaseTablesWithMeta(true);
         }
 
         $tableCount = count($tableMeta);
@@ -244,10 +256,11 @@ class DatabaseSettingController extends Controller
         ];
     }
 
-    protected function ensureAllowedTable(string $table): string
+    protected function ensureTable(string $table, bool $allowSensitive = false): string
     {
         $table = trim($table);
-        if (! in_array($table, $this->getAllowedTables(), true)) {
+        $pool = $allowSensitive ? $this->getAllTables() : $this->getAllowedTables();
+        if (! in_array($table, $pool, true)) {
             abort(404);
         }
 
@@ -584,5 +597,10 @@ class DatabaseSettingController extends Controller
         ];
 
         return in_array($type, $geometryTypes, true);
+    }
+
+    protected function isSensitiveTable(string $table): bool
+    {
+        return in_array($table, $this->sensitiveTables, true);
     }
 }

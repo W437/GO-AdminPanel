@@ -148,6 +148,10 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <div class="alert alert-soft-warning d-none" id="db-sensitive-warning">
+                            <strong>{{ translate('messages.sensitive_table') }}:</strong>
+                            <span>{{ translate('messages.this_table_contains_sensitive_data_handle_with_care') }}</span>
+                        </div>
                         <div class="mb-4">
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <h6 class="mb-0">{{ translate('messages.columns') }}</h6>
@@ -255,6 +259,7 @@
                 statTables: $('#db-stat-tables'),
                 statRows: $('#db-stat-rows'),
                 statSize: $('#db-stat-size'),
+                sensitiveWarning: $('#db-sensitive-warning'),
             };
 
             const csrf = $('meta[name="csrf-token"]').attr('content');
@@ -264,6 +269,16 @@
                     return '0';
                 }
                     return Number(value).toLocaleString();
+            }
+
+            function getSelectedTableMeta() {
+                return state.tables.find(item => item.name === state.selectedTable) || null;
+            }
+
+            function renderSensitiveWarning() {
+                const meta = getSelectedTableMeta();
+                const show = meta && meta.sensitive;
+                elements.sensitiveWarning.toggleClass('d-none', !show);
             }
 
             function renderStats() {
@@ -299,9 +314,19 @@
                     button.append(
                         $('<span/>', { class: 'text-truncate mr-2' }).text(item.name)
                     );
-                    button.append(
-                        $('<span/>', { class: 'badge badge-soft-primary badge-pill' }).text(item.rows)
+
+                    const badgeWrapper = $('<div/>', { class: 'd-flex align-items-center' });
+                    badgeWrapper.append(
+                        $('<span/>', { class: 'badge badge-soft-primary badge-pill ml-2' }).text(item.rows)
                     );
+
+                    if (item.sensitive) {
+                        badgeWrapper.append(
+                            $('<span/>', { class: 'badge badge-soft-danger badge-pill ml-1' }).text('{{ translate('messages.sensitive') }}')
+                        );
+                    }
+
+                    button.append(badgeWrapper);
                     button.on('click', () => selectTable(item.name));
                     elements.tableList.append(button);
                 });
@@ -330,6 +355,7 @@
                     elements.columnsGrid.empty();
                     elements.activeMeta.text('');
                     elements.pagination.hide();
+                    elements.sensitiveWarning.addClass('d-none');
                     return;
                 }
 
@@ -356,6 +382,7 @@
             function updateTableView() {
                 elements.activeTable.text(state.selectedTable || '{{ translate('messages.no_table_selected') }}');
                 elements.activeMeta.text(state.selectedTable ? `${state.total} {{ translate('messages.total_rows') }}` : '');
+                renderSensitiveWarning();
 
                 elements.head.empty();
                 state.columns.forEach(column => {
