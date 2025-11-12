@@ -1014,13 +1014,18 @@ class CustomerAuthController extends Controller
             if(env('APP_MODE') == 'test'){
                 $otp = '123456';
             }
-            DB::table('phone_verifications')->updateOrInsert(['phone' => $request_data['phone']],
-                [
-                    'token' => $otp,
-                    'otp_hit_count' => 0,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
+
+            // Wrap in transaction to ensure OTP is committed before SMS is sent
+            // This fixes race condition where first OTP fails but second works
+            DB::transaction(function() use ($request_data, $otp) {
+                DB::table('phone_verifications')->updateOrInsert(['phone' => $request_data['phone']],
+                    [
+                        'token' => $otp,
+                        'otp_hit_count' => 0,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+            });
 
             $response= null;
 
