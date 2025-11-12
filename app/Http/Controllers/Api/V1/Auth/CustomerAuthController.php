@@ -1088,15 +1088,15 @@ class CustomerAuthController extends Controller
             'name' => 'required',
             'login_type' => 'required|in:otp,social',
             'phone' => 'required|min:9|max:14',
-            'email' => 'required|email',
         ];
 
         if ($request->login_type == 'social') {
+            $rules['email'] = 'required|email';
             $rules['phone'] .= '|unique:users,phone';
         }
 
         if ($request->login_type == 'otp') {
-            $rules['email'] .= '|unique:users,email';
+            $rules['email'] = 'nullable|email|unique:users,email';
         }
 
         $validator = Validator::make($request->all(), $rules);
