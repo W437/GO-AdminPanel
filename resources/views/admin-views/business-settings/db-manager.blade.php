@@ -58,6 +58,10 @@
             font-size: .875rem;
             margin-bottom: .25rem;
         }
+        #db-row-editor .modal-body {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
     </style>
 @endpush
 
@@ -70,6 +74,42 @@
             <p class="text-muted mb-0">
                 {{ translate('messages.explore_database_tables_edit_records_and_review_structures') }}
             </p>
+        </div>
+
+        <div class="row g-3 mb-4" id="db-stats">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 class="text-muted text-uppercase mb-1">{{ translate('messages.total_tables') }}</h6>
+                        <div class="d-flex align-items-baseline">
+                            <span class="display-4 text-dark" id="db-stat-tables">{{ number_format($stats['table_count'] ?? 0) }}</span>
+                        </div>
+                        <small class="text-muted">{{ translate('messages.tables_detected_in_this_database') }}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 class="text-muted text-uppercase mb-1">{{ translate('messages.total_rows') }}</h6>
+                        <div class="d-flex align-items-baseline">
+                            <span class="display-4 text-dark" id="db-stat-rows">{{ number_format($stats['total_rows'] ?? 0) }}</span>
+                        </div>
+                        <small class="text-muted">{{ translate('messages.rows_across_visible_tables') }}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h6 class="text-muted text-uppercase mb-1">{{ translate('messages.database_size') }}</h6>
+                        <div class="d-flex align-items-baseline">
+                            <span class="display-4 text-dark" id="db-stat-size">{{ $stats['database_size_human'] ?? '0 B' }}</span>
+                        </div>
+                        <small class="text-muted">{{ translate('messages.approx_storage_used') }}</small>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="row g-3 db-manager-wrapper">
@@ -184,6 +224,7 @@
                 editing: {
                     primaryValue: null,
                 },
+                stats: @json($stats),
             };
 
             const endpoints = {
@@ -211,9 +252,29 @@
                 rowModal: $('#db-row-editor'),
                 rowFields: $('#db-row-fields'),
                 rowForm: $('#db-row-form'),
+                statTables: $('#db-stat-tables'),
+                statRows: $('#db-stat-rows'),
+                statSize: $('#db-stat-size'),
             };
 
             const csrf = $('meta[name="csrf-token"]').attr('content');
+
+            function formatNumber(value) {
+                if (value === undefined || value === null || isNaN(value)) {
+                    return '0';
+                }
+                    return Number(value).toLocaleString();
+            }
+
+            function renderStats() {
+                if (!state.stats) {
+                    return;
+                }
+
+                elements.statTables.text(formatNumber(state.stats.table_count));
+                elements.statRows.text(formatNumber(state.stats.total_rows));
+                elements.statSize.text(state.stats.database_size_human || '0 B');
+            }
 
             function renderTables(filter = '') {
                 elements.tableList.empty();
@@ -524,6 +585,7 @@
             elements.rowForm.on('submit', submitRow);
 
             renderTables();
+            renderStats();
             if (state.selectedTable) {
                 loadTable();
             }

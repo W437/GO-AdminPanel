@@ -62,15 +62,17 @@ class DatabaseSettingController extends Controller
     public function db_manager()
     {
         $tableMeta = $this->getDatabaseTablesWithMeta();
+        $stats = $this->getDatabaseStats($tableMeta);
         $defaultTable = $tableMeta[0]['name'] ?? null;
 
-        return view('admin-views.business-settings.db-manager', compact('tableMeta', 'defaultTable'));
+        return view('admin-views.business-settings.db-manager', compact('tableMeta', 'defaultTable', 'stats'));
     }
 
     public function tables()
     {
         return response()->json([
             'tables' => $this->getDatabaseTablesWithMeta(),
+            'stats' => $this->getDatabaseStats(),
         ]);
     }
 
@@ -217,6 +219,24 @@ class DatabaseSettingController extends Controller
         return $meta;
     }
 
+    protected function getDatabaseStats(array $tableMeta = []): array
+    {
+        if (empty($tableMeta)) {
+            $tableMeta = $this->getDatabaseTablesWithMeta();
+        }
+
+        $tableCount = count($tableMeta);
+        $totalRows = array_sum(array_column($tableMeta, 'rows'));
+        $sizeBytes = $this->resolveDatabaseSizeBytes();
+
+        return [
+            'table_count' => $tableCount,
+            'total_rows' => $totalRows,
+            'database_size_bytes' => $sizeBytes,
+            'database_size_human' => $this->formatBytes($sizeBytes),
+        ];
+    }
+
     protected function ensureAllowedTable(string $table): string
     {
         $table = trim($table);
@@ -229,32 +249,237 @@ class DatabaseSettingController extends Controller
 
     protected function getTableStructure(string $table): array
     {
-        $schema = DB::connection()->getDoctrineSchemaManager();
-        $tableDetails = $schema->listTableDetails($table);
-        $primaryKey = null;
+        try {
+            $schema = DB::connection()->getDoctrineSchemaManager();
+            $tableDetails = $schema->listTableDetails($table);
+            $primaryKey = null;
 
-        if ($tableDetails->hasPrimaryKey()) {
-            $primaryKeyColumns = $tableDetails->getPrimaryKey()->getColumns();
-            $primaryKey = $primaryKeyColumns[0] ?? null;
-        }
+            if ($tableDetails->hasPrimaryKey()) {
+                $primaryKeyColumns = $tableDetails->getPrimaryKey()->getColumns();
+                $primaryKey = $primaryKeyColumns[0] ?? null;
+            }
 
-        $columns = [];
-        foreach ($tableDetails->getColumns() as $column) {
-            $columns[] = [
-                'name' => $column->getName(),
-                'type' => $column->getType()->getName(),
-                'length' => $column->getLength(),
-                'not_null' => $column->getNotnull(),
-                'default' => $column->getDefault(),
-                'autoincrement' => $column->getAutoincrement(),
-                'precision' => $column->getPrecision(),
-                'scale' => $column->getScale(),
+            $columns = [];
+            foreach ($tableDetails->getColumns() as $column) {
+                $columns[] = [
+                    'name' => $column->getName(),
+                    'type' => $column->getType()->getName(),
+                    'length' => $column->getLength(),
+                    'not_null' => $column->getNotnull(),
+                    'default' => $column->getDefault(),
+                    'autoincrement' => $column->getAutoincrement(),
+                    'precision' => $column->getPrecision(),
+                    'scale' => $column->getScale(),
+                ];
+            }
+
+            return [
+                'primary_key' => $primaryKey,
+                'columns' => $columns,
             ];
+        } catch (\Throwable $exception) {
+            info('db_manager_structure_fallback: ' . $exception->getMessage());
+            return $this->getTableStructureFallback($table);
         }
+    }
+
+    protected function getTableStructureFallback(string $table): array
+    {
+        $driver = DB::connection()->getDriverName();
+
+        if ($driver === 'mysql') {
+            if ($columns = $this->resolveMysqlColumns($table)) {
+                return $columns;
+            }
+        } elseif ($driver === 'pgsql') {
+            if ($columns = $this->resolvePostgresColumns($table)) {
+                return $columns;
+            }
+        }
+
+        return $this->basicColumnListing($table);
+    }
+
+    protected function resolveMysqlColumns(string $table): ?array
+    {
+        try {
+            $wrappedTable = $this->wrapIdentifier($table);
+            $rawColumns = DB::select("SHOW FULL COLUMNS FROM {$wrappedTable}");
+
+            if (empty($rawColumns)) {
+                return null;
+            }
+
+            $primaryKey = null;
+            $columns = [];
+
+            foreach ($rawColumns as $column) {
+                $field = $column->Field ?? $column->field ?? null;
+                if (! $field) {
+                    continue;
+                }
+
+                if (($column->Key ?? '') === 'PRI' && ! $primaryKey) {
+                    $primaryKey = $field;
+                }
+
+                $columns[] = [
+                    'name' => $field,
+                    'type' => $column->Type ?? 'string',
+                    'length' => null,
+                    'not_null' => ($column->Null ?? '') === 'NO',
+                    'default' => $column->Default ?? null,
+                    'autoincrement' => stripos($column->Extra ?? '', 'auto_increment') !== false,
+                    'precision' => null,
+                    'scale' => null,
+                ];
+            }
+
+            return [
+                'primary_key' => $primaryKey,
+                'columns' => $columns,
+            ];
+        } catch (\Throwable $exception) {
+            info('mysql_column_fallback_failed: ' . $exception->getMessage());
+            return null;
+        }
+    }
+
+    protected function resolvePostgresColumns(string $table): ?array
+    {
+        try {
+            $rawColumns = DB::select(
+                'SELECT column_name, data_type, is_nullable, column_default
+                 FROM information_schema.columns
+                 WHERE table_name = ?
+                 ORDER BY ordinal_position',
+                [$table]
+            );
+
+            if (empty($rawColumns)) {
+                return null;
+            }
+
+            $primaryKey = $this->resolvePostgresPrimaryKey($table);
+            $columns = [];
+
+            foreach ($rawColumns as $column) {
+                $columns[] = [
+                    'name' => $column->column_name ?? $column->column_Name ?? '',
+                    'type' => $column->data_type ?? 'string',
+                    'length' => null,
+                    'not_null' => ($column->is_nullable ?? '') === 'NO',
+                    'default' => $column->column_default ?? null,
+                    'autoincrement' => false,
+                    'precision' => null,
+                    'scale' => null,
+                ];
+            }
+
+            return [
+                'primary_key' => $primaryKey,
+                'columns' => $columns,
+            ];
+        } catch (\Throwable $exception) {
+            info('pgsql_column_fallback_failed: ' . $exception->getMessage());
+            return null;
+        }
+    }
+
+    protected function resolvePostgresPrimaryKey(string $table): ?string
+    {
+        try {
+            $result = DB::select(
+                'SELECT a.attname
+                 FROM pg_index i
+                 JOIN pg_attribute a ON a.attrelid = i.indrelid AND a.attnum = ANY(i.indkey)
+                 WHERE i.indrelid = ?::regclass AND i.indisprimary = true
+                 LIMIT 1',
+                [$table]
+            );
+
+            return $result[0]->attname ?? null;
+        } catch (\Throwable $exception) {
+            info('pgsql_primary_key_lookup_failed: ' . $exception->getMessage());
+            return null;
+        }
+    }
+
+    protected function basicColumnListing(string $table): array
+    {
+        try {
+            $columnNames = DB::getSchemaBuilder()->getColumnListing($table);
+        } catch (\Throwable $exception) {
+            info('basic_column_listing_failed: ' . $exception->getMessage());
+            $columnNames = [];
+        }
+
+        $columns = array_map(function ($name) {
+            return [
+                'name' => $name,
+                'type' => 'string',
+                'length' => null,
+                'not_null' => false,
+                'default' => null,
+                'autoincrement' => false,
+                'precision' => null,
+                'scale' => null,
+            ];
+        }, $columnNames);
 
         return [
-            'primary_key' => $primaryKey,
+            'primary_key' => null,
             'columns' => $columns,
         ];
+    }
+
+    protected function wrapIdentifier(string $name): string
+    {
+        return '`' . str_replace('`', '``', $name) . '`';
+    }
+
+    protected function resolveDatabaseSizeBytes(): int
+    {
+        $driver = DB::connection()->getDriverName();
+
+        try {
+            if ($driver === 'mysql') {
+                $dbName = DB::getDatabaseName();
+                $result = DB::select(
+                    'SELECT SUM(data_length + index_length) AS size
+                     FROM information_schema.tables
+                     WHERE table_schema = ?',
+                    [$dbName]
+                );
+
+                return (int) ($result[0]->size ?? 0);
+            }
+
+            if ($driver === 'pgsql') {
+                $result = DB::select('SELECT pg_database_size(current_database()) AS size');
+
+                return (int) ($result[0]->size ?? 0);
+            }
+        } catch (\Throwable $exception) {
+            info('resolve_db_size_failed: ' . $exception->getMessage());
+        }
+
+        return 0;
+    }
+
+    protected function formatBytes(?int $bytes): string
+    {
+        $bytes = max(0, (int) $bytes);
+        if ($bytes === 0) {
+            return '0 B';
+        }
+
+        $units = ['B', 'KB', 'MB', 'GB', 'TB'];
+        $power = (int) floor(log($bytes, 1024));
+        $power = min($power, count($units) - 1);
+
+        $value = $bytes / (1024 ** $power);
+
+        return number_format($value, $power === 0 ? 0 : 2) . ' ' . $units[$power];
     }
 }
