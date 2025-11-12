@@ -46,6 +46,18 @@ class CustomerAuthController extends Controller
 
         if($phone){
             $user = User::where('phone', $phone)->first();
+
+            // Fallback: Try without the 0 for backward compatibility
+            if(!$user && strpos($phone, '+9720') === 0){
+                $phone_without_zero = str_replace('+9720', '+972', $phone);
+                $user = User::where('phone', $phone_without_zero)->first();
+
+                // If found, update user's phone to normalized format
+                if($user){
+                    $user->phone = $phone;
+                    $user->save();
+                }
+            }
         }
         if($request->email){
             $user = User::where('email', $request->email)->first();
@@ -216,10 +228,29 @@ class CustomerAuthController extends Controller
             }
         }
         if($request->login_type== 'otp'){
+            // Try normalized phone first
             $data = DB::table('phone_verifications')->where([
                 'phone' => $phone,
                 'token' => $request['otp'],
             ])->first();
+
+            // Fallback: Try without the 0 for backward compatibility with old OTP records
+            // This handles OTPs generated before phone normalization was implemented
+            if(!$data && strpos($phone, '+9720') === 0){
+                $phone_without_zero = str_replace('+9720', '+972', $phone);
+                $data = DB::table('phone_verifications')->where([
+                    'phone' => $phone_without_zero,
+                    'token' => $request['otp'],
+                ])->first();
+
+                // If found with old format, update to normalized format
+                if($data){
+                    DB::table('phone_verifications')
+                        ->where('phone', $phone_without_zero)
+                        ->update(['phone' => $phone]);
+                    $phone = $phone_without_zero; // Use old format for subsequent queries
+                }
+            }
 
             if($data){
                 if($user && $user->is_phone_verified == 0){
@@ -1165,6 +1196,18 @@ class CustomerAuthController extends Controller
 
         if($request->login_type == 'otp'){
             $user = User::where(['phone' => $normalized_phone])->first();
+
+            // Fallback: Try without the 0 for backward compatibility
+            if(!$user && $normalized_phone && strpos($normalized_phone, '+9720') === 0){
+                $phone_without_zero = str_replace('+9720', '+972', $normalized_phone);
+                $user = User::where(['phone' => $phone_without_zero])->first();
+
+                // If found, update to normalized format
+                if($user){
+                    $user->phone = $normalized_phone;
+                    $user->save();
+                }
+            }
         }else{
             $user = User::where(['email' => $request->email])->first();
         }
