@@ -88,6 +88,10 @@ class DatabaseSettingController extends Controller
         $columnNames = array_column($structure['columns'], 'name');
 
         $query = DB::table($table);
+        $selectColumns = $this->buildSelectColumns($table, $structure['columns']);
+        if (! empty($selectColumns)) {
+            $query->select($selectColumns);
+        }
         $sortBy = $request->get('sort_by');
         $sortDir = strtolower($request->get('sort_dir', 'desc')) === 'asc' ? 'asc' : 'desc';
 
@@ -101,9 +105,12 @@ class DatabaseSettingController extends Controller
 
         $total = (clone $query)->count();
         $rowsCollection = $query->offset($offset)->limit($perPage)->get();
-        $rows = $rowsCollection->map(function ($row) {
-            return (array) $row;
-        })->values()->all();
+        $rows = $rowsCollection
+            ->map(function ($row) use ($structure) {
+                return $this->normalizeRow($row, $structure['columns']);
+            })
+            ->values()
+            ->all();
 
         return response()->json([
             'table' => $table,
@@ -481,5 +488,101 @@ class DatabaseSettingController extends Controller
         $value = $bytes / (1024 ** $power);
 
         return number_format($value, $power === 0 ? 0 : 2) . ' ' . $units[$power];
+    }
+
+    protected function buildSelectColumns(string $table, array $columns): array
+    {
+        if (empty($columns)) {
+            return [];
+        }
+
+        $grammar = DB::connection()->getQueryGrammar();
+        $selects = [];
+
+        foreach ($columns as $column) {
+            $name = $column['name'] ?? null;
+            if (! $name) {
+                continue;
+            }
+
+            if ($this->isGeometryType($column['type'] ?? '')) {
+                $wrapped = $grammar->wrap($table . '.' . $name);
+                $alias = $grammar->wrap($name);
+                $selects[] = DB::raw("ST_AsText({$wrapped}) as {$alias}");
+            } else {
+                $selects[] = $table . '.' . $name;
+            }
+        }
+
+        return $selects;
+    }
+
+    protected function normalizeRow($row, array $columns): array
+    {
+        $normalized = [];
+
+        foreach ($columns as $column) {
+            $name = $column['name'] ?? null;
+            if (! $name) {
+                continue;
+            }
+
+            $value = is_array($row) ? ($row[$name] ?? null) : ($row->{$name} ?? null);
+            $normalized[$name] = $this->normalizeValue($value);
+        }
+
+        return $normalized;
+    }
+
+    protected function normalizeValue($value)
+    {
+        if (is_resource($value)) {
+            $data = stream_get_contents($value);
+            if ($data === false) {
+                return '[resource]';
+            }
+
+            $length = strlen($data);
+            $previewBytes = substr($data, 0, 32);
+            $preview = bin2hex($previewBytes);
+            if ($length > 32) {
+                $preview .= '…';
+            }
+
+            return sprintf('[binary %d bytes] %s', $length, $preview);
+        }
+
+        if ($value instanceof \DateTimeInterface) {
+            return $value->format(DATE_ATOM);
+        }
+
+        if (is_object($value)) {
+            if (method_exists($value, '__toString')) {
+                return (string) $value;
+            }
+
+            return json_encode($value, JSON_PRETTY_PRINT);
+        }
+
+        if (is_array($value)) {
+            return json_encode($value, JSON_PRETTY_PRINT);
+        }
+
+        return $value;
+    }
+
+    protected function isGeometryType(?string $type): bool
+    {
+        $type = strtolower($type ?? '');
+        if ($type === '') {
+            return false;
+        }
+
+        $geometryTypes = [
+            'geometry', 'point', 'multipoint', 'linestring', 'multilinestring',
+            'polygon', 'multipolygon', 'geomcollection', 'geometrycollection',
+        ];
+
+        return in_array($type, $geometryTypes, true);
     }
 }
