@@ -41,8 +41,11 @@ class CustomerAuthController extends Controller
             return response()->json(['errors' => Helpers::error_processor($validator)], 403);
         }
 
-        if($request->phone){
-            $user = User::where('phone', $request->phone)->first();
+        // Normalize phone number for consistent Israeli format
+        $phone = $request->phone ? Helpers::normalizeIsraeliPhone($request->phone) : null;
+
+        if($phone){
+            $user = User::where('phone', $phone)->first();
         }
         if($request->email){
             $user = User::where('email', $request->email)->first();
@@ -214,7 +217,7 @@ class CustomerAuthController extends Controller
         }
         if($request->login_type== 'otp'){
             $data = DB::table('phone_verifications')->where([
-                'phone' => $request['phone'],
+                'phone' => $phone,
                 'token' => $request['otp'],
             ])->first();
 
@@ -228,7 +231,7 @@ class CustomerAuthController extends Controller
                     return response()->json(['token' => $temporaryToken, 'is_phone_verified'=>1, 'is_email_verified'=>1, 'is_personal_info' => 1, 'is_exist_user' =>$is_exist_user, 'login_type' => 'otp', 'email' => $user_email], 200);
                 }elseif ($user && $user->is_phone_verified == 1){
                     DB::table('phone_verifications')->where([
-                        'phone' => $request['phone'],
+                        'phone' => $phone,
                         'token' => $request['otp'],
                     ])->delete();
                     $is_personal_info = 0;
@@ -249,8 +252,8 @@ class CustomerAuthController extends Controller
                 }
                 else{
                     $user = new User();
-                    $user->phone = $request['phone'];
-                    $user->password = bcrypt($request['phone']);
+                    $user->phone = $phone;
+                    $user->password = bcrypt($phone);
                     $user->is_phone_verified = 1;
                     $user->login_medium = 'otp';
                     $user->save();
@@ -1015,10 +1018,13 @@ class CustomerAuthController extends Controller
                 $otp = '123456';
             }
 
+            // Normalize phone number for Israeli format (ensure leading 0 after +972)
+            $normalized_phone = Helpers::normalizeIsraeliPhone($request_data['phone']);
+
             // Wrap in transaction to ensure OTP is committed before SMS is sent
             // This fixes race condition where first OTP fails but second works
-            DB::transaction(function() use ($request_data, $otp) {
-                DB::table('phone_verifications')->updateOrInsert(['phone' => $request_data['phone']],
+            DB::transaction(function() use ($normalized_phone, $otp) {
+                DB::table('phone_verifications')->updateOrInsert(['phone' => $normalized_phone],
                     [
                         'token' => $otp,
                         'otp_hit_count' => 0,
@@ -1154,8 +1160,11 @@ class CustomerAuthController extends Controller
         $firstName = $nameParts[0];
         $lastName = $nameParts[1] ?? '';
 
+        // Normalize phone number for consistent Israeli format
+        $normalized_phone = $request->phone ? Helpers::normalizeIsraeliPhone($request->phone) : null;
+
         if($request->login_type == 'otp'){
-            $user = User::where(['phone' => $request->phone])->first();
+            $user = User::where(['phone' => $normalized_phone])->first();
         }else{
             $user = User::where(['email' => $request->email])->first();
         }
@@ -1167,7 +1176,7 @@ class CustomerAuthController extends Controller
         $user->f_name = $firstName;
         $user->l_name = $lastName;
         $user->email = $request->email??$user->email;
-        $user->phone = $request->phone??$user->phone;
+        $user->phone = $normalized_phone??$user->phone;
         $user->ref_by = $ref_by;
         $user->save();
         $token = null;

@@ -90,6 +90,34 @@ class Helpers
         return $errors;
     }
 
+    /**
+     * Normalize phone number format for Israeli numbers
+     * Ensures consistent format with leading 0 after country code
+     * Example: +972522988206 -> +9720522988206
+     */
+    public static function normalizeIsraeliPhone($phone)
+    {
+        if (empty($phone)) {
+            return $phone;
+        }
+
+        // Remove any spaces or special characters except +
+        $phone = preg_replace('/[^\d+]/', '', $phone);
+
+        // Check if it's an Israeli number (+972)
+        if (strpos($phone, '+972') === 0) {
+            // Get the part after +972
+            $number = substr($phone, 4);
+
+            // If the number doesn't start with 0, add it
+            if (!empty($number) && $number[0] !== '0') {
+                $phone = '+9720' . $number;
+            }
+        }
+
+        return $phone;
+    }
+
     public static function schedule_order()
     {
         return (bool)Helpers::getSettingsDataFromConfig(settings: 'schedule_order')?->value;
