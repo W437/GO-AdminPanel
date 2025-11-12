@@ -462,6 +462,10 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
 
             //db clean
             Route::get('db-index', 'DatabaseSettingController@db_index')->name('db-index');
+            Route::get('db-manager', 'DatabaseSettingController@db_manager')->name('db-manager');
+            Route::get('db-manager/tables', 'DatabaseSettingController@tables')->name('db-manager.tables');
+            Route::get('db-manager/table/{table}', 'DatabaseSettingController@table')->name('db-manager.table');
+            Route::put('db-manager/table/{table}/rows/{primary}', 'DatabaseSettingController@updateRow')->name('db-manager.rows.update');
             Route::post('db-clean', 'DatabaseSettingController@clean_db')->name('clean-db');
 
             Route::get('site_direction', 'BusinessSettingsController@site_direction')->name('site_direction');

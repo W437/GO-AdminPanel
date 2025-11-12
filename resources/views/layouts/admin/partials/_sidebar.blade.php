@@ -1793,6 +1793,18 @@ $order_sch = Cache::rememberForever('order_scheduled_stats', function () {
                     </a>
                 </li>
 
+                <li
+                    class="navbar-vertical-aside-has-menu {{ Request::is('admin/business-settings/db-manager') ? 'active' : '' }}">
+                    <a class="js-navbar-vertical-aside-menu-link nav-link"
+                        href="{{ route('admin.business-settings.db-manager') }}"
+                        title="{{ translate('messages.database_manager') }}">
+                        <i class="tio-database nav-icon"></i>
+                        <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
+                            {{ translate('messages.database_manager') }}
+                        </span>
+                    </a>
+                </li>
+
                 <!-- End web & adpp Settings -->
 
                 <li class="nav-item">
