@@ -12,7 +12,7 @@
         <div class="page-header">
             <h1 class="page-header-title mr-3">
                 <span class="page-header-icon">
-                    <img src="{{dynamicAsset('/public/assets/admin/img/money.png')}}" class="w--26" alt="">
+                    <i class="tio-money"></i>
                 </span>
                 <span>
                      {{translate("messages.bonus")}}

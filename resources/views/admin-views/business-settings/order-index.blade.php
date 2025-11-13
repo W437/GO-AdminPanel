@@ -52,9 +52,7 @@
                                                     </span>
                                                     <span class="form-label-secondary text-danger d-flex"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        data-original-title="{{ translate('When_a_deliveryman_arrives_for_delivery,_Customers_will_get_a_verification_code_on_the_order_details_section_in_the_Customer_App_and_needs_to_provide_the_code_to_the_delivery_man_to_verify_the_order_delivery') }}"><img
-                                                            src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                            alt="{{ translate('messages.order_varification_toggle') }}">
+                                                        data-original-title="{{ translate('When_a_deliveryman_arrives_for_delivery,_Customers_will_get_a_verification_code_on_the_order_details_section_in_the_Customer_App_and_needs_to_provide_the_code_to_the_delivery_man_to_verify_the_order_delivery') }}"><i class="tio-info-outined"></i>
                                                     </span>
                                                 </span>
                                                 <input type="checkbox" data-id="odc1" data-type="toggle"
@@ -84,9 +82,7 @@
                                                     </span>
                                                     <span class="form-label-secondary text-danger d-flex"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        data-original-title="{{ translate('If_enabled,_customers_can_choose_Home_Delivery_option_from_the_customer_app_and_website') }}"><img
-                                                            src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                            alt="{{ translate('Home Delivery') }}"></span>
+                                                        data-original-title="{{ translate('If_enabled,_customers_can_choose_Home_Delivery_option_from_the_customer_app_and_website') }}"><i class="tio-info-outined"></i></span>
                                                 </span>
                                                 <input type="checkbox" data-id="home_delivery" data-type="toggle"
                                                     data-image-on="{{ dynamicAsset('/public/assets/admin/img/modal/home-delivery-on.png') }}"
@@ -116,9 +112,7 @@
                                                     </span>
                                                     <span class="form-label-secondary text-danger d-flex"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        data-original-title="{{ translate('If_enabled,_customers_can_use_the_Takeaway_feature_during_checkout_from_the_Customer_App_or_Website') }}"><img
-                                                            src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                            alt="{{ translate('Home Delivery') }}"></span>
+                                                        data-original-title="{{ translate('If_enabled,_customers_can_use_the_Takeaway_feature_during_checkout_from_the_Customer_App_or_Website') }}"><i class="tio-info-outined"></i></span>
                                                 </span>
                                                 <input type="checkbox" name="take_away" data-id="take_away"
                                                     data-type="toggle"
@@ -147,9 +141,7 @@
                                                     </span>
                                                     <span class="form-label-secondary text-danger d-flex"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        data-original-title="{{ translate('If_enabled,_customers_can_use_the_Dine-in_feature_during_checkout_from_the_Customer_App_or_Website') }}"><img
-                                                            src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                            alt="{{ translate('Dine In') }}"></span>
+                                                        data-original-title="{{ translate('If_enabled,_customers_can_use_the_Dine-in_feature_during_checkout_from_the_Customer_App_or_Website') }}"><i class="tio-info-outined"></i></span>
                                                 </span>
                                                 <input type="checkbox" name="dine_in_order_option"
                                                     data-id="dine_in_order_option" data-type="toggle"
@@ -179,9 +171,7 @@
                                                     </span>
                                                     <span class="form-label-secondary text-danger d-flex"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        data-original-title="{{ translate('With_this_feature,_customers_can_order_instantly.') }}"><img
-                                                            src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                            alt="{{ translate('messages.customer_varification_toggle') }}">
+                                                        data-original-title="{{ translate('With_this_feature,_customers_can_order_instantly.') }}"><i class="tio-info-outined"></i>
                                                     </span>
                                                 </span>
                                                 <input type="checkbox" data-id="instant_order" data-type="toggle"
@@ -212,9 +202,7 @@
                                                     </span>
                                                     <span class="form-label-secondary text-danger d-flex"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        data-original-title="{{ translate('If_enabled,_customers_can_re-order_foods_from_their_previous_orders.') }}"><img
-                                                            src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                            alt="{{ translate('messages.repeat_order_option') }}"> </span>
+                                                        data-original-title="{{ translate('If_enabled,_customers_can_re-order_foods_from_their_previous_orders.') }}"><i class="tio-info-outined"></i> </span>
                                                 </span>
                                                 <input type="checkbox" id="repeat_order_option"
                                                     name="repeat_order_option" value="1"
@@ -245,9 +233,7 @@
                                                     </span>
                                                     <span class="form-label-secondary text-danger d-flex"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        data-original-title="{{ translate('If_enabled,_costumes_can_place_orders_on_a_subscription-based.') }}"><img
-                                                            src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                            alt="{{ translate('messages.subscription_order') }}"> </span>
+                                                        data-original-title="{{ translate('If_enabled,_costumes_can_place_orders_on_a_subscription-based.') }}"><i class="tio-info-outined"></i> </span>
                                                 </span>
                                                 <input type="checkbox" id="subscription_order" name="order_subscription"
                                                     value="1" data-id="subscription_order" data-type="toggle"
@@ -276,9 +262,7 @@
                                                     </span>
                                                     <span class="form-label-secondary text-danger d-flex"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        data-original-title="{{ translate('With_this_feature,_customers_can_choose_their_preferred_delivery_time_and_calendar_selection.') }}"><img
-                                                            src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                            alt="{{ translate('messages.customer_varification_toggle') }}">
+                                                        data-original-title="{{ translate('With_this_feature,_customers_can_choose_their_preferred_delivery_time_and_calendar_selection.') }}"><i class="tio-info-outined"></i>
                                                     </span>
                                                 </span>
                                                 <input type="checkbox" data-id="schedule_order" data-type="toggle"
@@ -308,9 +292,7 @@
                                                     </span>
                                                     <span class="form-label-secondary text-danger d-flex"
                                                         data-toggle="tooltip" data-placement="right"
-                                                        data-original-title="{{ translate('With_this_feature,_customers_can_not_select_schedule_date_over_the_given_days.') }}"><img
-                                                            src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                            alt="{{ translate('messages.customer_varification_toggle') }}">
+                                                        data-original-title="{{ translate('With_this_feature,_customers_can_not_select_schedule_date_over_the_given_days.') }}"><i class="tio-info-outined"></i>
                                                     </span>
                                                 </span>
                                                 <input type="checkbox" data-id="customer_date_order_sratus"
@@ -434,9 +416,7 @@
                                                     </span>
                                                     <span class="form-label-secondary text-danger" data-toggle="tooltip"
                                                         data-placement="right"
-                                                        data-original-title="{{ translate('By_activating_this_feature,_customers_can_choose_their_suitable_delivery_slot_according_to_a_30-minute_or_1-hour_interval_set_by_the_Admin') }}"><img
-                                                            src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                            alt="{{ translate('Time_Interval_for_Scheduled_Delivery') }}"></span>
+                                                        data-original-title="{{ translate('By_activating_this_feature,_customers_can_choose_their_suitable_delivery_slot_according_to_a_30-minute_or_1-hour_interval_set_by_the_Admin') }}"><i class="tio-info-outined"></i></span>
                                                 </span>
                                             </label>
 
@@ -474,9 +454,7 @@
                                                     </span>
                                                     <span class="form-label-secondary text-danger" data-toggle="tooltip"
                                                         data-placement="right"
-                                                        data-original-title="{{ translate('customers_can_not_select_schedule_date_over_this_given_days') }}"><img
-                                                            src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                            alt="{{ translate('customers_can_not_select_schedule_date_over_this_given_days') }}"></span>
+                                                        data-original-title="{{ translate('customers_can_not_select_schedule_date_over_this_given_days') }}"><i class="tio-info-outined"></i></span>
                                                 </span>
                                             </label>
                                             <div class="d-flex">
@@ -560,9 +538,7 @@
                                         </span>
                                         <span class="form-label-secondary text-danger" data-toggle="tooltip"
                                             data-placement="right"
-                                            data-original-title="{{ translate('Choose_different_Customers_for_different_Order_Cancelation_Reasons,_such_as_Customer,_Restaurant,_Deliveryman,_and_Admin') }}"><img
-                                                src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                alt="{{ translate('Choose_different_Customers_for_different_Order_Cancelation_Reasons,_such_as_Customer,_Restaurant,_Deliveryman,_and_Admin') }}"></span>
+                                            data-original-title="{{ translate('Choose_different_Customers_for_different_Order_Cancelation_Reasons,_such_as_Customer,_Restaurant,_Deliveryman,_and_Admin') }}"><i class="tio-info-outined"></i></span>
                                     </span>
 
                                 </label>

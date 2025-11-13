@@ -184,7 +184,7 @@
                         <!-- Form Group -->
                             <div class="row js-form-message form-group">
                                 <label for="signupSrPassword" class="col-sm-3 col-form-label input-label">{{translate('messages.new_password')}}
-                                    <span class="input-label-secondary ps-1" data-toggle="tooltip" title="{{ translate('messages.Must_contain_at_least_one_number_and_one_uppercase_and_lowercase_letter_and_symbol,_and_at_least_8_or_more_characters') }}"><img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.Must_contain_at_least_one_number_and_one_uppercase_and_lowercase_letter_and_symbol,_and_at_least_8_or_more_characters') }}"></span>
+                                    <span class="input-label-secondary ps-1" data-toggle="tooltip" title="{{ translate('messages.Must_contain_at_least_one_number_and_one_uppercase_and_lowercase_letter_and_symbol,_and_at_least_8_or_more_characters') }}"><i class="tio-info-outined"></i></span>
                                 </label>
 
                                 <div class="col-sm-9">

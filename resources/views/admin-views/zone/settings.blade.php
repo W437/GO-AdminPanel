@@ -35,7 +35,7 @@
                         <i class="tio-settings-outlined"></i>
                     </span>
                     <span>{{translate('Delivery_Charges_Settings')}}</span> &nbsp;
-                    <img src="{{dynamicAsset('/public/assets/admin/img/info-circle.svg')}}" data-toggle="tooltip" title="{{ translate('messages.Set_zone_wise_delivery_charges_for_this_business_zone')}}" alt="">
+                    <i class="tio-info-outined"></i>
                 </h5>
             </div>
             <div class="card-body zone-setup">
@@ -47,9 +47,7 @@
                                 ({{ \App\CentralLogics\Helpers::currency_symbol() }})&nbsp;
                                 <span data-toggle="tooltip" data-placement="right"
                                     data-original-title="{{ translate('messages.Set_the_minimum_delivery_for_each_order_in_this_business_zone.')}}"
-                                    class="input-label-secondary text-danger"><img
-                                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                        alt="{{ translate('messages.maximum_shipping_charge') }}"></span>
+                                    class="input-label-secondary text-danger"><i class="tio-info-outined"></i></span>
                             </label>
                             <input id="min_delivery_charge" name="minimum_delivery_charge" type="number"
                                 min=".001" step=".001" class="form-control h--45px" required
@@ -64,9 +62,7 @@
                                 ({{ \App\CentralLogics\Helpers::currency_symbol() }})&nbsp;
                                 <span data-toggle="tooltip" data-placement="right"
                                     data-original-title="{{ translate('messages.Set_the_maximum_limit_for_the_total_delivery_charge._If_the_delivery_charge_crosses_the_limit,_it_will_not_add_any_extra_charge._Leave_it_empty_if_you_don’t_want_to_limit_the_delivery_charge.')}}"
-                                    class="input-label-secondary text-danger"><img
-                                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                        alt="{{ translate('messages.maximum_shipping_charge') }}"></span>
+                                    class="input-label-secondary text-danger"><i class="tio-info-outined"></i></span>
                             </label>
                             <input id="maximum_shipping_charge" name="maximum_shipping_charge" type="number"
                                 class="form-control h--45px"
@@ -81,9 +77,7 @@
                                 ({{ \App\CentralLogics\Helpers::currency_symbol() }})&nbsp;
                                 <span data-toggle="tooltip" data-placement="right"
                                 data-original-title="{{ translate('messages.Set_a_delivery_charge_for_each_kilometer_for_this_business_zone.')}}"
-                                class="input-label-secondary "><img
-                                    src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                    alt="{{ translate('messages.maximum_shipping_charge') }}"></span>
+                                class="input-label-secondary "><i class="tio-info-outined"></i></span>
                             </label>
                             <input id="delivery_charge_per_km" name="per_km_delivery_charge" type="number"
                                 min=".001" step=".001" class="form-control h--45px" required
@@ -98,9 +92,7 @@
                                 ({{ \App\CentralLogics\Helpers::currency_symbol() }})&nbsp;
                                 <span data-toggle="tooltip" data-placement="right"
                                     data-original-title="{{ translate('messages.Add_the_maximum_Cash_On_Delivery_order_limit_for_this_business_zone._Leave_it_empty_if_you_don’t_want_to_limit_the_COD_order_amount') }}"
-                                    class="input-label-secondary"><img
-                                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                        alt="{{ translate('messages.max_cod_order_amount_status') }}"></span>
+                                    class="input-label-secondary"><i class="tio-info-outined"></i></span>
                             </label>
                             <input id="max_cod_order_amount" name="max_cod_order_amount" min="0"
                                 step=".001" type="number" class="form-control h--45px"
@@ -114,7 +106,7 @@
                                 <label class="input-label text-capitalize d-inline-flex alig-items-center"
                                     for="increased_delivery_fee">
                                     <span class="line--limit-1">{{ translate('messages.increase_delivery_charge') }} (%)
-                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('messages.Set_an_additional_delivery_charge_in_percentage_for_any_emergency_situations._This_amount_will_be_added_to_the_delivery_charge.')}}" class="input-label-secondary"><img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.dm_maximum_order_hint') }}"></span>
+                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('messages.Set_an_additional_delivery_charge_in_percentage_for_any_emergency_situations._This_amount_will_be_added_to_the_delivery_charge.')}}" class="input-label-secondary"><i class="tio-info-outined"></i></span>
                                 </label>
                                 <label class="toggle-switch toggle-switch-sm">
                                     <input type="checkbox" class="toggle-switch-input" name="increased_delivery_fee_status"
@@ -137,7 +129,7 @@
                                 <label class="input-label text-capitalize d-inline-flex alig-items-center"
                                     for="increased_delivery_fee">
                                     <span class="line--limit-1">{{ translate('messages.increase_delivery_charge_message') }}
-                                        <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('messages.Customers_will_see_the_delivery_charge_increased_reason_on_the_website_and_customer_app.')}}" class="input-label-secondary"><img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.dm_maximum_order_hint') }}"></span>
+                                        <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('messages.Customers_will_see_the_delivery_charge_increased_reason_on_the_website_and_customer_app.')}}" class="input-label-secondary"><i class="tio-info-outined"></i></span>
 
                                 </label>
                             </div>
@@ -169,7 +161,7 @@
                         <i class="tio-settings-outlined"></i>
                     </span>
                     <span>{{translate('Incentive_Settings')}}</span> &nbsp;
-                    <img src="{{dynamicAsset('/public/assets/admin/img/info-circle.svg')}}" data-toggle="tooltip" title="{{ translate('messages.Set_the_daily_earning_target_and_the_incentive_upon_completing_the_target.') }}" alt="">
+                    <i class="tio-info-outined"></i>
                 </h5>
             </div>
 
@@ -186,9 +178,7 @@
 
                                     <span data-toggle="tooltip" data-placement="right"
                                     data-original-title="{{ translate('messages.Set_the_daily_earning_target_for_deliverymen_for_this_business_zone.')}}"
-                                    class="input-label-secondary text-danger"><img
-                                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                        alt="{{ translate('messages.maximum_shipping_charge') }}"></span>
+                                    class="input-label-secondary text-danger"><i class="tio-info-outined"></i></span>
 
                                 </label>
                                 @endif
@@ -200,9 +190,7 @@
 
                                     <span data-toggle="tooltip" data-placement="right"
                                     data-original-title="{{ translate('messages.Set_the_incentive_amount_for_deliverymen_on_completing_the_daily_earning_target_for_this_business_zone.')}}"
-                                    class="input-label-secondary text-danger"><img
-                                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                        alt="{{ translate('messages.maximum_shipping_charge') }}"></span>
+                                    class="input-label-secondary text-danger"><i class="tio-info-outined"></i></span>
                                 </label>
                                 @endif
                                 <input  readonly  type="number" value="{{ \App\CentralLogics\Helpers::format_currency($incentive->incentive) }}" placeholder="{{ \App\CentralLogics\Helpers::format_currency($incentive->incentive) }}" class="form-control">

@@ -98,9 +98,7 @@
                                     for="refund_to_wallet">
                                     <span class="pr-2">{{ translate('messages.refund_to_wallet') }}<span
                                             class="input-label-secondary"
-                                            title="{{ translate('messages.When_a_order_will_refund,_order_amount_will_add_to_customer_wallet') }}"><img
-                                                src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                alt="{{ translate('messages.show_hide_food_menu') }}"></span> :</span>
+                                            title="{{ translate('messages.When_a_order_will_refund,_order_amount_will_add_to_customer_wallet') }}"><i class="tio-info-outined"></i></span> :</span>
                                     <input type="checkbox" class="toggle-switch-input" name="refund_to_wallet"
                                         id="refund_to_wallet" value="1"
                                         {{ isset($data['wallet_add_refund']) && $data['wallet_add_refund'] == 1 ? 'checked' : '' }}>
@@ -139,9 +137,7 @@
                                 <label class="input-label"
                                     for="intem_purchase_point">{{ translate('messages.item_purchase_point') }}
                                     <small class="text-danger"><span class="input-label-secondary"
-                                            data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('messages.item_purchase_point_hint') }}"><img
-                                                src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                alt="{{ translate('messages.item_purchase_point_hint') }}"></span></small>
+                                            data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('messages.item_purchase_point_hint') }}"><i class="tio-info-outined"></i></span></small>
                                 </label>
                                 <input type="number" class="form-control" name="item_purchase_point" step=".01"
                                     value="{{ $data['loyalty_point_item_purchase_point'] ?? '0' }}">

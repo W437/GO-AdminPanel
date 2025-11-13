@@ -32,9 +32,7 @@
                                         href="#"
                                         id="default-link">{{translate('messages.default')}}  <span class="form-label-secondary text-danger mt-2"
                                         data-toggle="tooltip" data-placement="right"
-                                        data-original-title="{{ translate('Choose_your_preferred_language_&_set_your_zone_name.') }}"><img
-                                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                        alt="{{ translate('messages.veg_non_veg') }}"></span></a>
+                                        data-original-title="{{ translate('Choose_your_preferred_language_&_set_your_zone_name.') }}"><i class="tio-info-outined"></i></span></a>
                                     </li>
                                     @if($language)
                                         @foreach (json_decode($language) as $lang)

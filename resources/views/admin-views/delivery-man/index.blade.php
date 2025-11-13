@@ -98,7 +98,7 @@
 
                                 <div class="image-box">
                                     <label for="image-input" class="d-flex flex-column align-items-center justify-content-center h-100 cursor-pointer gap-2">
-                                    <img width="30" class="upload-icon" src="{{dynamicAsset('public/assets/admin/img/upload-icon.png')}}" alt="Upload Icon">
+                                    <i class="tio-cloud-upload upload-icon" style="font-size: 30px;"></i>
                                     <span class="upload-text">{{ translate('Upload Image')}}</span>
                                     <img src="#" alt="Preview Image" class="preview-image">
                                     </label>
@@ -183,15 +183,13 @@
                                             </span>
 
                                             <div class="img_area_with_preview z-index-2">
-                                                <img id="additional_Image_1" class="bg-white d-none"
-                                                     src="{{ dynamicAsset('public/assets/admin/img/upload-icon.png-dummy') }}" alt="">
+                                                <i class="tio-cloud-upload" style="font-size: 30px;"></i>
                                             </div>
                                             <div
                                                 class="position-absolute h-100 top-0 w-100 d-flex align-content-center justify-content-center">
                                                 <div
                                                     class="d-flex flex-column justify-content-center align-items-center">
-                                                    <img alt="" width="30"
-                                                         src="{{ dynamicAsset('public/assets/admin/img/upload-icon.png') }}">
+                                                    <i class="tio-cloud-upload" style="font-size: 30px;"></i>
                                                     <div class="text-muted mt-3">{{ translate('Upload_Picture') }}</div>
                                                     <div class="fs-10 text-muted mt-1">{{translate('Upload jpg, png, jpeg, gif maximum 2 MB')}}</div>
                                                 </div>
@@ -273,7 +271,7 @@
                                                         <p class="mb-2 form-label">{{translate($item['input_data'])  }}</p>
                                                         <div class="image-box banner" >
                                                             <label class="d-flex flex-column align-items-center justify-content-center h-100 cursor-pointer gap-2">
-                                                                <img  width='30' id="additional_data_Image_1" class="upload-icon " src="{{dynamicAsset('public/assets/admin/img/upload-icon.png')}}" alt="Upload Icon">
+                                                                <i class="tio-cloud-upload upload-icon" id="additional_data_Image_1" style="font-size: 30px;"></i>
                                                                 <span class="upload-text text-center px-2" data-text="{{ translate('Select a file')}}">{{ translate('Select a file')}}</span>
                                                                 <span class="upload-text2 text-center px-2" data-text="{{ translate('JPG, PNG or PDF, file size no more than 2MB')}}">{{ translate('JPG, PNG or PDF, file size no more than 2MB')}}</span>
                                                                 <img src="#" alt="Preview Image" class="preview-image">
@@ -311,15 +309,13 @@
                                                             </span>
 
                                                             <div class="img_area_with_preview z-index-2">
-                                                                <img id="additional_data_Image_1" class="bg-white d-none"
-                                                                     src="{{ dynamicAsset('public/assets/admin/img/upload-icon.png-dummy') }}" alt="">
+                                                                <i class="tio-cloud-upload" style="font-size: 30px;"></i>
                                                             </div>
                                                             <div
                                                                 class="position-absolute h-100 top-0 w-100 d-flex align-content-center justify-content-center">
                                                                 <div
                                                                     class="d-flex flex-column justify-content-center align-items-center">
-                                                                    <img alt="" width="30"
-                                                                         src="{{ dynamicAsset('public/assets/admin/img/upload-icon.png') }}">
+                                                                    <i class="tio-cloud-upload" style="font-size: 30px;"></i>
                                                                     <div class="text-muted mt-3">{{ translate('Upload_Picture') }}</div>
                                                                     <div class="fs-10 text-muted mt-1">{{translate('Upload jpg, png, jpeg, gif maximum 2 MB')}}</div>
                                                                 </div>
@@ -368,7 +364,7 @@
                                 <div class="js-form-message form-group">
                                     <label class="input-label"
                                         for="signupSrPassword">{{ translate('messages.password') }}
-                                        <span class="input-label-secondary ps-1" data-toggle="tooltip" title="{{ translate('messages.Must_contain_at_least_one_number_and_one_uppercase_and_lowercase_letter_and_symbol,_and_at_least_8_or_more_characters') }}"><img src="{{dynamicAsset('public/assets/admin/img/info-circle.svg')}}" alt="{{ translate('messages.Must_contain_at_least_one_number_and_one_uppercase_and_lowercase_letter_and_symbol,_and_at_least_8_or_more_characters') }}"></span>
+                                        <span class="input-label-secondary ps-1" data-toggle="tooltip" title="{{ translate('messages.Must_contain_at_least_one_number_and_one_uppercase_and_lowercase_letter_and_symbol,_and_at_least_8_or_more_characters') }}"><i class="tio-info-outined"></i></span>
 
                                     </label>
 
@@ -498,8 +494,7 @@
                                     </div>
                                     <div class="position-absolute h-100 top-0 w-100 d-flex align-content-center justify-content-center">
                                         <div class="d-flex flex-column justify-content-center align-items-center">
-                                            <img alt="" width="30"
-                                                         src="{{ dynamicAsset('public/assets/admin/img/upload-icon.png') }}">
+                                            <i class="tio-cloud-upload" style="font-size: 30px;"></i>
                                             <div class="text-muted mt-3">{{ translate('Upload_Picture') }}</div>
                                             <div class="fs-10 text-muted mt-1">{{translate('Upload jpg, png, jpeg, gif maximum 2 MB')}}</div>
                                         </div>
@@ -572,15 +567,13 @@
                             </span>
 
                             <div class="img_area_with_preview z-index-2">
-                                <img id="additional_data_Image_${datasetIndex}" class="bg-white d-none"
-                                        src="{{ dynamicAsset('public/assets/admin/img/upload-icon.png-dummy') }}" alt="">
+                                <i class="tio-cloud-upload" style="font-size: 30px;"></i>
                             </div>
                             <div
                                 class="position-absolute h-100 top-0 w-100 d-flex align-content-center justify-content-center">
                                 <div
                                     class="d-flex flex-column justify-content-center align-items-center">
-                                    <img alt="" width="30"
-                                            src="{{ dynamicAsset('public/assets/admin/img/upload-icon.png') }}">
+                                    <i class="tio-cloud-upload" style="font-size: 30px;"></i>
                                     <div class="text-muted mt-3">{{ translate('Upload_Picture') }}</div>
                                     <div class="fs-10 text-muted mt-1">{{translate('Upload jpg, png, jpeg, gif maximum 2 MB')}}</div>
                                 </div>

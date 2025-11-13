@@ -8,7 +8,7 @@
         <div class="page-header">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{dynamicAsset('public/assets/admin/img/Create_Cashback_Offer.png')}}" class="w--26" alt="">
+                    <i class="tio-money"></i>
                 </span>
                 <span>
                     {{translate('messages.Edit_Cashback_Offer')}}

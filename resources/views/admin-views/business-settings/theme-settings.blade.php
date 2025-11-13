@@ -18,9 +18,7 @@ $theme_value = \App\Models\BusinessSetting::where('key', 'theme')->first()->valu
                     {{ translate('messages.change_theme_for_user_app') }} <span
                     class="input-label-secondary" data-toggle="tooltip"
                     data-placement="right"
-                    data-original-title="{{ translate('messages.User_will_see_the_view_of_the_user_app_according_to_the_theme_selected_from_here') }}"><img
-                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                        alt="{{ translate('messages.User_will_see_the_view_of_the_user_app_according_to_the_theme_selected_from_here') }}"></span>
+                    data-original-title="{{ translate('messages.User_will_see_the_view_of_the_user_app_according_to_the_theme_selected_from_here') }}"><i class="tio-info-outined"></i></span>
                 </span>
             </h1>
         </div>

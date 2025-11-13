@@ -71,7 +71,7 @@
                                             <span>
                                                 {{translate('Payment_Note')}}
                                                 <span class="form-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('messages.This_Section_will_be_field_by_the_customer.') }}" alt="">
-                                                    <img src="{{dynamicAsset('public/assets/admin/img/info-circle.svg')}}" alt="">
+                                                    <i class="tio-info-outined"></i>
                                                 </span>
                                             </span>
 

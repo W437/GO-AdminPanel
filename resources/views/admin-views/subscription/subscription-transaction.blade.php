@@ -18,7 +18,7 @@ active
             <div class="row align-items-center py-2">
                 <div class="col-sm">
                     <div class="d-flex align-items-start">
-                        <img src="{{dynamicAsset('/public/assets/admin/img/store.png')}}" width="24" alt="img">
+                        <i class="tio-shop" style="font-size: 40px;"></i>
                         <div class="w-0 flex-grow pl-2">
                             <h1 class="page-header-title">{{translate('Subscription Package')}}</h1>
                         </div>

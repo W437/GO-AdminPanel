@@ -12,7 +12,7 @@
         <div class="page-header">
             <h1 class="page-header-title text-capitalize">
                 <div class="card-header-icon d-inline-flex mr-2 img">
-                    <img src="{{dynamicAsset('/public/assets/admin/img/money.png')}}" alt="public">
+                    <i class="tio-money"></i>
                 </div>
                 <span>
                     {{translate('messages.add_fund')}}

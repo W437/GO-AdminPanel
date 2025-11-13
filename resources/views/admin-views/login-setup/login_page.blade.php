@@ -210,7 +210,7 @@
                 </div>
                 <div class="modal-body pb-0"><b></b>
                     <div class="text-center mb-20">
-                        <img src="{{dynamicAsset('public/assets/admin/img/sms.png')}}" alt="" class="mb-20">
+                        <i class="tio-message"></i>
                         <h5 class="modal-title">{{translate('Set Up SMS Configuration First')}}</h5>
                     </div>
                     <p>{{ translate('It looks like your SMS configuration is not set up yet. To enable the OTP system, please set up the SMS configuration first.') }}</p>
@@ -341,7 +341,7 @@
                 </div>
                 <div class="modal-body pb-0"><b></b>
                     <div class="text-center mb-20">
-                        <img src="{{dynamicAsset('public/assets/admin/img/sms.png')}}" alt="" class="mb-20">
+                        <i class="tio-message"></i>
                         <h5 class="modal-title">{{translate('Set Up SMS Configuration First')}}</h5>
                     </div>
                     <p>{{ translate('It looks like your SMS configuration is not set up yet. To enable the phone verification, please set up the SMS configuration first.') }}</p>
@@ -363,7 +363,7 @@
                 </div>
                 <div class="modal-body pb-0"><b></b>
                     <div class="text-center mb-20">
-                        <img src="{{dynamicAsset('public/assets/admin/img/sms.png')}}" alt="" class="mb-20">
+                        <i class="tio-message"></i>
                         <h5 class="modal-title">{{translate('Set Up Email Configuration First')}}</h5>
                     </div>
                     <p>{{ translate('It looks like your Email configuration is not set up yet. To enable the email verification, please set up the SMS configuration first.') }}</p>

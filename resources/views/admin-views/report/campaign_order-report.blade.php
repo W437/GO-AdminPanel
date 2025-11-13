@@ -12,7 +12,7 @@
         <div class="page-header">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{dynamicAsset('/public/assets/admin/img/report/report.png')}}" class="w--22" alt="">
+                    <i class="tio-chart-bar-4"></i>
                 </span>
                 <span>
                     {{ translate('messages.Camapign_Order_Report') }}
@@ -114,8 +114,8 @@
                         <div class="col-sm-6 col-md-4">
                             <a class="__card-2 __bg-1" href="#">
                             <h4 class="title">{{$total_progress_count}}</h4>
-                            <span class="subtitle">{{translate('messages.in_progress_orders')}} <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('Including accepted and processing orders')}}"><img src="{{dynamicAsset('public/assets/admin/img/info-circle.svg')}}" alt="{{translate('messages.in_progress_orders')}}"></span></span>
-                            <img src="{{dynamicAsset('/public/assets/admin/img/report/new/progress-report.png')}}" alt="report/new" class="card-icon">
+                            <span class="subtitle">{{translate('messages.in_progress_orders')}} <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('Including accepted and processing orders')}}"><i class="tio-info-outined"></i></span></span>
+                            <i class="tio-chart-bar-4"></i>
                             </a>
                         </div>
                         <div class="col-sm-6 col-md-4">

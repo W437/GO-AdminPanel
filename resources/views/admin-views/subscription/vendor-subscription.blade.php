@@ -14,7 +14,7 @@ active
             <div class="d-flex flex-wrap justify-content-between align-items-center py-2">
                 <div class="flex-grow-1">
                     <div class="d-flex align-items-start">
-                        <img src="{{dynamicAsset('/public/assets/admin/img/store.png')}}" width="24" alt="img">
+                        <i class="tio-shop" style="font-size: 40px;"></i>
                         <div class="w-0 flex-grow pl-2">
                             <h1 class="page-header-title">{{ $restaurant->name }} {{translate('Subscription')}} &nbsp; &nbsp;
                                 @if($restaurant?->status == 0 &&  $restaurant?->vendor?->status == 0)
@@ -184,7 +184,7 @@ active
             <div class="card-header border-0 align-items-center">
                 <h4 class="card-title align-items-center gap-2">
                     <span class="card-header-icon">
-                        <img width="25" src="{{dynamicAsset('public/assets/admin/img/subscription-plan/subscribed-user.png')}}" alt="">
+                        <i class="tio-user" style="font-size: 35px;"></i>
                     </span>
                     <span>{{ translate('Package Overview') }}</span>
                 </h4>
@@ -205,7 +205,7 @@ active
 
                         <div>
                             <div class="d-flex align-items-center gap-2">
-                                <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check.png')}}" alt="">
+                                <i class="tio-checkmark-circle"></i>
                                 @if ( $restaurant?->restaurant_sub_update_application?->max_order == 'unlimited' )
                                 <span class="form-check-label text-dark">{{ translate('messages.unlimited_orders') }}</span>
                                 @else
@@ -219,9 +219,9 @@ active
                         <div>
                             <div class="d-flex align-items-center gap-2">
                                 @if ( $restaurant?->restaurant_sub_update_application?->pos == 1 )
-                                <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check.png')}}" alt="">
+                                <i class="tio-checkmark-circle"></i>
                                 @else
-                                <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check-1.png')}}" alt="">
+                                <i class="tio-checkmark-circle"></i>
                                 @endif
                                 <span class="form-check-label text-dark">{{ translate('messages.POS') }}</span>
                             </div>
@@ -230,9 +230,9 @@ active
                         <div>
                             <div class="d-flex align-items-center gap-2">
                                 @if ( $restaurant?->restaurant_sub_update_application?->mobile_app == 1 )
-                                <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check.png')}}" alt="">
+                                <i class="tio-checkmark-circle"></i>
                                 @else
-                                <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check-1.png')}}" alt="">
+                                <i class="tio-checkmark-circle"></i>
                                 @endif
                                 <span class="form-check-label text-dark">{{ translate('messages.Mobile_App') }}</span>
                             </div>
@@ -240,9 +240,9 @@ active
                         <div>
                             <div class="d-flex align-items-center gap-2">
                                 @if ( $restaurant?->restaurant_sub_update_application?->self_delivery == 1 )
-                                <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check.png')}}" alt="">
+                                <i class="tio-checkmark-circle"></i>
                                 @else
-                                <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check-1.png')}}" alt="">
+                                <i class="tio-checkmark-circle"></i>
                                 @endif
                                 <span class="form-check-label text-dark">{{ translate('messages.self_delivery') }}</span>
                             </div>
@@ -250,7 +250,7 @@ active
 
                         <div>
                             <div class="d-flex align-items-center gap-2">
-                                <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check.png')}}" alt="">
+                                <i class="tio-checkmark-circle"></i>
                                 @if ( $restaurant?->restaurant_sub_update_application?->max_product == 'unlimited' )
                                 <span class="form-check-label text-dark">{{ translate('messages.unlimited_item_Upload')
                                     }}</span>
@@ -264,9 +264,9 @@ active
                         <div>
                             <div class="d-flex align-items-center gap-2">
                                 @if ( $restaurant?->restaurant_sub_update_application?->review == 1 )
-                                <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check.png')}}" alt="">
+                                <i class="tio-checkmark-circle"></i>
                                 @else
-                                <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check-1.png')}}" alt="">
+                                <i class="tio-checkmark-circle"></i>
                                 @endif
                                 <span class="form-check-label text-dark">{{ translate('messages.review') }}</span>
                             </div>
@@ -275,9 +275,9 @@ active
                         <div>
                             <div class="d-flex align-items-center gap-2">
                                 @if ( $restaurant?->restaurant_sub_update_application?->chat == 1 )
-                                <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check.png')}}" alt="">
+                                <i class="tio-checkmark-circle"></i>
                                 @else
-                                <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check-1.png')}}" alt="">
+                                <i class="tio-checkmark-circle"></i>
                                 @endif
                                 <span class="form-check-label text-dark">{{ translate('messages.chat') }}</span>
                             </div>

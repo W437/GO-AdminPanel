@@ -135,9 +135,7 @@
                                         <label class="input-label" for="choice_zones">{{ translate('messages.zone') }}
                                             <span data-toggle="tooltip" data-placement="right"
                                                 data-original-title="{{ translate('messages.select_zone_for_map') }}"
-                                                class="input-label-secondary"><img
-                                                    src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                    alt="{{ translate('messages.restaurant_lat_lng_warning') }}"></span>
+                                                class="input-label-secondary"><i class="tio-info-outined"></i></span>
                                         </label>
                                         <select name="zone_id" id="choice_zones"
                                             data-placeholder="{{ translate('messages.select_zone') }}"
@@ -417,11 +415,9 @@
                                                     <div class="overlay">
                                                         <div class="pdf-info">
                                                             @if (Str::endsWith($imgPath, ['.pdf', '.doc', '.docx']))
-                                                                <img src="{{ dynamicAsset('public/assets/admin/img/document.svg') }}"
-                                                                    width="34" alt="File Type Logo">
+                                                                <i class="tio-document" style="font-size: 34px;"></i>
                                                             @else
-                                                                <img src="{{ dynamicAsset('public/assets/admin/img/picture.svg') }}"
-                                                                    width="34" alt="File Type Logo">
+                                                                <i class="tio-image" style="font-size: 34px;"></i>
                                                             @endif
                                                             <div class="file-name-wrapper">
                                                                 <span
@@ -467,9 +463,7 @@
                                         <label class="input-label"
                                             for="signupSrPassword">{{ translate('messages.password') }}
                                             <span class="input-label-secondary ps-1" data-toggle="tooltip"
-                                                title="{{ translate('messages.Must_contain_at_least_one_number_and_one_uppercase_and_lowercase_letter_and_symbol,_and_at_least_8_or_more_characters') }}"><img
-                                                    src="{{ dynamicAsset('public/assets/admin/img/info-circle.svg') }}"
-                                                    alt="{{ translate('messages.Must_contain_at_least_one_number_and_one_uppercase_and_lowercase_letter_and_symbol,_and_at_least_8_or_more_characters') }}"></span>
+                                                title="{{ translate('messages.Must_contain_at_least_one_number_and_one_uppercase_and_lowercase_letter_and_symbol,_and_at_least_8_or_more_characters') }}"><i class="tio-info-outined"></i></span>
 
                                         </label>
 

@@ -14,7 +14,7 @@
         <div class="page-header">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{dynamicAsset('/public/assets/admin/img/payment.png')}}" class="w--22" alt="">
+                    <i class="tio-wallet"></i>
                 </span>
                 <span>
                     {{translate('messages.payment_gateway_setup')}}
@@ -53,7 +53,7 @@
                                     <span class="line--limit-1">
                                         {{translate('Cash On Delivery')}}
                                     </span>
-                                    <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled_Customers_will_be_able_to_select_COD_as_a_payment_method_during_checkout')}}"><img src="{{dynamicAsset('public/assets/admin/img/info-circle.svg')}}" alt="Veg/non-veg toggle"> * </span>
+                                    <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled_Customers_will_be_able_to_select_COD_as_a_payment_method_during_checkout')}}"><i class="tio-info-outined"></i> * </span>
                                 </span>
                                 <input type="hidden" name="toggle_type" value="cash_on_delivery">
                                 <input
@@ -84,7 +84,7 @@
                                     <span class="line--limit-1">
                                         {{translate('digital payment')}}
                                     </span>
-                                    <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled_Customers_will_be_able_to_select_digital_payment_as_a_payment_method_during_checkout')}}"><img src="{{dynamicAsset('public/assets/admin/img/info-circle.svg')}}" alt="Veg/non-veg toggle"> * </span>
+                                    <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled_Customers_will_be_able_to_select_digital_payment_as_a_payment_method_during_checkout')}}"><i class="tio-info-outined"></i> * </span>
                                 </span>
                                 <input type="hidden" name="toggle_type" value="digital_payment">
                                 <input  type="checkbox"
@@ -115,7 +115,7 @@
                                     <span class="line--limit-1">
                                         {{translate('Offline_Payment')}}
                                     </span>
-                                    <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled_Customers_will_be_able_to_select_offline_payment_as_a_payment_method_during_checkout')}}"><img src="{{dynamicAsset('public/assets/admin/img/info-circle.svg')}}" alt="Veg/non-veg toggle"> * </span>
+                                    <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If_enabled_Customers_will_be_able_to_select_offline_payment_as_a_payment_method_during_checkout')}}"><i class="tio-info-outined"></i> * </span>
                                 </span>
                                 <input type="hidden" name="toggle_type" value="offline_payment_status" >
                                 <input  type="checkbox" id="offline_payment_status"

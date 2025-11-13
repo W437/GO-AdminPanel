@@ -8,7 +8,7 @@
         <div class="page-header">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{dynamicAsset('public/assets/admin/img/email.png')}}" class="w--26" alt="">
+                    <i class="tio-email"></i>
                 </span>
                 <span>{{ translate('messages.smtp_mail_setup') }}
                 </span>

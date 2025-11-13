@@ -394,7 +394,7 @@ $reviewsInfo = $product->rating()->first();
                             <th  class="text-canter">{{translate('messages.Variation_Wise_Price')}}</th>
                             <th  class="text-canter">{{translate('messages.Stock')}}
                                 @if ($tock_out == true)
-                                <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('messages.Your main stock is empty.Variations stock won\'t work if the main stock is empty.')}}"><img src="{{dynamicAsset('public/assets/admin/img/info-circle.svg')}}" alt="public/img"></span>
+                                <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('messages.Your main stock is empty.Variations stock won\'t work if the main stock is empty.')}}"><i class="tio-info-outined"></i></span>
                                 @endif
 
                             </th>

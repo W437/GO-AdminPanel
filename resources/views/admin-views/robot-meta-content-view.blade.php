@@ -42,7 +42,7 @@
                             <p class="mb-0"> <span class="font-semibold text-title">{{ translate('Banner_image') }}</span> <small class="text-danger">(size: 2:1)</small></p>
                             <div class="image-box banner2">
                                 <label for="image-input" class="d-flex flex-column align-items-center justify-content-center h-100 cursor-pointer gap-2">
-                                    <img width="30" class="upload-icon" src="{{dynamicAsset('public/assets/admin/img/upload-icon.png')}}" alt="Upload Icon">
+                                    <i class="tio-cloud-upload upload-icon" style="font-size: 30px;"></i>
                                     <span class="upload-text">{{ translate('Upload Image')}}</span>
                                     <img src="#" alt="Preview Image" class="preview-image">
                                 </label>
@@ -77,58 +77,58 @@
                             <div class="item">
                                 <label class="checkbox--item">
                                     <input type="checkbox" name="canonicals">
-                                    <img class="unchecked" src="{{dynamicAsset('public/assets/admin/img/uncheck-icon.svg')}}" alt="">
-                                    <img class="checked" src="{{dynamicAsset('public/assets/admin/img/check-icon.svg')}}" alt="">
+                                    <i class="tio-done text-success"></i>
+                                    <i class="tio-done text-success"></i>
                                     <span>Index</span>
                                     <span data-toggle="tooltip" title="add new page">
-                                        <img src="{{dynamicAsset('public/assets/admin/img/query.png')}}" alt="">
+                                        <i class="tio-help" style="font-size: 24px;"></i>
                                     </span>
                                 </label>
                                 <label class="checkbox--item">
                                     <input type="checkbox" name="canonicals">
-                                    <img class="unchecked" src="{{dynamicAsset('public/assets/admin/img/uncheck-icon.svg')}}" alt="">
-                                    <img class="checked" src="{{dynamicAsset('public/assets/admin/img/check-icon.svg')}}" alt="">
+                                    <i class="tio-done text-success"></i>
+                                    <i class="tio-done text-success"></i>
                                     <span>No Follow</span>
                                     <span data-toggle="tooltip" title="add new page">
-                                        <img src="{{dynamicAsset('public/assets/admin/img/query.png')}}" alt="">
+                                        <i class="tio-help" style="font-size: 24px;"></i>
                                     </span>
                                 </label>
                                 <label class="checkbox--item">
                                     <input type="checkbox" name="canonicals">
-                                    <img class="unchecked" src="{{dynamicAsset('public/assets/admin/img/uncheck-icon.svg')}}" alt="">
-                                    <img class="checked" src="{{dynamicAsset('public/assets/admin/img/check-icon.svg')}}" alt="">
+                                    <i class="tio-done text-success"></i>
+                                    <i class="tio-done text-success"></i>
                                     <span>No Image Index</span>
                                     <span data-toggle="tooltip" title="add new page">
-                                        <img src="{{dynamicAsset('public/assets/admin/img/query.png')}}" alt="">
+                                        <i class="tio-help" style="font-size: 24px;"></i>
                                     </span>
                                 </label>
                             </div>
                             <div class="item">
                                 <label class="checkbox--item">
                                     <input type="checkbox" name="canonicals">
-                                    <img class="unchecked" src="{{dynamicAsset('public/assets/admin/img/uncheck-icon.svg')}}" alt="">
-                                    <img class="checked" src="{{dynamicAsset('public/assets/admin/img/check-icon.svg')}}" alt="">
+                                    <i class="tio-done text-success"></i>
+                                    <i class="tio-done text-success"></i>
                                     <span>No Index</span>
                                     <span data-toggle="tooltip" title="add new page">
-                                        <img src="{{dynamicAsset('public/assets/admin/img/query.png')}}" alt="">
+                                        <i class="tio-help" style="font-size: 24px;"></i>
                                     </span>
                                 </label>
                                 <label class="checkbox--item">
                                     <input type="checkbox" name="canonicals">
-                                    <img class="unchecked" src="{{dynamicAsset('public/assets/admin/img/uncheck-icon.svg')}}" alt="">
-                                    <img class="checked" src="{{dynamicAsset('public/assets/admin/img/check-icon.svg')}}" alt="">
+                                    <i class="tio-done text-success"></i>
+                                    <i class="tio-done text-success"></i>
                                     <span>No Archive</span>
                                     <span data-toggle="tooltip" title="add new page">
-                                        <img src="{{dynamicAsset('public/assets/admin/img/query.png')}}" alt="">
+                                        <i class="tio-help" style="font-size: 24px;"></i>
                                     </span>
                                 </label>
                                 <label class="checkbox--item">
                                     <input type="checkbox" name="canonicals">
-                                    <img class="unchecked" src="{{dynamicAsset('public/assets/admin/img/uncheck-icon.svg')}}" alt="">
-                                    <img class="checked" src="{{dynamicAsset('public/assets/admin/img/check-icon.svg')}}" alt="">
+                                    <i class="tio-done text-success"></i>
+                                    <i class="tio-done text-success"></i>
                                     <span>No Snippet</span>
                                     <span data-toggle="tooltip" title="add new page">
-                                        <img src="{{dynamicAsset('public/assets/admin/img/query.png')}}" alt="">
+                                        <i class="tio-help" style="font-size: 24px;"></i>
                                     </span>
                                 </label>
                             </div>
@@ -140,11 +140,11 @@
                                 <div class="item">
                                     <label class="checkbox--item m-0">
                                         <input type="checkbox" name="canonicals">
-                                        <img class="unchecked" src="{{dynamicAsset('public/assets/admin/img/uncheck-icon.svg')}}" alt="">
-                                        <img class="checked" src="{{dynamicAsset('public/assets/admin/img/check-icon.svg')}}" alt="">
+                                        <i class="tio-done text-success"></i>
+                                        <i class="tio-done text-success"></i>
                                         <span>Max Snippet</span>
                                         <span data-toggle="tooltip" title="add new page">
-                                            <img src="{{dynamicAsset('public/assets/admin/img/query.png')}}" alt="">
+                                            <i class="tio-help" style="font-size: 24px;"></i>
                                         </span>
                                     </label>
                                 </div>
@@ -156,11 +156,11 @@
                                <div class="item">
                                     <label class="checkbox--item m-0">
                                         <input type="checkbox" name="canonicals">
-                                        <img class="unchecked" src="{{dynamicAsset('public/assets/admin/img/uncheck-icon.svg')}}" alt="">
-                                        <img class="checked" src="{{dynamicAsset('public/assets/admin/img/check-icon.svg')}}" alt="">
+                                        <i class="tio-done text-success"></i>
+                                        <i class="tio-done text-success"></i>
                                         <span>Max Video Preview</span>
                                         <span data-toggle="tooltip" title="add new page">
-                                            <img src="{{dynamicAsset('public/assets/admin/img/query.png')}}" alt="">
+                                            <i class="tio-help" style="font-size: 24px;"></i>
                                         </span>
                                     </label>
                                </div>
@@ -172,11 +172,11 @@
                                <div class="item">
                                     <label class="checkbox--item m-0">
                                         <input type="checkbox" name="canonicals">
-                                        <img class="unchecked" src="{{dynamicAsset('public/assets/admin/img/uncheck-icon.svg')}}" alt="">
-                                        <img class="checked" src="{{dynamicAsset('public/assets/admin/img/check-icon.svg')}}" alt="">
+                                        <i class="tio-done text-success"></i>
+                                        <i class="tio-done text-success"></i>
                                         <span>Max Image Preview</span>
                                         <span data-toggle="tooltip" title="add new page">
-                                            <img src="{{dynamicAsset('public/assets/admin/img/query.png')}}" alt="">
+                                            <i class="tio-help" style="font-size: 24px;"></i>
                                         </span>
                                     </label>
                                </div>

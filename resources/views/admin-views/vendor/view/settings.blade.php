@@ -596,9 +596,7 @@
                                         ({{ translate('messages.Days') }})
                                         <span data-toggle="tooltip" data-placement="right"
                                               data-original-title="{{translate('Enter_the_number_of_days_customers_can_select_for_scheduled_orders.')}}"
-                                              class="input-label-secondary"><img
-                                                src="{{dynamicAsset('public/assets/admin/img/info-circle.svg')}}"
-                                                alt="i"></span>
+                                              class="input-label-secondary"><i class="tio-info-outined"></i></span>
                                     </label>
                                     <input type="number" name="customer_order_date" id="customer_order_date"
                                            {{ $restaurant?->restaurant_config?->customer_date_order_sratus == 1 ? 'required' :'readonly' }} min="0"
@@ -619,9 +617,7 @@
                                         </span>
                                         <span class="form-label-secondary text-danger" data-toggle="tooltip"
                                             data-placement="right"
-                                            data-original-title="{{ translate('By_activating_this_feature,_customers_can_choose_their_advance_booking_according_to_a_30-minute_or_1-hour_interval_set_by_the_Admin') }}"><img
-                                                src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                alt="{{ translate('Time_Interval_for_Scheduled_Delivery') }}"></span>
+                                            data-original-title="{{ translate('By_activating_this_feature,_customers_can_choose_their_advance_booking_according_to_a_30-minute_or_1-hour_interval_set_by_the_Admin') }}"><i class="tio-info-outined"></i></span>
                                     </span>
                                 </label>
                                 <div class="custom-group-btn form-control single">

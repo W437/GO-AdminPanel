@@ -118,7 +118,7 @@
                                 <p class="mb-0">{{ translate('Food_Image') }}</p>
                                 <div class="image-box">
                                     <label for="image-input" class="d-flex flex-column align-items-center justify-content-center h-100 cursor-pointer gap-2">
-                                    <img width="30" class="upload-icon" src="{{dynamicAsset('public/assets/admin/img/upload-icon.png')}}" alt="Upload Icon">
+                                    <i class="tio-cloud-upload upload-icon" style="font-size: 30px;"></i>
                                     <span class="upload-text">{{ translate('Upload Image')}}</span>
                                     <img src="#" alt="Preview Image" class="preview-image">
                                     </label>
@@ -200,9 +200,7 @@
                                             for="exampleFormControlSelect1">{{ translate('messages.sub_category') }}<span
                                                 class="input-label-secondary" data-toggle="tooltip"
                                                 data-placement="right"
-                                                data-original-title="{{ translate('messages.category_required_warning') }}"><img
-                                                    src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                    alt="{{ translate('messages.category_required_warning') }}"></span></label>
+                                                data-original-title="{{ translate('messages.category_required_warning') }}"><i class="tio-info-outined"></i></span></label>
                                         <select name="sub_category_id" id="sub-categories"
                                             class="form-control js-select2-custom">
                                             <option value="" selected disabled>
@@ -222,7 +220,7 @@
                                 <div class="col-sm-6 col-lg-4">
                                     <div class="form-group mb-0">
                                         <label class="input-label" for="exampleFormControlSelect1">{{translate('messages.addon')}}<span
-                                                class="input-label-secondary" title="{{translate('messages.Make_sure_you_have_selected_a_restaurant_first_!')}}"><img src="{{dynamicAsset('/public/assets/admin/img/info-circle.svg')}}" alt="{{translate('messages.Make_sure_you_have_selected_a_restaurant_first_!')}}"></span></label>
+                                                class="input-label-secondary" title="{{translate('messages.Make_sure_you_have_selected_a_restaurant_first_!')}}"><i class="tio-info-outined"></i></span></label>
                                         <select name="addon_ids[]" id="add_on" class="form-control js-select2-custom" multiple="multiple">
                                         </select>
                                     </div>

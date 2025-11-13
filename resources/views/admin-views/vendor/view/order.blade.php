@@ -44,14 +44,14 @@
 
             <div class="order-info-item redirect-url" data-url="{{route('admin.order.list',['all'])}}?vendor[]={{$restaurant->id}}">
                 <div class="order-info-icon">
-                    <img src="{{dynamicAsset('/public/assets/admin/img/resturant/navbar/all.png')}}" alt="public">
+                    <i class="tio-fastfood"></i>
                 </div>
                     <h6 class="card-subtitle">{{translate('messages.all_orders')}} <span class="amount text--primary">{{\App\Models\Order::where('restaurant_id', $restaurant->id)->Notpos()->count()}}</span></h6>
             </div>
             <span class="order-info-seperator"></span>
             <div class="order-info-item redirect-url" data-url="{{route('admin.order.list',['scheduled'])}}?vendor[]={{$restaurant->id}}">
                 <div class="order-info-icon">
-                    <img src="{{dynamicAsset('/public/assets/admin/img/resturant/navbar/schedule.png')}}" alt="public">
+                    <i class="tio-time"></i>
                 </div>
                 <h6 class="card-subtitle">{{translate('messages.scheduled_orders')}}
                 <span class="amount text--warning">{{\App\Models\Order::Scheduled()->Notpos()->where('restaurant_id', $restaurant->id)->count()}}</span></h6>
@@ -59,7 +59,7 @@
             <span class="order-info-seperator"></span>
             <div class="order-info-item redirect-url" data-url="{{route('admin.order.list',['pending'])}}?vendor[]={{$restaurant->id}}">
                 <div class="order-info-icon">
-                    <img src="{{dynamicAsset('/public/assets/admin/img/resturant/navbar/pending.png')}}" alt="public">
+                    <i class="tio-clock"></i>
                 </div>
                 <h6 class="card-subtitle">{{translate('messages.pending_orders')}}
                 <span class="amount text--info">
@@ -68,7 +68,7 @@
             <span class="order-info-seperator"></span>
             <div class="order-info-item redirect-url" data-url="{{route('admin.order.list',['delivered'])}}?vendor[]={{$restaurant->id}}">
                 <div class="order-info-icon">
-                    <img src="{{dynamicAsset('/public/assets/admin/img/resturant/navbar/delivered.png')}}" alt="public">
+                    <i class="tio-checkmark-circle"></i>
                 </div>
                 <h6 class="card-subtitle">{{translate('messages.delivered_orders')}}
                 <span class="amount text--success">{{\App\Models\Order::where(['order_status'=>'delivered', 'restaurant_id'=>$restaurant->id])->Notpos()->count()}}</span></h6>
@@ -76,7 +76,7 @@
             <span class="order-info-seperator"></span>
             <div class="order-info-item redirect-url" data-url="{{route('admin.order.list',['canceled'])}}?vendor[]={{$restaurant->id}}">
                 <div class="order-info-icon">
-                    <img src="{{dynamicAsset('/public/assets/admin/img/resturant/navbar/cancel.png')}}" alt="public">
+                    <i class="tio-clear"></i>
                 </div>
                 <h6 class="card-subtitle">{{translate('messages.canceled_orders')}}
                 <span class="amount text--danger">{{\App\Models\Order::where(['order_status'=>'canceled', 'restaurant_id'=>$restaurant->id])->count()}}</span></h6>

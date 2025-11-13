@@ -79,7 +79,7 @@ active
         <div class="card-header border-0 align-items-center">
             <h4 class="card-title align-items-center gap-2">
                 <span class="card-header-icon">
-                    <img width="25" src="{{dynamicAsset('public/assets/admin/img/subscription-plan/subscribed-user.png')}}" alt="">
+                    <i class="tio-user" style="font-size: 35px;"></i>
                 </span>
                 <span>{{ translate('Package_details') }}</span>
             </h4>
@@ -112,7 +112,7 @@ active
 
                     <div>
                         <div class="d-flex align-items-center gap-2">
-                            <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check.png')}}" alt="">
+                            <i class="tio-checkmark-circle"></i>
                             @if ( $subscriptionackage->max_order == 'unlimited' )
                             <span class="form-check-label text-dark">{{ translate('messages.unlimited_orders') }}</span>
                             @else
@@ -126,9 +126,9 @@ active
                     <div>
                         <div class="d-flex align-items-center gap-2">
                             @if ( $subscriptionackage->pos == 1 )
-                            <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check.png')}}" alt="">
+                            <i class="tio-checkmark-circle"></i>
                             @else
-                            <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check-1.png')}}" alt="">
+                            <i class="tio-checkmark-circle"></i>
                             @endif
                             <span class="form-check-label text-dark">{{ translate('messages.POS') }}</span>
                         </div>
@@ -137,9 +137,9 @@ active
                     <div>
                         <div class="d-flex align-items-center gap-2">
                             @if ( $subscriptionackage->mobile_app == 1 )
-                            <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check.png')}}" alt="">
+                            <i class="tio-checkmark-circle"></i>
                             @else
-                            <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check-1.png')}}" alt="">
+                            <i class="tio-checkmark-circle"></i>
                             @endif
                             <span class="form-check-label text-dark">{{ translate('messages.Mobile_App') }}</span>
                         </div>
@@ -147,9 +147,9 @@ active
                     <div>
                         <div class="d-flex align-items-center gap-2">
                             @if ( $subscriptionackage->self_delivery == 1 )
-                            <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check.png')}}" alt="">
+                            <i class="tio-checkmark-circle"></i>
                             @else
-                            <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check-1.png')}}" alt="">
+                            <i class="tio-checkmark-circle"></i>
                             @endif
                             <span class="form-check-label text-dark">{{ translate('messages.self_delivery') }}</span>
                         </div>
@@ -157,7 +157,7 @@ active
 
                     <div>
                         <div class="d-flex align-items-center gap-2">
-                            <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check.png')}}" alt="">
+                            <i class="tio-checkmark-circle"></i>
                             @if ( $subscriptionackage->max_product == 'unlimited' )
                             <span class="form-check-label text-dark">{{ translate('messages.unlimited_item_Upload')
                                 }}</span>
@@ -171,9 +171,9 @@ active
                     <div>
                         <div class="d-flex align-items-center gap-2">
                             @if ( $subscriptionackage->review == 1 )
-                            <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check.png')}}" alt="">
+                            <i class="tio-checkmark-circle"></i>
                             @else
-                            <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check-1.png')}}" alt="">
+                            <i class="tio-checkmark-circle"></i>
                             @endif
                             <span class="form-check-label text-dark">{{ translate('messages.review') }}</span>
                         </div>
@@ -182,9 +182,9 @@ active
                     <div>
                         <div class="d-flex align-items-center gap-2">
                             @if ( $subscriptionackage->chat == 1 )
-                            <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check.png')}}" alt="">
+                            <i class="tio-checkmark-circle"></i>
                             @else
-                            <img src="{{dynamicAsset('/public/assets/admin/img/subscription-plan/check-1.png')}}" alt="">
+                            <i class="tio-checkmark-circle"></i>
                             @endif
                             <span class="form-check-label text-dark">{{ translate('messages.chat') }}</span>
                         </div>

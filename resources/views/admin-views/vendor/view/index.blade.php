@@ -54,8 +54,7 @@
                         {{translate('messages.collected_cash_by_restaurant')}}
                     </div>
                     <div class="d-flex align-items-center justify-content-center mt-3">
-                        <img class="cash-icon mr-3" src="{{dynamicAsset('/public/assets/admin/img/transactions/cash.png')}}"
-                            alt="transactions">
+                        <i class="tio-wallet cash-icon mr-3"></i>
                         <h2 class="cash--title">{{\App\CentralLogics\Helpers::format_currency($wallet->collected_cash)}}
                         </h2>
                     </div>
@@ -75,8 +74,7 @@
                         <h4 class="title">{{\App\CentralLogics\Helpers::format_currency($wallet->pending_withdraw)}}
                         </h4>
                         <span class="subtitle">{{translate('messages.pending_withdraw')}}</span>
-                        <img class="resturant-icon" src="{{dynamicAsset('/public/assets/admin/img/transactions/pending.png')}}"
-                            alt="transactions">
+                        <i class="tio-clock resturant-icon"></i>
                     </div>
                 </div>
 
@@ -119,8 +117,7 @@
                     <div class="resturant-card  bg--1">
                         <h4 class="title">{{\App\CentralLogics\Helpers::format_currency($wallet->total_earning)}}</h4>
                         <span class="subtitle">{{translate('messages.total_earning')}}</span>
-                        <img class="resturant-icon" src="{{dynamicAsset('/public/assets/admin/img/transactions/earning.png')}}"
-                            alt="transactions">
+                        <i class="tio-chart-bar-4 resturant-icon"></i>
                     </div>
                 </div>
 
@@ -331,11 +328,9 @@
                                     </a>
                                     <div class="pdf-info d-flex gap-10px align-items-center">
                                         @if (Str::endsWith($imgPath, ['.pdf', '.doc', '.docx']))
-                                            <img src="{{ dynamicAsset('public/assets/admin/img/document.svg') }}" width="34"
-                                                alt="File Type Logo">
+                                            <i class="tio-document" style="font-size: 34px;"></i>
                                         @else
-                                            <img src="{{ dynamicAsset('public/assets/admin/img/picture.svg') }}" width="34"
-                                                alt="File Type Logo">
+                                            <i class="tio-image" style="font-size: 34px;"></i>
                                         @endif
                                         <div class="fs-13 text--title d-flex flex-column">
                                             <span class="file-name js-filename-truncate"></span>
@@ -411,9 +406,9 @@
                                         <div class="overlay">
                                             <div class="pdf-info">
                                                 @if(Str::endsWith($imgPath, ['.pdf', '.doc', '.docx']))
-                                                    <img src="{{ dynamicAsset('public/assets/admin/img/document.svg') }}" width="34" alt="File Type Logo">
+                                                    <i class="tio-document" style="font-size: 34px;"></i>
                                                 @else
-                                                    <img src="{{ dynamicAsset('public/assets/admin/img/picture.svg') }}" width="34" alt="File Type Logo">
+                                                    <i class="tio-image" style="font-size: 34px;"></i>
                                                 @endif
                                                 <div class="file-name-wrapper">
                                                     <span class="file-name js-filename-truncate text-limit-show" data-limit="15">{{ $restaurant->tin_certificate_image }}</span>
@@ -453,11 +448,9 @@
                                     </a>
                                     <div class="pdf-info d-flex gap-10px align-items-center">
                                         @if (Str::endsWith($imgPath, ['.pdf', '.doc', '.docx']))
-                                            <img src="{{ dynamicAsset('public/assets/admin/img/document.svg') }}" width="34"
-                                                alt="File Type Logo">
+                                            <i class="tio-document" style="font-size: 34px;"></i>
                                         @else
-                                            <img src="{{ dynamicAsset('public/assets/admin/img/picture.svg') }}" width="34"
-                                                alt="File Type Logo">
+                                            <i class="tio-image" style="font-size: 34px;"></i>
                                         @endif
                                         <div class="fs-13 text--title d-flex flex-column">
                                             <span class="file-name js-filename-truncate"></span>
@@ -498,12 +491,11 @@
 
                 <div class="card-header justify-content-between align-items-center">
                     <label class="input-label text-capitalize d-inline-flex align-items-center m-0">
-                        <span class="line--limit-1"><img src="{{ dynamicAsset('/public/assets/admin/img/company.png') }}"
-                                alt=""> {{ translate('Additional_Information') }} </span>
+                        <span class="line--limit-1"><i class="tio-building"></i> {{ translate('Additional_Information') }} </span>
                         <span data-toggle="tooltip" data-placement="right"
                             data-original-title="{{ translate('Additional_Information') }}"
                             class="input-label-secondary">
-                            <img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="info"></span>
+                            <i class="tio-info-outined"></i></span>
                     </label>
                 </div>
                 <div class="card-body">
@@ -547,7 +539,7 @@
                         <span data-toggle="tooltip" data-placement="right"
                             data-original-title="{{ translate('Additional_Documents') }}"
                             class="input-label-secondary">
-                            <img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="info"></span>
+                            <i class="tio-info-outined"></i></span>
                     </label>
                 </div>
                 <div class="card-body">

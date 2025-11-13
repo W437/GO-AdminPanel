@@ -8,7 +8,7 @@
         <div class="page-header d-flex flex-wrap align-items-center justify-content-between">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{dynamicAsset('public/assets/admin/img/add.png')}}" class="w--26" alt="">
+                    <i class="tio-add"></i>
                 </span>
                 <span>
                     {{translate('messages.wallet_bonus_setup')}}

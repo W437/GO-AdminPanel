@@ -89,13 +89,11 @@
                     <div class="card mt-3">
                         <div class="card-header justify-content-between align-items-center">
                             <label class="input-label text-capitalize d-inline-flex align-items-center m-0">
-                                <span class="line--limit-1"><img src="{{ dynamicAsset('/public/assets/admin/img/company.png') }}"
-                                        alt=""> {{ translate('Registration_Information') }} </span>
+                                <span class="line--limit-1"><i class="tio-building"></i> {{ translate('Registration_Information') }} </span>
                                 <span data-toggle="tooltip" data-placement="right"
                                     data-original-title="{{ translate('Registration_Information_Details') }}"
                                     class="input-label-secondary">
-                                    <img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                        alt="info"></span>
+                                    <i class="tio-info-outined"></i></span>
                             </label>
                         </div>
                         <div class="card-body">
@@ -184,12 +182,11 @@
 
                                 <div class="card-header justify-content-between align-items-center">
                                     <label class="input-label text-capitalize d-inline-flex align-items-center m-0">
-                                        <span class="line--limit-1"><img src="{{ dynamicAsset('/public/assets/admin/img/company.png') }}"
-                                                alt=""> {{ translate('Additional_Information') }} </span>
+                                        <span class="line--limit-1"><i class="tio-building"></i> {{ translate('Additional_Information') }} </span>
                                         <span data-toggle="tooltip" data-placement="right"
                                             data-original-title="{{ translate('Additional_Information') }}"
                                             class="input-label-secondary">
-                                            <img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="info"></span>
+                                            <i class="tio-info-outined"></i></span>
                                     </label>
                                 </div>
                                 <div class="card-body">
@@ -235,7 +232,7 @@
                                         <span data-toggle="tooltip" data-placement="right"
                                             data-original-title="{{ translate('Additional_Documents') }}"
                                             class="input-label-secondary">
-                                            <img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="info"></span>
+                                            <i class="tio-info-outined"></i></span>
                                     </label>
                                 </div>
                                 <div class="card-body">

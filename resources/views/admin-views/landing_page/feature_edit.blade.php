@@ -8,7 +8,7 @@
         <div class="d-flex flex-wrap justify-content-between">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{ dynamicAsset('/public/assets/admin/img/landing-page.png') }}" class="mw-26px" alt="public">
+                    <i class="tio-pages"></i>
                 </span>
                 <span>
                     {{ translate('messages.Admin Landing Page') }}

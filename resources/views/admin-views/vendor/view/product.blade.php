@@ -45,7 +45,7 @@
         <div class="resturant-card-navbar px-xl-4 justify-content-evenly">
             <div class="order-info-item">
                 <div class="order-info-icon icon-sm">
-                    <img src="{{ dynamicAsset('/public/assets/admin/img/resturant/foods/all.png') }}" alt="public">
+                    <i class="tio-fastfood"></i>
                 </div>
                 @php(  $food = \App\Models\Food::withoutGlobalScope(\App\Scopes\RestaurantScope::class)->where(['restaurant_id' => $restaurant->id])->count())
                 @php($food = $food == null ? 0 : $food)
@@ -55,7 +55,7 @@
             <span class="order-info-seperator"></span>
             <div class="order-info-item">
                 <div class="order-info-icon icon-sm">
-                    <img src="{{ dynamicAsset('/public/assets/admin/img/resturant/foods/active.png') }}" alt="public">
+                    <i class="tio-done-circle"></i>
                 </div>
                 @php(
     $food = \App\Models\Food::withoutGlobalScope(\App\Scopes\RestaurantScope::class)->where(['restaurant_id' => $restaurant->id, 'status' => 1])->count())
@@ -66,7 +66,7 @@
             <span class="order-info-seperator"></span>
             <div class="order-info-item">
                 <div class="order-info-icon icon-sm">
-                    <img src="{{ dynamicAsset('/public/assets/admin/img/resturant/foods/inactive.png') }}" alt="public">
+                    <i class="tio-pause-circle"></i>
                 </div>
                 @php(
     $food = \App\Models\Food::withoutGlobalScope(\App\Scopes\RestaurantScope::class)->where(['restaurant_id' => $restaurant->id, 'status' => 0])->count())
@@ -184,9 +184,7 @@
                                                         class="badge badge-soft-warning badge-pill font-medium">{{ translate('Out Of Stock') }}</span>
                                                     <span class="input-label-secondary" data-toggle="tooltip"
                                                         data-placement="right"
-                                                        data-original-title="{{ translate('messages.Your_main_stock_is_out_of_stock.') }}"><img
-                                                            src="{{ dynamicAsset('public/assets/admin/img/info-circle.svg') }}"
-                                                            alt="public/img"></span>
+                                                        data-original-title="{{ translate('messages.Your_main_stock_is_out_of_stock.') }}"><i class="tio-info-outined"></i></span>
                                                 @else
                                                     <?php
 
@@ -206,9 +204,7 @@
                                                         {{-- <span class="badge badge-soft-warning badge-pill font-medium">{{ translate('Out Of Stock') }}</span> --}}
                                                         <span class="input-label-secondary" data-toggle="tooltip"
                                                             data-placement="right"
-                                                            data-original-title="{{ translate('messages.One_or_more_variations_are_out_of_stock.') }}"><img
-                                                                src="{{ dynamicAsset('public/assets/admin/img/info-circle.svg') }}"
-                                                                alt="public/img"></span>
+                                                            data-original-title="{{ translate('messages.One_or_more_variations_are_out_of_stock.') }}"><i class="tio-info-outined"></i></span>
                                                     @endif
                                                 @endif
 

@@ -157,8 +157,7 @@
                                     &nbsp;
                                     <span class="line--limit-1"
                                           data-toggle="tooltip" data-placement="right"
-                                          data-original-title="{{ translate('Write_the_Company_Name.') }}"><img
-                                            src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}">
+                                          data-original-title="{{ translate('Write_the_Company_Name.') }}"><i class="tio-info-outined"></i>
                                     </span>
                                 </label>
                                 <input type="text" name="restaurant_name" maxlength="191" value="{{ $name->value ?? '' }}" class="form-control"
@@ -189,8 +188,7 @@
                                        for="country">{{ translate('messages.country') }} &nbsp;
                                     <span class="line--limit-1"
                                           data-toggle="tooltip" data-placement="right"
-                                          data-original-title="{{ translate('Choose_your_country_from_the_drop-down_menu.') }}"><img
-                                            src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}">
+                                          data-original-title="{{ translate('Choose_your_country_from_the_drop-down_menu.') }}"><i class="tio-info-outined"></i>
                                         </span>
 
                                 </label>
@@ -465,9 +463,7 @@
                                     <div class="form-group mb-0">
                                         <label class="input-label text-capitalize d-flex alig-items-center"
                                                for="latitude">{{ translate('messages.latitude') }}<span class="input-label-secondary"
-                                                                                                        data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('messages.Click_on_the_map_to_see_your_location’s_latitude') }}"><img
-                                                    src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                    alt="{{ translate('messages.Click_on_the_map_to_see_your_location’s_latitude') }}"></span></label>
+                                                                                                        data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('messages.Click_on_the_map_to_see_your_location’s_latitude') }}"><i class="tio-info-outined"></i></span></label>
                                         <input type="text" id="latitude" name="latitude" class="form-control d-inline"
                                                placeholder="{{ translate('messages.Ex :') }} -94.22213"
                                                value="{{ $default_location ? $default_location['lat'] : 0 }}" required readonly>
@@ -477,9 +473,7 @@
                                     <div class="form-group mb-0">
                                         <label class="input-label text-capitalize d-flex alig-items-center"
                                                for="longitude">{{ translate('messages.longitude') }}<span class="input-label-secondary"
-                                                                                                          data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('messages.Click_on_the_map_to_see_your_location’s_longitude') }}"><img
-                                                    src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                    alt="{{ translate('messages.Click_on_the_map_to_see_your_location’s_longitude') }}"></span></label>
+                                                                                                          data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('messages.Click_on_the_map_to_see_your_location’s_longitude') }}"><i class="tio-info-outined"></i></span></label>
                                         <input type="text" name="longitude" class="form-control" placeholder="{{ translate('messages.Ex :') }} 103.344322"
                                                id="longitude" value="{{ $default_location ? $default_location['lng'] : 0 }}"
                                                required readonly>
@@ -719,7 +713,7 @@
                         <div class="col-sm-6 col-md-5">
                             @php($footer_text = \App\Models\BusinessSetting::where('key', 'footer_text')->first())
                             <div class="form-group">
-                                <label class="input-label">{{ translate('copy_right_text') }} <img src="{{dynamicAsset('/public/assets/admin/img/info-circle.svg')}}" title="{{ translate('make_visitors_aware_of_your_business‘s_rights_&_legal_information') }}" data-toggle="tooltip" alt=""> </label>
+                                <label class="input-label">{{ translate('copy_right_text') }} <i class="tio-info-outined"></i> </label>
                                 <textarea type="text" value="" name="footer_text" class="form-control" placeholder="" rows="3"
                                           required>{{ $footer_text->value ?? '' }}</textarea>
                             </div>
@@ -727,7 +721,7 @@
                         <div class="col-sm-6 col-md-5">
                             @php($cookies_text = \App\Models\BusinessSetting::where('key', 'cookies_text')->first())
                             <div class="form-group">
-                                <label class="input-label">{{ translate('Cookies_Text') }} <img src="{{dynamicAsset('/public/assets/admin/img/info-circle.svg')}}" data-original-title="{{ translate('messages.make_visitors_aware_of_your_business‘s_rights_&_legal_information.') }}" data-toggle="tooltip" alt=""> </label>
+                                <label class="input-label">{{ translate('Cookies_Text') }} <i class="tio-info-outined"></i> </label>
                                 <textarea type="text" value="" name="cookies_text" class="form-control"
                                           placeholder="{{ translate('messages.Ex_:_Cookies_Text') }} " rows="3" required>{{ $cookies_text->value ?? '' }}</textarea>
                             </div>
@@ -756,8 +750,7 @@
                                     <span class="line--limit-1"
                                           data-toggle="tooltip" data-placement="right"
                                           data-original-title="{{ translate('Set_up_Default_Commission_on_evrey_order._Admin_can_set_restaurant_wise_different_commission_rates_from_respective_restaurant_settings.') }}">
-                                        <img
-                                            src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}">
+                                        <i class="tio-info-outined"></i>
                                     </span>
                                 </label>
                                 <input type="number" name="admin_commission" class="form-control" id="admin_commission"
@@ -772,8 +765,7 @@
                                     &nbsp;
                                     <span class="line--limit-1"
                                           data-toggle="tooltip" data-placement="right"
-                                          data-original-title="{{ translate('Set_a_default_Commission_Rate_for_freelance_deliverymen_(under_admin)_on_every_deliveryman') }}"><img
-                                            src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}">
+                                          data-original-title="{{ translate('Set_a_default_Commission_Rate_for_freelance_deliverymen_(under_admin)_on_every_deliveryman') }}"><i class="tio-info-outined"></i>
                                     </span>
                                 </label>
                                 <input type="number" name="admin_comission_in_delivery_charge" class="form-control" id="admin_comission_in_delivery_charge"
@@ -959,9 +951,7 @@
                                                 </span>
                                                 <span class="form-label-secondary text-danger d-flex"
                                                       data-toggle="tooltip" data-placement="right"
-                                                      data-original-title="{{ translate('messages.If_enabled,_customers_do_not_have_to_login_while_checking_out_orders.')}}"><img
-                                                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                        alt="{{ translate('messages.customer_varification_toggle') }}"> *
+                                                      data-original-title="{{ translate('messages.If_enabled,_customers_do_not_have_to_login_while_checking_out_orders.')}}"><i class="tio-info-outined"></i> *
                                                 </span>
                                             </span>
                                     <input type="checkbox"
@@ -995,9 +985,7 @@
                                                 </span>
                                                 <span class="form-label-secondary text-danger d-flex"
                                                       data-toggle="tooltip" data-placement="right"
-                                                      data-original-title="{{ translate('messages.If_you_enable_this_option,_in_all_phone_no_field_will_show_a_country_picker_list.')}}"><img
-                                                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                        alt="{{ translate('messages.customer_varification_toggle') }}">
+                                                      data-original-title="{{ translate('messages.If_you_enable_this_option,_in_all_phone_no_field_will_show_a_country_picker_list.')}}"><i class="tio-info-outined"></i>
                                                 </span>
                                             </span>
                                     <input type="checkbox"
@@ -1089,9 +1077,7 @@
                                                             ({{ \App\CentralLogics\Helpers::currency_symbol() }}) <small
                                                                 class="text-danger"><span class="form-label-secondary"
                                                                                           data-toggle="tooltip" data-placement="right"
-                                                                                          data-original-title="{{ translate('messages.If_the_order_amount_exceeds_this_amount_the_delivery_fee_will_be_free_and_the_delivery_fee_will_be_deducted_from_the_admin’s_income.') }}"><img
-                                                                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                                        alt="{{ translate('messages.free_over_delivery_message') }}"></span>
+                                                                                          data-original-title="{{ translate('messages.If_the_order_amount_exceeds_this_amount_the_delivery_fee_will_be_free_and_the_delivery_fee_will_be_deducted_from_the_admin’s_income.') }}"><i class="tio-info-outined"></i></span>
                                                             *</small></span>
 
                                             </label>
@@ -1113,7 +1099,7 @@
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <label class="input-label text-capitalize d-inline-flex alig-items-center">
                                                     <span class="line--limit-1">{{ translate('messages.free_delivery_distance') }} (km)</span>
-                                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('Within_this_distance_the_delivery_fee_will_be_free_and_the_delivery_fee_will_be_deducted_from_the_admin’s_income.')}}" class="input-label-secondary"><img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.Enter_the_distance_for_free_delivery._Charges_will_apply_after_exceeding_that_distance.') }}"></span>
+                                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('Within_this_distance_the_delivery_fee_will_be_free_and_the_delivery_fee_will_be_deducted_from_the_admin’s_income.')}}" class="input-label-secondary"><i class="tio-info-outined"></i></span>
                                                     <small class="text-danger">*</small>
                                                 </label>
                                             </div>
@@ -1153,9 +1139,7 @@
                                                 </span>
                                                 <span class="form-label-secondary text-danger d-flex"
                                                       data-toggle="tooltip" data-placement="right"
-                                                      data-original-title="{{ translate('messages.If_enabled,_customers_need_to_pay_an_extra_charge_while_checking_out_orders.')}}"><img
-                                                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                        alt="{{ translate('messages.customer_varification_toggle') }}"> *
+                                                      data-original-title="{{ translate('messages.If_enabled,_customers_need_to_pay_an_extra_charge_while_checking_out_orders.')}}"><i class="tio-info-outined"></i> *
                                                 </span>
                                             </span>
                                             <input type="checkbox"
@@ -1186,9 +1170,7 @@
                                                 <small
                                                     class="text-danger"><span class="form-label-secondary"
                                                                               data-toggle="tooltip" data-placement="right"
-                                                                              data-original-title="{{ translate('messages.Set_a_name_for_the_additional_charge,_e.g._“Processing_Fee”.') }}"><img
-                                                            src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                            alt="{{ translate('messages.free_over_delivery_message') }}"></span>
+                                                                              data-original-title="{{ translate('messages.Set_a_name_for_the_additional_charge,_e.g._“Processing_Fee”.') }}"><i class="tio-info-outined"></i></span>
                                                 *</small></span>
                                         </label>
 
@@ -1206,9 +1188,7 @@
                                                 ({{ \App\CentralLogics\Helpers::currency_symbol() }}) <small
                                                     class="text-danger"><span class="form-label-secondary"
                                                                               data-toggle="tooltip" data-placement="right"
-                                                                              data-original-title="{{ translate('messages.Set_the_value_(amount)_customers_need_to_pay_as_additional_charge.') }}"><img
-                                                            src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                            alt="{{ translate('messages.free_over_delivery_message') }}"></span>
+                                                                              data-original-title="{{ translate('messages.Set_the_value_(amount)_customers_need_to_pay_as_additional_charge.') }}"><i class="tio-info-outined"></i></span>
                                                 *</small></span>
                                         </label>
 
@@ -1240,9 +1220,7 @@
                                                 </span>
                                                 <span class="form-label-secondary text-danger d-flex"
                                                       data-toggle="tooltip" data-placement="right"
-                                                      data-original-title="{{ translate('messages.If_enabled,_customers_can_make_partial_payments._For_example,_a_customer_can_pay_$20_initially_out_of_their_$50_payment_&_use_other_payment_methods_for_the_rest._Partial_payments_must_be_made_through_their_wallets.')}}"><img
-                                                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                        alt="{{ translate('messages.customer_varification_toggle') }}"> *
+                                                      data-original-title="{{ translate('messages.If_enabled,_customers_can_make_partial_payments._For_example,_a_customer_can_pay_$20_initially_out_of_their_$50_payment_&_use_other_payment_methods_for_the_rest._Partial_payments_must_be_made_through_their_wallets.')}}"><i class="tio-info-outined"></i> *
                                                 </span>
                                             </span>
                                             <input type="checkbox"
@@ -1270,7 +1248,7 @@
                                         <label class="input-label text-capitalize d-flex alig-items-center"><span
                                                 class="line--limit-1">{{ translate('Can_Pay_the_Rest_Amount_using') }}
                                             <span class="form-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('messages.Set_the_method(s)_that_customers_can_pay_the_remainder_after_partial_payment.') }}" alt="">
-                                                <img src="{{dynamicAsset('public/assets/admin/img/info-circle.svg')}}" alt="">
+                                                <i class="tio-info-outined"></i>
                                             </span>
                                             </span>
                                         </label>

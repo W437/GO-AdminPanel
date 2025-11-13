@@ -23,7 +23,7 @@
                     <img src="{{dynamicAsset('public/assets/admin/img/add-btn.png')}}" alt="">
                     <span class="txt">Add Page</span>
                     <span data-toggle="tooltip" title="add new page">
-                        <img src="{{dynamicAsset('public/assets/admin/img/query.png')}}" alt="">
+                        <i class="tio-help" style="font-size: 24px;"></i>
                     </span>
                 </button>
             </div>

@@ -17,7 +17,7 @@ active
             <div class="d-flex flex-wrap justify-content-between align-items-center py-2">
                 <div class="flex-grow-1">
                     <div class="d-flex align-items-start">
-                        <img src="{{dynamicAsset('/public/assets/admin/img/store.png')}}" width="24" alt="img">
+                        <i class="tio-shop" style="font-size: 40px;"></i>
                         <div class="w-0 flex-grow pl-2">
                             <h1 class="page-header-title">{{translate('Subscribed Restaurant List')}}</h1>
                         </div>
@@ -41,28 +41,28 @@ active
                     <a class="__card-2 __bg-1" href="#">
                         <h4 class="title text--title">{{ $data['total_subscribed_user'] }}</h4>
                         <span class="subtitle">{{ translate('Total_Subscribed_User') }}</span>
-                        <img src="{{dynamicAsset('public/assets/admin/img/subscription-plan/subscribed-user.png')}}" alt="report/new" class="card-icon" width="35px">
+                        <i class="tio-user" style="font-size: 35px;"></i>
                     </a>
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <a class="__card-2 __bg-3" href="#">
                         <h4 class="title text--title">{{ $data['active_subscription'] }}</h4>
                         <span class="subtitle">{{ translate('Active_Subscriptions') }}</span>
-                        <img src="{{dynamicAsset('public/assets/admin/img/subscription-plan/active-user.png')}}" alt="report/new" class="card-icon" width="35px">
+                        <i class="tio-user-circle" style="font-size: 35px;"></i>
                     </a>
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <a class="__card-2 __bg-6" href="#">
                         <h4 class="title text--title">{{ $data['expired_subscription'] }}</h4>
                         <span class="subtitle">{{ translate('Expired_Subscription') }}</span>
-                        <img src="{{dynamicAsset('public/assets/admin/img/subscription-plan/expired-user.png')}}" alt="report/new" class="card-icon" width="35px">
+                        <i class="tio-user-remove" style="font-size: 35px;"></i>
                     </a>
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <a class="__card-2 __bg-4" href="#">
                         <h4 class="title text--title">{{ $data['expired_soon'] }}</h4>
                         <span class="subtitle">{{ translate('Expiring_Soon') }} </span>
-                        <img src="{{dynamicAsset('public/assets/admin/img/subscription-plan/expired-soon.png')}}" alt="report/new" class="card-icon" width="35px">
+                        <i class="tio-time" style="font-size: 35px;"></i>
                     </a>
                 </div>
             </div>
@@ -174,8 +174,7 @@ active
 
                                 <span
                                 data-toggle="tooltip" data-placement="right"
-                                data-original-title="{{ translate('The subscription is canceled by admin/restaurant but subscribers will continue to get full subscription privileges until the expiration date') }}"><img
-                                    src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}">
+                                data-original-title="{{ translate('The subscription is canceled by admin/restaurant but subscribers will continue to get full subscription privileges until the expiration date') }}"><i class="tio-info-outined"></i>
                             </span>
 
                             </th>

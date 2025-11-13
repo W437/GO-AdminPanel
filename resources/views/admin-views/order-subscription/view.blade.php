@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="d-flex flex-wrap g-1 justify-content-between mt-3">
                                     <div class="d-flex gap-1 align-items-center">
-                                        <img src="{{dynamicAsset('public/assets/admin/img/store.png')}}"  width="22" alt=""> <strong>{{ translate('Restaurant') }} :</strong> <a href="{{route('admin.restaurant.view', $subscription->restaurant_id)}}" class="text-primary font-semibold">{{ $subscription->restaurant->name }}</a>
+                                        <i class="tio-shop" style="font-size: 40px;"></i> <strong>{{ translate('Restaurant') }} :</strong> <a href="{{route('admin.restaurant.view', $subscription->restaurant_id)}}" class="text-primary font-semibold">{{ $subscription->restaurant->name }}</a>
                                     </div>
                                     <div class="d-flex gap-2">
                                         <span> {{ translate('Payment_Method') }}   :</span>
@@ -97,10 +97,10 @@
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link {{$tab=='delivery-log'?'active':''}}" href="{{route('admin.order.subscription.show', ['subscription'=>$subscription->id])}}?tab=delivery-log"  aria-disabled="true">{{translate('messages.delivery_log')}}
-                                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('See_all_completed_subscription_deliveries_of_this_order_ID.')}}" class="input-label-secondary"><img src="{{dynamicAsset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span></a>
+                                                    <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('See_all_completed_subscription_deliveries_of_this_order_ID.')}}" class="input-label-secondary"><i class="tio-info-outined"></i></span></a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link {{$tab=='pause-log'?'active':''}}" href="{{route('admin.order.subscription.show', ['subscription'=>$subscription->id])}}?tab=pause-log"  aria-disabled="true">{{translate('messages.pause_log')}}  <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('See_all_paused_subscription_deliveries_of_this_order_ID_and_who_paused_it.')}}" class="input-label-secondary"><img src="{{dynamicAsset('public/assets/admin/img/info-circle.svg')}}" alt="i"></span></a>
+                                                <a class="nav-link {{$tab=='pause-log'?'active':''}}" href="{{route('admin.order.subscription.show', ['subscription'=>$subscription->id])}}?tab=pause-log"  aria-disabled="true">{{translate('messages.pause_log')}}  <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('See_all_paused_subscription_deliveries_of_this_order_ID_and_who_paused_it.')}}" class="input-label-secondary"><i class="tio-info-outined"></i></span></a>
                                             </li>
                                         </ul>
                                     </div>

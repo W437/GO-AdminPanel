@@ -3,7 +3,7 @@
     <h5 class="card-header-title">
         <i class="tio-star card-header-icon"></i>
         {{ translate('Most_Popular_Restaurants') }}
-        <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('most_popular_restaurants_based_on_users_wishlisted_Foods')}}" class="input-label-secondary"><img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.Most_Popular_Restaurants_Based_on_Users_Wishlisted_Foods.') }}"></span>
+        <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('most_popular_restaurants_based_on_users_wishlisted_Foods')}}" class="input-label-secondary"><i class="tio-info-outined"></i></span>
 
     </h5>
     @php($params = session('dash_params'))

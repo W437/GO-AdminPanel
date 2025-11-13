@@ -32,7 +32,7 @@
                                      class="mr-1 w--20" alt="">
                                     {{translate('messages.'.$socialLoginService['login_medium'])}} &nbsp;
                                     <span class="d-flex align-items-center switch--label">
-                                        <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('Users_can_sign_in_using_their') }} {{translate($socialLoginService['login_medium'])}} {{ translate('messages.account') }}"><img src="{{dynamicAsset('public/assets/admin/img/info-circle.svg')}}" alt="Veg/non-veg toggle"> * </span>
+                                        <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('Users_can_sign_in_using_their') }} {{translate($socialLoginService['login_medium'])}} {{ translate('messages.account') }}"><i class="tio-info-outined"></i> * </span>
                                     </span>
                                 </h5>
                                 <label class="toggle-switch toggle-switch-sm p-0">
@@ -104,7 +104,7 @@
                                         <img src="{{dynamicAsset('/public/assets/admin/img/apple.png')}}" class="mr-1 w--20" alt="">
                                         {{translate('messages.'.$appleLoginService['login_medium'])}} &nbsp;
                                         <span class="d-flex align-items-center switch--label">
-                                            <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('Users_can_sign_in_using_their') }} {{translate($appleLoginService['login_medium'])}} {{ translate('messages.account') }}"><img src="{{dynamicAsset('public/assets/admin/img/info-circle.svg')}}" alt="Veg/non-veg toggle"> * </span>
+                                            <span class="form-label-secondary text-danger d-flex" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('Users_can_sign_in_using_their') }} {{translate($appleLoginService['login_medium'])}} {{ translate('messages.account') }}"><i class="tio-info-outined"></i> * </span>
                                         </span>
                                     </h5>
                                     <label class="toggle-switch toggle-switch-sm p-0">

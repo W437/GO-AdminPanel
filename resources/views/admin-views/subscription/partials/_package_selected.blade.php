@@ -146,8 +146,8 @@
                     <input type="radio" {{ $balance >= $package?->price ? '' :'disabled'  }} value="wallet"  class="d-none" name="payment_gateway">
                     <div  data-toggle="tooltip" data-placement="bottom" title="{{$balance >= $package?->price ? translate('pay_the_amount_via_wallet') : translate('You have not sufficient balance on you wallet! please add money to your wallet to purchase the packages') }}"  class="payment-item-inner">
                         <div class="check">
-                            <img src="{{dynamicAsset('/public/assets/admin/img/check-1.png')}}" class="uncheck" alt="">
-                            <img src="{{dynamicAsset('/public/assets/admin/img/check-2.png')}}" class="check" alt="">
+                            <i class="tio-checkmark-circle"></i>
+                            <i class="tio-checkmark-circle"></i>
                         </div>
                         <span>{{ translate('wallet') }}</span>
                         <span class="ml-auto" >{{ \App\CentralLogics\Helpers::format_currency($balance) }} </span>
@@ -161,8 +161,8 @@
                     <input type="radio" value="manual_payment_by_admin"  class="d-none" name="payment_gateway">
                     <div class="payment-item-inner">
                         <div class="check">
-                            <img src="{{dynamicAsset('/public/assets/admin/img/check-1.png')}}" class="uncheck" alt="">
-                            <img src="{{dynamicAsset('/public/assets/admin/img/check-2.png')}}" class="check" alt="">
+                            <i class="tio-checkmark-circle"></i>
+                            <i class="tio-checkmark-circle"></i>
                         </div>
                         <span>{{ translate('manually_pay') }}</span>
                     </div>

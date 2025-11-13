@@ -37,7 +37,7 @@
                                     <h2 class="mb-0 font-weight-normal">{{ translate('messages.step_1') }}</h2>
                                     <div class="text-capitalize">{{ translate('messages.download_the_excel_file') }}</div>
                                 </div>
-                                <img width="60" src="{{dynamicAsset('/public/assets/admin/img/bulk1.png')}}" alt="">
+                                <i class="tio-download" style="font-size: 60px;"></i>
                             </div>
 
                             <h5 class="mb-3">{{ translate('messages.instruction') }}</h5>
@@ -61,7 +61,7 @@
                                     <h2 class="mb-0 font-weight-normal">{{ translate('messages.step_2') }}</h2>
                                     <div class="text-capitalize">{{ translate('messages.Match Spread sheet data according to instruction') }}</div>
                                 </div>
-                                <img width="60" src="{{dynamicAsset('/public/assets/admin/img/bulk2.png')}}" alt="">
+                                <i class="tio-edit" style="font-size: 60px;"></i>
                             </div>
 
                             <h5 class="mb-3">{{ translate('messages.instruction') }}</h5>
@@ -96,7 +96,7 @@
                                     <h2 class="mb-0 font-weight-normal">{{ translate('messages.step_3 ') }}</h2>
                                     <div class="text-capitalize">{{ translate('messages.Validate data and complete import') }}</div>
                                 </div>
-                                <img width="60" src="{{dynamicAsset('/public/assets/admin/img/bulk3.png')}}" alt="">
+                                <i class="tio-cloud-upload" style="font-size: 60px;"></i>
                             </div>
 
                             <h5 class="mb-3">{{ translate('messages.instruction') }}</h5>
@@ -163,7 +163,7 @@
 
                                 <div class="image-box banner">
                                     <label for="upload_excel" class="d-flex flex-column align-items-center justify-content-center h-100 cursor-pointer gap-2">
-                                        <img width="54" class="upload-icon" src="{{dynamicAsset('public/assets/admin/img/excel-upload.png')}}" alt="Upload Icon">
+                                        <i class="tio-file-outlined upload-icon" style="font-size: 54px;"></i>
                                         <span class="upload-text px-2 filename text-center">{{ translate('Must be Excel files using our Excel template above')}}</span>
                                     </label>
 
@@ -187,7 +187,7 @@
         <h3 class="mb-3 mt-4">{{ translate('generate_Variation') }}</h3>
         <div class="alert alert-primary-light alert-dismissible fade show" role="alert">
             <div class="media gap-3 align-items-center">
-                <img width="18" src="{{dynamicAsset('public/assets/admin/img/info-bulb.png')}}" alt="">
+                <i class="tio-lightbulb" style="font-size: 18px;"></i>
                 <div class="media-body">
                     {{ translate('You_must_generate_variations_from_this_generator_if_you_want_to_add_variations_to_your_foods.You_must_copy_from_the_specific_filed_and_past_it_to_the_specific_column_at_your_excel_sheet.Otherwise_you_might_get_500_error_if_you_swap_or_entered_invalid_data.And_if_you_want_to_make_it_empty_then_you_have_to_enter_an_empty_array_[_]_.') }}
                 </div>

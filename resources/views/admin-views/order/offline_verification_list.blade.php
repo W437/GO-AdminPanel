@@ -14,7 +14,7 @@
                 <div class="col-xl-12 col-md-12 col-sm-12 mb-3 mb-sm-0">
                     <h1 class="page-header-title text-capitalize m-0">
                         <span class="page-header-icon">
-                            <img src="{{dynamicAsset('public/assets/admin/img/fi_273177.svg')}}" class="w--26" alt="">
+                            <i class="tio-receipt"></i>
                         </span>
                         <span>
                         {{translate('messages.Verify_Offline_Payments')}}

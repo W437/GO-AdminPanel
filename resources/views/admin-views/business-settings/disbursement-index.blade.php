@@ -57,9 +57,7 @@
                                                 class="line--limit-1">{{ translate('Disbursement_Request_Type')}}</span>
                                             <span class="form-label-secondary"
                                                   data-toggle="tooltip" data-placement="right"
-                                                  data-original-title="{{ translate('Choose_Manual_or_Automated_Disbursement_Requests._In_Automated_mode,_withdrawal_requests_for_disbursement_are_generated_automatically;_in_Manual_mode,_restaurants_need_to_request_withdrawals_manually.') }}"><img
-                                                    src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                    alt="{{ translate('messages.Disbursement_Request_Type') }}"></span>
+                                                  data-original-title="{{ translate('Choose_Manual_or_Automated_Disbursement_Requests._In_Automated_mode,_withdrawal_requests_for_disbursement_are_generated_automatically;_in_Manual_mode,_restaurants_need_to_request_withdrawals_manually.') }}"><i class="tio-info-outined"></i></span>
                                         </label>
                                         <div class="resturant-type-group border">
                                             <label class="form-check form--check mr-2 mr-md-4">

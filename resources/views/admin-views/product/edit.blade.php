@@ -197,9 +197,7 @@
                                             for="exampleFormControlSelect1">{{ translate('messages.sub_category') }}<span
                                                 class="input-label-secondary" data-toggle="tooltip"
                                                 data-placement="right"
-                                                data-original-title="{{ translate('messages.category_required_warning') }}"><img
-                                                    src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                    alt="{{ translate('messages.category_required_warning') }}"></span></label>
+                                                data-original-title="{{ translate('messages.category_required_warning') }}"><i class="tio-info-outined"></i></span></label>
                                                     <select name="sub_category_id" id="sub-categories"
                                                     data-id="{{ count($product_category) >= 2 ? $product_category[1]->id : '' }}"
                                                     class="form-control js-select2-custom">
@@ -286,9 +284,7 @@
                                 for="exampleFormControlSelect1">{{ translate('Select_Add-on') }}<span
                                     class="input-label-secondary" data-toggle="tooltip"
                                     data-placement="right"
-                                    data-original-title="{{ translate('messages.The_selected_addon’s_will_be_displayed_in_this_food_details') }}"><img
-                                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                        alt="{{ translate('messages.The_selected_addon’s_will_be_displayed_in_this_food_details') }}"></span></label>
+                                    data-original-title="{{ translate('messages.The_selected_addon’s_will_be_displayed_in_this_food_details') }}"><i class="tio-info-outined"></i></span></label>
                                         <select name="addon_ids[]" class="form-control border js-select2-custom" multiple="multiple"
                                         id="add_on">
                                     </select>

@@ -132,7 +132,7 @@
 
                                 <div class="image-box">
                                     <label for="image-input" class="d-flex flex-column align-items-center justify-content-center h-100 cursor-pointer gap-2">
-                                    <img width="30" class="upload-icon" src="{{dynamicAsset('public/assets/admin/img/upload-icon.png')}}" alt="Upload Icon">
+                                    <i class="tio-cloud-upload upload-icon" style="font-size: 30px;"></i>
                                     <span class="upload-text">{{ translate('Upload Image')}}</span>
                                     <img src="#" alt="Preview Image" class="preview-image">
                                     </label>
@@ -202,9 +202,7 @@
                                             for="exampleFormControlSelect1">{{ translate('messages.sub_category') }}<span
                                                 class="input-label-secondary" data-toggle="tooltip"
                                                 data-placement="right"
-                                                data-original-title="{{ translate('messages.category_required_warning') }}"><img
-                                                    src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                    alt="{{ translate('messages.category_required_warning') }}"></span></label>
+                                                data-original-title="{{ translate('messages.category_required_warning') }}"><i class="tio-info-outined"></i></span></label>
                                         <select name="sub_category_id" id="sub-categories"
                                             class="form-control js-select2-custom">
                                             <option value="" selected disabled>
@@ -290,9 +288,7 @@
                                 for="exampleFormControlSelect1">{{ translate('Select_Add-on') }}<span
                                     class="input-label-secondary" data-toggle="tooltip"
                                     data-placement="right"
-                                    data-original-title="{{ translate('messages.The_selected_addon’s_will_be_displayed_in_this_food_details') }}"><img
-                                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                        alt="{{ translate('messages.The_selected_addon’s_will_be_displayed_in_this_food_details') }}"></span></label>
+                                    data-original-title="{{ translate('messages.The_selected_addon’s_will_be_displayed_in_this_food_details') }}"><i class="tio-info-outined"></i></span></label>
                             <select name="addon_ids[]" class="form-control border js-select2-custom"
                                 multiple="multiple" id="add_on">
 

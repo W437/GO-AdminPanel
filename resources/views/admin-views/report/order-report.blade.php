@@ -12,7 +12,7 @@
         <div class="page-header">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{dynamicAsset('/public/assets/admin/img/report/new/order_report.png')}}" class="w--22" alt="">
+                    <i class="tio-chart-bar-4"></i>
                 </span>
                 <span>
                     {{ translate('messages.order_report') }}

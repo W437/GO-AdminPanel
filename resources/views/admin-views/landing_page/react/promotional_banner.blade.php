@@ -9,7 +9,7 @@
             <div class="d-flex flex-wrap justify-content-between align-items-start">
                 <h1 class="page-header-title text-capitalize">
                     <div class="card-header-icon d-inline-flex mr-2 img">
-                        <img src="{{ dynamicAsset('/public/assets/admin/img/landing-page.png') }}" class="mw-26px" alt="public">
+                        <i class="tio-pages"></i>
                     </div>
                     <span>
                         {{ translate('React_Landing_Page') }}
@@ -115,7 +115,7 @@
                                     </label>
                                     <label class="upload-img-3 m-0">
                                         <div class="img">
-                                            <img src="{{dynamicAsset('/public/assets/admin/img/upload-3.png')}}"  class="vertical-img max-w-187px" alt="">
+                                            <i class="tio-cloud-upload" style="font-size: 40px;"></i>
                                         </div>
                                         <input type="file" required   name="image" hidden="">
                                     </label>

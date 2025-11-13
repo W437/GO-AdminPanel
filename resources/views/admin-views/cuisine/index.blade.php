@@ -325,7 +325,7 @@
 
                                         <div class="image-box">
                                             <label for="image-input2" class="d-flex flex-column align-items-center justify-content-center h-100 cursor-pointer gap-2">
-                                            <img width="30"  class="upload-icon" src="{{dynamicAsset('public/assets/admin/img/upload-icon.png')}}" alt="Upload Icon">
+                                            <i class="tio-cloud-upload upload-icon" style="font-size: 30px;"></i>
                                             <span class="upload-text">{{ translate('Upload Image')}}</span>
                                             <img src="#" alt="Preview Image" class="preview-image image_on_add">
                                             </label>

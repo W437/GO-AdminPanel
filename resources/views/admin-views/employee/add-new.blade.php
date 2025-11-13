@@ -113,7 +113,7 @@
 
                                         <div class="image-box">
                                             <label for="image-input" class="d-flex flex-column align-items-center justify-content-center h-100 cursor-pointer gap-2">
-                                            <img width="30" class="upload-icon" src="{{dynamicAsset('public/assets/admin/img/upload-icon.png')}}" alt="Upload Icon">
+                                            <i class="tio-cloud-upload upload-icon" style="font-size: 30px;"></i>
                                             <span class="upload-text">{{ translate('Upload Image')}}</span>
                                             <img src="#" alt="Preview Image" class="preview-image">
                                             </label>
@@ -154,7 +154,7 @@
 
                                     <div class="js-form-message form-group">
                                         <label class="input-label" for="signupSrPassword">{{translate('messages.password')}}
-                                            <span class="input-label-secondary ps-1" title="{{ translate('messages.Must_contain_at_least_one_number_and_one_uppercase_and_lowercase_letter_and_symbol,_and_at_least_8_or_more_characters') }}"><img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.Must_contain_at_least_one_number_and_one_uppercase_and_lowercase_letter_and_symbol,_and_at_least_8_or_more_characters') }}"></span>
+                                            <span class="input-label-secondary ps-1" title="{{ translate('messages.Must_contain_at_least_one_number_and_one_uppercase_and_lowercase_letter_and_symbol,_and_at_least_8_or_more_characters') }}"><i class="tio-info-outined"></i></span>
                                         </label>
 
                                         <div class="input-group input-group-merge">

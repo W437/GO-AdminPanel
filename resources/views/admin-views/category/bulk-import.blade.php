@@ -28,7 +28,7 @@
                                     <h2 class="mb-0 font-weight-normal">{{ translate('messages.step_1') }}</h2>
                                     <div class="text-capitalize">{{ translate('messages.download_the_excel_file') }}</div>
                                 </div>
-                                <img width="60" src="{{dynamicAsset('/public/assets/admin/img/bulk1.png')}}" alt="">
+                                <i class="tio-download" style="font-size: 60px;"></i>
                             </div>
 
                             <h5 class="mb-3">{{ translate('messages.instruction') }}</h5>
@@ -52,7 +52,7 @@
                                     <h2 class="mb-0 font-weight-normal">{{ translate('messages.step_2') }}</h2>
                                     <div class="text-capitalize">{{ translate('messages.Match Spread sheet data according to instruction') }}</div>
                                 </div>
-                                <img width="60" src="{{dynamicAsset('/public/assets/admin/img/bulk2.png')}}" alt="">
+                                <i class="tio-edit" style="font-size: 60px;"></i>
                             </div>
 
                             <h5 class="mb-3">{{ translate('messages.instruction') }}</h5>
@@ -82,7 +82,7 @@
                                     <h2 class="mb-0 font-weight-normal">{{ translate('messages.step_3 ') }}</h2>
                                     <div class="text-capitalize">{{ translate('messages.Validate data and complete import') }}</div>
                                 </div>
-                                <img width="60" src="{{dynamicAsset('/public/assets/admin/img/bulk3.png')}}" alt="">
+                                <i class="tio-cloud-upload" style="font-size: 60px;"></i>
                             </div>
 
                             <h5 class="mb-3">{{ translate('messages.instruction') }}</h5>
@@ -145,7 +145,7 @@
 
                                 <div class="image-box banner">
                                     <label for="upload_excel" class="d-flex flex-column align-items-center justify-content-center h-100 cursor-pointer gap-2">
-                                        <img width="54" class="upload-icon" src="{{dynamicAsset('public/assets/admin/img/excel-upload.png')}}" alt="Upload Icon">
+                                        <i class="tio-file-outlined upload-icon" style="font-size: 54px;"></i>
                                         <span class="upload-text px-2 filename text-center">{{ translate('Must be Excel files using our Excel template above')}}</span>
                                     </label>
 

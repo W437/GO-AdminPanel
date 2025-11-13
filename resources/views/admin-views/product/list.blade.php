@@ -176,7 +176,7 @@
                                                         @php( $stock_out = true)
 
                                                         <span class="badge badge-soft-warning badge-pill font-medium">{{ translate('Out Of Stock') }}</span>
-                                                        <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('messages.Your_main_stock_is_out_of_stock.')}}"><img src="{{dynamicAsset('public/assets/admin/img/info-circle.svg')}}" alt="public/img"></span>
+                                                        <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('messages.Your_main_stock_is_out_of_stock.')}}"><i class="tio-info-outined"></i></span>
                                                         @else
 
                                                         <?php
@@ -194,7 +194,7 @@
                                                             }
                                                             ?>
                                                             @if($stock_out)
-                                                            <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('messages.One_or_more_variations_are_out_of_stock.')}}"><img src="{{dynamicAsset('public/assets/admin/img/info-circle.svg')}}" alt="public/img"></span>
+                                                            <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('messages.One_or_more_variations_are_out_of_stock.')}}"><i class="tio-info-outined"></i></span>
 
                                                             @endif
                                                         @endif

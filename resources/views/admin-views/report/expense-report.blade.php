@@ -11,7 +11,7 @@
         <div class="page-header">
             <h1 class="page-header-title mb-2">
                 <span class="page-header-icon">
-                    <img src="{{ dynamicAsset('public/assets/admin/img/report.png') }}" class="w--22" alt="">
+                    <i class="tio-chart-bar-4"></i>
                 </span>
                 <span>
                     {{ translate('messages.expense_report') }}

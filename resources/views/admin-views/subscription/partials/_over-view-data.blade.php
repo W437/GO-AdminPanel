@@ -5,24 +5,21 @@
                 <a class="__card-2 __bg-1" href="#">
                     <h4 class="title">{{ $over_view_data['total_subscribed_user'] }}</h4>
                     <span class="subtitle">{{ translate('Total_Subscribed_User') }}</span>
-                    <img src="{{dynamicAsset('public/assets/admin/img/subscription-plan/subscribed-user.png')}}"
-                        alt="report/new" class="card-icon" width="35px">
+                    <i class="tio-user" style="font-size: 35px;"></i>
                 </a>
             </div>
             <div class="col-sm-6 col-lg-3">
                 <a class="__card-2 __bg-3" href="#">
                     <h4 class="title">{{ $over_view_data['active_subscription'] }}</h4>
                     <span class="subtitle">{{ translate('Active_Subscriptions') }}</span>
-                    <img src="{{dynamicAsset('public/assets/admin/img/subscription-plan/active-user.png')}}"
-                        alt="report/new" class="card-icon" width="35px">
+                    <i class="tio-user-circle" style="font-size: 35px;"></i>
                 </a>
             </div>
             <div class="col-sm-6 col-lg-3">
                 <a class="__card-2 __bg-6" href="#">
                     <h4 class="title">{{ $over_view_data['expired_subscription'] }}</h4>
                     <span class="subtitle">{{ translate('Expired_Subscription') }}</span>
-                    <img src="{{dynamicAsset('public/assets/admin/img/subscription-plan/expired-user.png')}}"
-                        alt="report/new" class="card-icon" width="35px">
+                    <i class="tio-user-remove" style="font-size: 35px;"></i>
                 </a>
             </div>
             <div class="col-sm-6 col-lg-3">

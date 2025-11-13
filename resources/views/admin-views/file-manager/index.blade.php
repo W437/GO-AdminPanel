@@ -7,7 +7,7 @@
     <div class="page-header d-flex flex-wrap justify-content-between">
         <h1 class="page-header-title">
             <span class="page-header-icon">
-                <img src="{{dynamicAsset('public/assets/admin/img/folder-logo.png')}}" class="w--26" alt="">
+                <i class="tio-folder"></i>
             </span>
             <span>
                 {{translate('messages.file_manager')}}

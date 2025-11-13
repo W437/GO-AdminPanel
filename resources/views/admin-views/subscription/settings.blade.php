@@ -16,7 +16,7 @@ active
             <div class="d-flex flex-wrap justify-content-between align-items-center py-2">
                 <div class="flex-grow-1">
                     <div class="d-flex align-items-start">
-                        <img src="{{dynamicAsset('/public/assets/admin/img/store.png')}}" width="24" alt="img">
+                        <i class="tio-shop" style="font-size: 40px;"></i>
                         <div class="w-0 flex-grow pl-2">
                             <h1 class="page-header-title">{{translate('Subscription Settings')}}</h1>
                         </div>

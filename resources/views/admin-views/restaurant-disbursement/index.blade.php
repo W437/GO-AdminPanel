@@ -13,7 +13,7 @@
     <div class="page-header">
         <h1 class="page-header-title">
             <span class="page-header-icon">
-                <img src="{{dynamicAsset('/public/assets/admin/img/report/new/disburstment.png')}}" class="w--22" alt="">
+                <i class="tio-money-vs"></i>
             </span>
             <span>{{ translate('Restaurant_Disbursement') }}<span class="badge badge-soft-secondary m-1"
                 >{{ $disbursements->total() }}</span></span>

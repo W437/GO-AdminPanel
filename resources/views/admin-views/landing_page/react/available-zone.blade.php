@@ -8,7 +8,7 @@
         <div class="d-flex flex-wrap justify-content-between">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{dynamicAsset('public/assets/admin/img/landing-page.png')}}" class="w--20" alt="">
+                    <i class="tio-pages"></i>
                 </span>
                 <span>
                     {{ translate('messages.react_landing_pages') }}
@@ -96,7 +96,7 @@
                                     <label class="input-label"
                                            for="default_title">{{ translate('messages.title') }}
                                         ({{ translate('messages.Default') }})<span class="form-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('Write_the_title_within_50_characters') }}">
-                                                <img src="{{dynamicAsset('public/assets/admin/img/info-circle.svg')}}" alt="">
+                                                <i class="tio-info-outined"></i>
                                             </span>
                                     </label>
                                     <input type="text" name="available_zone_title[]" id="default_title" maxlength="50"
@@ -107,7 +107,7 @@
                                 <div class="form-group mb-0">
                                     <label class="input-label"
                                            for="exampleFormControlInput1">{{ translate('messages.short_description') }} ({{ translate('messages.default') }})<span class="form-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('Write_the_short_description_within_200_characters') }}">
-                                                <img src="{{dynamicAsset('public/assets/admin/img/info-circle.svg')}}" alt="">
+                                                <i class="tio-info-outined"></i>
                                             </span></label>
                                     <textarea type="text" name="available_zone_short_description[]" maxlength="200" placeholder="{{translate('messages.short_description')}}" class="form-control min-h-90px ckeditor">{{$available_zone_short_description?->getRawOriginal('value')}}</textarea>
                                 </div>
@@ -141,7 +141,7 @@
                                         <label class="input-label"
                                                for="{{ $lang }}_title">{{ translate('messages.title') }}
                                             ({{ strtoupper($lang) }})<span class="form-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('Write_the_title_within_50_characters') }}">
-                                                <img src="{{dynamicAsset('public/assets/admin/img/info-circle.svg')}}" alt="">
+                                                <i class="tio-info-outined"></i>
                                             </span>
                                         </label>
                                         <input type="text" name="available_zone_title[]" maxlength="50" id="{{ $lang }}_title"
@@ -151,7 +151,7 @@
                                     <div class="form-group mb-0">
                                         <label class="input-label"
                                                for="exampleFormControlInput1">{{ translate('messages.short_description') }} ({{ strtoupper($lang) }})<span class="form-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('Write_the_short_description_within_200_characters') }}">
-                                                <img src="{{dynamicAsset('public/assets/admin/img/info-circle.svg')}}" alt="">
+                                                <i class="tio-info-outined"></i>
                                             </span></label>
                                         <textarea type="text" name="available_zone_short_description[]" maxlength="200" placeholder="{{translate('messages.short_description')}}" class="form-control min-h-90px ckeditor">{{ $available_zone_short_description_translate[$lang]['value']??'' }}</textarea>
                                     </div>

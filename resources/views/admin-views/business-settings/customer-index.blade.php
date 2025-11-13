@@ -45,7 +45,7 @@
                                 <span>
                                     {{translate('Customer_Setup')}}
                                 </span>
-                                <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('messages.If_enabled,_customers_can_have_virtual_wallets_in_their_accounts._They_can_also_earn_(via_referral,_refund,_or_loyalty_points)_and_buy_with_the_wallet’s_amount') }}"><img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.show_hide_food_menu') }}"></span>
+                                <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('messages.If_enabled,_customers_can_have_virtual_wallets_in_their_accounts._They_can_also_earn_(via_referral,_refund,_or_loyalty_points)_and_buy_with_the_wallet’s_amount') }}"><i class="tio-info-outined"></i></span>
                             </h5>
                         </div>
                         <div class="card-body">
@@ -55,7 +55,7 @@
                                         <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border  rounded px-4 form-control">
                                             <span class="pr-2">{{ translate('Customer_Verification') }}
                                                 <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('If_you_activate_this_feature,_customers_need_to_verify_their_account_information_via_OTP_during_the_signup_process') }}">
-                                                    <img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.show_hide_food_menu') }}">
+                                                    <i class="tio-info-outined"></i>
                                                 </span>
                                             </span>
                                             <input type="checkbox"
@@ -82,7 +82,7 @@
                                         <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border  rounded px-4 form-control">
                                             <span class="pr-2">{{ translate('Customer Can Earn & Buy From Wallet') }}
                                                 <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('If_enabled,_customers_can_earn_and_buy_from_their_wallets.') }}">
-                                                    <img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.show_hide_food_menu') }}">
+                                                    <i class="tio-info-outined"></i>
                                                 </span>
                                             </span>
                                             <input type="checkbox"
@@ -113,9 +113,7 @@
                                         ">
                                             <span class="pr-2">{{ translate('messages.refund_to_wallet') }}<span
                                                     class="input-label-secondary"
-                                                    data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('messages.If_enabled,_Customers_will_automatically_receive_the_refunded_amount_in_their_wallets._But_if_it’s_disabled,_the_Admin_will_handle_the_Refund_Request_in_his_convenient_transaction_channel.') }}"><img
-                                                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                        alt="{{ translate('messages.show_hide_food_menu') }}"></span></span>
+                                                    data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('messages.If_enabled,_Customers_will_automatically_receive_the_refunded_amount_in_their_wallets._But_if_it’s_disabled,_the_Admin_will_handle_the_Refund_Request_in_his_convenient_transaction_channel.') }}"><i class="tio-info-outined"></i></span></span>
                                             <input type="checkbox"
                                             data-id="refund_to_wallet"
                                             data-type="toggle"
@@ -142,7 +140,7 @@
                                         <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border rounded px-4 form-control {{ isset($data['wallet_status']) && $data['wallet_status'] == 1 ? '' : 'text-muted' }}">
                                             <span class="pr-2">{{ translate('customer_can_add_fund_to_wallet') }}
                                                 <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('messages.With_this_feature,_customers_can_add_fund_to_wallet_if_the_payment_module_is_available.')}}">
-                                              <img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.add_fund_status') }}">
+                                              <i class="tio-info-outined"></i>
                                                 </span>
                                             </span>
                                             <input type="checkbox"
@@ -175,7 +173,7 @@
                                             for="customer_loyalty_point">
                                             <span class="pr-2">{{ translate('Customer_Can_Earn_Loyalty_Point') }}
                                                 <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('If_enabled,_customers_will_earn_a_certain_amount_of_points_after_each_purchase.') }}">
-                                                    <img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.show_hide_food_menu') }}">
+                                                    <i class="tio-info-outined"></i>
                                                 </span>
                                             </span>
                                             <input type="checkbox"
@@ -242,7 +240,7 @@
                                     {{ translate('Customer_Loyalty_Point_Settings') }}
                                 </span>
                                 <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('With_this_feature,_customers_can_earn_loyalty_points_after_purchasing_food_from_this_system.') }}">
-                                    <img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.show_hide_food_menu') }}">
+                                    <i class="tio-info-outined"></i>
                                 </span>
                             </h5>
                         </div>
@@ -270,9 +268,7 @@
                                             {{ translate('Loyalty_Point_Earn_Per_Order') }} (%)
                                             <small class="text-danger"><span class="input-label-secondary"
                                                     data-toggle="tooltip" data-placement="right"
-                                                    data-original-title="{{ translate('messages.On_every_purchase_this_percent_of_amount_will_be_added_as_loyalty_point_on_his_account') }}"><img
-                                                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                        alt="{{ translate('messages.On_every_purchase_this_percent_of_amount_will_be_added_as_loyalty_point_on_his_account') }}"></span>
+                                                    data-original-title="{{ translate('messages.On_every_purchase_this_percent_of_amount_will_be_added_as_loyalty_point_on_his_account') }}"><i class="tio-info-outined"></i></span>
                                                 *</small>
                                         </label>
                                         <input {{ isset($data['loyalty_point_status']) && $data['loyalty_point_status'] == 1 ? 'required' : 'readonly' }} id="item_purchase_point" type="number" class="form-control"
@@ -309,8 +305,7 @@
                                 </span>
                                 <span class="input-label-secondary" data-toggle="tooltip" data-placement="right"
                                     data-original-title="{{ translate('messages.Existing_Customers_can_share_a_referral_code_with_others_to_earn_a_referral_bonus._For_this,_the_new_user_MUST_sign_up_using_the_referral_code_and_make_their_first_purchase.') }}">
-                                    <img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                        alt="{{ translate('messages.show_hide_food_menu') }}">
+                                    <i class="tio-info-outined"></i>
                                 </span>
                             </h5>
                         </div>
@@ -378,8 +373,7 @@
                                                                 <span class="input-label-secondary" data-toggle="tooltip"
                                                                     data-placement="right"
                                                                     data-original-title="{{ translate('messages.Configure_discounts_for_newly_registered_users_who_sign_up_with_a_referral_code._Customize_the_discount_type_and_amount_to_incentivize_referrals_and_encourage_user_engagement.') }}">
-                                                                    <img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                                        alt="{{ translate('messages.show_hide_food_menu') }}">
+                                                                    <i class="tio-info-outined"></i>
                                                                 </span>
                                                             </span>
                                                             <input {{ isset($data['wallet_status']) && $data['wallet_status'] == 1 ? '' : 'disabled' }}
@@ -416,8 +410,7 @@
                                                                 <span class="input-label-secondary" data-toggle="tooltip"
                                                                     data-placement="right"
                                                                     data-original-title="{{ translate('Enter_the_discount_value_for_referral-based_new_user_registrations.') }}">
-                                                                    <img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                                        alt="{{ translate('messages.show_hide_food_menu') }}">
+                                                                    <i class="tio-info-outined"></i>
                                                                 </span>
                                                             </label>
                                                             <input id="new_customer_discount_amount" type="number" step=".001" min="0"
@@ -447,8 +440,7 @@
                                                                 <span class="input-label-secondary" data-toggle="tooltip"
                                                                     data-placement="right"
                                                                     data-original-title="{{ translate('Set_how_long_the_discount_remains_active_after_registration.') }}">
-                                                                    <img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                                        alt="{{ translate('messages.show_hide_food_menu') }}">
+                                                                    <i class="tio-info-outined"></i>
                                                                 </span>
                                                             </label>
                                                             <input id="new_customer_discount_amount_validity" type="number" step="1" min="1" max="999"

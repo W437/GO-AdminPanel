@@ -206,15 +206,13 @@
                                             </span>
 
                                             <div class="img_area_with_preview z-index-2">
-                                                <img id="additional_Image_1" class="bg-white d-none"
-                                                     src="{{ dynamicAsset('public/assets/admin/img/upload-icon.png-dummy') }}" alt="">
+                                                <i class="tio-cloud-upload" style="font-size: 30px;"></i>
                                             </div>
                                             <div
                                                 class="position-absolute h-100 top-0 w-100 d-flex align-content-center justify-content-center">
                                                 <div
                                                     class="d-flex flex-column justify-content-center align-items-center">
-                                                    <img alt="" width="30"
-                                                         src="{{ dynamicAsset('public/assets/admin/img/upload-icon.png') }}">
+                                                    <i class="tio-cloud-upload" style="font-size: 30px;"></i>
                                                     <div class="text-muted mt-3">{{ translate('Upload_Picture') }}</div>
                                                     <div class="fs-10 text-muted mt-1">{{translate('Upload jpg, png, jpeg, gif maximum 2 MB')}}</div>
                                                 </div>
@@ -250,7 +248,7 @@
 
                             <div class="js-form-message form-group">
                                 <label class="input-label" for="signupSrPassword">{{translate('messages.password')}}
-                                    <span class="input-label-secondary ps-1" title="{{ translate('messages.Must_contain_at_least_one_number_and_one_uppercase_and_lowercase_letter_and_symbol,_and_at_least_8_or_more_characters') }}"><img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.Must_contain_at_least_one_number_and_one_uppercase_and_lowercase_letter_and_symbol,_and_at_least_8_or_more_characters') }}"></span>
+                                    <span class="input-label-secondary ps-1" title="{{ translate('messages.Must_contain_at_least_one_number_and_one_uppercase_and_lowercase_letter_and_symbol,_and_at_least_8_or_more_characters') }}"><i class="tio-info-outined"></i></span>
                                 </label>
 
                                 <div class="input-group input-group-merge">
@@ -380,8 +378,7 @@
                                     </div>
                                     <div class="position-absolute h-100 top-0 w-100 d-flex align-content-center justify-content-center">
                                         <div class="d-flex flex-column justify-content-center align-items-center">
-                                            <img alt="" width="30"
-                                                         src="{{ dynamicAsset('public/assets/admin/img/upload-icon.png') }}">
+                                            <i class="tio-cloud-upload" style="font-size: 30px;"></i>
                                             <div class="text-muted mt-3">{{ translate('Upload_Picture') }}</div>
                                             <div class="fs-10 text-muted mt-1">{{translate('Upload jpg, png, jpeg, gif maximum 2 MB')}}</div>
                                         </div>

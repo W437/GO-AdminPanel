@@ -206,9 +206,7 @@
                                                     for="exampleFormControlSelect1">{{ translate('messages.sub_category') }}<span
                                                         class="input-label-secondary" data-toggle="tooltip"
                                                         data-placement="right"
-                                                        data-original-title="{{ translate('messages.category_required_warning') }}"><img
-                                                            src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                            alt="{{ translate('messages.category_required_warning') }}"></span></label>
+                                                        data-original-title="{{ translate('messages.category_required_warning') }}"><i class="tio-info-outined"></i></span></label>
                                                             <select name="sub_category_id" id="sub-categories"
                                                             data-id="{{ count($product_category) >= 2 ? $product_category[1]->id : '' }}"
                                                             class="form-control js-select2-custom">
@@ -234,7 +232,7 @@
                                         <div class="col-sm-6 col-md-4">
                                             <div class="form-group mb-0">
                                                 <label class="input-label" for="exampleFormControlSelect1">{{translate('messages.addon')}}<span
-                                                        class="input-label-secondary" title="{{translate('messages.Make_sure_you_have_selected_a_restaurant_first_!')}}"><img src="{{dynamicAsset('/public/assets/admin/img/info-circle.svg')}}" alt="{{translate('messages.Make_sure_you_have_selected_a_restaurant_first_!')}}"></span></label>
+                                                        class="input-label-secondary" title="{{translate('messages.Make_sure_you_have_selected_a_restaurant_first_!')}}"><i class="tio-info-outined"></i></span></label>
                                                 <select name="addon_ids[]" id="add_on" class="form-control js-select2-custom" multiple="multiple">
                                                     @foreach(\App\Models\AddOn::withOutGlobalScope(App\Scopes\RestaurantScope::class)->orderBy('name')->get() as $addon)
                                                         <option value="{{$addon['id']}}" {{in_array($addon->id,json_decode($campaign['add_ons'],true))?'selected':''}}>{{$addon['name']}}</option>

@@ -85,9 +85,7 @@
                                                 </span>
                                                 <span class="form-label-secondary text-danger d-flex"
                                                     data-toggle="tooltip" data-placement="right"
-                                                    data-original-title="{{ translate('If_enabled,_a_restaurant_can_send_a_registration_request_through_their_restaurant_or_customer_app,_website,_or_admin_landing_page._The_admin_will_receive_an_email_notification_and_can_accept_or_reject_the_request') }}"><img
-                                                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                        alt="{{ translate('messages.restaurant_self_registration') }}"> *
+                                                    data-original-title="{{ translate('If_enabled,_a_restaurant_can_send_a_registration_request_through_their_restaurant_or_customer_app,_website,_or_admin_landing_page._The_admin_will_receive_an_email_notification_and_can_accept_or_reject_the_request') }}"><i class="tio-info-outined"></i> *
                                                 </span>
                                             </span>
                                             <input type="checkbox"
@@ -124,9 +122,7 @@
                                                 </span>
                                                 <span class="form-label-secondary text-danger d-flex"
                                                     data-toggle="tooltip" data-placement="right"
-                                                    data-original-title="{{ translate('If_enabled,_a_restaurant_can_reply_to_a_review') }}"><img
-                                                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                        alt="{{ translate('messages.restaurant_review_reply') }}">
+                                                    data-original-title="{{ translate('If_enabled,_a_restaurant_can_reply_to_a_review') }}"><i class="tio-info-outined"></i>
                                                 </span>
                                             </span>
                                             <input type="checkbox"
@@ -163,9 +159,7 @@
                                                 </span>
                                                 <span class="form-label-secondary text-danger d-flex"
                                                       data-toggle="tooltip" data-placement="right"
-                                                      data-original-title="{{ translate('With_this_feature,_restaurant_will_get_the_option_to_offer_extra_packaging_charge_to_the_customer.') }}"><img
-                                                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                        alt="{{ translate('messages.extra_packaging_charge_toggle') }}">
+                                                      data-original-title="{{ translate('With_this_feature,_restaurant_will_get_the_option_to_offer_extra_packaging_charge_to_the_customer.') }}"><i class="tio-info-outined"></i>
                                                 </span>
                                             </span>
                                             <input type="checkbox"
@@ -203,9 +197,7 @@
                                                 </span>
                                                 <span class="form-label-secondary text-danger d-flex"
                                                     data-toggle="tooltip" data-placement="right"
-                                                    data-original-title="{{ translate('If_enabled,_restaurants_will_be_automatically_suspended_by_the_system_when_their_‘Cash_in_Hand’_limit_is_exceeded.') }}"><img
-                                                        src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                        alt="{{ translate('messages.cash_in_hand_overflow') }}"> *
+                                                    data-original-title="{{ translate('If_enabled,_restaurants_will_be_automatically_suspended_by_the_system_when_their_‘Cash_in_Hand’_limit_is_exceeded.') }}"><i class="tio-info-outined"></i> *
                                                 </span>
                                             </span>
                                             <input type="checkbox"
@@ -247,9 +239,7 @@
 
                                             <span class="form-label-secondary"
                                             data-toggle="tooltip" data-placement="right"
-                                            data-original-title="{{ translate('Enter_the_maximum_cash_amount_restaurants_can_hold._If_this_number_exceeds,_restaurants_will_be_suspended_and_not_receive_any_orders.') }}"><img
-                                                src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                alt="{{ translate('messages.dm_cancel_order_hint') }}"></span>
+                                            data-original-title="{{ translate('Enter_the_maximum_cash_amount_restaurants_can_hold._If_this_number_exceeds,_restaurants_will_be_suspended_and_not_receive_any_orders.') }}"><i class="tio-info-outined"></i></span>
                                         </label>
                                         <input type="number" name="cash_in_hand_overflow_restaurant_amount" class="form-control"
                                             id="cash_in_hand_overflow_restaurant_amount" min="0" step=".001"
@@ -268,9 +258,7 @@
                                             </span>
                                             <span class="form-label-secondary"
                                             data-toggle="tooltip" data-placement="right"
-                                            data-original-title="{{ translate('Enter_the_minimum_cash_amount_restaurants_can_pay') }}"><img
-                                                src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}"
-                                                alt="{{ translate('messages.dm_cancel_order_hint') }}"></span>
+                                            data-original-title="{{ translate('Enter_the_minimum_cash_amount_restaurants_can_pay') }}"><i class="tio-info-outined"></i></span>
                                         </label>
                                         <input type="number" name="min_amount_to_pay_restaurant" class="form-control"
                                             id="min_amount_to_pay_restaurant" min="0" step=".001"

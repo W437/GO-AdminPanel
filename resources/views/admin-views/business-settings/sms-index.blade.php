@@ -9,7 +9,7 @@
         <div class="page-header">
             <h1 class="page-header-title">
                 <span class="page-header-icon">
-                    <img src="{{dynamicAsset('public/assets/admin/img/sms.png')}}" class="w--26" alt="">
+                    <i class="tio-message"></i>
                 </span>
                 <span>
                     {{translate('messages.sms_gateway_setup')}}
