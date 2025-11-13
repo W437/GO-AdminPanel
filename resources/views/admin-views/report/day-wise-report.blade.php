@@ -11,7 +11,7 @@
     <div class="page-header">
         <h1 class="page-header-title">
             <span class="page-header-icon">
-                <img src="{{ dynamicAsset('public/assets/admin/img/report.png') }}" class="w--22" alt="">
+                <i class="tio-receipt"></i>
             </span>
             <span>
                 {{ translate('messages.transection_report') }}
@@ -102,29 +102,25 @@
                     <div class="col-sm-6">
 
                         <a class="__card-3 h-100" href="#">
-                            <img src="{{ dynamicAsset('/public/assets/admin/img/report/new/trx1.png') }}" class="icon"
-                                alt="report/new">
+                            <i class="tio-checkmark-circle icon text-008958" style="font-size: 3rem;"></i>
                             <h3 class="title text-008958">{{ \App\CentralLogics\Helpers::number_format_short($delivered) }}
                             </h3>
                             <h6 class="subtitle">{{ translate('Completed_Transaction') }}</h6>
                             <div class="info-icon" data-toggle="tooltip" data-placement="top"
                                 data-original-title="{{ translate('When_the_order_is_successfully_delivered_full_order_amount_goes_to_this_section.') }}">
-                                <img src="{{ dynamicAsset('/public/assets/admin/img/report/new/info1.png') }}"
-                                    alt="report/new">
+                                <i class="tio-info-outined"></i>
                             </div>
                         </a>
                     </div>
                     <div class="col-sm-6">
                         <a class="__card-3 h-100" href="#">
-                            <img src="{{ dynamicAsset('/public/assets/admin/img/report/new/trx3.png') }}" class="icon"
-                                alt="report/new">
+                            <i class="tio-money icon text-FF5A54" style="font-size: 3rem;"></i>
                             <h3 class="title text-FF5A54">{{ \App\CentralLogics\Helpers::number_format_short($canceled) }}
                             </h3>
                             <h6 class="subtitle">{{ translate('Refunded_Transaction') }}</h6>
                             <div class="info-icon" data-toggle="tooltip" data-placement="top"
                                 data-original-title="{{ translate('If_the_order_is_successfully_refunded,_the_full_order_amount_goes_to_this_section_without_the_delivery_fee_and_delivery_tips.') }}">
-                                <img src="{{ dynamicAsset('/public/assets/admin/img/report/new/info3.png') }}"
-                                    alt="report/new">
+                                <i class="tio-info-outined"></i>
                             </div>
                         </a>
                     </div>
@@ -135,14 +131,11 @@
                     <div class="col-md-12">
                         <div class="__card-vertical">
                             <div class="__card-vertical-img">
-                                <img class="img"
-                                    src="{{ dynamicAsset('/public/assets/admin/img/report/new/admin-earning.png') }}"
-                                    alt="">
+                                <i class="tio-wallet img text-0661CB" style="font-size: 3rem;"></i>
                                 <h4 class="name">{{ translate('Admin_Earning') }}</h4>
                                 <div class="info-icon" data-toggle="tooltip" data-placement="right"
                                     data-original-title="{{ translate('messages.Deducting_admin_commission_and_commission_on_delivery_charge_from_admin_discount_amount_goes_to_this_section.') }}">
-                                    <img src="{{ dynamicAsset('/public/assets/admin/img/report/new/info1.png') }}"
-                                        alt="report/new">
+                                    <i class="tio-info-outined"></i>
                                 </div>
                             </div>
                             <h4 class="earning text-0661CB">
@@ -152,14 +145,11 @@
                     <div class="col-md-12">
                         <div class="__card-vertical">
                             <div class="__card-vertical-img">
-                                <img class="img"
-                                    src="{{ dynamicAsset('/public/assets/admin/img/report/new/store-earning.png') }}"
-                                    alt="">
+                                <i class="tio-atm img text-00AA6D" style="font-size: 3rem;"></i>
                                 <h4 class="name">{{ translate('Restaurant_Earning') }}</h4>
                                 <div class="info-icon" data-toggle="tooltip" data-placement="right"
                                     data-original-title="{{ translate('messages.Deducting_admin_commission_and_restaurant_discount_from_actual_item_price_amount_goes_to_this_section.') }}">
-                                    <img src="{{ dynamicAsset('/public/assets/admin/img/report/new/info2.png') }}"
-                                        alt="report/new">
+                                    <i class="tio-info-outined"></i>
                                 </div>
                             </div>
                             <h4 class="earning text-00AA6D">
@@ -169,14 +159,11 @@
                     <div class="col-md-12">
                         <div class="__card-vertical">
                             <div class="__card-vertical-img">
-                                <img class="img"
-                                    src="{{ dynamicAsset('/public/assets/admin/img/report/new/deliveryman-earning.png') }}"
-                                    alt="">
+                                <i class="tio-truck img text-FF7500" style="font-size: 3rem;"></i>
                                 <h4 class="name">{{ translate('Deliveryman Earning') }}</h4>
                                 <div class="info-icon" data-toggle="tooltip" data-placement="right"
                                     data-original-title="{{ translate('Deducting_the_admin_commission_on_the_delivery_fee,_the_delivery_fee_&_tips_amount_goes_to_earning_section.') }}">
-                                    <img src="{{ dynamicAsset('/public/assets/admin/img/report/new/info3.png') }}"
-                                        alt="report/new">
+                                    <i class="tio-info-outined"></i>
                                 </div>
                             </div>
                             <h4 class="earning text-FF7500">
