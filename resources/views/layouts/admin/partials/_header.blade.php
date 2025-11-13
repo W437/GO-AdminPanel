@@ -77,6 +77,15 @@
 
                 <!-- Right Section: Language & Profile -->
                 <ul class="navbar-nav align-items-center flex-row">
+                    <li class="nav-item mr-2">
+                        <button type="button"
+                                id="themeToggle"
+                                class="btn btn-icon btn-soft-secondary rounded-circle"
+                                aria-pressed="false"
+                                aria-label="{{ __('Toggle dark mode') }}">
+                            <i class="tio-moon theme-toggle__icon"></i>
+                        </button>
+                    </li>
                     <li class="nav-item d-none d-sm-inline-block mr-2">
                         <div class="hs-unfold">
                             <div>

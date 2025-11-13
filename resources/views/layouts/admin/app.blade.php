@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="{{ dynamicAsset('public/assets/admin/css/emojionearea.min.css') }}">
     <link rel="stylesheet" href="{{ dynamicAsset('public/assets/admin/css/theme.minc619.css?v=1.0') }}">
     <link rel="stylesheet" href="{{ dynamicAsset('public/assets/admin/css/style.css') }}">
+    <link rel="stylesheet" href="{{ dynamicAsset('public/assets/admin/css/dark-mode.css') }}">
     <link rel="stylesheet" href="{{dynamicAsset('public/assets/admin/intltelinput/css/intlTelInput.css')}}">
     @stack('css_or_js')
     <link rel="stylesheet" href="{{ dynamicAsset('public/assets/admin/css/toastr.css') }}">
@@ -72,6 +73,17 @@
             opacity: 1 !important; /* Ensure visibility */
         }
     </style>
+    <script>
+        (function() {
+            try {
+                if (localStorage.getItem('go-admin-theme') === 'dark') {
+                    document.documentElement.classList.add('theme-dark');
+                }
+            } catch (error) {
+                console.warn('Theme initialization failed', error);
+            }
+        })();
+    </script>
 </head>
 
 <body class="footer-offset">
@@ -300,6 +312,68 @@
         $('#pre--loader').hide(); // Properly hide the preloader
     }
 
+    </script>
+    <script>
+        (function () {
+            "use strict";
+
+            var THEME_STORAGE_KEY = 'go-admin-theme';
+
+            function getStoredTheme() {
+                try {
+                    return localStorage.getItem(THEME_STORAGE_KEY) || 'light';
+                } catch (error) {
+                    console.warn('Theme preference could not be read', error);
+                    return 'light';
+                }
+            }
+
+            function persistTheme(theme) {
+                try {
+                    localStorage.setItem(THEME_STORAGE_KEY, theme);
+                } catch (error) {
+                    console.warn('Theme preference could not be saved', error);
+                }
+            }
+
+            function updateToggleState(theme) {
+                var toggle = document.getElementById('themeToggle');
+                if (!toggle) {
+                    return;
+                }
+                var icon = toggle.querySelector('.theme-toggle__icon');
+                toggle.setAttribute('aria-pressed', theme === 'dark');
+                toggle.setAttribute('data-theme', theme);
+
+                if (icon) {
+                    icon.className = 'theme-toggle__icon ' + (theme === 'dark' ? 'tio-brightness-1' : 'tio-moon');
+                }
+            }
+
+            function applyTheme(theme) {
+                var root = document.documentElement;
+                if (theme === 'dark') {
+                    root.classList.add('theme-dark');
+                } else {
+                    root.classList.remove('theme-dark');
+                }
+                updateToggleState(theme);
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var currentTheme = getStoredTheme();
+                applyTheme(currentTheme);
+
+                var toggle = document.getElementById('themeToggle');
+                if (toggle) {
+                    toggle.addEventListener('click', function () {
+                        var nextTheme = document.documentElement.classList.contains('theme-dark') ? 'light' : 'dark';
+                        persistTheme(nextTheme);
+                        applyTheme(nextTheme);
+                    });
+                }
+            });
+        })();
     </script>
     <script src="{{dynamicAsset('public/assets/admin/js/firebase.min.js')}}"></script>
 

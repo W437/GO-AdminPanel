@@ -1,0 +1,219 @@
+:root {
+    --go-surface-dark: #121212;
+    --go-panel-dark: #1f1f1f;
+    --go-panel-dark-alt: #181818;
+    --go-border-dark: #2b2b2b;
+    --go-text-dark-primary: #f5f5f5;
+    --go-text-dark-secondary: #b5b5b5;
+    --go-accent: #a97dc4;
+}
+
+html.theme-dark {
+    color-scheme: dark;
+}
+
+html.theme-dark body {
+    background-color: var(--go-surface-dark);
+    color: var(--go-text-dark-primary);
+}
+
+html.theme-dark body,
+html.theme-dark .content,
+html.theme-dark .main,
+html.theme-dark .footer,
+html.theme-dark .navbar-vertical-content {
+    background-color: var(--go-surface-dark);
+}
+
+html.theme-dark .navbar,
+html.theme-dark .navbar.navbar-bordered,
+html.theme-dark .navbar-vertical-aside,
+html.theme-dark .navbar-vertical-aside .navbar-brand-wrapper,
+html.theme-dark .navbar-vertical-aside .navbar__brand-wrapper {
+    background-color: var(--go-panel-dark-alt) !important;
+    border-color: var(--go-border-dark) !important;
+    box-shadow: none !important;
+}
+
+html.theme-dark .navbar,
+html.theme-dark .navbar .nav-link,
+html.theme-dark .navbar-vertical .nav-link,
+html.theme-dark .navbar-vertical .nav-item > a {
+    color: var(--go-text-dark-primary) !important;
+}
+
+html.theme-dark .navbar .nav-link:hover,
+html.theme-dark .navbar-vertical .nav-link:hover {
+    color: var(--go-accent) !important;
+}
+
+html.theme-dark .navbar-vertical .navbar-vertical-aside-has-menu.active > .nav-link,
+html.theme-dark .navbar-vertical .navbar-vertical-aside-has-menu.active > .js-navbar-vertical-aside-menu-link {
+    background-color: rgba(169, 125, 196, 0.16) !important;
+    border-inline-start: 3px solid var(--go-accent) !important;
+}
+
+html.theme-dark .navbar-vertical .navbar-vertical-aside-menu,
+html.theme-dark .navbar-vertical .navbar-vertical-aside-menu .nav-link {
+    background-color: transparent !important;
+    color: var(--go-text-dark-primary) !important;
+}
+
+html.theme-dark .navbar-vertical-aside .nav-link:hover,
+html.theme-dark .navbar-vertical-aside .nav-link:focus {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+html.theme-dark .card,
+html.theme-dark .dropdown-menu,
+html.theme-dark .modal-content,
+html.theme-dark .toast,
+html.theme-dark .hs-unfold-content,
+html.theme-dark .list-group-item,
+html.theme-dark .swal2-popup,
+html.theme-dark .badge-soft-secondary,
+html.theme-dark .select2-dropdown {
+    background-color: var(--go-panel-dark) !important;
+    color: var(--go-text-dark-primary) !important;
+    border-color: var(--go-border-dark) !important;
+}
+
+html.theme-dark .card,
+html.theme-dark .modal-content,
+html.theme-dark .dropdown-menu,
+html.theme-dark .hs-unfold-content,
+html.theme-dark .select2-dropdown {
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
+}
+
+html.theme-dark .card-header,
+html.theme-dark .modal-header,
+html.theme-dark .dropdown-header,
+html.theme-dark .table thead th {
+    background-color: var(--go-panel-dark-alt);
+    border-color: var(--go-border-dark);
+    color: var(--go-text-dark-primary);
+}
+
+html.theme-dark hr,
+html.theme-dark .table th,
+html.theme-dark .table td,
+html.theme-dark .border,
+html.theme-dark .border-top,
+html.theme-dark .border-bottom,
+html.theme-dark .border-left,
+html.theme-dark .border-right,
+html.theme-dark .navbar-vertical .nav-link {
+    border-color: var(--go-border-dark) !important;
+}
+
+html.theme-dark .table {
+    color: var(--go-text-dark-primary);
+}
+
+html.theme-dark .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+html.theme-dark .table-hover tbody tr:hover {
+    color: var(--go-text-dark-primary);
+    background-color: rgba(169, 125, 196, 0.1);
+}
+
+html.theme-dark .form-control,
+html.theme-dark .custom-select,
+html.theme-dark .custom-file-label,
+html.theme-dark .select2-selection,
+html.theme-dark .select2-selection__rendered,
+html.theme-dark .select2-selection__choice,
+html.theme-dark .input-group-text,
+html.theme-dark textarea,
+html.theme-dark input {
+    background-color: var(--go-panel-dark-alt) !important;
+    border-color: var(--go-border-dark) !important;
+    color: var(--go-text-dark-primary) !important;
+}
+
+html.theme-dark .form-control::placeholder,
+html.theme-dark textarea::placeholder,
+html.theme-dark .select2-search__field::placeholder {
+    color: var(--go-text-dark-secondary) !important;
+}
+
+html.theme-dark .btn.btn-soft-secondary,
+html.theme-dark .btn.btn-outline-secondary {
+    color: var(--go-text-dark-primary);
+    border-color: var(--go-border-dark);
+}
+
+html.theme-dark .btn.btn-outline-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+html.theme-dark .badge-soft-primary,
+html.theme-dark .btn-primary,
+html.theme-dark .btn--primary,
+html.theme-dark .btn-primary:focus,
+html.theme-dark .btn--primary:focus {
+    background-color: var(--go-accent);
+    border-color: var(--go-accent);
+}
+
+html.theme-dark .text-muted,
+html.theme-dark .text-secondary,
+html.theme-dark .subtitle,
+html.theme-dark .title-color-1,
+html.theme-dark .title-color-2,
+html.theme-dark .paragraph,
+html.theme-dark .small {
+    color: var(--go-text-dark-secondary) !important;
+}
+
+html.theme-dark .dropdown-item {
+    color: var(--go-text-dark-primary);
+}
+
+html.theme-dark .dropdown-item:hover,
+html.theme-dark .dropdown-item:focus {
+    color: var(--go-text-dark-primary);
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+html.theme-dark .bg-white {
+    background-color: var(--go-panel-dark) !important;
+}
+
+html.theme-dark .bg-light,
+html.theme-dark .badge-soft-light {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: var(--go-text-dark-primary) !important;
+}
+
+html.theme-dark .text-dark {
+    color: var(--go-text-dark-primary) !important;
+}
+
+html.theme-dark .modal-backdrop {
+    background-color: #000;
+}
+
+html.theme-dark .modal-backdrop.show {
+    opacity: 0.6;
+}
+
+html.theme-dark .swal2-title,
+html.theme-dark .swal2-content {
+    color: var(--go-text-dark-primary) !important;
+}
+
+html.theme-dark .link-hover,
+html.theme-dark .text-primary {
+    color: var(--go-accent) !important;
+}
+
+html.theme-dark .input-group .input-group-append .btn,
+html.theme-dark .input-group .input-group-prepend .btn {
+    background-color: var(--go-panel-dark-alt);
+    border-color: var(--go-border-dark);
+    color: var(--go-text-dark-primary);
+}
