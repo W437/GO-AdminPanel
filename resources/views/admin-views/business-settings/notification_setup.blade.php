@@ -32,7 +32,7 @@ active
 
             <!-- Title -->
             <div class="mb-3 d-flex align-items-start gap-2">
-                <img src="{{dynamicAsset('public/assets/admin/img/bell-2.png')}}" alt="">
+                <i class="tio-notifications"></i>
                 <div class="w-0 flex-grow mb-2">
                     {{ translate('From here you setup who can see what types of notification from') }} {{ $business_name }}
 
@@ -181,7 +181,7 @@ active
                             <div class="max-349 mx-auto mb-20">
                                 <div>
                                     <div class="text-center">
-                                        <img width="80" src="{{  dynamicAsset('public/assets/admin/img/modal/bell.png') }}" class="mb-20">
+                                        <i class="tio-notifications mb-20" style="font-size: 80px;"></i>
                                         <h5 class="modal-title"></h5>
                                     </div>
                                     <div class="text-center" >

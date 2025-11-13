@@ -13,7 +13,7 @@
     <div class="page-header">
         <h1 class="page-header-title mb-2 text-capitalize">
             <div class="card-header-icon d-inline-flex mr-2 img">
-                <img src="{{dynamicAsset('/public/assets/admin/img/collect-cash.png')}}" class="w-20px" alt="public">
+                <i class="tio-wallet"></i>
             </div>
             <span>
                 {{ translate('Cash_Collection') }}

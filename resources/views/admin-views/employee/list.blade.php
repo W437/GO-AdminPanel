@@ -11,7 +11,7 @@
     <div class="page-header">
         <h1 class="page-header-title mb-2 text-capitalize">
             <div class="card-header-icon d-inline-flex mr-2 img">
-                <img src="{{dynamicAsset('/public/assets/admin/img/employee-list.png')}}" alt="public">
+                <i class="tio-user"></i>
             </div>
             <span>
                 {{translate('messages.Employee_list')}}

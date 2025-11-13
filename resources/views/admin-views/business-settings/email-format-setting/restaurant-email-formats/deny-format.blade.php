@@ -13,7 +13,7 @@
             <div class="d-flex flex-wrap justify-content-between align-items-center __gap-15px">
                 <h1 class="page-header-title mr-3 mb-0">
                     <span class="page-header-icon">
-                        <img src="{{ dynamicAsset('public/assets/admin/img/email-setting.png') }}" class="w--26" alt="">
+                        <i class="tio-email"></i>
                     </span>
                     <span>
                         {{ translate('messages.Email_Templates') }}
@@ -34,7 +34,7 @@
                             <h5 class="text-capitalize m-0 text--primary pl-2">
                                 {{translate('Send_Mail_on_‘New_Restaurant_Rejection’')}}
                                 <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('If_Admin_rejects_a_restaurant’s_self-registration,_the_restaurant_will_get_an_automatic_disapproval_mail_from_the_system.')}}">
-                                    <img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.show_hide_food_menu') }}">
+                                    <i class="tio-info-outined"></i>
                                 </span>
                             </h5>
                             <label class="toggle-switch toggle-switch-sm">
@@ -109,7 +109,7 @@
                                     <div>
                                         <h5 class="card-title mb-3">
                                             {{translate('Icon')}}  <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('Icon_must_be_1:1.')}}">
-                                                <img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.show_hide_food_menu') }}">
+                                                <i class="tio-info-outined"></i>
                                             </span>
                                         </h5>
                                         <label class="custom-file">
@@ -120,7 +120,7 @@
                                     <br>
                                     <div>
                                         <h5 class="card-title mb-3">
-                                            <img src="{{dynamicAsset('public/assets/admin/img/pointer.png')}}" class="mr-2" alt="">
+                                            <i class="tio-arrow-left"></i>
                                             {{translate('Header_Content')}}
                                         </h5>
                                         @if ($language)
@@ -128,7 +128,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">{{translate('Main_Title')}}({{ translate('messages.default') }})
                                                         <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('Write_the_main_title_within_45_characters')}}">
-                                                            <img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.show_hide_food_menu') }}">
+                                                            <i class="tio-info-outined"></i>
                                                         </span>
                                                     </label>
                                                     <input type="text" maxlength="45" name="title[]" value="{{ $data?->getRawOriginal('title') }}" data-id="mail-title" placeholder="{{ translate('Order_has_been_placed_successfully.') }}" class="form-control">
@@ -165,7 +165,7 @@
                                                     <div class="form-group">
                                                        <label class="form-label">{{translate('Main_Title')}}({{strtoupper($lang)}})
                                                             <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('Write_the_title_within_45_characters')}}">
-                                                                <img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.show_hide_food_menu') }}">
+                                                                <i class="tio-info-outined"></i>
                                                             </span>
                                                         </label>
                                                         <input type="text" maxlength="45" name="title[]"  placeholder="{{ translate('Order_has_been_placed_successfully.') }}" class="form-control" value="{{$translate[$lang]['title']??''}}">
@@ -189,7 +189,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">{{translate('Main_Title')}}
                                                     <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('Write_the_title_within_45_characters')}}">
-                                                                <img src="{{ dynamicAsset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.show_hide_food_menu') }}">
+                                                                <i class="tio-info-outined"></i>
                                                             </span></label>
                                                     <input type="text" maxlength="45" name="title[]" placeholder="{{ translate('Order_has_been_placed_successfully.') }}"class="form-control">
                                                 </div>
@@ -213,7 +213,7 @@
 
                                     <div>
                                         <h5 class="card-title mb-3">
-                                            <img src="{{dynamicAsset('public/assets/admin/img/pointer.png')}}" class="mr-2" alt="">
+                                            <i class="tio-arrow-left"></i>
                                             {{translate('Footer_Content')}}
                                         </h5>
                                         <div class="__bg-F8F9FC-card">
