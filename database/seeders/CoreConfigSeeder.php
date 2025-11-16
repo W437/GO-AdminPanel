@@ -13,9 +13,11 @@ class CoreConfigSeeder extends Seeder
      * Tables we hydrate from installation/backup/database.sql
      */
     protected array $dumpTables = [
+        'addon_settings',
         'admin_roles',
         'business_settings',
         'data_settings',
+        'email_templates',
     ];
 
     /**
