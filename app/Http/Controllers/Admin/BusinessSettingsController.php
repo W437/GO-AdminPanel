@@ -20,6 +20,7 @@ use App\Models\NotificationSetting;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 use App\Models\RestaurantSubscription;
@@ -2504,6 +2505,9 @@ class BusinessSettingsController extends Controller
             'value' =>$credential_array
         ]);
 
+        // Clear cache so login validation sees updated credentials immediately
+        Cache::forget('business_settings_all_data');
+
         Toastr::success(translate('messages.credential_updated', ['service' => $service]));
         return redirect()->back();
     }
@@ -2539,6 +2543,10 @@ class BusinessSettingsController extends Controller
         Helpers::businessUpdateOrInsert(['key' => 'apple_login'], [
             'value' =>$credential_array
         ]);
+
+        // Clear cache so login validation sees updated credentials immediately
+        Cache::forget('business_settings_all_data');
+
         Toastr::success(translate('messages.credential_updated', ['service' => $service]));
         return redirect()->back();
     }
