@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class AdminSeeder extends Seeder
@@ -15,18 +16,19 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('admins')->insert([
-            'id' => 1,
-            'f_name' => 'Master Admin',
-            'l_name' => 'Moka',
-            'phone' => '01759412381',
-            'email' => 'admin@admin.com',
-            'image' => 'def.png',
-            'password' => bcrypt(12345678),
-            'role_id' => 1,
-            'remember_token' =>Str::random(10),
-            'created_at'=>now(),
-            'updated_at'=>now()
-        ]);
+        DB::table('admins')->updateOrInsert(
+            ['email' => 'admin@admin.com'],
+            [
+                'f_name' => 'Master',
+                'l_name' => 'Admin',
+                'phone' => '0000000000',
+                'image' => 'def.png',
+                'password' => Hash::make('12345678'),
+                'role_id' => 1,
+                'remember_token' => Str::random(10),
+                'updated_at' => now(),
+                'created_at' => now(),
+            ]
+        );
     }
 }

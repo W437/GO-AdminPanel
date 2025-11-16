@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
         // \App\Models\Vendor::factory(10000)->create();
         // \App\Models\Restaurant::factory(10000)->create();
         $this->call([
-            UserSeeder::class
+            CoreConfigSeeder::class,
+            AdminSeeder::class,
         ]);
     }
 }
