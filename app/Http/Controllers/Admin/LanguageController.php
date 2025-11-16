@@ -250,7 +250,11 @@ class LanguageController extends Controller
                 @opcache_invalidate($messagesPath, true);
             }
             \Cache::flush();
-            \Artisan::call('view:clear');
+            // Clear view cache directory directly (avoid Artisan route errors)
+            $viewPath = storage_path('framework/views');
+            if (is_dir($viewPath)) {
+                array_map('unlink', glob($viewPath . '/*'));
+            }
 
             $newMessagesPath = base_path('resources/lang/' . $lang . '/new-messages.php');
             if (file_exists($newMessagesPath)) {
@@ -293,7 +297,11 @@ class LanguageController extends Controller
 
         // Clear caches to show translation immediately
         \Cache::flush();
-        \Artisan::call('view:clear');
+        // Clear view cache directory directly
+        $viewPath = storage_path('framework/views');
+        if (is_dir($viewPath)) {
+            array_map('unlink', glob($viewPath . '/*'));
+        }
 
         return response()->json([
             'translated_data' => $translated
