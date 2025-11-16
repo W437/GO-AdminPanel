@@ -773,6 +773,9 @@ class BusinessSettingsController extends Controller
 //
 //        file_put_contents(base_path('.env'), implode(PHP_EOL, $lines) . PHP_EOL);
 
+        // Clear cache to ensure changes are reflected immediately
+        Artisan::call('cache:clear');
+        Artisan::call('config:clear');
 
         Toastr::success(translate('messages.updated_successfully'));
         return back();
