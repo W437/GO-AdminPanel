@@ -27,10 +27,10 @@ class StoryViewController extends Controller
 
         $user = $request->user() ?: auth('api')->user();
 
-        if (!$user && empty($data['session_key'])) {
-            throw ValidationException::withMessages([
-                'session_key' => __('Provide either an authenticated user or a session key to record the view.'),
-            ]);
+        // Auto-generate session key for anonymous users if not provided
+        $sessionKey = $data['session_key'] ?? null;
+        if (!$user && !$sessionKey) {
+            $sessionKey = $this->generateAnonymousSessionKey($request);
         }
 
         $story = Story::with('restaurant')->findOrFail($storyId);
@@ -42,7 +42,7 @@ class StoryViewController extends Controller
         $view = $this->storyService->recordView(
             $story,
             $user,
-            $data['session_key'] ?? null,
+            $sessionKey,
             (bool) ($data['completed'] ?? false)
         );
 
@@ -50,5 +50,19 @@ class StoryViewController extends Controller
             'message' => __('Story view recorded.'),
             'view_id' => $view->id,
         ], 200);
+    }
+
+    /**
+     * Generate a session key for anonymous users based on IP and User-Agent
+     */
+    protected function generateAnonymousSessionKey(Request $request): string
+    {
+        $ip = $request->ip();
+        $userAgent = $request->userAgent() ?? 'unknown';
+
+        // Create a stable session key that's consistent for the same IP + User-Agent
+        // but changes daily to allow tracking across sessions while respecting privacy
+        $date = date('Y-m-d');
+        return 'anon_' . hash('sha256', $ip . $userAgent . $date);
     }
 }
