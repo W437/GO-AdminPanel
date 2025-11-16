@@ -38,7 +38,7 @@ class SubscriptionCancel extends Mailable
         $data=EmailTemplate::where('type','restaurant')->where('email_type', 'subscription-cancel')->first();
 
         $template=$data?$data->email_template:5;
-        $url = BusinessSetting::where('key', 'email_address')->first()?->value ?? '6am Mart' ;
+        $url = BusinessSetting::where('key', 'email_address')->first()?->value ?? 'Hopa!' ;
 
         $restaurant_name = $this->name;
         $title = Helpers::text_variable_data_format( value:$data['title']??'',restaurant_name:$restaurant_name??'');
