@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Story;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreStoryRequest extends FormRequest
 {
@@ -11,14 +12,32 @@ class StoreStoryRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        $overlays = $this->input('overlays');
+
+        if (is_string($overlays)) {
+            $decoded = json_decode($overlays, true);
+
+            if (json_last_error() === JSON_ERROR_NONE) {
+                $this->merge(['overlays' => $decoded]);
+            }
+        }
+    }
+
     public function rules(): array
     {
         return array_merge([
             'title' => ['nullable', 'string', 'max:120'],
             'scheduled_for' => ['nullable', 'date', 'after_or_equal:now'],
-            'type' => ['nullable', 'string', 'in:image,video'],
-            'media_url' => ['nullable', 'url', 'max:2048'],
-            'thumbnail_url' => ['nullable', 'url', 'max:2048', 'required_if:type,video'],
+            'type' => ['required', 'string', 'in:image,video'],
+            'media_url' => ['required', 'url', 'max:2048'],
+            'thumbnail_url' => [
+                Rule::requiredIf(fn () => $this->input('type') === 'video'),
+                'nullable',
+                'url',
+                'max:2048',
+            ],
             'duration_seconds' => ['nullable', 'integer', 'min:1', 'max:60'],
         ], $this->overlayRules());
     }

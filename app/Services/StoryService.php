@@ -81,7 +81,9 @@ class StoryService
     {
         $this->assertStoriesEnabled($story->restaurant);
 
-        if ($story->media()->count() === 0) {
+        $hasDirectMedia = !empty($story->media_url);
+
+        if ($story->media()->count() === 0 && !$hasDirectMedia) {
             throw ValidationException::withMessages([
                 'story' => __('Story must include at least one media item before publishing.'),
             ]);
@@ -267,6 +269,11 @@ class StoryService
 
     protected function normalizeOverlays($input): array
     {
+        if (is_string($input)) {
+            $decoded = json_decode($input, true);
+            $input = json_last_error() === JSON_ERROR_NONE ? $decoded : null;
+        }
+
         if (!is_array($input)) {
             return [];
         }

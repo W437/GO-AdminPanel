@@ -3,12 +3,26 @@
 namespace App\Http\Requests\Story;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateStoryRequest extends FormRequest
 {
     public function authorize(): bool
     {
         return true;
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $overlays = $this->input('overlays');
+
+        if (is_string($overlays)) {
+            $decoded = json_decode($overlays, true);
+
+            if (json_last_error() === JSON_ERROR_NONE) {
+                $this->merge(['overlays' => $decoded]);
+            }
+        }
     }
 
     public function rules(): array
@@ -20,7 +34,13 @@ class UpdateStoryRequest extends FormRequest
             'status' => ['sometimes', 'in:draft,scheduled,published'],
             'type' => ['sometimes', 'nullable', 'string', 'in:image,video'],
             'media_url' => ['sometimes', 'nullable', 'url', 'max:2048'],
-            'thumbnail_url' => ['sometimes', 'nullable', 'url', 'max:2048'],
+            'thumbnail_url' => [
+                'sometimes',
+                'nullable',
+                'url',
+                'max:2048',
+                Rule::requiredIf(fn () => $this->input('type') === 'video'),
+            ],
             'duration_seconds' => ['sometimes', 'nullable', 'integer', 'min:1', 'max:60'],
         ], $this->overlayRules(true));
     }
