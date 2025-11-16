@@ -805,7 +805,7 @@ class BusinessSettingsController extends Controller
                     "username" => $request['username'],
                     "email_id" => $request['email'],
                     "encryption" => $request['encryption'],
-                    "password" => $request['password']
+                    "password" => $request['password'] ? encrypt($request['password']) : null
                 ]),
                 'updated_at' => now()
             ]

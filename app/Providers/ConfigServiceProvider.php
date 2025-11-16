@@ -37,13 +37,25 @@ class ConfigServiceProvider extends ServiceProvider
             $data = BusinessSetting::where(['key' => 'mail_config'])->first();
             $emailServices = json_decode($data['value'], true);
             if ($emailServices) {
+                // Safely decrypt password with backward compatibility
+                $password = null;
+                if (isset($emailServices['password']) && $emailServices['password']) {
+                    try {
+                        // Try to decrypt (for new encrypted passwords)
+                        $password = decrypt($emailServices['password']);
+                    } catch (\Exception $e) {
+                        // If decryption fails, it's plain text (old format)
+                        $password = $emailServices['password'];
+                    }
+                }
+
                 $config = array(
                     'status' => (Boolean)(isset($emailServices['status'])?$emailServices['status']:1),
                     'driver' => $emailServices['driver'],
                     'host' => $emailServices['host'],
                     'port' => $emailServices['port'],
                     'username' => $emailServices['username'],
-                    'password' => $emailServices['password'],
+                    'password' => $password,
                     'encryption' => $emailServices['encryption'],
                     'from' => array('address' => $emailServices['email_id'], 'name' => $emailServices['name']),
                     'sendmail' => '/usr/sbin/sendmail -bs',
