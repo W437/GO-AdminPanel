@@ -15,6 +15,10 @@ npm-debug.log
 yarn-error.log
 error_log
 
+# Admin-Created Languages (managed via admin panel, not Git)
+/resources/lang/*
+!/resources/lang/en
+
 # Docker-related
 docker-compose.yml
 Dockerfile
