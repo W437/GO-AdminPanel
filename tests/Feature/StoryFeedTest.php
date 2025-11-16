@@ -26,12 +26,35 @@ class StoryFeedTest extends TestCase
             'status' => 1,
         ]);
 
+        $overlays = [
+            [
+                'id' => 'overlay-1',
+                'text' => 'Limited time combo',
+                'position' => ['x' => 0.5, 'y' => 0.4],
+                'scale' => 1.2,
+                'rotation' => 0,
+                'fontFamily' => 'Directional',
+                'stylePreset' => 'directional',
+                'color' => '#FFFFFFFF',
+                'backgroundColor' => '#000000CC',
+                'backgroundMode' => 'pill',
+                'alignment' => 'center',
+                'zIndex' => 1,
+            ],
+        ];
+
         $story = Story::create([
             'restaurant_id' => $restaurant->id,
             'title' => 'Happy hour',
             'status' => Story::STATUS_PUBLISHED,
             'publish_at' => Carbon::now()->subHour(),
             'expire_at' => Carbon::now()->addHour(),
+            'type' => 'image',
+            'media_url' => 'https://example.com/stories/test-image.jpg',
+            'thumbnail_url' => 'https://example.com/stories/test-image-thumb.jpg',
+            'duration_seconds' => 5,
+            'overlays' => $overlays,
+            'has_overlays' => true,
         ]);
 
         StoryMedia::create([
@@ -53,6 +76,12 @@ class StoryFeedTest extends TestCase
                         'stories' => [
                             [
                                 'id',
+                                'type',
+                                'media_url',
+                                'thumbnail_url',
+                                'duration_seconds',
+                                'has_overlays',
+                                'overlays',
                                 'media' => [
                                     ['id', 'sequence', 'type', 'media_url'],
                                 ],
@@ -60,6 +89,10 @@ class StoryFeedTest extends TestCase
                         ],
                     ],
                 ],
-            ]);
+            ])
+            ->assertJsonPath('data.0.stories.0.has_overlays', true)
+            ->assertJsonPath('data.0.stories.0.overlays.0.text', 'Limited time combo')
+            ->assertJsonPath('data.0.stories.0.overlays.0.position.x', 0.5)
+            ->assertJsonPath('data.0.stories.0.media.0.type', 'image');
     }
 }

@@ -20,11 +20,19 @@ class StoryService
     public function createDraft(Restaurant $restaurant, array $attributes = []): Story
     {
         $this->assertStoriesEnabled($restaurant);
+        $overlays = $this->normalizeOverlays($attributes['overlays'] ?? null);
+        $duration = $this->clampDuration($attributes['duration_seconds'] ?? null);
 
         return Story::create([
             'restaurant_id' => $restaurant->id,
             'title' => $attributes['title'] ?? null,
             'status' => Story::STATUS_DRAFT,
+            'type' => $attributes['type'] ?? null,
+            'media_url' => $attributes['media_url'] ?? null,
+            'thumbnail_url' => $attributes['thumbnail_url'] ?? null,
+            'duration_seconds' => $duration,
+            'overlays' => !empty($overlays) ? $overlays : null,
+            'has_overlays' => !empty($overlays),
         ]);
     }
 
@@ -59,6 +67,8 @@ class StoryService
             'cta_label' => $payload['cta_label'] ?? null,
             'cta_url' => $payload['cta_url'] ?? null,
         ]);
+
+        $this->syncStoryPrimaryMedia($story);
 
         DB::afterCommit(function () use ($media) {
             ProcessStoryMedia::dispatch($media->id);
@@ -151,6 +161,8 @@ class StoryService
             $ordered->values()->each(function (StoryMedia $item, int $index) {
                 $item->update(['sequence' => $index + 1]);
             });
+
+            $this->syncStoryPrimaryMedia($story);
         });
 
         if (!empty($paths)) {
@@ -163,6 +175,45 @@ class StoryService
     public function recordView(Story $story, ?User $customer, ?string $sessionKey, bool $completed = false): StoryView
     {
         return StoryView::record($story, $customer, $sessionKey, $completed);
+    }
+
+    public function updateOverlays(Story $story, $input): Story
+    {
+        $normalized = $this->normalizeOverlays($input);
+
+        $story->forceFill([
+            'overlays' => !empty($normalized) ? $normalized : null,
+            'has_overlays' => !empty($normalized),
+        ])->save();
+
+        return $story->fresh();
+    }
+
+    public function updateStoryMediaMetadata(Story $story, array $attributes = []): Story
+    {
+        $updates = [];
+
+        if (array_key_exists('type', $attributes)) {
+            $updates['type'] = $attributes['type'];
+        }
+
+        if (array_key_exists('media_url', $attributes)) {
+            $updates['media_url'] = $attributes['media_url'];
+        }
+
+        if (array_key_exists('thumbnail_url', $attributes)) {
+            $updates['thumbnail_url'] = $attributes['thumbnail_url'];
+        }
+
+        if (array_key_exists('duration_seconds', $attributes)) {
+            $updates['duration_seconds'] = $this->clampDuration($attributes['duration_seconds']);
+        }
+
+        if (!empty($updates)) {
+            $story->forceFill($updates)->save();
+        }
+
+        return $story->fresh();
     }
 
     protected function assertStoriesEnabled(?Restaurant $restaurant): void
@@ -189,5 +240,140 @@ class StoryService
         }
 
         return empty($existing) ? 1 : (max($existing) + 1);
+    }
+
+    protected function syncStoryPrimaryMedia(Story $story): void
+    {
+        $primary = $story->media()->orderBy('sequence')->first();
+
+        if (!$primary) {
+            $story->forceFill([
+                'type' => null,
+                'media_url' => null,
+                'thumbnail_url' => null,
+                'duration_seconds' => (int) config('stories.default_duration', 5),
+            ])->save();
+
+            return;
+        }
+
+        $story->forceFill([
+            'type' => $primary->media_type,
+            'media_url' => $primary->media_url,
+            'thumbnail_url' => $primary->thumbnail_url,
+            'duration_seconds' => $primary->duration_seconds,
+        ])->save();
+    }
+
+    protected function normalizeOverlays($input): array
+    {
+        if (!is_array($input)) {
+            return [];
+        }
+
+        $normalized = [];
+
+        foreach ($input as $overlay) {
+            if (!is_array($overlay)) {
+                continue;
+            }
+
+            $text = isset($overlay['text']) ? trim((string) $overlay['text']) : '';
+
+            if ($text === '') {
+                continue;
+            }
+
+            $position = $this->formatOverlayPosition($overlay['position'] ?? null);
+            $scale = $this->formatOverlayNumber($overlay['scale'] ?? null, 0.1, 10, 4);
+            $rotation = $this->formatOverlayNumber($overlay['rotation'] ?? null, -360, 360, 2);
+            $zIndex = $this->formatOverlayInteger($overlay['zIndex'] ?? null, 0, 100);
+
+            $entry = [
+                'id' => $overlay['id'] ?? null,
+                'text' => $text,
+                'position' => $position,
+                'scale' => $scale,
+                'rotation' => $rotation,
+                'fontFamily' => $overlay['fontFamily'] ?? null,
+                'stylePreset' => $overlay['stylePreset'] ?? null,
+                'color' => $overlay['color'] ?? null,
+                'backgroundColor' => $overlay['backgroundColor'] ?? null,
+                'backgroundMode' => $overlay['backgroundMode'] ?? null,
+                'alignment' => $overlay['alignment'] ?? null,
+                'zIndex' => $zIndex,
+            ];
+
+            foreach ($entry as $key => $value) {
+                if ($value === null) {
+                    unset($entry[$key]);
+                }
+            }
+
+            $normalized[] = $entry;
+        }
+
+        return $normalized;
+    }
+
+    protected function formatOverlayPosition($position): ?array
+    {
+        if (!is_array($position)) {
+            return null;
+        }
+
+        $formatted = [];
+
+        if (array_key_exists('x', $position)) {
+            $formatted['x'] = $this->clamp((float) $position['x'], 0, 1);
+        }
+
+        if (array_key_exists('y', $position)) {
+            $formatted['y'] = $this->clamp((float) $position['y'], 0, 1);
+        }
+
+        return empty($formatted) ? null : $formatted;
+    }
+
+    protected function formatOverlayNumber($value, float $min, float $max, int $precision): ?float
+    {
+        if ($value === null || $value === '') {
+            return null;
+        }
+
+        $number = $this->clamp((float) $value, $min, $max);
+
+        return round($number, $precision);
+    }
+
+    protected function formatOverlayInteger($value, int $min, int $max): ?int
+    {
+        if ($value === null || $value === '') {
+            return null;
+        }
+
+        $number = (int) round($value);
+
+        return max($min, min($max, $number));
+    }
+
+    protected function clamp(float $value, float $min, float $max): float
+    {
+        return max($min, min($max, $value));
+    }
+
+    protected function clampDuration($value): int
+    {
+        $default = (int) config('stories.default_duration', 5);
+        $max = (int) config('stories.max_duration_seconds', 60);
+        $min = 1;
+
+        if ($value === null || $value === '') {
+            return $default;
+        }
+
+        $int = (int) $value;
+
+        return max($min, min($max, $int));
     }
 }

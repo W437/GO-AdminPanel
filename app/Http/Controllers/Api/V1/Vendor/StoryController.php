@@ -12,6 +12,7 @@ use App\Services\StoryService;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
 
@@ -104,6 +105,16 @@ class StoryController extends Controller
         }
 
         $story->save();
+
+        if (array_key_exists('overlays', $data)) {
+            $story = $this->storyService->updateOverlays($story, $data['overlays']);
+        }
+
+        $metadata = Arr::only($data, ['type', 'media_url', 'thumbnail_url', 'duration_seconds']);
+
+        if (!empty($metadata)) {
+            $story = $this->storyService->updateStoryMediaMetadata($story, $metadata);
+        }
 
         return response()->json([
             'message' => __('Story updated.'),

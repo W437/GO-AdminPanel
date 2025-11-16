@@ -522,7 +522,7 @@
             </div>
             <div class="btn--container justify-content-end mt-3">
                 <button id="reset_btn" type="button" class="btn btn--reset">{{translate('messages.reset')}}</button>
-                <button type="button" id="save_information" class="btn btn--primary h--45px"><i class="tio-save"></i> {{ translate('messages.save_information') }}</button>
+                <button type="submit" class="btn btn--primary h--45px"><i class="tio-save"></i> {{ translate('messages.save_information') }}</button>
             </div>
         </form>
 
@@ -614,20 +614,20 @@
             });
         });
 
-        $("#save_information").on("click", function () {
-            const form = $("#res_form")[0];
+        $("#res_form").on("submit", function (event) {
+            const form = this;
             const messages = new Set();
             let hasError = false;
+            const hasHtmlValidationError = !form.checkValidity();
 
-            if (!form.checkValidity()) {
-                form.reportValidity();
+            if (hasHtmlValidationError) {
                 hasError = true;
             }
 
             if ($('#latitude').val() === '' || $('#longitude').val() === '') {
                 hasError = true;
                 showCoordinateError();
-                messages.add('{{ translate('messages.Click_on_the_map_inside_the_red_marked_area_for_the_Lat/Long') }}');
+                messages.add('{{ translate('messages.restaurant_coordinates_are_required') }}');
             } else {
                 clearCoordinateError();
             }
@@ -637,6 +637,11 @@
             }
 
             if (hasError) {
+                event.preventDefault();
+                if (hasHtmlValidationError) {
+                    form.reportValidity();
+                }
+
                 messages.forEach(message => {
                     toastr.error(message, {
                         CloseButton: true,
@@ -650,10 +655,7 @@
                         scrollTop: $firstError.offset().top - 120
                     }, 400);
                 }
-                return;
             }
-
-            $("#res_form").submit();
         });
 
         $('#tin_expire_date').attr('min',(new Date()).toISOString().split('T')[0]);

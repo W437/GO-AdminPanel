@@ -18,6 +18,8 @@ class Story extends Model
     protected $casts = [
         'publish_at' => 'datetime',
         'expire_at' => 'datetime',
+        'overlays' => 'array',
+        'has_overlays' => 'boolean',
     ];
 
     public const STATUS_DRAFT = 'draft';
@@ -83,5 +85,20 @@ class Story extends Model
         }
 
         return $this->expire_at === null || $this->expire_at->gt($now);
+    }
+
+    public function getOverlaysAttribute($value): array
+    {
+        if (is_array($value)) {
+            return $value;
+        }
+
+        if ($value === null) {
+            return [];
+        }
+
+        $decoded = json_decode($value, true);
+
+        return is_array($decoded) ? $decoded : [];
     }
 }

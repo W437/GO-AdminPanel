@@ -50,6 +50,12 @@ class StoryFeedController extends Controller
                         'status' => $story->status,
                         'publish_at' => optional($story->publish_at)->toIso8601String(),
                         'expire_at' => optional($story->expire_at)->toIso8601String(),
+                        'type' => $story->type,
+                        'media_url' => $story->media_url,
+                        'thumbnail_url' => $story->thumbnail_url,
+                        'duration_seconds' => $story->duration_seconds,
+                        'has_overlays' => $story->has_overlays,
+                        'overlays' => $story->overlays,
                         'media' => $story->media->map(function ($media) {
                             return [
                                 'id' => $media->id,
@@ -59,8 +65,10 @@ class StoryFeedController extends Controller
                                 'caption' => $media->caption,
                                 'cta_label' => $media->cta_label,
                                 'cta_url' => $media->cta_url,
-                                'media_url' => $media->media_url,
-                                'thumbnail_url' => $media->thumbnail_url,
+                        'media_url' => $media->media_url,
+                        'thumbnail_url' => $media->thumbnail_url,
+                        'has_overlays' => $media->has_overlays,
+                        'overlays' => $media->overlays,
                             ];
                         })->values(),
                     ];
