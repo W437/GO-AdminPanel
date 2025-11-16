@@ -244,9 +244,13 @@ class LanguageController extends Controller
 
             $str = "<?php\n\nreturn " . var_export($full_data, true) . ";\n";
             file_put_contents($messagesPath, $str, LOCK_EX);
+
+            // Clear all caches to ensure translation is immediately visible
             if (function_exists('opcache_invalidate')) {
                 @opcache_invalidate($messagesPath, true);
             }
+            \Cache::forget('translations');
+            \Artisan::call('cache:clear');
 
             $newMessagesPath = base_path('resources/lang/' . $lang . '/new-messages.php');
             if (file_exists($newMessagesPath)) {
@@ -286,6 +290,10 @@ class LanguageController extends Controller
         $data_filtered[$request['key']] = $translated;
         $str = "<?php return " . var_export($data_filtered, true) . ";";
         file_put_contents(base_path('resources/lang/' . $lang . '/messages.php'), $str);
+
+        // Clear caches to show translation immediately
+        \Cache::forget('translations');
+        \Artisan::call('cache:clear');
 
         return response()->json([
             'translated_data' => $translated
@@ -362,6 +370,11 @@ class LanguageController extends Controller
 
                 $str = "<?php\n\nreturn " . var_export($merged_data, true) . ";\n";
                 file_put_contents(base_path('resources/lang/' . $lang . '/messages.php'), $str);
+
+                // Clear caches to show translations immediately
+                \Cache::forget('translations');
+                \Artisan::call('cache:clear');
+
                 $renmaining_translated_data_count= count($translated_data);
                 $percentage =  $renmaining_translated_data_count > 0 && $translating_count > 0 ?  100 - ( ($renmaining_translated_data_count/$translating_count)* 100) : 0;
 

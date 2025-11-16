@@ -198,7 +198,7 @@
                             </div>
                         </td>
                         <td style="padding:0;text-align:right">
-                            <img  alt="6amMart"
+                            <img  alt="Hopa!"
                             src="{{ \App\CentralLogics\Helpers::get_full_url('business',$logo?->value,$logo?->storage[0]?->value ?? 'public' ) }}"
                             style="margin-bottom:5px">
                             <div class="font-normal">

@@ -57,7 +57,7 @@ $logo = \App\Models\BusinessSetting::where('key','logo')->first()?->value;
                 </a>
             </span>
             <span class="copyright" id="mail-copyright">
-                {{ $data['copyright_text']?? translate('Copyright 2023 6ammart. All right reserved') }}
+                {{ $data['copyright_text']?? translate('Copyright 2023 Hopa!. All right reserved') }}
             </span>
         </td>
     </tr>

@@ -94,7 +94,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group mb-0">
                                             <label class="form-label">{{ translate('messages.host') }}</label><br>
-                                            <input type="text" class="form-control" name="host" placeholder="{{translate('messages.Ex_:_mail.6am.one')}}"
+                                            <input type="text" class="form-control" name="host" placeholder="{{translate('messages.Ex_:_mail.example.com')}}"
                                                 value="{{ env('APP_MODE') != 'demo' ? $data['host'] ?? '' : '' }}" required>
                                         </div>
                                     </div>
