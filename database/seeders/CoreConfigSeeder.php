@@ -46,15 +46,14 @@ class CoreConfigSeeder extends Seeder
             DB::unprepared($insertSql);
         }
 
+        // Seed essential currencies only
         DB::table('currencies')->truncate();
         DB::table('currencies')->insert([
-            'id' => 1,
-            'country' => 'United States',
-            'currency_code' => 'USD',
-            'currency_symbol' => '$',
-            'exchange_rate' => 1,
-            'created_at' => now(),
-            'updated_at' => now(),
+            ['id' => 1, 'country' => 'US Dollar', 'currency_code' => 'USD', 'currency_symbol' => '$', 'exchange_rate' => 1.00, 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 3, 'country' => 'Euro', 'currency_code' => 'EUR', 'currency_symbol' => '€', 'exchange_rate' => 1.00, 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 4, 'country' => 'United Arab Emirates Dirham', 'currency_code' => 'AED', 'currency_symbol' => 'د.إ.‏', 'exchange_rate' => 1.00, 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 38, 'country' => 'British Pound Sterling', 'currency_code' => 'GBP', 'currency_symbol' => '£', 'exchange_rate' => 1.00, 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 48, 'country' => 'Israeli New Sheqel', 'currency_code' => 'ILS', 'currency_symbol' => '₪', 'exchange_rate' => 1.00, 'created_at' => now(), 'updated_at' => now()],
         ]);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
