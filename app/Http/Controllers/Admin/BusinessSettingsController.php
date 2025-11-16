@@ -19,6 +19,7 @@ use App\Models\NotificationMessage;
 use App\Models\NotificationSetting;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 use App\Models\RestaurantSubscription;
