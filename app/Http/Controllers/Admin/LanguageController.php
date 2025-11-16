@@ -380,8 +380,12 @@ class LanguageController extends Controller
                 file_put_contents(base_path('resources/lang/' . $lang . '/messages.php'), $str);
 
                 // Clear caches to show translations immediately
-                \Cache::forget('translations');
-                \Artisan::call('cache:clear');
+                \Cache::flush();
+                // Clear view cache directory directly
+                $viewPath = storage_path('framework/views');
+                if (is_dir($viewPath)) {
+                    array_map('unlink', glob($viewPath . '/*'));
+                }
 
                 $renmaining_translated_data_count= count($translated_data);
                 $percentage =  $renmaining_translated_data_count > 0 && $translating_count > 0 ?  100 - ( ($renmaining_translated_data_count/$translating_count)* 100) : 0;
