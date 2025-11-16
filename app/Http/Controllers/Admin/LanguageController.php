@@ -249,8 +249,8 @@ class LanguageController extends Controller
             if (function_exists('opcache_invalidate')) {
                 @opcache_invalidate($messagesPath, true);
             }
-            \Cache::forget('translations');
-            \Artisan::call('cache:clear');
+            \Cache::flush();
+            \Artisan::call('view:clear');
 
             $newMessagesPath = base_path('resources/lang/' . $lang . '/new-messages.php');
             if (file_exists($newMessagesPath)) {
@@ -292,8 +292,8 @@ class LanguageController extends Controller
         file_put_contents(base_path('resources/lang/' . $lang . '/messages.php'), $str);
 
         // Clear caches to show translation immediately
-        \Cache::forget('translations');
-        \Artisan::call('cache:clear');
+        \Cache::flush();
+        \Artisan::call('view:clear');
 
         return response()->json([
             'translated_data' => $translated
