@@ -10,12 +10,20 @@
     @php
         $app_name = \App\CentralLogics\Helpers::get_business_settings('business_name', false);
         $icon = \App\CentralLogics\Helpers::get_business_settings('icon', false);
+        $fallbackIcon = dynamicAsset('public/assets/admin/img/logo.png');
+        $iconUrl = $fallbackIcon;
+        if ($icon) {
+            $relativePath = 'business/' . $icon;
+            if (\Illuminate\Support\Facades\Storage::disk('public')->exists($relativePath)) {
+                $iconUrl = asset('storage/app/public/' . $relativePath);
+            }
+        }
     @endphp
     <!-- Title -->
     <title>{{ translate('messages.login') }} | {{$app_name??'Hopa! Control Center'}}</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{asset($icon ? 'storage/app/public/business/'.$icon : 'public/favicon.ico')}}">
+    <link rel="shortcut icon" href="{{ $iconUrl }}">
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
