@@ -121,7 +121,10 @@
                                         </div>
                                         <div class="col-md-12">
                                             <input id="pac-input" class="controls rounded initial-8" title="{{translate('messages.search_your_location_here')}}" type="text" placeholder="{{translate('messages.search_here')}}"/>
-                                            <div style="height: 170px !important" id="map"></div>
+                                            <div style="height: 170px !important" id="map" class="rounded overflow-hidden"></div>
+                                            <small class="text-danger d-none mt-2 validation-message" id="coordinates_error">
+                                                {{ translate('messages.restaurant_coordinates_are_required') }}
+                                            </small>
                                         </div>
                                     </div>
                                 </div>
@@ -138,7 +141,7 @@
                                                 <p class="mb-0 fs-12">{{ translate('Upload your website Logo') }}</p>
                                             </div>
 
-                                            <div class="image-box w-100px h-100px mx-auto bg-white">
+                                            <div class="image-box w-100px h-100px mx-auto bg-white" id="logo_upload_box">
                                                 <label for="image-input" class="d-flex flex-column align-items-center justify-content-center h-100 cursor-pointer gap-2">
                                                 <img width="30" class="upload-icon" src="{{dynamicAsset('public/assets/admin/img/img-up.png')}}" alt="Upload Icon">
                                                 <span class="upload-text text-primary font-semibold fs-10">{{ translate('Click to upload')}}
@@ -151,6 +154,9 @@
                                                 </button>
                                                 <input type="file" id="image-input" name="logo" accept="image/*" hidden>
                                             </div>
+                                            <small class="text-danger d-none mt-2 validation-message" id="logo_error">
+                                                {{ translate('messages.restaurant_logo_is_required') }}
+                                            </small>
 
                                             <p class="opacity-75 mx-auto fs-10 text-center">
                                                 {{ translate('JPG, JPEG, PNG, Gif Image size : Max 2 MB (1:1)')}}
@@ -164,7 +170,7 @@
                                                     <p class="mb-0 fs-12">{{ translate('Upload your website Logo') }}</p>
                                                 </div>
 
-                                                <div class="image-box ratio-3-1 max-w-300 mx-auto h-100px bg-white max-auto">
+                                                <div class="image-box ratio-3-1 max-w-300 mx-auto h-100px bg-white max-auto" id="cover_upload_box">
                                                     <label for="image-input2" class="d-flex flex-column align-items-center justify-content-center h-100 cursor-pointer gap-2">
                                                     <img width="30" class="upload-icon" src="{{dynamicAsset('public/assets/admin/img/img-up.png')}}" alt="Upload Icon">
                                                     <span class="upload-text text-primary font-semibold fs-10">{{ translate('Click to upload')}}
@@ -177,6 +183,9 @@
                                                     </button>
                                                     <input type="file" id="image-input2" name="cover_photo" accept="image/*" hidden>
                                                 </div>
+                                                <small class="text-danger d-none mt-2 validation-message" id="cover_error">
+                                                    {{ translate('messages.restaurant_cover_photo_is_required') }}
+                                                </small>
 
                                                 <p class="opacity-75 mx-auto fs-10 text-center">
                                                     {{ translate('JPG, JPEG, PNG, Gif Image size : Max 2 MB (3:1)')}}
@@ -541,29 +550,110 @@
 
             location.reload();
         });
-        $("#save_information").on("click", function (e) {
 
-            if($('#latitude').val() == '' || $('#longitude').val() == ''){
-                toastr.error('{{ translate('messages.Click_on_the_map_inside_the_red_marked_area_for_the_Lat/Long') }}', {
-                    CloseButton: true,
-                    ProgressBar: true
-                });
-
-            }else if($('#image-input')[0].files.length === 0 || $('#image-input2')[0].files.length === 0){
-                toastr.error('{{ translate('restaurant_cover_photo_&_restaurant_logo_are_required') }}', {
-                    CloseButton: true,
-                    ProgressBar: true
-                });
-
-            }else if($('#tin_certificate_image')[0].files.length === 0 ){
-                toastr.error('{{ translate('tin_certificate_file_is_required') }}', {
-                    CloseButton: true,
-                    ProgressBar: true
-                });
+        const uploadFields = [
+            {
+                input: $('#image-input'),
+                wrapper: $('#logo_upload_box'),
+                errorElement: $('#logo_error'),
+                message: '{{ translate('messages.restaurant_logo_is_required') }}'
+            },
+            {
+                input: $('#image-input2'),
+                wrapper: $('#cover_upload_box'),
+                errorElement: $('#cover_error'),
+                message: '{{ translate('messages.restaurant_cover_photo_is_required') }}'
             }
-            else{
-                $("#res_form").submit();
+        ];
+
+        function showUploadError(field) {
+            field.wrapper.addClass('border border-danger');
+            field.errorElement.removeClass('d-none');
+        }
+
+        function clearUploadError(field) {
+            field.wrapper.removeClass('border border-danger');
+            field.errorElement.addClass('d-none');
+        }
+
+        function validateUploads(messages) {
+            let hasError = false;
+            uploadFields.forEach(field => {
+                if (!field.input[0].files.length) {
+                    showUploadError(field);
+                    messages.add(field.message);
+                    hasError = true;
+                } else {
+                    clearUploadError(field);
+                }
+            });
+            return hasError;
+        }
+
+        function showCoordinateError() {
+            $('#map').addClass('border border-danger');
+            $('#coordinates_error').removeClass('d-none');
+        }
+
+        function clearCoordinateError() {
+            $('#map').removeClass('border border-danger');
+            $('#coordinates_error').addClass('d-none');
+        }
+
+        $('#latitude, #longitude').on('change', function () {
+            if ($('#latitude').val() && $('#longitude').val()) {
+                clearCoordinateError();
             }
+        });
+
+        uploadFields.forEach(field => {
+            field.input.on('change', function () {
+                if (this.files.length) {
+                    clearUploadError(field);
+                }
+            });
+        });
+
+        $("#save_information").on("click", function () {
+            const form = $("#res_form")[0];
+            const messages = new Set();
+            let hasError = false;
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                hasError = true;
+            }
+
+            if ($('#latitude').val() === '' || $('#longitude').val() === '') {
+                hasError = true;
+                showCoordinateError();
+                messages.add('{{ translate('messages.Click_on_the_map_inside_the_red_marked_area_for_the_Lat/Long') }}');
+            } else {
+                clearCoordinateError();
+            }
+
+            if (validateUploads(messages)) {
+                hasError = true;
+            }
+
+            if (hasError) {
+                messages.forEach(message => {
+                    toastr.error(message, {
+                        CloseButton: true,
+                        ProgressBar: true
+                    });
+                });
+
+                const $firstError = $('.validation-message').not('.d-none').first();
+                if ($firstError.length) {
+                    $('html, body').animate({
+                        scrollTop: $firstError.offset().top - 120
+                    }, 400);
+                }
+                return;
+            }
+
+            $("#res_form").submit();
         });
 
         $('#tin_expire_date').attr('min',(new Date()).toISOString().split('T')[0]);
@@ -784,6 +874,8 @@
                         var coordinates = JSON.parse(coordinates);
                                     document.getElementById('latitude').value = coordinates['lat'];
                                     document.getElementById('longitude').value = coordinates['lng'];
+                                    $('#latitude').trigger('change');
+                                    $('#longitude').trigger('change');
                                     infoWindow.open(map);
                                 });
                             },
