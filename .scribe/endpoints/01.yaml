@@ -1,0 +1,143 @@
+name: Authentication
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/auth/login
+    metadata:
+      custom: []
+      groupName: Authentication
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Customer Login'
+      description: |-
+        Authenticate a customer using various login methods (manual, OTP, or social).
+        Returns a JWT token upon successful authentication.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      login_type:
+        custom: []
+        name: login_type
+        description: 'The type of login.'
+        required: true
+        example: manual
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      email_or_phone:
+        custom: []
+        name: email_or_phone
+        description: 'required_if:login_type,manual The email or phone number.'
+        required: false
+        example: user@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      password:
+        custom: []
+        name: password
+        description: 'required_if:login_type,manual The user password (min 6 characters).'
+        required: false
+        example: password123
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      field_type:
+        custom: []
+        name: field_type
+        description: 'required_if:login_type,manual Specify whether email_or_phone is an email or phone.'
+        required: false
+        example: email
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      phone:
+        custom: []
+        name: phone
+        description: 'required_if:login_type,otp The phone number for OTP login.'
+        required: false
+        example: '+972501234567'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      otp:
+        custom: []
+        name: otp
+        description: 'required_if:login_type,otp The OTP code.'
+        required: false
+        example: '123456'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      guest_id:
+        custom: []
+        name: guest_id
+        description: 'optional Guest user ID for cart migration.'
+        required: false
+        example: guest_12345
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      login_type: manual
+      email_or_phone: user@example.com
+      password: password123
+      field_type: email
+      phone: '+972501234567'
+      otp: '123456'
+      guest_id: guest_12345
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+            "is_phone_verified": 1,
+            "is_email_verified": 1,
+            "is_personal_info": 1
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 403
+        content: |-
+          {
+            "errors": [
+              {"code": "auth-001", "message": "Invalid credentials"}
+            ]
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null

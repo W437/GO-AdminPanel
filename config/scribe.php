@@ -86,7 +86,7 @@ return [
         'assets_directory' => null,
 
         // Middleware to attach to the docs endpoint (if `add_routes` is true).
-        'middleware' => [],
+        'middleware' => ['web', 'auth:admin'],  // Requires admin login
     ],
 
     'external' => [
