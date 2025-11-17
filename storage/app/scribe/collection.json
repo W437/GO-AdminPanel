@@ -5,12 +5,12 @@
             "key": "baseUrl",
             "type": "string",
             "name": "string",
-            "value": "http:\/\/localhost:8000"
+            "value": "https:\/\/api.hopa.delivery"
         }
     ],
     "info": {
         "name": "GO-AdminPanel API Documentation",
-        "_postman_id": "0c662a5e-0014-4fc8-afad-a83ed05e9e56",
+        "_postman_id": "5d08fc96-96f0-494a-b073-9696d8c62ab9",
         "description": "Complete API documentation for GO-AdminPanel - Restaurant Management System",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -5578,7 +5578,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"opening_time\":\"17:17:23\",\"closing_time\":\"2051-12-10\",\"day\":\"architecto\"}"
+                            "raw": "{\"opening_time\":\"18:06:27\",\"closing_time\":\"2051-12-10\",\"day\":\"architecto\"}"
                         },
                         "description": "",
                         "auth": {

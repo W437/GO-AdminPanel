@@ -5,7 +5,7 @@ info:
   version: 1.0.0
 servers:
   -
-    url: 'http://localhost:8000'
+    url: 'https://api.hopa.delivery'
 tags:
   -
     name: Authentication
@@ -5644,7 +5644,7 @@ paths:
                 opening_time:
                   type: string
                   description: 'Must be a valid date in the format <code>H:i:s</code>.'
-                  example: '17:17:23'
+                  example: '18:06:27'
                   nullable: false
                 closing_time:
                   type: string
