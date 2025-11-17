@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\CentralLogics\Helpers;
 use App\Jobs\ProcessStoryMedia;
 use App\Jobs\PurgeStoryMedia;
 use App\Models\Restaurant;
@@ -12,6 +13,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 class StoryService
@@ -55,6 +57,30 @@ class StoryService
         $path = $file->store($baseDirectory, $disk);
         $thumbPath = $thumbnail?->store($baseDirectory . '/thumbnails', $disk);
 
+        // Auto-generate thumbnail for videos if not provided
+        if ($payload['media_type'] === 'video' && !$thumbPath) {
+            $fullPath = Storage::disk($disk)->path($path);
+            $thumbnailFilename = Helpers::generate_video_thumbnail($fullPath);
+
+            if ($thumbnailFilename) {
+                // Move generated thumbnail to proper location
+                $thumbnailSourcePath = storage_path('app/public/temp/' . $thumbnailFilename);
+                $thumbnailDestPath = $baseDirectory . '/thumbnails/' . $thumbnailFilename;
+
+                if (file_exists($thumbnailSourcePath)) {
+                    Storage::disk($disk)->put($thumbnailDestPath, file_get_contents($thumbnailSourcePath));
+                    unlink($thumbnailSourcePath);
+                    $thumbPath = $thumbnailDestPath;
+                }
+            }
+        }
+
+        // Generate blurhash for thumbnail
+        $thumbnailBlurhash = null;
+        if ($thumbPath) {
+            $thumbnailBlurhash = $this->generateBlurhashForPath($thumbPath, $disk);
+        }
+
         $duration = $payload['duration_seconds'] ?? (int) config('stories.default_duration', 5);
 
         $media = $story->media()->create([
@@ -62,6 +88,7 @@ class StoryService
             'media_type' => $payload['media_type'],
             'media_path' => $path,
             'thumbnail_path' => $thumbPath,
+            'thumbnail_blurhash' => $thumbnailBlurhash,
             'duration_seconds' => max(1, (int) $duration),
             'caption' => $payload['caption'] ?? null,
             'cta_label' => $payload['cta_label'] ?? null,
@@ -382,5 +409,25 @@ class StoryService
         $int = (int) $value;
 
         return max($min, min($max, $int));
+    }
+
+    protected function generateBlurhashForPath(string $path, string $disk): ?string
+    {
+        try {
+            // Extract filename from path
+            $filename = basename($path);
+            $directory = dirname($path) . '/';
+
+            // Generate blurhash - handles both S3 and local storage
+            return Helpers::generate_blurhash($directory, $filename);
+        } catch (\Exception $e) {
+            // Log error but don't fail the upload
+            \Log::warning('Failed to generate blurhash for story media', [
+                'path' => $path,
+                'disk' => $disk,
+                'error' => $e->getMessage()
+            ]);
+            return null;
+        }
     }
 }
