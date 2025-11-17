@@ -2290,7 +2290,7 @@ class Helpers
         }
     }
 
-    public static function generate_blurhash(string $dir, string $image_filename, int $components_x = 7, int $components_y = 6)
+    public static function generate_blurhash(string $dir, string $image_filename, int $components_x = 5, int $components_y = 4)
     {
         try {
             if (!$image_filename || $image_filename === 'def.png') {
@@ -2343,7 +2343,7 @@ class Helpers
                 $pixels[] = $row;
             }
 
-            // Generate blurhash with custom components (7x6 for higher quality)
+            // Generate blurhash with custom components (5x4 for quality/size balance)
             $blurhash = \kornrunner\Blurhash\Blurhash::encode($pixels, $components_x, $components_y);
 
             \Illuminate\Support\Facades\Log::info('Blurhash generated successfully', [
