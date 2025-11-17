@@ -389,13 +389,13 @@
                                                     <label class="input-label mb-2 d-block title-clr fw-normal" for="exampleFormControlInput1">{{ translate('messages.business_registration_tax_id') }}
                                                     <span class="input-label-secondary ps-1" data-toggle="tooltip" title="{{ translate('messages.business_registration_tax_id') }}"><i class="tio-info text-muted fs-14"></i></span>
                                                 </label>
-                                                    <input type="text" id="tin" name="tin" placeholder="{{ translate('messages.business_registration_tax_id_placeholder') }}" class="form-control">
+                                                <input type="text" id="tin" name="tin" value="{{ old('tin') }}" placeholder="{{ translate('messages.business_registration_tax_id_placeholder') }}" class="form-control">
                                                 </div>
                                                 <div class="form-group mb-0">
                                                     <label class="input-label mb-2 d-block title-clr fw-normal" for="exampleFormControlInput1">{{translate('Expire Date')}}
                                                     <span class="input-label-secondary ps-1" data-toggle="tooltip" title="{{ translate('messages.Expire Date') }}"><i class="tio-info text-muted fs-14"></i></span>
                                                 </label>
-                                                    <input type="date" id="tin_expire_date" name="tin_expire_date" class="form-control" >
+                                                    <input type="date" id="tin_expire_date" name="tin_expire_date" value="{{ old('tin_expire_date') }}" class="form-control" >
                                                 </div>
                                             </div>
                                         </div>
@@ -453,7 +453,7 @@
                                         <div class="col-md-4 col-12">
                                             <div class="form-group mb-0">
                                                 <label class="input-label" for="email">{{ translate('messages.email') }}</label>
-                                                <input id="email" type="email" name="email" class="form-control h--45px" placeholder="{{ translate('messages.Ex:_Jhone@company.com') }} "
+                                                <input id="email" type="email" name="email" value="{{ old('email') }}" class="form-control h--45px" placeholder="{{ translate('messages.Ex:_Jhone@company.com') }} "
                                                     required>
                                             </div>
                                         </div>
@@ -544,130 +544,138 @@
     <script>
         "use strict";
 
-        //Clear All Data
-        $("#reset_btn").on("click", function () {
-            $("#res_form")[0].reset();
+        document.addEventListener('DOMContentLoaded', function () {
+            const $form = $('#res_form');
 
-            location.reload();
-        });
-
-        const uploadFields = [
-            {
-                input: $('#image-input'),
-                wrapper: $('#logo_upload_box'),
-                errorElement: $('#logo_error'),
-                message: '{{ translate('messages.restaurant_logo_is_required') }}'
-            },
-            {
-                input: $('#image-input2'),
-                wrapper: $('#cover_upload_box'),
-                errorElement: $('#cover_error'),
-                message: '{{ translate('messages.restaurant_cover_photo_is_required') }}'
-            }
-        ];
-
-        function showUploadError(field) {
-            field.wrapper.addClass('border border-danger');
-            field.errorElement.removeClass('d-none');
-        }
-
-        function clearUploadError(field) {
-            field.wrapper.removeClass('border border-danger');
-            field.errorElement.addClass('d-none');
-        }
-
-        function validateUploads(messages) {
-            let hasError = false;
-            uploadFields.forEach(field => {
-                if (!field.input[0].files.length) {
-                    showUploadError(field);
-                    messages.add(field.message);
-                    hasError = true;
-                } else {
-                    clearUploadError(field);
+            //Clear All Data
+            $("#reset_btn").on("click", function () {
+                if ($form.length) {
+                    $form[0].reset();
                 }
+                location.reload();
             });
-            return hasError;
-        }
 
-        function showCoordinateError() {
-            $('#map').addClass('border border-danger');
-            $('#coordinates_error').removeClass('d-none');
-        }
-
-        function clearCoordinateError() {
-            $('#map').removeClass('border border-danger');
-            $('#coordinates_error').addClass('d-none');
-        }
-
-        $('#latitude, #longitude').on('change', function () {
-            if ($('#latitude').val() && $('#longitude').val()) {
-                clearCoordinateError();
-            }
-        });
-
-        uploadFields.forEach(field => {
-            field.input.on('change', function () {
-                if (this.files.length) {
-                    clearUploadError(field);
+            const uploadFields = [
+                {
+                    input: $('#image-input'),
+                    wrapper: $('#logo_upload_box'),
+                    errorElement: $('#logo_error'),
+                    message: '{{ translate('messages.restaurant_logo_is_required') }}'
+                },
+                {
+                    input: $('#image-input2'),
+                    wrapper: $('#cover_upload_box'),
+                    errorElement: $('#cover_error'),
+                    message: '{{ translate('messages.restaurant_cover_photo_is_required') }}'
                 }
-            });
-        });
+            ].filter(field => field.input.length && field.wrapper.length && field.errorElement.length);
 
-        $("#res_form").on("submit", function (event) {
-            const form = this;
-            const messages = new Set();
-            let hasError = false;
-            const hasHtmlValidationError = !form.checkValidity();
-
-            if (hasHtmlValidationError) {
-                hasError = true;
+            function showUploadError(field) {
+                field.wrapper.addClass('border border-danger');
+                field.errorElement.removeClass('d-none');
             }
 
-            if ($('#latitude').val() === '' || $('#longitude').val() === '') {
-                hasError = true;
-                showCoordinateError();
-                messages.add('{{ translate('messages.restaurant_coordinates_are_required') }}');
-            } else {
-                clearCoordinateError();
+            function clearUploadError(field) {
+                field.wrapper.removeClass('border border-danger');
+                field.errorElement.addClass('d-none');
             }
 
-            if (validateUploads(messages)) {
-                hasError = true;
+            function isUploadMissing(field) {
+                const inputEl = field.input.get(0);
+                return !inputEl || !inputEl.files || inputEl.files.length === 0;
             }
 
-            if (hasError) {
-                event.preventDefault();
-                if (hasHtmlValidationError) {
-                    form.reportValidity();
-                }
-
-                messages.forEach(message => {
-                    toastr.error(message, {
-                        CloseButton: true,
-                        ProgressBar: true
-                    });
+            function validateUploads(messages) {
+                let hasError = false;
+                uploadFields.forEach(field => {
+                    if (isUploadMissing(field)) {
+                        showUploadError(field);
+                        messages.add(field.message);
+                        hasError = true;
+                    } else {
+                        clearUploadError(field);
+                    }
                 });
-
-                const $firstError = $('.validation-message').not('.d-none').first();
-                if ($firstError.length) {
-                    $('html, body').animate({
-                        scrollTop: $firstError.offset().top - 120
-                    }, 400);
-                }
+                return hasError;
             }
-        });
 
-        $('#tin_expire_date').attr('min',(new Date()).toISOString().split('T')[0]);
+            function showCoordinateError() {
+                $('#map').addClass('border border-danger');
+                $('#coordinates_error').removeClass('d-none');
+            }
 
-        $(document).ready(function () {
+            function clearCoordinateError() {
+                $('#map').removeClass('border border-danger');
+                $('#coordinates_error').addClass('d-none');
+            }
+
+            $('#latitude, #longitude').on('change', function () {
+                if ($('#latitude').val() && $('#longitude').val()) {
+                    clearCoordinateError();
+                }
+            });
+
+            uploadFields.forEach(field => {
+                field.input.on('change', function () {
+                    if (this.files && this.files.length) {
+                        clearUploadError(field);
+                    }
+                });
+            });
+
+            $form.on("submit", function (event) {
+                const form = this;
+                const messages = new Set();
+                let hasError = false;
+                const hasHtmlValidationError = !form.checkValidity();
+
+                if (hasHtmlValidationError) {
+                    hasError = true;
+                }
+
+                if ($('#latitude').val() === '' || $('#longitude').val() === '') {
+                    hasError = true;
+                    showCoordinateError();
+                    messages.add('{{ translate('messages.restaurant_coordinates_are_required') }}');
+                } else {
+                    clearCoordinateError();
+                }
+
+                if (validateUploads(messages)) {
+                    hasError = true;
+                }
+
+                if (hasError) {
+                    event.preventDefault();
+                    if (hasHtmlValidationError) {
+                        form.reportValidity();
+                    }
+
+                    messages.forEach(message => {
+                        toastr.error(message, {
+                            CloseButton: true,
+                            ProgressBar: true
+                        });
+                    });
+
+                    const $firstError = $('.validation-message').not('.d-none').first();
+                    if ($firstError.length) {
+                        $('html, body').animate({
+                            scrollTop: $firstError.offset().top - 120
+                        }, 400);
+                    }
+                }
+            });
+
+            $('#tin_expire_date').attr('min',(new Date()).toISOString().split('T')[0]);
+
             function previewFile(inputSelector, previewImgSelector, textBoxSelector) {
                 const input = $(inputSelector);
                 const imagePreview = $(previewImgSelector);
                 const textBox = $(textBoxSelector);
 
                 input.on('change', function () {
-                    const file = this.files[0];
+                    const file = this.files && this.files[0];
                     if (!file) return;
 
                     const fileType = file.type;
@@ -688,30 +696,19 @@
             }
 
             previewFile('#tin_certificate_image', '#logoImageViewer2', '.upload-file__textbox');
-        });
 
-
-
-        $(document).on('ready', function() {
             @if (isset(auth('admin')->user()->zone_id))
             $('#choice_zones').trigger('change');
             @endif
+
+            $form.on('keyup keypress', function(e) {
+                var keyCode = e.keyCode || e.which;
+                if (keyCode === 13) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
         });
-
-
-
-
-
-
-        $('#res_form').on('keyup keypress', function(e) {
-            var keyCode = e.keyCode || e.which;
-            if (keyCode === 13) {
-                e.preventDefault();
-                return false;
-            }
-        });
-
-
 
                 @php($default_location = \App\Models\BusinessSetting::where('key', 'default_location')->first())
                 @php($default_location = $default_location->value ? json_decode($default_location->value, true) : 0)
