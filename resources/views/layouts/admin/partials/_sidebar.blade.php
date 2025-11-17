@@ -443,7 +443,7 @@ $order_sch = Cache::rememberForever('order_scheduled_stats', function () {
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
                                 href="{{ route('admin.cuisine.add') }}"
                                 title="{{ translate('messages.cuisine') }}">
-                                <i class="tio-restaurant-menu nav-icon"></i>
+                                <i class="tio-category nav-icon"></i>
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
                                     {{ translate('messages.cuisine') }}
                             </a>
