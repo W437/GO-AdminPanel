@@ -23,6 +23,20 @@
             </div>
         </div>
         <!-- End Page Header -->
+
+        <!-- Info Alert -->
+        <div class="alert alert-soft-info mb-3" role="alert">
+            <div class="d-flex align-items-center">
+                <div class="alert-icon">
+                    <i class="tio-info-outined"></i>
+                </div>
+                <div class="flex-grow-1 ml-3">
+                    <strong>How Basic Campaigns Work:</strong> Basic campaigns appear as <strong>banners in the app</strong>. When customers tap a banner, it opens a campaign screen showing all participating restaurants. Use this to promote special events or group discounts across multiple restaurants.
+                </div>
+            </div>
+        </div>
+        <!-- End Info Alert -->
+
         <div class="row gx-2 gx-lg-3">
             <div class="col-sm-12 col-lg-12 mb-3 mb-lg-2">
                 <!-- Card -->

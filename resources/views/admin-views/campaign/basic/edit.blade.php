@@ -17,6 +17,20 @@
             </div>
         </div>
         <!-- End Page Header -->
+
+        <!-- Info Alert -->
+        <div class="alert alert-soft-info mb-3" role="alert">
+            <div class="d-flex align-items-center">
+                <div class="alert-icon">
+                    <i class="tio-info-outined"></i>
+                </div>
+                <div class="flex-grow-1 ml-3">
+                    <strong>Campaign Display:</strong> This campaign appears as a <strong>banner in the app</strong>. When customers tap it, they see all participating restaurants. Changes will be visible after saving.
+                </div>
+            </div>
+        </div>
+        <!-- End Info Alert -->
+
         <div class="card">
             <div class="card-body">
                 <form action="{{route('admin.campaign.update-basic',[$campaign['id']])}}" method="post" id=campaign-form

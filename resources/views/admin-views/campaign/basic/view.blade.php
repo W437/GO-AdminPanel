@@ -14,6 +14,20 @@
                 <span class="badge badge-soft-secondary badge-pill" id="itemCount"> {{ $restaurants->total() }}</span></h1>
         </div>
         <!-- End Page Header -->
+
+        <!-- Info Alert -->
+        <div class="alert alert-soft-info mb-3" role="alert">
+            <div class="d-flex align-items-center">
+                <div class="alert-icon">
+                    <i class="tio-info-outined"></i>
+                </div>
+                <div class="flex-grow-1 ml-3">
+                    <strong>Campaign Display:</strong> This campaign appears as a <strong>banner in the app</strong>. When tapped, it opens a screen showing all restaurants listed below. Add restaurants to make them visible in this campaign.
+                </div>
+            </div>
+        </div>
+        <!-- End Info Alert -->
+
         <!-- Card -->
         <div class="card mb-3 mb-lg-5">
             <!-- Body -->

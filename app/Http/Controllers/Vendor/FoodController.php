@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 use App\CentralLogics\ProductLogic;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Cache;
 use Rap2hpoutre\FastExcel\FastExcel;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -267,6 +268,10 @@ class FoodController extends Controller
                 }
             }
         }
+
+        // Clear cache to show changes immediately
+        Cache::flush();
+
         return response()->json([], 200);
     }
 
@@ -311,6 +316,10 @@ class FoodController extends Controller
         if($request->status != 1){
             $product?->carts()?->delete();
         }
+
+        // Clear cache to show changes immediately
+        Cache::flush();
+
         Toastr::success(translate('Food status updated!'));
         return back();
     }
@@ -548,6 +557,9 @@ class FoodController extends Controller
         Helpers::add_or_update_translations(request: $request, key_data:'name' , name_field:'name' , model_name: 'Food' ,data_id: $p->id,data_value: $p->name);
         Helpers::add_or_update_translations(request: $request, key_data:'description' , name_field:'description' , model_name: 'Food' ,data_id: $p->id,data_value: $p->description);
 
+        // Clear cache to show changes immediately
+        Cache::flush();
+
         return response()->json([], 200);
     }
 
@@ -570,6 +582,10 @@ class FoodController extends Controller
         $product?->translations()?->delete();
         $product?->taxVats()->delete();
         $product->delete();
+
+        // Clear cache to show changes immediately
+        Cache::flush();
+
         Toastr::success(translate('Food removed!'));
         return back();
     }

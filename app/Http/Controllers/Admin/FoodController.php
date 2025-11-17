@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\DB;
 use App\CentralLogics\ProductLogic;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Cache;
 use Maatwebsite\Excel\Facades\Excel;
 use Rap2hpoutre\FastExcel\FastExcel;
 use App\Exports\RestaurantFoodExport;
@@ -237,6 +238,9 @@ class FoodController extends Controller
         Helpers::add_or_update_translations(request: $request, key_data:'name' , name_field:'name' , model_name: 'Food' ,data_id: $food->id,data_value: $food->name);
         Helpers::add_or_update_translations(request: $request, key_data:'description' , name_field:'description' , model_name: 'Food' ,data_id: $food->id,data_value: $food->description);
 
+        // Clear cache to show changes immediately
+        Cache::flush();
+
         return response()->json([], 200);
     }
 
@@ -278,6 +282,10 @@ class FoodController extends Controller
         if($request->status != 1){
             $product?->carts()?->delete();
         }
+
+        // Clear cache to show changes immediately
+        Cache::flush();
+
         Toastr::success(translate('messages.food_status_updated'));
         return back();
     }
@@ -501,6 +509,9 @@ class FoodController extends Controller
         Helpers::add_or_update_translations(request: $request, key_data:'name' , name_field:'name' , model_name: 'Food' ,data_id: $p->id,data_value: $p->name);
         Helpers::add_or_update_translations(request: $request, key_data:'description' , name_field:'description' , model_name: 'Food' ,data_id: $p->id,data_value: $p->description);
 
+        // Clear cache to show changes immediately
+        Cache::flush();
+
         return response()->json([], 200);
     }
 
@@ -518,6 +529,10 @@ class FoodController extends Controller
         $product?->newVariations()?->delete();
         $product?->taxVats()->delete();
         $product->delete();
+
+        // Clear cache to show changes immediately
+        Cache::flush();
+
         Toastr::success(translate('messages.product_deleted_successfully'));
         return back();
     }

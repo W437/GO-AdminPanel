@@ -20,6 +20,20 @@
             </div>
         </div>
         <!-- End Page Header -->
+
+        <!-- Info Alert -->
+        <div class="alert alert-soft-info mb-3" role="alert">
+            <div class="d-flex align-items-center">
+                <div class="alert-icon">
+                    <i class="tio-info-outined"></i>
+                </div>
+                <div class="flex-grow-1 ml-3">
+                    <strong>What are Basic Campaigns?</strong> Basic campaigns appear as <strong>banners in the app</strong>. When customers tap the banner, they see a screen with all participating restaurants. Perfect for promoting special events, seasonal offers, or group discounts across multiple restaurants.
+                </div>
+            </div>
+        </div>
+        <!-- End Info Alert -->
+
         <div class="card">
             <div class="card-body">
                 <form action="{{route('admin.campaign.store-basic')}}" method="post" enctype="multipart/form-data" id="campaign-form">
