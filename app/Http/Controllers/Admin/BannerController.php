@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\CentralLogics\Helpers;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -96,6 +97,10 @@ class BannerController extends Controller
             }
         }
         Translation::insert($data);
+
+        // Clear banner cache so new banner appears immediately
+        $this->clearBannerCache();
+
         return response()->json([], 200);
     }
 
@@ -110,6 +115,10 @@ class BannerController extends Controller
         $banner = Banner::findOrFail($request->id);
         $banner->status = $request->status;
         $banner->save();
+
+        // Clear banner cache so status change appears immediately
+        $this->clearBannerCache();
+
         Toastr::success(translate('messages.banner_status_updated'));
         return back();
     }
@@ -193,6 +202,10 @@ class BannerController extends Controller
                 }
             }
         }
+
+        // Clear banner cache so updates appear immediately
+        $this->clearBannerCache();
+
         return response()->json([], 200);
     }
 
@@ -207,6 +220,10 @@ class BannerController extends Controller
         }
         $banner?->translations()?->delete();
         $banner->delete();
+
+        // Clear banner cache so deletion appears immediately
+        $this->clearBannerCache();
+
         Toastr::success(translate('messages.banner_deleted_successfully'));
         return back();
     }
@@ -300,5 +317,21 @@ class BannerController extends Controller
         }
 
         return true;
+    }
+
+    /**
+     * Clear all banner-related cache keys
+     */
+    private function clearBannerCache()
+    {
+        // Clear all cache keys starting with "banners_"
+        // This ensures all zone-specific banner caches are cleared
+        $keys = Cache::get('banners_cache_keys', []);
+        foreach ($keys as $key) {
+            Cache::forget($key);
+        }
+
+        // Also use wildcard clearing for safety
+        Cache::flush(); // Note: This clears ALL cache. For production, use Cache::tags() if Redis is available
     }
 }

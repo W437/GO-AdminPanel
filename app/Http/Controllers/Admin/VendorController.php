@@ -170,7 +170,7 @@ class VendorController extends Controller
         $restaurant->vendor_id = $vendor->id;
         $restaurant->zone_id = $request->zone_id;
 
-        $restaurant->restaurant_model = 'none';
+        $restaurant->restaurant_model = 'commission';
         $restaurant->delivery_time =$request->minimum_delivery_time .'-'. $request->maximum_delivery_time.'-'.$request->delivery_time_type;
 
         if(isset($request->additional_data)  && count($request->additional_data) > 0){
