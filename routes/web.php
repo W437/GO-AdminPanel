@@ -38,11 +38,11 @@ Route::get('maintenance-mode', 'HomeController@maintenanceMode')->name('maintena
 //login
 
 Route::get('login/{tab}', 'LoginController@login')->name('login');
-Route::post('login_submit', 'LoginController@submit')->name('login_post');
+Route::post('login_submit', 'LoginController@submit')->name('login_post')->middleware('throttle:admin-login');
 Route::get('logout', 'LoginController@logout')->name('logout');
 Route::get('/reload-captcha', 'LoginController@reloadCaptcha')->name('reload-captcha');
 Route::get('/reset-password', 'LoginController@reset_password_request')->name('reset-password');
-Route::post('/vendor-reset-password', 'LoginController@vendor_reset_password_request')->name('vendor-reset-password');
+Route::post('/vendor-reset-password', 'LoginController@vendor_reset_password_request')->name('vendor-reset-password')->middleware('throttle:vendor-login');
 Route::get('/password-reset', 'LoginController@reset_password')->name('change-password');
 Route::post('verify-otp', 'LoginController@verify_token')->name('verify-otp');
 Route::post('reset-password-submit', 'LoginController@reset_password_submit')->name('reset-password-submit');

@@ -154,8 +154,34 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting()
     {
+        // API rate limiting - 240 requests per minute
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(240)->by(optional($request->user())->id ?: $request->ip());
+        });
+
+        // Admin login rate limiting - 5 attempts per minute
+        RateLimiter::for('admin-login', function (Request $request) {
+            return Limit::perMinute(5)->by($request->ip());
+        });
+
+        // Vendor login rate limiting - 10 attempts per minute
+        RateLimiter::for('vendor-login', function (Request $request) {
+            return Limit::perMinute(10)->by($request->ip());
+        });
+
+        // Delivery man login rate limiting - 10 attempts per minute
+        RateLimiter::for('delivery-login', function (Request $request) {
+            return Limit::perMinute(10)->by($request->ip());
+        });
+
+        // Customer login rate limiting - 15 attempts per minute
+        RateLimiter::for('customer-login', function (Request $request) {
+            return Limit::perMinute(15)->by($request->ip());
+        });
+
+        // Admin panel general rate limiting - 60 requests per minute
+        RateLimiter::for('admin', function (Request $request) {
+            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
     }
 }
