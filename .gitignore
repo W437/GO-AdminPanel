@@ -28,6 +28,12 @@ docker/
 
 # macOS System Files
 .DS_Store
+
+# Scribe API Documentation (generated files)
+# /resources/views/scribe/  # Commented out for production deployment
+# /storage/app/scribe/       # Commented out for production deployment
+.scribe/                     # Keep cache files ignored
+*.scribe.cache               # Keep cache files ignored
 .AppleDouble
 .LSOverride
 ._*

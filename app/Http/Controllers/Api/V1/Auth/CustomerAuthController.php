@@ -634,6 +634,36 @@ class CustomerAuthController extends Controller
         return response()->json(['token' => $token, 'is_phone_verified'=>$phone, 'is_email_verified'=>$mail, 'is_personal_info' => 1, 'is_exist_user' =>null, 'login_type' => 'manual', 'email' => $user_email], 200);
     }
 
+    /**
+     * Customer Login
+     *
+     * Authenticate a customer using various login methods (manual, OTP, or social).
+     * Returns a JWT token upon successful authentication.
+     *
+     * @group Authentication
+     * @unauthenticated
+     *
+     * @bodyParam login_type string required The type of login. Example: manual
+     * @bodyParam email_or_phone string required_if:login_type,manual The email or phone number. Example: user@example.com
+     * @bodyParam password string required_if:login_type,manual The user password (min 6 characters). Example: password123
+     * @bodyParam field_type string required_if:login_type,manual Specify whether email_or_phone is an email or phone. Example: email
+     * @bodyParam phone string required_if:login_type,otp The phone number for OTP login. Example: +972501234567
+     * @bodyParam otp string required_if:login_type,otp The OTP code. Example: 123456
+     * @bodyParam guest_id string optional Guest user ID for cart migration. Example: guest_12345
+     *
+     * @response 200 {
+     *   "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+     *   "is_phone_verified": 1,
+     *   "is_email_verified": 1,
+     *   "is_personal_info": 1
+     * }
+     *
+     * @response 403 {
+     *   "errors": [
+     *     {"code": "auth-001", "message": "Invalid credentials"}
+     *   ]
+     * }
+     */
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
