@@ -144,6 +144,12 @@ class FoodController extends Controller
         $food->variations = json_encode([]);
         $food->price = $request->price;
         $food->image = Helpers::upload(dir: 'product/', format:'png', image:$request->file('image'));
+
+        // Generate blurhash for food image
+        if ($food->image) {
+            $food->image_blurhash = Helpers::generate_blurhash('product/', $food->image);
+        }
+
         $food->available_time_starts = $request->available_time_starts;
         $food->available_time_ends = $request->available_time_ends;
         $food->discount =  $request->discount ?? 0;
@@ -442,6 +448,12 @@ class FoodController extends Controller
         //combinations end
         $p->price = $request->price;
         $p->image = $request->has('image') ? Helpers::update(dir:'product/', old_image: $p->image, format:'png', image: $request->file('image')) : $p->image;
+
+        // Generate blurhash for updated food image
+        if ($request->has('image') && $p->image) {
+            $p->image_blurhash = Helpers::generate_blurhash('product/', $p->image);
+        }
+
         $p->available_time_starts = $request->available_time_starts;
         $p->available_time_ends = $request->available_time_ends;
 
