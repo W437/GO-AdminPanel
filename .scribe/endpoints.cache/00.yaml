@@ -8381,7 +8381,7 @@ endpoints:
         name: opening_time
         description: 'Must be a valid date in the format <code>H:i:s</code>.'
         required: true
-        example: '18:06:27'
+        example: '02:14:44'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -8392,7 +8392,7 @@ endpoints:
         name: closing_time
         description: 'Must be a valid date in the format <code>H:i:s</code>. Must be a date after <code>opening_time</code>.'
         required: true
-        example: '2051-12-10'
+        example: '2051-12-11'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -8410,8 +8410,8 @@ endpoints:
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      opening_time: '18:06:27'
-      closing_time: '2051-12-10'
+      opening_time: '02:14:44'
+      closing_time: '2051-12-11'
       day: architecto
     fileParameters: []
     responses: []
@@ -14415,7 +14415,7 @@ endpoints:
         name: start_date
         description: 'This field is required when <code>status</code> is <code>paused</code>. Must be a valid date. Must be a date after or equal to <code>today</code>.'
         required: false
-        example: '2051-12-10'
+        example: '2051-12-11'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -14426,7 +14426,7 @@ endpoints:
         name: end_date
         description: 'This field is required when <code>status</code> is <code>paused</code>. Must be a valid date. Must be a date after or equal to <code>start_date</code>.'
         required: false
-        example: '2051-12-10'
+        example: '2051-12-11'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -14445,8 +14445,8 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       status: canceled
-      start_date: '2051-12-10'
-      end_date: '2051-12-10'
+      start_date: '2051-12-11'
+      end_date: '2051-12-11'
     fileParameters: []
     responses: []
     responseFields: []

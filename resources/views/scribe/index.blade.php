@@ -926,6 +926,35 @@
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-public-restaurant-api" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="public-restaurant-api">
+                    <a href="#public-restaurant-api">Public Restaurant API</a>
+                </li>
+                                    <ul id="tocify-subheader-public-restaurant-api" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="public-restaurant-api-GETapi-v1-public-restaurants-by-slug--slug-">
+                                <a href="#public-restaurant-api-GETapi-v1-public-restaurants-by-slug--slug-">Get Restaurant by Slug</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="public-restaurant-api-GETapi-v1-public-restaurants--id--schedules">
+                                <a href="#public-restaurant-api-GETapi-v1-public-restaurants--id--schedules">Get Restaurant Operating Hours</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="public-restaurant-api-GETapi-v1-public-restaurants--id--menu">
+                                <a href="#public-restaurant-api-GETapi-v1-public-restaurants--id--menu">Get Complete Restaurant Menu</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-public-zone-api" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="public-zone-api">
+                    <a href="#public-zone-api">Public Zone API</a>
+                </li>
+                                    <ul id="tocify-subheader-public-zone-api" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="public-zone-api-GETapi-v1-public-zones">
+                                <a href="#public-zone-api-GETapi-v1-public-zones">List All Zones</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="public-zone-api-GETapi-v1-public-zones--id-">
+                                <a href="#public-zone-api-GETapi-v1-public-zones--id-">Get Zone Details</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
             </div>
 
     <ul class="toc-footer" id="toc-footer">
@@ -935,7 +964,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: November 16, 2025</li>
+        <li>Last updated: November 17, 2025</li>
     </ul>
 </div>
 
@@ -16461,8 +16490,8 @@ Must be one of:
     --form "cta_label=z"\
     --form "cta_url=http://rempel.com/sunt-nihil-accusantium-harum-mollitia"\
     --form "duration_seconds=8"\
-    --form "media=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php9ueccpkkut95d0e7Uj0" \
-    --form "thumbnail=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phptdr2mfe13nf78QpqrGG" </code></pre></div>
+    --form "media=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php6g1jqu1mvvos5L5lEeM" \
+    --form "thumbnail=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phphld7eq47inl83EuzZUB" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -16664,7 +16693,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be a file. Must not be greater than 10240 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php9ueccpkkut95d0e7Uj0</code></p>
+<p>Must be a file. Must not be greater than 10240 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php6g1jqu1mvvos5L5lEeM</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>thumbnail</code></b>&nbsp;&nbsp;
@@ -16676,7 +16705,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be a file. Must not be greater than 10240 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phptdr2mfe13nf78QpqrGG</code></p>
+<p>Must be a file. Must not be greater than 10240 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phphld7eq47inl83EuzZUB</code></p>
         </div>
         </form>
 
@@ -20211,9 +20240,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "description=Et animi quos velit et fugiat."\
     --form "dates=architecto"\
     --form "advertisement_type=restaurant_promotion"\
-    --form "cover_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php8imi6idcacob5x1SpyG" \
-    --form "profile_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php5rp8kglvmb37er5Zgrd" \
-    --form "video_attachment=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php2a5bc49qcaqf79Q4iil" </code></pre></div>
+    --form "cover_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php8e8fd5iqop6vc6863Jb" \
+    --form "profile_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php2jjc1k162jt2c1aiAP8" \
+    --form "video_attachment=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpmtakjvg26ripdbOPDL2" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -20377,7 +20406,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>This field is required when <code>advertisement_type</code> is <code>restaurant_promotion</code>. Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php8imi6idcacob5x1SpyG</code></p>
+<p>This field is required when <code>advertisement_type</code> is <code>restaurant_promotion</code>. Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php8e8fd5iqop6vc6863Jb</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>profile_image</code></b>&nbsp;&nbsp;
@@ -20389,7 +20418,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>This field is required when <code>advertisement_type</code> is <code>restaurant_promotion</code>. Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php5rp8kglvmb37er5Zgrd</code></p>
+<p>This field is required when <code>advertisement_type</code> is <code>restaurant_promotion</code>. Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php2jjc1k162jt2c1aiAP8</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>video_attachment</code></b>&nbsp;&nbsp;
@@ -20401,7 +20430,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>This field is required when <code>advertisement_type</code> is <code>video_promotion</code>. Must be a file. Must not be greater than 5120 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php2a5bc49qcaqf79Q4iil</code></p>
+<p>This field is required when <code>advertisement_type</code> is <code>video_promotion</code>. Must be a file. Must not be greater than 5120 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpmtakjvg26ripdbOPDL2</code></p>
         </div>
         </form>
 
@@ -20426,9 +20455,9 @@ Must be one of:
     --form "description=Animi quos velit et fugiat."\
     --form "dates=architecto"\
     --form "advertisement_type=restaurant_promotion"\
-    --form "cover_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpsq5o6vdf1qse9d8jYyG" \
-    --form "profile_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpdmqeovq791e23CSHLJ8" \
-    --form "video_attachment=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpd4kicfbig9ik2SEXuPR" </code></pre></div>
+    --form "cover_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php04k3i8tu2c03cVqRWEb" \
+    --form "profile_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpv02pjmbb6sohfWegOAE" \
+    --form "video_attachment=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php0anvdsone3221VyHtne" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -20618,7 +20647,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpsq5o6vdf1qse9d8jYyG</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php04k3i8tu2c03cVqRWEb</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>profile_image</code></b>&nbsp;&nbsp;
@@ -20630,7 +20659,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpdmqeovq791e23CSHLJ8</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpv02pjmbb6sohfWegOAE</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>video_attachment</code></b>&nbsp;&nbsp;
@@ -20642,7 +20671,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be a file. Must not be greater than 5120 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpd4kicfbig9ik2SEXuPR</code></p>
+<p>Must be a file. Must not be greater than 5120 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php0anvdsone3221VyHtne</code></p>
         </div>
         </form>
 
@@ -20839,9 +20868,9 @@ Must be one of:
     --form "description=Animi quos velit et fugiat."\
     --form "dates=architecto"\
     --form "advertisement_type=restaurant_promotion"\
-    --form "cover_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpqcu6733fkpkq50H3Vqk" \
-    --form "profile_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phps5hoofuat4653C8W9d7" \
-    --form "video_attachment=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phphb4mv8q96c7seceuFoe" </code></pre></div>
+    --form "cover_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpn177e1d94gg4a7kfNRf" \
+    --form "profile_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpfir9gmer6bvs6L9Tkez" \
+    --form "video_attachment=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpep2o9u1gepd24IAKtUW" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -21018,7 +21047,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpqcu6733fkpkq50H3Vqk</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpn177e1d94gg4a7kfNRf</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>profile_image</code></b>&nbsp;&nbsp;
@@ -21030,7 +21059,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phps5hoofuat4653C8W9d7</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpfir9gmer6bvs6L9Tkez</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>video_attachment</code></b>&nbsp;&nbsp;
@@ -21042,7 +21071,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be a file. Must not be greater than 5120 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phphb4mv8q96c7seceuFoe</code></p>
+<p>Must be a file. Must not be greater than 5120 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpep2o9u1gepd24IAKtUW</code></p>
         </div>
         </form>
 
@@ -21174,8 +21203,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --form "contact_number=bngzmiyvdljnikhw"\
     --form "meta_title=a"\
-    --form "logo=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php6i1i3qcno36u5uWj1VE" \
-    --form "cover_photo=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpo2ou0t9lha6l8tBoPi4" </code></pre></div>
+    --form "logo=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php2i3vjfiao9qe9ReQojA" \
+    --form "cover_photo=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpr8ui9uom1pjg5DoA72b" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -21298,7 +21327,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php6i1i3qcno36u5uWj1VE</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php2i3vjfiao9qe9ReQojA</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>cover_photo</code></b>&nbsp;&nbsp;
@@ -21310,7 +21339,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpo2ou0t9lha6l8tBoPi4</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpr8ui9uom1pjg5DoA72b</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>meta_title</code></b>&nbsp;&nbsp;
@@ -21787,8 +21816,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"opening_time\": \"18:06:27\",
-    \"closing_time\": \"2051-12-10\",
+    \"opening_time\": \"02:14:44\",
+    \"closing_time\": \"2051-12-11\",
     \"day\": \"architecto\"
 }"
 </code></pre></div>
@@ -21805,8 +21834,8 @@ const headers = {
 };
 
 let body = {
-    "opening_time": "18:06:27",
-    "closing_time": "2051-12-10",
+    "opening_time": "02:14:44",
+    "closing_time": "2051-12-11",
     "day": "architecto"
 };
 
@@ -21899,10 +21928,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="opening_time"                data-endpoint="POSTapi-v1-vendor-schedule-store"
-               value="18:06:27"
+               value="02:14:44"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>18:06:27</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>02:14:44</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>closing_time</code></b>&nbsp;&nbsp;
@@ -21911,10 +21940,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="closing_time"                data-endpoint="POSTapi-v1-vendor-schedule-store"
-               value="2051-12-10"
+               value="2051-12-11"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Must be a date after <code>opening_time</code>. Example: <code>2051-12-10</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Must be a date after <code>opening_time</code>. Example: <code>2051-12-11</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>day</code></b>&nbsp;&nbsp;
@@ -37892,8 +37921,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"status\": \"canceled\",
-    \"start_date\": \"2051-12-10\",
-    \"end_date\": \"2051-12-10\"
+    \"start_date\": \"2051-12-11\",
+    \"end_date\": \"2051-12-11\"
 }"
 </code></pre></div>
 
@@ -37910,8 +37939,8 @@ const headers = {
 
 let body = {
     "status": "canceled",
-    "start_date": "2051-12-10",
-    "end_date": "2051-12-10"
+    "start_date": "2051-12-11",
+    "end_date": "2051-12-11"
 };
 
 fetch(url, {
@@ -38034,10 +38063,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="start_date"                data-endpoint="PUTapi-v1-customer-subscription--id-"
-               value="2051-12-10"
+               value="2051-12-11"
                data-component="body">
     <br>
-<p>This field is required when <code>status</code> is <code>paused</code>. Must be a valid date. Must be a date after or equal to <code>today</code>. Example: <code>2051-12-10</code></p>
+<p>This field is required when <code>status</code> is <code>paused</code>. Must be a valid date. Must be a date after or equal to <code>today</code>. Example: <code>2051-12-11</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>end_date</code></b>&nbsp;&nbsp;
@@ -38046,10 +38075,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="end_date"                data-endpoint="PUTapi-v1-customer-subscription--id-"
-               value="2051-12-10"
+               value="2051-12-11"
                data-component="body">
     <br>
-<p>This field is required when <code>status</code> is <code>paused</code>. Must be a valid date. Must be a date after or equal to <code>start_date</code>. Example: <code>2051-12-10</code></p>
+<p>This field is required when <code>status</code> is <code>paused</code>. Must be a valid date. Must be a date after or equal to <code>start_date</code>. Example: <code>2051-12-11</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>cancellation_reason</code></b>&nbsp;&nbsp;
@@ -44484,6 +44513,850 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
         </div>
         </form>
+
+                <h1 id="public-restaurant-api">Public Restaurant API</h1>
+
+    
+
+                                <h2 id="public-restaurant-api-GETapi-v1-public-restaurants-by-slug--slug-">Get Restaurant by Slug</h2>
+
+<p>
+</p>
+
+<p>Retrieve restaurant details using a SEO-friendly slug instead of ID.
+This endpoint is specifically for the public restaurant website.</p>
+
+<span id="example-requests-GETapi-v1-public-restaurants-by-slug--slug-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://api.hopa.delivery/api/v1/public/restaurants/by-slug/pizza-palace" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://api.hopa.delivery/api/v1/public/restaurants/by-slug/pizza-palace"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-public-restaurants-by-slug--slug-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;Pizza Palace&quot;,
+    &quot;slug&quot;: &quot;pizza-palace&quot;,
+    &quot;phone&quot;: &quot;+972501234567&quot;,
+    &quot;email&quot;: &quot;contact@pizzapalace.com&quot;,
+    &quot;logo&quot;: &quot;restaurant-logo.png&quot;,
+    &quot;cover_photo&quot;: &quot;restaurant-cover.jpg&quot;,
+    &quot;address&quot;: &quot;123 Main St, Tel Aviv&quot;,
+    &quot;latitude&quot;: &quot;32.0853&quot;,
+    &quot;longitude&quot;: &quot;34.7818&quot;,
+    &quot;rating&quot;: &quot;4.5&quot;,
+    &quot;delivery_time&quot;: &quot;30-45&quot;,
+    &quot;minimum_order&quot;: 50,
+    &quot;delivery_charge&quot;: 15,
+    &quot;status&quot;: 1,
+    &quot;active&quot;: 1
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;errors&quot;: [
+        {
+            &quot;code&quot;: &quot;restaurant&quot;,
+            &quot;message&quot;: &quot;Restaurant not found&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-public-restaurants-by-slug--slug-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-public-restaurants-by-slug--slug-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-public-restaurants-by-slug--slug-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-public-restaurants-by-slug--slug-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-public-restaurants-by-slug--slug-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-public-restaurants-by-slug--slug-" data-method="GET"
+      data-path="api/v1/public/restaurants/by-slug/{slug}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-public-restaurants-by-slug--slug-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-public-restaurants-by-slug--slug-"
+                    onclick="tryItOut('GETapi-v1-public-restaurants-by-slug--slug-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-public-restaurants-by-slug--slug-"
+                    onclick="cancelTryOut('GETapi-v1-public-restaurants-by-slug--slug-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-public-restaurants-by-slug--slug-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/public/restaurants/by-slug/{slug}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-public-restaurants-by-slug--slug-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-public-restaurants-by-slug--slug-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>slug</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="slug"                data-endpoint="GETapi-v1-public-restaurants-by-slug--slug-"
+               value="pizza-palace"
+               data-component="url">
+    <br>
+<p>The restaurant slug. Example: <code>pizza-palace</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="public-restaurant-api-GETapi-v1-public-restaurants--id--schedules">Get Restaurant Operating Hours</h2>
+
+<p>
+</p>
+
+<p>Retrieve the weekly schedule/operating hours for a specific restaurant.
+Returns an array of schedules for each day of the week.</p>
+
+<span id="example-requests-GETapi-v1-public-restaurants--id--schedules">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://api.hopa.delivery/api/v1/public/restaurants/1/schedules" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://api.hopa.delivery/api/v1/public/restaurants/1/schedules"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-public-restaurants--id--schedules">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;restaurant_id&quot;: 1,
+    &quot;schedules&quot;: [
+        {
+            &quot;day&quot;: 0,
+            &quot;day_name&quot;: &quot;Sunday&quot;,
+            &quot;opening_time&quot;: &quot;10:00:00&quot;,
+            &quot;closing_time&quot;: &quot;22:00:00&quot;,
+            &quot;is_open&quot;: true
+        },
+        {
+            &quot;day&quot;: 1,
+            &quot;day_name&quot;: &quot;Monday&quot;,
+            &quot;opening_time&quot;: &quot;10:00:00&quot;,
+            &quot;closing_time&quot;: &quot;22:00:00&quot;,
+            &quot;is_open&quot;: true
+        },
+        {
+            &quot;day&quot;: 2,
+            &quot;day_name&quot;: &quot;Tuesday&quot;,
+            &quot;opening_time&quot;: &quot;10:00:00&quot;,
+            &quot;closing_time&quot;: &quot;22:00:00&quot;,
+            &quot;is_open&quot;: true
+        },
+        {
+            &quot;day&quot;: 3,
+            &quot;day_name&quot;: &quot;Wednesday&quot;,
+            &quot;opening_time&quot;: &quot;10:00:00&quot;,
+            &quot;closing_time&quot;: &quot;22:00:00&quot;,
+            &quot;is_open&quot;: true
+        },
+        {
+            &quot;day&quot;: 4,
+            &quot;day_name&quot;: &quot;Thursday&quot;,
+            &quot;opening_time&quot;: &quot;10:00:00&quot;,
+            &quot;closing_time&quot;: &quot;22:00:00&quot;,
+            &quot;is_open&quot;: true
+        },
+        {
+            &quot;day&quot;: 5,
+            &quot;day_name&quot;: &quot;Friday&quot;,
+            &quot;opening_time&quot;: &quot;10:00:00&quot;,
+            &quot;closing_time&quot;: &quot;23:00:00&quot;,
+            &quot;is_open&quot;: true
+        },
+        {
+            &quot;day&quot;: 6,
+            &quot;day_name&quot;: &quot;Saturday&quot;,
+            &quot;opening_time&quot;: &quot;10:00:00&quot;,
+            &quot;closing_time&quot;: &quot;23:00:00&quot;,
+            &quot;is_open&quot;: true
+        }
+    ],
+    &quot;currently_open&quot;: true
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;errors&quot;: [
+        {
+            &quot;code&quot;: &quot;restaurant&quot;,
+            &quot;message&quot;: &quot;Restaurant not found&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-public-restaurants--id--schedules" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-public-restaurants--id--schedules"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-public-restaurants--id--schedules"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-public-restaurants--id--schedules" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-public-restaurants--id--schedules">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-public-restaurants--id--schedules" data-method="GET"
+      data-path="api/v1/public/restaurants/{id}/schedules"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-public-restaurants--id--schedules', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-public-restaurants--id--schedules"
+                    onclick="tryItOut('GETapi-v1-public-restaurants--id--schedules');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-public-restaurants--id--schedules"
+                    onclick="cancelTryOut('GETapi-v1-public-restaurants--id--schedules');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-public-restaurants--id--schedules"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/public/restaurants/{id}/schedules</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-public-restaurants--id--schedules"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-public-restaurants--id--schedules"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-v1-public-restaurants--id--schedules"
+               value="1"
+               data-component="url">
+    <br>
+<p>The restaurant ID. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="public-restaurant-api-GETapi-v1-public-restaurants--id--menu">Get Complete Restaurant Menu</h2>
+
+<p>
+</p>
+
+<p>Retrieve the complete menu for a restaurant in a single optimized API call.
+Returns all categories with their products organized hierarchically.</p>
+
+<span id="example-requests-GETapi-v1-public-restaurants--id--menu">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://api.hopa.delivery/api/v1/public/restaurants/1/menu" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://api.hopa.delivery/api/v1/public/restaurants/1/menu"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-public-restaurants--id--menu">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;restaurant_id&quot;: 1,
+    &quot;restaurant_name&quot;: &quot;Pizza Palace&quot;,
+    &quot;categories&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;Pizzas&quot;,
+            &quot;products_count&quot;: 12,
+            &quot;products&quot;: [
+                {
+                    &quot;id&quot;: 101,
+                    &quot;name&quot;: &quot;Margherita Pizza&quot;,
+                    &quot;description&quot;: &quot;Classic pizza with tomato and mozzarella&quot;,
+                    &quot;price&quot;: 45,
+                    &quot;image&quot;: &quot;pizza.jpg&quot;,
+                    &quot;available&quot;: true
+                }
+            ]
+        }
+    ],
+    &quot;total_products&quot;: 45
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;errors&quot;: [
+        {
+            &quot;code&quot;: &quot;restaurant&quot;,
+            &quot;message&quot;: &quot;Restaurant not found&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-public-restaurants--id--menu" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-public-restaurants--id--menu"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-public-restaurants--id--menu"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-public-restaurants--id--menu" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-public-restaurants--id--menu">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-public-restaurants--id--menu" data-method="GET"
+      data-path="api/v1/public/restaurants/{id}/menu"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-public-restaurants--id--menu', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-public-restaurants--id--menu"
+                    onclick="tryItOut('GETapi-v1-public-restaurants--id--menu');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-public-restaurants--id--menu"
+                    onclick="cancelTryOut('GETapi-v1-public-restaurants--id--menu');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-public-restaurants--id--menu"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/public/restaurants/{id}/menu</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-public-restaurants--id--menu"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-public-restaurants--id--menu"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-v1-public-restaurants--id--menu"
+               value="1"
+               data-component="url">
+    <br>
+<p>The restaurant ID. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                <h1 id="public-zone-api">Public Zone API</h1>
+
+    
+
+                                <h2 id="public-zone-api-GETapi-v1-public-zones">List All Zones</h2>
+
+<p>
+</p>
+
+<p>Retrieve all available delivery zones with restaurant counts.
+Useful for zone exploration page on public website.</p>
+
+<span id="example-requests-GETapi-v1-public-zones">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://api.hopa.delivery/api/v1/public/zones" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://api.hopa.delivery/api/v1/public/zones"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-public-zones">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;zones&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;Tel Aviv Central&quot;,
+            &quot;display_name&quot;: &quot;Tel Aviv - Center&quot;,
+            &quot;restaurant_count&quot;: 45,
+            &quot;minimum_shipping_charge&quot;: 10,
+            &quot;per_km_shipping_charge&quot;: 2.5,
+            &quot;maximum_shipping_charge&quot;: 50,
+            &quot;status&quot;: 1
+        },
+        {
+            &quot;id&quot;: 2,
+            &quot;name&quot;: &quot;Haifa&quot;,
+            &quot;display_name&quot;: &quot;Haifa&quot;,
+            &quot;restaurant_count&quot;: 23,
+            &quot;minimum_shipping_charge&quot;: 12,
+            &quot;per_km_shipping_charge&quot;: 3,
+            &quot;maximum_shipping_charge&quot;: 60,
+            &quot;status&quot;: 1
+        }
+    ],
+    &quot;total_zones&quot;: 2
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-public-zones" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-public-zones"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-public-zones"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-public-zones" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-public-zones">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-public-zones" data-method="GET"
+      data-path="api/v1/public/zones"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-public-zones', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-public-zones"
+                    onclick="tryItOut('GETapi-v1-public-zones');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-public-zones"
+                    onclick="cancelTryOut('GETapi-v1-public-zones');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-public-zones"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/public/zones</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-public-zones"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-public-zones"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="public-zone-api-GETapi-v1-public-zones--id-">Get Zone Details</h2>
+
+<p>
+</p>
+
+<p>Retrieve detailed information about a specific zone including
+delivery charges, coverage area, and active restaurants.</p>
+
+<span id="example-requests-GETapi-v1-public-zones--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "https://api.hopa.delivery/api/v1/public/zones/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://api.hopa.delivery/api/v1/public/zones/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-public-zones--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;Tel Aviv Central&quot;,
+    &quot;display_name&quot;: &quot;Tel Aviv - Center&quot;,
+    &quot;minimum_shipping_charge&quot;: 10,
+    &quot;per_km_shipping_charge&quot;: 2.5,
+    &quot;maximum_shipping_charge&quot;: 50,
+    &quot;max_cod_order_amount&quot;: 500,
+    &quot;increased_delivery_fee&quot;: 5,
+    &quot;increased_delivery_fee_status&quot;: true,
+    &quot;increase_delivery_charge_message&quot;: &quot;Due to high demand&quot;,
+    &quot;status&quot;: 1,
+    &quot;restaurant_count&quot;: 45,
+    &quot;restaurants&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;Pizza Palace&quot;,
+            &quot;slug&quot;: &quot;pizza-palace&quot;,
+            &quot;rating&quot;: &quot;4.5&quot;,
+            &quot;delivery_time&quot;: &quot;30-45&quot;
+        }
+    ]
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;errors&quot;: [
+        {
+            &quot;code&quot;: &quot;zone&quot;,
+            &quot;message&quot;: &quot;Zone not found&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-public-zones--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-public-zones--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-public-zones--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-public-zones--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-public-zones--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-public-zones--id-" data-method="GET"
+      data-path="api/v1/public/zones/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-public-zones--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-public-zones--id-"
+                    onclick="tryItOut('GETapi-v1-public-zones--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-public-zones--id-"
+                    onclick="cancelTryOut('GETapi-v1-public-zones--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-public-zones--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/public/zones/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-public-zones--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-public-zones--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-v1-public-zones--id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The zone ID. Example: <code>1</code></p>
+            </div>
+                    </form>
 
             
 

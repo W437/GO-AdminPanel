@@ -458,6 +458,33 @@ Route::group(['namespace' => 'Api\V1', 'middleware'=>['localization','react']], 
     Route::get('get-vehicles', 'ConfigController@get_vehicles');
     Route::get('get-PaymentMethods', 'ConfigController@getPaymentMethods');
     Route::get('offline_payment_method_list', 'ConfigController@offline_payment_method_list');
+
+    // ========================================
+    // Public Restaurant Website API Endpoints
+    // ========================================
+    // These endpoints are specifically designed for the public-facing
+    // React restaurant website. They are separated from admin/vendor
+    // endpoints for better organization and security.
+    //
+    // Documentation: See docs/restaurant-public-website/
+    // ========================================
+
+    Route::group(['prefix' => 'public'], function () {
+
+        // Restaurant endpoints
+        Route::group(['prefix' => 'restaurants'], function () {
+            Route::get('by-slug/{slug}', 'PublicRestaurantController@getBySlug');
+            Route::get('{id}/schedules', 'PublicRestaurantController@getSchedules');
+            Route::get('{id}/menu', 'PublicRestaurantController@getMenu');
+        });
+
+        // Zone endpoints
+        Route::group(['prefix' => 'zones'], function () {
+            Route::get('/', 'PublicZoneController@index');
+            Route::get('{id}', 'PublicZoneController@show');
+        });
+
+    });
 });
 
 WebSocketsRouter::webSocket('/delivery-man/live-location', DMLocationSocketHandler::class);

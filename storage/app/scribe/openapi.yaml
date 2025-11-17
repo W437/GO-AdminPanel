@@ -13,6 +13,12 @@ tags:
   -
     name: Endpoints
     description: ''
+  -
+    name: 'Public Restaurant API'
+    description: ''
+  -
+    name: 'Public Zone API'
+    description: ''
 components:
   securitySchemes:
     default:
@@ -5644,12 +5650,12 @@ paths:
                 opening_time:
                   type: string
                   description: 'Must be a valid date in the format <code>H:i:s</code>.'
-                  example: '18:06:27'
+                  example: '02:14:44'
                   nullable: false
                 closing_time:
                   type: string
                   description: 'Must be a valid date in the format <code>H:i:s</code>. Must be a date after <code>opening_time</code>.'
-                  example: '2051-12-10'
+                  example: '2051-12-11'
                   nullable: false
                 day:
                   type: string
@@ -9658,12 +9664,12 @@ paths:
                 start_date:
                   type: string
                   description: 'This field is required when <code>status</code> is <code>paused</code>. Must be a valid date. Must be a date after or equal to <code>today</code>.'
-                  example: '2051-12-10'
+                  example: '2051-12-11'
                   nullable: true
                 end_date:
                   type: string
                   description: 'This field is required when <code>status</code> is <code>paused</code>. Must be a valid date. Must be a date after or equal to <code>start_date</code>.'
-                  example: '2051-12-10'
+                  example: '2051-12-11'
                   nullable: true
                 cancellation_reason:
                   type: string
@@ -11336,3 +11342,651 @@ paths:
                 - categoryIds
                 - quantity
       security: []
+  '/api/v1/public/restaurants/by-slug/{slug}':
+    get:
+      summary: 'Get Restaurant by Slug'
+      operationId: getRestaurantBySlug
+      description: "Retrieve restaurant details using a SEO-friendly slug instead of ID.\nThis endpoint is specifically for the public restaurant website."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  name: 'Pizza Palace'
+                  slug: pizza-palace
+                  phone: '+972501234567'
+                  email: contact@pizzapalace.com
+                  logo: restaurant-logo.png
+                  cover_photo: restaurant-cover.jpg
+                  address: '123 Main St, Tel Aviv'
+                  latitude: '32.0853'
+                  longitude: '34.7818'
+                  rating: '4.5'
+                  delivery_time: 30-45
+                  minimum_order: 50.0
+                  delivery_charge: 15.0
+                  status: 1
+                  active: 1
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: 'Pizza Palace'
+                  slug:
+                    type: string
+                    example: pizza-palace
+                  phone:
+                    type: string
+                    example: '+972501234567'
+                  email:
+                    type: string
+                    example: contact@pizzapalace.com
+                  logo:
+                    type: string
+                    example: restaurant-logo.png
+                  cover_photo:
+                    type: string
+                    example: restaurant-cover.jpg
+                  address:
+                    type: string
+                    example: '123 Main St, Tel Aviv'
+                  latitude:
+                    type: string
+                    example: '32.0853'
+                  longitude:
+                    type: string
+                    example: '34.7818'
+                  rating:
+                    type: string
+                    example: '4.5'
+                  delivery_time:
+                    type: string
+                    example: 30-45
+                  minimum_order:
+                    type: number
+                    example: 50.0
+                  delivery_charge:
+                    type: number
+                    example: 15.0
+                  status:
+                    type: integer
+                    example: 1
+                  active:
+                    type: integer
+                    example: 1
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors:
+                    -
+                      code: restaurant
+                      message: 'Restaurant not found'
+                properties:
+                  errors:
+                    type: array
+                    example:
+                      -
+                        code: restaurant
+                        message: 'Restaurant not found'
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: restaurant
+                        message:
+                          type: string
+                          example: 'Restaurant not found'
+      tags:
+        - 'Public Restaurant API'
+      security: []
+    parameters:
+      -
+        in: path
+        name: slug
+        description: 'The restaurant slug.'
+        example: pizza-palace
+        required: true
+        schema:
+          type: string
+  '/api/v1/public/restaurants/{id}/schedules':
+    get:
+      summary: 'Get Restaurant Operating Hours'
+      operationId: getRestaurantOperatingHours
+      description: "Retrieve the weekly schedule/operating hours for a specific restaurant.\nReturns an array of schedules for each day of the week."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  restaurant_id: 1
+                  schedules:
+                    -
+                      day: 0
+                      day_name: Sunday
+                      opening_time: '10:00:00'
+                      closing_time: '22:00:00'
+                      is_open: true
+                    -
+                      day: 1
+                      day_name: Monday
+                      opening_time: '10:00:00'
+                      closing_time: '22:00:00'
+                      is_open: true
+                    -
+                      day: 2
+                      day_name: Tuesday
+                      opening_time: '10:00:00'
+                      closing_time: '22:00:00'
+                      is_open: true
+                    -
+                      day: 3
+                      day_name: Wednesday
+                      opening_time: '10:00:00'
+                      closing_time: '22:00:00'
+                      is_open: true
+                    -
+                      day: 4
+                      day_name: Thursday
+                      opening_time: '10:00:00'
+                      closing_time: '22:00:00'
+                      is_open: true
+                    -
+                      day: 5
+                      day_name: Friday
+                      opening_time: '10:00:00'
+                      closing_time: '23:00:00'
+                      is_open: true
+                    -
+                      day: 6
+                      day_name: Saturday
+                      opening_time: '10:00:00'
+                      closing_time: '23:00:00'
+                      is_open: true
+                  currently_open: true
+                properties:
+                  restaurant_id:
+                    type: integer
+                    example: 1
+                  schedules:
+                    type: array
+                    example:
+                      -
+                        day: 0
+                        day_name: Sunday
+                        opening_time: '10:00:00'
+                        closing_time: '22:00:00'
+                        is_open: true
+                      -
+                        day: 1
+                        day_name: Monday
+                        opening_time: '10:00:00'
+                        closing_time: '22:00:00'
+                        is_open: true
+                      -
+                        day: 2
+                        day_name: Tuesday
+                        opening_time: '10:00:00'
+                        closing_time: '22:00:00'
+                        is_open: true
+                      -
+                        day: 3
+                        day_name: Wednesday
+                        opening_time: '10:00:00'
+                        closing_time: '22:00:00'
+                        is_open: true
+                      -
+                        day: 4
+                        day_name: Thursday
+                        opening_time: '10:00:00'
+                        closing_time: '22:00:00'
+                        is_open: true
+                      -
+                        day: 5
+                        day_name: Friday
+                        opening_time: '10:00:00'
+                        closing_time: '23:00:00'
+                        is_open: true
+                      -
+                        day: 6
+                        day_name: Saturday
+                        opening_time: '10:00:00'
+                        closing_time: '23:00:00'
+                        is_open: true
+                    items:
+                      type: object
+                      properties:
+                        day:
+                          type: integer
+                          example: 0
+                        day_name:
+                          type: string
+                          example: Sunday
+                        opening_time:
+                          type: string
+                          example: '10:00:00'
+                        closing_time:
+                          type: string
+                          example: '22:00:00'
+                        is_open:
+                          type: boolean
+                          example: true
+                  currently_open:
+                    type: boolean
+                    example: true
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors:
+                    -
+                      code: restaurant
+                      message: 'Restaurant not found'
+                properties:
+                  errors:
+                    type: array
+                    example:
+                      -
+                        code: restaurant
+                        message: 'Restaurant not found'
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: restaurant
+                        message:
+                          type: string
+                          example: 'Restaurant not found'
+      tags:
+        - 'Public Restaurant API'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The restaurant ID.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  '/api/v1/public/restaurants/{id}/menu':
+    get:
+      summary: 'Get Complete Restaurant Menu'
+      operationId: getCompleteRestaurantMenu
+      description: "Retrieve the complete menu for a restaurant in a single optimized API call.\nReturns all categories with their products organized hierarchically."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  restaurant_id: 1
+                  restaurant_name: 'Pizza Palace'
+                  categories:
+                    -
+                      id: 1
+                      name: Pizzas
+                      products_count: 12
+                      products:
+                        -
+                          id: 101
+                          name: 'Margherita Pizza'
+                          description: 'Classic pizza with tomato and mozzarella'
+                          price: 45.0
+                          image: pizza.jpg
+                          available: true
+                  total_products: 45
+                properties:
+                  restaurant_id:
+                    type: integer
+                    example: 1
+                  restaurant_name:
+                    type: string
+                    example: 'Pizza Palace'
+                  categories:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        name: Pizzas
+                        products_count: 12
+                        products:
+                          -
+                            id: 101
+                            name: 'Margherita Pizza'
+                            description: 'Classic pizza with tomato and mozzarella'
+                            price: 45
+                            image: pizza.jpg
+                            available: true
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: Pizzas
+                        products_count:
+                          type: integer
+                          example: 12
+                        products:
+                          type: array
+                          example:
+                            -
+                              id: 101
+                              name: 'Margherita Pizza'
+                              description: 'Classic pizza with tomato and mozzarella'
+                              price: 45
+                              image: pizza.jpg
+                              available: true
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 101
+                              name:
+                                type: string
+                                example: 'Margherita Pizza'
+                              description:
+                                type: string
+                                example: 'Classic pizza with tomato and mozzarella'
+                              price:
+                                type: number
+                                example: 45.0
+                              image:
+                                type: string
+                                example: pizza.jpg
+                              available:
+                                type: boolean
+                                example: true
+                  total_products:
+                    type: integer
+                    example: 45
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors:
+                    -
+                      code: restaurant
+                      message: 'Restaurant not found'
+                properties:
+                  errors:
+                    type: array
+                    example:
+                      -
+                        code: restaurant
+                        message: 'Restaurant not found'
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: restaurant
+                        message:
+                          type: string
+                          example: 'Restaurant not found'
+      tags:
+        - 'Public Restaurant API'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The restaurant ID.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/v1/public/zones:
+    get:
+      summary: 'List All Zones'
+      operationId: listAllZones
+      description: "Retrieve all available delivery zones with restaurant counts.\nUseful for zone exploration page on public website."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  zones:
+                    -
+                      id: 1
+                      name: 'Tel Aviv Central'
+                      display_name: 'Tel Aviv - Center'
+                      restaurant_count: 45
+                      minimum_shipping_charge: 10.0
+                      per_km_shipping_charge: 2.5
+                      maximum_shipping_charge: 50.0
+                      status: 1
+                    -
+                      id: 2
+                      name: Haifa
+                      display_name: Haifa
+                      restaurant_count: 23
+                      minimum_shipping_charge: 12.0
+                      per_km_shipping_charge: 3.0
+                      maximum_shipping_charge: 60.0
+                      status: 1
+                  total_zones: 2
+                properties:
+                  zones:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        name: 'Tel Aviv Central'
+                        display_name: 'Tel Aviv - Center'
+                        restaurant_count: 45
+                        minimum_shipping_charge: 10
+                        per_km_shipping_charge: 2.5
+                        maximum_shipping_charge: 50
+                        status: 1
+                      -
+                        id: 2
+                        name: Haifa
+                        display_name: Haifa
+                        restaurant_count: 23
+                        minimum_shipping_charge: 12
+                        per_km_shipping_charge: 3
+                        maximum_shipping_charge: 60
+                        status: 1
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: 'Tel Aviv Central'
+                        display_name:
+                          type: string
+                          example: 'Tel Aviv - Center'
+                        restaurant_count:
+                          type: integer
+                          example: 45
+                        minimum_shipping_charge:
+                          type: number
+                          example: 10.0
+                        per_km_shipping_charge:
+                          type: number
+                          example: 2.5
+                        maximum_shipping_charge:
+                          type: number
+                          example: 50.0
+                        status:
+                          type: integer
+                          example: 1
+                  total_zones:
+                    type: integer
+                    example: 2
+      tags:
+        - 'Public Zone API'
+      security: []
+  '/api/v1/public/zones/{id}':
+    get:
+      summary: 'Get Zone Details'
+      operationId: getZoneDetails
+      description: "Retrieve detailed information about a specific zone including\ndelivery charges, coverage area, and active restaurants."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  name: 'Tel Aviv Central'
+                  display_name: 'Tel Aviv - Center'
+                  minimum_shipping_charge: 10.0
+                  per_km_shipping_charge: 2.5
+                  maximum_shipping_charge: 50.0
+                  max_cod_order_amount: 500.0
+                  increased_delivery_fee: 5.0
+                  increased_delivery_fee_status: true
+                  increase_delivery_charge_message: 'Due to high demand'
+                  status: 1
+                  restaurant_count: 45
+                  restaurants:
+                    -
+                      id: 1
+                      name: 'Pizza Palace'
+                      slug: pizza-palace
+                      rating: '4.5'
+                      delivery_time: 30-45
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: 'Tel Aviv Central'
+                  display_name:
+                    type: string
+                    example: 'Tel Aviv - Center'
+                  minimum_shipping_charge:
+                    type: number
+                    example: 10.0
+                  per_km_shipping_charge:
+                    type: number
+                    example: 2.5
+                  maximum_shipping_charge:
+                    type: number
+                    example: 50.0
+                  max_cod_order_amount:
+                    type: number
+                    example: 500.0
+                  increased_delivery_fee:
+                    type: number
+                    example: 5.0
+                  increased_delivery_fee_status:
+                    type: boolean
+                    example: true
+                  increase_delivery_charge_message:
+                    type: string
+                    example: 'Due to high demand'
+                  status:
+                    type: integer
+                    example: 1
+                  restaurant_count:
+                    type: integer
+                    example: 45
+                  restaurants:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        name: 'Pizza Palace'
+                        slug: pizza-palace
+                        rating: '4.5'
+                        delivery_time: 30-45
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: 'Pizza Palace'
+                        slug:
+                          type: string
+                          example: pizza-palace
+                        rating:
+                          type: string
+                          example: '4.5'
+                        delivery_time:
+                          type: string
+                          example: 30-45
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors:
+                    -
+                      code: zone
+                      message: 'Zone not found'
+                properties:
+                  errors:
+                    type: array
+                    example:
+                      -
+                        code: zone
+                        message: 'Zone not found'
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: zone
+                        message:
+                          type: string
+                          example: 'Zone not found'
+      tags:
+        - 'Public Zone API'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The zone ID.'
+        example: 1
+        required: true
+        schema:
+          type: integer

@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "GO-AdminPanel API Documentation",
-        "_postman_id": "5d08fc96-96f0-494a-b073-9696d8c62ab9",
+        "_postman_id": "7db83d2c-3932-479a-b0d5-52cf3cba151a",
         "description": "Complete API documentation for GO-AdminPanel - Restaurant Management System",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -5578,7 +5578,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"opening_time\":\"18:06:27\",\"closing_time\":\"2051-12-10\",\"day\":\"architecto\"}"
+                            "raw": "{\"opening_time\":\"02:14:44\",\"closing_time\":\"2051-12-11\",\"day\":\"architecto\"}"
                         },
                         "description": "",
                         "auth": {
@@ -10641,7 +10641,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"status\":\"canceled\",\"start_date\":\"2051-12-10\",\"end_date\":\"2051-12-10\"}"
+                            "raw": "{\"status\":\"canceled\",\"start_date\":\"2051-12-11\",\"end_date\":\"2051-12-11\"}"
                         },
                         "description": "",
                         "auth": {
@@ -12526,6 +12526,249 @@
                         }
                     },
                     "response": []
+                }
+            ]
+        },
+        {
+            "name": "Public Restaurant API",
+            "description": "",
+            "item": [
+                {
+                    "name": "Get Restaurant by Slug",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/public\/restaurants\/by-slug\/:slug",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/public\/restaurants\/by-slug\/:slug",
+                            "variable": [
+                                {
+                                    "id": "slug",
+                                    "key": "slug",
+                                    "value": "pizza-palace",
+                                    "description": "The restaurant slug."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve restaurant details using a SEO-friendly slug instead of ID.\nThis endpoint is specifically for the public restaurant website.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"name\": \"Pizza Palace\",\n  \"slug\": \"pizza-palace\",\n  \"phone\": \"+972501234567\",\n  \"email\": \"contact@pizzapalace.com\",\n  \"logo\": \"restaurant-logo.png\",\n  \"cover_photo\": \"restaurant-cover.jpg\",\n  \"address\": \"123 Main St, Tel Aviv\",\n  \"latitude\": \"32.0853\",\n  \"longitude\": \"34.7818\",\n  \"rating\": \"4.5\",\n  \"delivery_time\": \"30-45\",\n  \"minimum_order\": 50.00,\n  \"delivery_charge\": 15.00,\n  \"status\": 1,\n  \"active\": 1\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"errors\": [\n    {\"code\": \"restaurant\", \"message\": \"Restaurant not found\"}\n  ]\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Restaurant Operating Hours",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/public\/restaurants\/:id\/schedules",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/public\/restaurants\/:id\/schedules",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The restaurant ID."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve the weekly schedule\/operating hours for a specific restaurant.\nReturns an array of schedules for each day of the week.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"restaurant_id\": 1,\n  \"schedules\": [\n    {\"day\": 0, \"day_name\": \"Sunday\", \"opening_time\": \"10:00:00\", \"closing_time\": \"22:00:00\", \"is_open\": true},\n    {\"day\": 1, \"day_name\": \"Monday\", \"opening_time\": \"10:00:00\", \"closing_time\": \"22:00:00\", \"is_open\": true},\n    {\"day\": 2, \"day_name\": \"Tuesday\", \"opening_time\": \"10:00:00\", \"closing_time\": \"22:00:00\", \"is_open\": true},\n    {\"day\": 3, \"day_name\": \"Wednesday\", \"opening_time\": \"10:00:00\", \"closing_time\": \"22:00:00\", \"is_open\": true},\n    {\"day\": 4, \"day_name\": \"Thursday\", \"opening_time\": \"10:00:00\", \"closing_time\": \"22:00:00\", \"is_open\": true},\n    {\"day\": 5, \"day_name\": \"Friday\", \"opening_time\": \"10:00:00\", \"closing_time\": \"23:00:00\", \"is_open\": true},\n    {\"day\": 6, \"day_name\": \"Saturday\", \"opening_time\": \"10:00:00\", \"closing_time\": \"23:00:00\", \"is_open\": true}\n  ],\n  \"currently_open\": true\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"errors\": [\n    {\"code\": \"restaurant\", \"message\": \"Restaurant not found\"}\n  ]\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Complete Restaurant Menu",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/public\/restaurants\/:id\/menu",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/public\/restaurants\/:id\/menu",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The restaurant ID."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve the complete menu for a restaurant in a single optimized API call.\nReturns all categories with their products organized hierarchically.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"restaurant_id\": 1,\n  \"restaurant_name\": \"Pizza Palace\",\n  \"categories\": [\n    {\n      \"id\": 1,\n      \"name\": \"Pizzas\",\n      \"products_count\": 12,\n      \"products\": [\n        {\n          \"id\": 101,\n          \"name\": \"Margherita Pizza\",\n          \"description\": \"Classic pizza with tomato and mozzarella\",\n          \"price\": 45.00,\n          \"image\": \"pizza.jpg\",\n          \"available\": true\n        }\n      ]\n    }\n  ],\n  \"total_products\": 45\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"errors\": [\n    {\"code\": \"restaurant\", \"message\": \"Restaurant not found\"}\n  ]\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Public Zone API",
+            "description": "",
+            "item": [
+                {
+                    "name": "List All Zones",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/public\/zones",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/public\/zones"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve all available delivery zones with restaurant counts.\nUseful for zone exploration page on public website.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"zones\": [\n    {\n      \"id\": 1,\n      \"name\": \"Tel Aviv Central\",\n      \"display_name\": \"Tel Aviv - Center\",\n      \"restaurant_count\": 45,\n      \"minimum_shipping_charge\": 10.00,\n      \"per_km_shipping_charge\": 2.50,\n      \"maximum_shipping_charge\": 50.00,\n      \"status\": 1\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Haifa\",\n      \"display_name\": \"Haifa\",\n      \"restaurant_count\": 23,\n      \"minimum_shipping_charge\": 12.00,\n      \"per_km_shipping_charge\": 3.00,\n      \"maximum_shipping_charge\": 60.00,\n      \"status\": 1\n    }\n  ],\n  \"total_zones\": 2\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Zone Details",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/public\/zones\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/public\/zones\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The zone ID."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve detailed information about a specific zone including\ndelivery charges, coverage area, and active restaurants.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"name\": \"Tel Aviv Central\",\n  \"display_name\": \"Tel Aviv - Center\",\n  \"minimum_shipping_charge\": 10.00,\n  \"per_km_shipping_charge\": 2.50,\n  \"maximum_shipping_charge\": 50.00,\n  \"max_cod_order_amount\": 500.00,\n  \"increased_delivery_fee\": 5.00,\n  \"increased_delivery_fee_status\": true,\n  \"increase_delivery_charge_message\": \"Due to high demand\",\n  \"status\": 1,\n  \"restaurant_count\": 45,\n  \"restaurants\": [\n    {\n      \"id\": 1,\n      \"name\": \"Pizza Palace\",\n      \"slug\": \"pizza-palace\",\n      \"rating\": \"4.5\",\n      \"delivery_time\": \"30-45\"\n    }\n  ]\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"errors\": [\n    {\"code\": \"zone\", \"message\": \"Zone not found\"}\n  ]\n}",
+                            "name": ""
+                        }
+                    ]
                 }
             ]
         }

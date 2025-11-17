@@ -1,0 +1,242 @@
+name: 'Public Restaurant API'
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/public/restaurants/by-slug/{slug}'
+    metadata:
+      custom: []
+      groupName: 'Public Restaurant API'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Restaurant by Slug'
+      description: |-
+        Retrieve restaurant details using a SEO-friendly slug instead of ID.
+        This endpoint is specifically for the public restaurant website.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      slug:
+        custom: []
+        name: slug
+        description: 'The restaurant slug.'
+        required: true
+        example: pizza-palace
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      slug: pizza-palace
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "id": 1,
+            "name": "Pizza Palace",
+            "slug": "pizza-palace",
+            "phone": "+972501234567",
+            "email": "contact@pizzapalace.com",
+            "logo": "restaurant-logo.png",
+            "cover_photo": "restaurant-cover.jpg",
+            "address": "123 Main St, Tel Aviv",
+            "latitude": "32.0853",
+            "longitude": "34.7818",
+            "rating": "4.5",
+            "delivery_time": "30-45",
+            "minimum_order": 50.00,
+            "delivery_charge": 15.00,
+            "status": 1,
+            "active": 1
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "errors": [
+              {"code": "restaurant", "message": "Restaurant not found"}
+            ]
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/public/restaurants/{id}/schedules'
+    metadata:
+      custom: []
+      groupName: 'Public Restaurant API'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Restaurant Operating Hours'
+      description: |-
+        Retrieve the weekly schedule/operating hours for a specific restaurant.
+        Returns an array of schedules for each day of the week.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The restaurant ID.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "restaurant_id": 1,
+            "schedules": [
+              {"day": 0, "day_name": "Sunday", "opening_time": "10:00:00", "closing_time": "22:00:00", "is_open": true},
+              {"day": 1, "day_name": "Monday", "opening_time": "10:00:00", "closing_time": "22:00:00", "is_open": true},
+              {"day": 2, "day_name": "Tuesday", "opening_time": "10:00:00", "closing_time": "22:00:00", "is_open": true},
+              {"day": 3, "day_name": "Wednesday", "opening_time": "10:00:00", "closing_time": "22:00:00", "is_open": true},
+              {"day": 4, "day_name": "Thursday", "opening_time": "10:00:00", "closing_time": "22:00:00", "is_open": true},
+              {"day": 5, "day_name": "Friday", "opening_time": "10:00:00", "closing_time": "23:00:00", "is_open": true},
+              {"day": 6, "day_name": "Saturday", "opening_time": "10:00:00", "closing_time": "23:00:00", "is_open": true}
+            ],
+            "currently_open": true
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "errors": [
+              {"code": "restaurant", "message": "Restaurant not found"}
+            ]
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/public/restaurants/{id}/menu'
+    metadata:
+      custom: []
+      groupName: 'Public Restaurant API'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get Complete Restaurant Menu'
+      description: |-
+        Retrieve the complete menu for a restaurant in a single optimized API call.
+        Returns all categories with their products organized hierarchically.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The restaurant ID.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "restaurant_id": 1,
+            "restaurant_name": "Pizza Palace",
+            "categories": [
+              {
+                "id": 1,
+                "name": "Pizzas",
+                "products_count": 12,
+                "products": [
+                  {
+                    "id": 101,
+                    "name": "Margherita Pizza",
+                    "description": "Classic pizza with tomato and mozzarella",
+                    "price": 45.00,
+                    "image": "pizza.jpg",
+                    "available": true
+                  }
+                ]
+              }
+            ],
+            "total_products": 45
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "errors": [
+              {"code": "restaurant", "message": "Restaurant not found"}
+            ]
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
