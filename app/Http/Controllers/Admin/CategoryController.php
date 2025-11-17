@@ -83,6 +83,12 @@ class CategoryController extends Controller
         $category = new Category();
         $category->name = $request->name[array_search('default', $request->lang)];
         $category->image = $request->has('image') ? Helpers::upload(dir:'category/',format: 'png',image: $request->file('image')) : 'def.png';
+
+        // Generate blurhash for category image
+        if ($category->image && $category->image !== 'def.png') {
+            $category->image_blurhash = Helpers::generate_blurhash('category/', $category->image);
+        }
+
         $category->parent_id = $request?->parent_id ??  0 ;
         $category->position = $request->position;
         $category->save();
@@ -186,7 +192,16 @@ class CategoryController extends Controller
         $slug = Str::slug($request->name[array_search('default', $request->lang)]);
         $category->slug = $category->slug? $category->slug :"{$slug}{$category->id}";
         $category->name = $request->name[array_search('default', $request->lang)];
-        $category->image = $request->has('image') ? Helpers::update(dir:'category/', old_image:$category->image,format: 'png', image:$request->file('image')) : $category->image;
+
+        if ($request->has('image')) {
+            $category->image = Helpers::update(dir:'category/', old_image:$category->image,format: 'png', image:$request->file('image'));
+
+            // Generate blurhash for updated image
+            if ($category->image && $category->image !== 'def.png') {
+                $category->image_blurhash = Helpers::generate_blurhash('category/', $category->image);
+            }
+        }
+
         $category->save();
 
         $default_lang = str_replace('_', '-', app()->getLocale());

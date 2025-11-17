@@ -58,6 +58,12 @@ class CuisineController extends Controller
         $cuisine = new Cuisine();
         $cuisine->name = $request->name[array_search('default', $request->lang)];
         $cuisine->image = $request->has('image') ? Helpers::upload(dir:'cuisine/',format: 'png', image: $request->file('image')) : 'def.png';
+
+        // Generate blurhash for cuisine image
+        if ($cuisine->image && $cuisine->image !== 'def.png') {
+            $cuisine->image_blurhash = Helpers::generate_blurhash('cuisine/', $cuisine->image);
+        }
+
         $cuisine->save();
         $default_lang = str_replace('_', '-', app()->getLocale());
             foreach ($request->lang as $index => $key) {
@@ -111,7 +117,15 @@ class CuisineController extends Controller
         $slug = Str::slug($cuisine->name);
         $cuisine->slug = $cuisine->slug? $cuisine->slug :"{$slug}-{$cuisine->id}";
 
-        $cuisine->image = $request->has('image') ? Helpers::update(dir:'cuisine/', old_image:$cuisine->image, format:'png', image:$request->file('image')) : $cuisine->image;
+        if ($request->has('image')) {
+            $cuisine->image = Helpers::update(dir:'cuisine/', old_image:$cuisine->image, format:'png', image:$request->file('image'));
+
+            // Generate blurhash for updated image
+            if ($cuisine->image && $cuisine->image !== 'def.png') {
+                $cuisine->image_blurhash = Helpers::generate_blurhash('cuisine/', $cuisine->image);
+            }
+        }
+
         $cuisine->save();
         $default_lang = str_replace('_', '-', app()->getLocale());
 
