@@ -19,6 +19,7 @@ error_log
 /resources/lang/*
 !/resources/lang/en
 !/resources/lang/ar
+!/resources/lang/he
 
 # Docker-related
 docker-compose.yml
