@@ -2290,7 +2290,7 @@ class Helpers
         }
     }
 
-    public static function generate_blurhash(string $dir, string $image_filename)
+    public static function generate_blurhash(string $dir, string $image_filename, int $components_x = 7, int $components_y = 6)
     {
         try {
             if (!$image_filename || $image_filename === 'def.png') {
@@ -2307,76 +2307,37 @@ class Helpers
                 return null;
             }
 
-            // Load image using GD or Imagick
-            $image_info = getimagesize($image_path);
-            $mime_type = $image_info['mime'] ?? '';
+            // Use Intervention Image for better color accuracy
+            $img = \Intervention\Image\Facades\Image::make($image_path);
 
-            $image_resource = null;
-            switch ($mime_type) {
-                case 'image/jpeg':
-                    $image_resource = imagecreatefromjpeg($image_path);
-                    break;
-                case 'image/png':
-                    $image_resource = imagecreatefrompng($image_path);
-                    break;
-                case 'image/gif':
-                    $image_resource = imagecreatefromgif($image_path);
-                    break;
-                case 'image/webp':
-                    $image_resource = imagecreatefromwebp($image_path);
-                    break;
-                default:
-                    \Illuminate\Support\Facades\Log::warning('Blurhash: Unsupported image type', [
-                        'mime' => $mime_type
-                    ]);
-                    return null;
-            }
+            // Resize to max 100px for faster generation (maintains aspect ratio)
+            $img->resize(100, 100, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
 
-            if (!$image_resource) {
-                return null;
-            }
+            $width = $img->width();
+            $height = $img->height();
 
-            $width = imagesx($image_resource);
-            $height = imagesy($image_resource);
-
-            // Resize to max 100px for faster blurhash generation
-            $max_dimension = 100;
-            if ($width > $max_dimension || $height > $max_dimension) {
-                $ratio = min($max_dimension / $width, $max_dimension / $height);
-                $new_width = (int)($width * $ratio);
-                $new_height = (int)($height * $ratio);
-
-                $resized = imagecreatetruecolor($new_width, $new_height);
-                imagecopyresampled($resized, $image_resource, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-                imagedestroy($image_resource);
-                $image_resource = $resized;
-                $width = $new_width;
-                $height = $new_height;
-            }
-
-            // Generate pixel array for blurhash
+            // Generate pixel array with correct RGB values
             $pixels = [];
             for ($y = 0; $y < $height; $y++) {
                 $row = [];
                 for ($x = 0; $x < $width; $x++) {
-                    $rgb = imagecolorat($image_resource, $x, $y);
-                    $row[] = [
-                        ($rgb >> 16) & 0xFF, // R
-                        ($rgb >> 8) & 0xFF,  // G
-                        $rgb & 0xFF          // B
-                    ];
+                    $color = $img->pickColor($x, $y);
+                    // pickColor returns [R, G, B, Alpha] - we only need RGB
+                    $row[] = [$color[0], $color[1], $color[2]];
                 }
                 $pixels[] = $row;
             }
 
-            imagedestroy($image_resource);
-
-            // Generate blurhash (4x3 components for good quality/size balance)
-            $blurhash = \kornrunner\Blurhash\Blurhash::encode($pixels, 4, 3);
+            // Generate blurhash with custom components (7x6 for higher quality)
+            $blurhash = \kornrunner\Blurhash\Blurhash::encode($pixels, $components_x, $components_y);
 
             \Illuminate\Support\Facades\Log::info('Blurhash generated successfully', [
                 'image' => $image_filename,
-                'blurhash' => $blurhash
+                'blurhash' => $blurhash,
+                'components' => "{$components_x}x{$components_y}"
             ]);
 
             return $blurhash;
