@@ -296,6 +296,10 @@ class BannerController extends Controller
 
         // dd($request->all());
         $this->update_data($request , 'promotional_banner_title','promotional_banner_title' );
+
+        // Clear cache to show changes immediately
+        Cache::flush();
+
         Toastr::success(translate('messages.banner_updated_successfully'));
         return back();
 
