@@ -484,6 +484,9 @@ Route::group(['namespace' => 'Api\V1', 'middleware'=>['localization','react']], 
             Route::get('{id}', 'PublicZoneController@show');
         });
 
+        // Contact form endpoint
+        Route::post('contact', 'PublicContactController@submit');
+
     });
 });
 

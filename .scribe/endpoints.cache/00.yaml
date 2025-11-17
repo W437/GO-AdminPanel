@@ -32,7 +32,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '[{"id":1,"name":"Demo Zone","coordinates":{"type":"Polygon","coordinates":[[[88.153989496582,26.322839841459],[90.043637934082,26.401590253196],[90.087583246582,25.373687844238],[92.526548090332,25.115323811515],[92.834165277832,21.360888061314],[92.394712152832,20.47835580494],[89.010923090332,21.544941165392],[87.912290277832,24.517017276456],[88.153989496582,26.322839841459]]]},"status":1,"created_at":"2023-09-09T02:23:28.000000Z","updated_at":"2023-09-09T02:24:00.000000Z","restaurant_wise_topic":"zone_1_restaurant","customer_wise_topic":"zone_1_customer","deliveryman_wise_topic":"zone_1_delivery_man","minimum_shipping_charge":10,"per_km_shipping_charge":5,"maximum_shipping_charge":null,"max_cod_order_amount":null,"increased_delivery_fee":0,"increased_delivery_fee_status":0,"increase_delivery_charge_message":null,"display_name":"Demo Zone","formated_coordinates":[{"lat":26.322839841459,"lng":88.153989496582},{"lat":26.401590253196,"lng":90.043637934082},{"lat":25.373687844238,"lng":90.087583246582},{"lat":25.115323811515,"lng":92.526548090332},{"lat":21.360888061314,"lng":92.834165277832},{"lat":20.47835580494,"lng":92.394712152832},{"lat":21.544941165392,"lng":89.010923090332},{"lat":24.517017276456,"lng":87.912290277832},{"lat":26.322839841459,"lng":88.153989496582}],"translations":[{"id":43,"translationable_type":"App\\Models\\Zone","translationable_id":1,"locale":"en","key":"name","value":"Demo Zone","created_at":null,"updated_at":null}]}]'
+        content: '[]'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -5702,7 +5702,7 @@ endpoints:
         name: scheduled_for
         description: 'Must be a valid date. Must be a date after or equal to <code>now</code>.'
         required: false
-        example: '2051-12-11'
+        example: '2051-12-12'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -5924,7 +5924,7 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       title: b
-      scheduled_for: '2051-12-11'
+      scheduled_for: '2051-12-12'
       type: video
       media_url: 'http://crooks.biz/et-fugiat-sunt-nihil-accusantium'
       thumbnail_url: 'http://tillman.com/'
@@ -6144,7 +6144,7 @@ endpoints:
         name: publish_at
         description: 'Must be a valid date. Must be a date after or equal to <code>now</code>.'
         required: false
-        example: '2051-12-11'
+        example: '2051-12-12'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -6391,7 +6391,7 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       title: b
-      publish_at: '2051-12-11'
+      publish_at: '2051-12-12'
       publish_now: false
       status: draft
       type: video
@@ -8381,7 +8381,7 @@ endpoints:
         name: opening_time
         description: 'Must be a valid date in the format <code>H:i:s</code>.'
         required: true
-        example: '02:14:44'
+        example: '15:58:02'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -8410,7 +8410,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      opening_time: '02:14:44'
+      opening_time: '15:58:02'
       closing_time: '2051-12-11'
       day: architecto
     fileParameters: []
@@ -12405,11 +12405,8 @@ endpoints:
     responses:
       -
         custom: []
-        status: 500
-        content: |-
-          {
-              "message": "Server Error"
-          }
+        status: 200
+        content: '[]'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -12591,11 +12588,8 @@ endpoints:
     responses:
       -
         custom: []
-        status: 500
-        content: |-
-          {
-              "message": "Server Error"
-          }
+        status: 200
+        content: '[]'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -12631,14 +12625,14 @@ endpoints:
         name: category_id
         description: 'The ID of the category.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      category_id: 1
+      category_id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -12712,11 +12706,8 @@ endpoints:
     responses:
       -
         custom: []
-        status: 500
-        content: |-
-          {
-              "message": "Server Error"
-          }
+        status: 200
+        content: '{"Cuisines":[]}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -16568,7 +16559,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '[{"id":1,"type":"Cycle","translations":[{"id":52,"translationable_type":"App\\Models\\Vehicle","translationable_id":1,"locale":"en","key":"type","value":"Cycle","created_at":null,"updated_at":null}]}]'
+        content: '[]'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json

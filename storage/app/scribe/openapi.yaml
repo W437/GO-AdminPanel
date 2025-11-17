@@ -14,6 +14,9 @@ tags:
     name: Endpoints
     description: ''
   -
+    name: 'Public Contact API'
+    description: ''
+  -
     name: 'Public Restaurant API'
     description: ''
   -
@@ -149,259 +152,7 @@ paths:
                 type: array
                 items:
                   type: object
-                  properties:
-                    id:
-                      type: integer
-                      example: 1
-                    name:
-                      type: string
-                      example: 'Demo Zone'
-                    coordinates:
-                      type: object
-                      properties:
-                        type:
-                          type: string
-                          example: Polygon
-                        coordinates:
-                          type: array
-                          example:
-                            -
-                              -
-                                - 88.153989496582
-                                - 26.322839841459
-                              -
-                                - 90.043637934082
-                                - 26.401590253196
-                              -
-                                - 90.087583246582
-                                - 25.373687844238
-                              -
-                                - 92.526548090332
-                                - 25.115323811515
-                              -
-                                - 92.834165277832
-                                - 21.360888061314
-                              -
-                                - 92.394712152832
-                                - 20.47835580494
-                              -
-                                - 89.010923090332
-                                - 21.544941165392
-                              -
-                                - 87.912290277832
-                                - 24.517017276456
-                              -
-                                - 88.153989496582
-                                - 26.322839841459
-                          items:
-                            type: array
-                    status:
-                      type: integer
-                      example: 1
-                    created_at:
-                      type: string
-                      example: '2023-09-09T02:23:28.000000Z'
-                    updated_at:
-                      type: string
-                      example: '2023-09-09T02:24:00.000000Z'
-                    restaurant_wise_topic:
-                      type: string
-                      example: zone_1_restaurant
-                    customer_wise_topic:
-                      type: string
-                      example: zone_1_customer
-                    deliveryman_wise_topic:
-                      type: string
-                      example: zone_1_delivery_man
-                    minimum_shipping_charge:
-                      type: integer
-                      example: 10
-                    per_km_shipping_charge:
-                      type: integer
-                      example: 5
-                    maximum_shipping_charge:
-                      type: string
-                      example: null
-                    max_cod_order_amount:
-                      type: string
-                      example: null
-                    increased_delivery_fee:
-                      type: integer
-                      example: 0
-                    increased_delivery_fee_status:
-                      type: integer
-                      example: 0
-                    increase_delivery_charge_message:
-                      type: string
-                      example: null
-                    display_name:
-                      type: string
-                      example: 'Demo Zone'
-                    formated_coordinates:
-                      type: array
-                      example:
-                        -
-                          lat: 26.322839841459
-                          lng: 88.153989496582
-                        -
-                          lat: 26.401590253196
-                          lng: 90.043637934082
-                        -
-                          lat: 25.373687844238
-                          lng: 90.087583246582
-                        -
-                          lat: 25.115323811515
-                          lng: 92.526548090332
-                        -
-                          lat: 21.360888061314
-                          lng: 92.834165277832
-                        -
-                          lat: 20.47835580494
-                          lng: 92.394712152832
-                        -
-                          lat: 21.544941165392
-                          lng: 89.010923090332
-                        -
-                          lat: 24.517017276456
-                          lng: 87.912290277832
-                        -
-                          lat: 26.322839841459
-                          lng: 88.153989496582
-                      items:
-                        type: object
-                        properties:
-                          lat:
-                            type: number
-                            example: 26.322839841459
-                          lng:
-                            type: number
-                            example: 88.153989496582
-                    translations:
-                      type: array
-                      example:
-                        -
-                          id: 43
-                          translationable_type: App\Models\Zone
-                          translationable_id: 1
-                          locale: en
-                          key: name
-                          value: 'Demo Zone'
-                          created_at: null
-                          updated_at: null
-                      items:
-                        type: object
-                        properties:
-                          id:
-                            type: integer
-                            example: 43
-                          translationable_type:
-                            type: string
-                            example: App\Models\Zone
-                          translationable_id:
-                            type: integer
-                            example: 1
-                          locale:
-                            type: string
-                            example: en
-                          key:
-                            type: string
-                            example: name
-                          value:
-                            type: string
-                            example: 'Demo Zone'
-                          created_at:
-                            type: string
-                            example: null
-                          updated_at:
-                            type: string
-                            example: null
-                example:
-                  -
-                    id: 1
-                    name: 'Demo Zone'
-                    coordinates:
-                      type: Polygon
-                      coordinates:
-                        -
-                          -
-                            - 88.153989496582
-                            - 26.322839841459
-                          -
-                            - 90.043637934082
-                            - 26.401590253196
-                          -
-                            - 90.087583246582
-                            - 25.373687844238
-                          -
-                            - 92.526548090332
-                            - 25.115323811515
-                          -
-                            - 92.834165277832
-                            - 21.360888061314
-                          -
-                            - 92.394712152832
-                            - 20.47835580494
-                          -
-                            - 89.010923090332
-                            - 21.544941165392
-                          -
-                            - 87.912290277832
-                            - 24.517017276456
-                          -
-                            - 88.153989496582
-                            - 26.322839841459
-                    status: 1
-                    created_at: '2023-09-09T02:23:28.000000Z'
-                    updated_at: '2023-09-09T02:24:00.000000Z'
-                    restaurant_wise_topic: zone_1_restaurant
-                    customer_wise_topic: zone_1_customer
-                    deliveryman_wise_topic: zone_1_delivery_man
-                    minimum_shipping_charge: 10
-                    per_km_shipping_charge: 5
-                    maximum_shipping_charge: null
-                    max_cod_order_amount: null
-                    increased_delivery_fee: 0
-                    increased_delivery_fee_status: 0
-                    increase_delivery_charge_message: null
-                    display_name: 'Demo Zone'
-                    formated_coordinates:
-                      -
-                        lat: 26.322839841459
-                        lng: 88.153989496582
-                      -
-                        lat: 26.401590253196
-                        lng: 90.043637934082
-                      -
-                        lat: 25.373687844238
-                        lng: 90.087583246582
-                      -
-                        lat: 25.115323811515
-                        lng: 92.526548090332
-                      -
-                        lat: 21.360888061314
-                        lng: 92.834165277832
-                      -
-                        lat: 20.47835580494
-                        lng: 92.394712152832
-                      -
-                        lat: 21.544941165392
-                        lng: 89.010923090332
-                      -
-                        lat: 24.517017276456
-                        lng: 87.912290277832
-                      -
-                        lat: 26.322839841459
-                        lng: 88.153989496582
-                    translations:
-                      -
-                        id: 43
-                        translationable_type: App\Models\Zone
-                        translationable_id: 1
-                        locale: en
-                        key: name
-                        value: 'Demo Zone'
-                        created_at: null
-                        updated_at: null
+                example: []
       tags:
         - Endpoints
       security: []
@@ -4100,7 +3851,7 @@ paths:
                 scheduled_for:
                   type: string
                   description: 'Must be a valid date. Must be a date after or equal to <code>now</code>.'
-                  example: '2051-12-11'
+                  example: '2051-12-12'
                   nullable: true
                 type:
                   type: string
@@ -4309,7 +4060,7 @@ paths:
                 publish_at:
                   type: string
                   description: 'Must be a valid date. Must be a date after or equal to <code>now</code>.'
-                  example: '2051-12-11'
+                  example: '2051-12-12'
                   nullable: true
                 publish_now:
                   type: boolean
@@ -5650,7 +5401,7 @@ paths:
                 opening_time:
                   type: string
                   description: 'Must be a valid date in the format <code>H:i:s</code>.'
-                  example: '02:14:44'
+                  example: '15:58:02'
                   nullable: false
                 closing_time:
                   type: string
@@ -8511,18 +8262,15 @@ paths:
       description: ''
       parameters: []
       responses:
-        500:
+        200:
           description: ''
           content:
             application/json:
               schema:
-                type: object
-                example:
-                  message: 'Server Error'
-                properties:
-                  message:
-                    type: string
-                    example: 'Server Error'
+                type: array
+                items:
+                  type: object
+                example: []
       tags:
         - Endpoints
       security: []
@@ -8627,18 +8375,15 @@ paths:
       description: ''
       parameters: []
       responses:
-        500:
+        200:
           description: ''
           content:
             application/json:
               schema:
-                type: object
-                example:
-                  message: 'Server Error'
-                properties:
-                  message:
-                    type: string
-                    example: 'Server Error'
+                type: array
+                items:
+                  type: object
+                example: []
       tags:
         - Endpoints
       security: []
@@ -8713,7 +8458,7 @@ paths:
         in: path
         name: category_id
         description: 'The ID of the category.'
-        example: 1
+        example: 16
         required: true
         schema:
           type: integer
@@ -8724,18 +8469,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        500:
+        200:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: 'Server Error'
+                  Cuisines: []
                 properties:
-                  message:
-                    type: string
-                    example: 'Server Error'
+                  Cuisines:
+                    type: array
+                    example: []
       tags:
         - Endpoints
       security: []
@@ -11116,66 +10861,7 @@ paths:
                 type: array
                 items:
                   type: object
-                  properties:
-                    id:
-                      type: integer
-                      example: 1
-                    type:
-                      type: string
-                      example: Cycle
-                    translations:
-                      type: array
-                      example:
-                        -
-                          id: 52
-                          translationable_type: App\Models\Vehicle
-                          translationable_id: 1
-                          locale: en
-                          key: type
-                          value: Cycle
-                          created_at: null
-                          updated_at: null
-                      items:
-                        type: object
-                        properties:
-                          id:
-                            type: integer
-                            example: 52
-                          translationable_type:
-                            type: string
-                            example: App\Models\Vehicle
-                          translationable_id:
-                            type: integer
-                            example: 1
-                          locale:
-                            type: string
-                            example: en
-                          key:
-                            type: string
-                            example: type
-                          value:
-                            type: string
-                            example: Cycle
-                          created_at:
-                            type: string
-                            example: null
-                          updated_at:
-                            type: string
-                            example: null
-                example:
-                  -
-                    id: 1
-                    type: Cycle
-                    translations:
-                      -
-                        id: 52
-                        translationable_type: App\Models\Vehicle
-                        translationable_id: 1
-                        locale: en
-                        key: type
-                        value: Cycle
-                        created_at: null
-                        updated_at: null
+                example: []
       tags:
         - Endpoints
       security: []
@@ -11341,6 +11027,101 @@ paths:
                 - productIds
                 - categoryIds
                 - quantity
+      security: []
+  /api/v1/public/contact:
+    post:
+      summary: 'Submit Contact Form'
+      operationId: submitContactForm
+      description: "Submit a contact form message from the public website.\nThis endpoint is for the React website contact page."
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "Thank you for contacting us! We'll get back to you soon."
+                  contact_id: 15
+                properties:
+                  message:
+                    type: string
+                    example: "Thank you for contacting us! We'll get back to you soon."
+                  contact_id:
+                    type: integer
+                    example: 15
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors:
+                    -
+                      code: name
+                      message: 'The name field is required'
+                    -
+                      code: email
+                      message: 'The email field is required'
+                properties:
+                  errors:
+                    type: array
+                    example:
+                      -
+                        code: name
+                        message: 'The name field is required'
+                      -
+                        code: email
+                        message: 'The email field is required'
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: name
+                        message:
+                          type: string
+                          example: 'The name field is required'
+      tags:
+        - 'Public Contact API'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Full name.'
+                  example: 'John Doe'
+                  nullable: false
+                email:
+                  type: string
+                  description: 'Email address.'
+                  example: john@example.com
+                  nullable: false
+                mobile_number:
+                  type: string
+                  description: 'optional Phone number.'
+                  example: '+972501234567'
+                  nullable: true
+                subject:
+                  type: string
+                  description: 'optional Subject/reason for contact.'
+                  example: 'Question about delivery'
+                  nullable: true
+                message:
+                  type: string
+                  description: 'Message content.'
+                  example: 'I would like to know about your delivery times.'
+                  nullable: false
+              required:
+                - name
+                - email
+                - message
       security: []
   '/api/v1/public/restaurants/by-slug/{slug}':
     get:

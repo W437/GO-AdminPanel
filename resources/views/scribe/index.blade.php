@@ -926,6 +926,16 @@
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-public-contact-api" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="public-contact-api">
+                    <a href="#public-contact-api">Public Contact API</a>
+                </li>
+                                    <ul id="tocify-subheader-public-contact-api" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="public-contact-api-POSTapi-v1-public-contact">
+                                <a href="#public-contact-api-POSTapi-v1-public-contact">Submit Contact Form</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-public-restaurant-api" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="public-restaurant-api">
                     <a href="#public-restaurant-api">Public Restaurant API</a>
@@ -1300,119 +1310,7 @@ x-ratelimit-limit: 240
 x-ratelimit-remaining: 239
  </code></pre></details>         <pre>
 
-<code class="language-json" style="max-height: 300px;">[
-    {
-        &quot;id&quot;: 1,
-        &quot;name&quot;: &quot;Demo Zone&quot;,
-        &quot;coordinates&quot;: {
-            &quot;type&quot;: &quot;Polygon&quot;,
-            &quot;coordinates&quot;: [
-                [
-                    [
-                        88.153989496582,
-                        26.322839841459
-                    ],
-                    [
-                        90.043637934082,
-                        26.401590253196
-                    ],
-                    [
-                        90.087583246582,
-                        25.373687844238
-                    ],
-                    [
-                        92.526548090332,
-                        25.115323811515
-                    ],
-                    [
-                        92.834165277832,
-                        21.360888061314
-                    ],
-                    [
-                        92.394712152832,
-                        20.47835580494
-                    ],
-                    [
-                        89.010923090332,
-                        21.544941165392
-                    ],
-                    [
-                        87.912290277832,
-                        24.517017276456
-                    ],
-                    [
-                        88.153989496582,
-                        26.322839841459
-                    ]
-                ]
-            ]
-        },
-        &quot;status&quot;: 1,
-        &quot;created_at&quot;: &quot;2023-09-09T02:23:28.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2023-09-09T02:24:00.000000Z&quot;,
-        &quot;restaurant_wise_topic&quot;: &quot;zone_1_restaurant&quot;,
-        &quot;customer_wise_topic&quot;: &quot;zone_1_customer&quot;,
-        &quot;deliveryman_wise_topic&quot;: &quot;zone_1_delivery_man&quot;,
-        &quot;minimum_shipping_charge&quot;: 10,
-        &quot;per_km_shipping_charge&quot;: 5,
-        &quot;maximum_shipping_charge&quot;: null,
-        &quot;max_cod_order_amount&quot;: null,
-        &quot;increased_delivery_fee&quot;: 0,
-        &quot;increased_delivery_fee_status&quot;: 0,
-        &quot;increase_delivery_charge_message&quot;: null,
-        &quot;display_name&quot;: &quot;Demo Zone&quot;,
-        &quot;formated_coordinates&quot;: [
-            {
-                &quot;lat&quot;: 26.322839841459,
-                &quot;lng&quot;: 88.153989496582
-            },
-            {
-                &quot;lat&quot;: 26.401590253196,
-                &quot;lng&quot;: 90.043637934082
-            },
-            {
-                &quot;lat&quot;: 25.373687844238,
-                &quot;lng&quot;: 90.087583246582
-            },
-            {
-                &quot;lat&quot;: 25.115323811515,
-                &quot;lng&quot;: 92.526548090332
-            },
-            {
-                &quot;lat&quot;: 21.360888061314,
-                &quot;lng&quot;: 92.834165277832
-            },
-            {
-                &quot;lat&quot;: 20.47835580494,
-                &quot;lng&quot;: 92.394712152832
-            },
-            {
-                &quot;lat&quot;: 21.544941165392,
-                &quot;lng&quot;: 89.010923090332
-            },
-            {
-                &quot;lat&quot;: 24.517017276456,
-                &quot;lng&quot;: 87.912290277832
-            },
-            {
-                &quot;lat&quot;: 26.322839841459,
-                &quot;lng&quot;: 88.153989496582
-            }
-        ],
-        &quot;translations&quot;: [
-            {
-                &quot;id&quot;: 43,
-                &quot;translationable_type&quot;: &quot;App\\Models\\Zone&quot;,
-                &quot;translationable_id&quot;: 1,
-                &quot;locale&quot;: &quot;en&quot;,
-                &quot;key&quot;: &quot;name&quot;,
-                &quot;value&quot;: &quot;Demo Zone&quot;,
-                &quot;created_at&quot;: null,
-                &quot;updated_at&quot;: null
-            }
-        ]
-    }
-]</code>
+<code class="language-json" style="max-height: 300px;">[]</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-v1-zone-list" hidden>
@@ -16062,7 +15960,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"title\": \"b\",
-    \"scheduled_for\": \"2051-12-11\",
+    \"scheduled_for\": \"2051-12-12\",
     \"type\": \"video\",
     \"media_url\": \"http:\\/\\/crooks.biz\\/et-fugiat-sunt-nihil-accusantium\",
     \"thumbnail_url\": \"http:\\/\\/tillman.com\\/\",
@@ -16102,7 +16000,7 @@ const headers = {
 
 let body = {
     "title": "b",
-    "scheduled_for": "2051-12-11",
+    "scheduled_for": "2051-12-12",
     "type": "video",
     "media_url": "http:\/\/crooks.biz\/et-fugiat-sunt-nihil-accusantium",
     "thumbnail_url": "http:\/\/tillman.com\/",
@@ -16229,10 +16127,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="scheduled_for"                data-endpoint="POSTapi-v1-vendor-stories"
-               value="2051-12-11"
+               value="2051-12-12"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after or equal to <code>now</code>. Example: <code>2051-12-11</code></p>
+<p>Must be a valid date. Must be a date after or equal to <code>now</code>. Example: <code>2051-12-12</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>type</code></b>&nbsp;&nbsp;
@@ -16490,8 +16388,8 @@ Must be one of:
     --form "cta_label=z"\
     --form "cta_url=http://rempel.com/sunt-nihil-accusantium-harum-mollitia"\
     --form "duration_seconds=8"\
-    --form "media=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php6g1jqu1mvvos5L5lEeM" \
-    --form "thumbnail=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phphld7eq47inl83EuzZUB" </code></pre></div>
+    --form "media=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpen592ir3mpn08L0IXgI" \
+    --form "thumbnail=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phphkl9ivkp9q03crVrqlv" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -16693,7 +16591,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be a file. Must not be greater than 10240 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php6g1jqu1mvvos5L5lEeM</code></p>
+<p>Must be a file. Must not be greater than 10240 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpen592ir3mpn08L0IXgI</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>thumbnail</code></b>&nbsp;&nbsp;
@@ -16705,7 +16603,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be a file. Must not be greater than 10240 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phphld7eq47inl83EuzZUB</code></p>
+<p>Must be a file. Must not be greater than 10240 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phphkl9ivkp9q03crVrqlv</code></p>
         </div>
         </form>
 
@@ -16727,7 +16625,7 @@ Must be one of:
     --header "Accept: application/json" \
     --data "{
     \"title\": \"b\",
-    \"publish_at\": \"2051-12-11\",
+    \"publish_at\": \"2051-12-12\",
     \"publish_now\": false,
     \"status\": \"draft\",
     \"type\": \"video\",
@@ -16769,7 +16667,7 @@ const headers = {
 
 let body = {
     "title": "b",
-    "publish_at": "2051-12-11",
+    "publish_at": "2051-12-12",
     "publish_now": false,
     "status": "draft",
     "type": "video",
@@ -16911,10 +16809,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="publish_at"                data-endpoint="PATCHapi-v1-vendor-stories--story-"
-               value="2051-12-11"
+               value="2051-12-12"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after or equal to <code>now</code>. Example: <code>2051-12-11</code></p>
+<p>Must be a valid date. Must be a date after or equal to <code>now</code>. Example: <code>2051-12-12</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>publish_now</code></b>&nbsp;&nbsp;
@@ -20240,9 +20138,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "description=Et animi quos velit et fugiat."\
     --form "dates=architecto"\
     --form "advertisement_type=restaurant_promotion"\
-    --form "cover_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php8e8fd5iqop6vc6863Jb" \
-    --form "profile_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php2jjc1k162jt2c1aiAP8" \
-    --form "video_attachment=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpmtakjvg26ripdbOPDL2" </code></pre></div>
+    --form "cover_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpv0nqikc1ijq45n3jNKX" \
+    --form "profile_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php2m36ga2o7brl6916hRt" \
+    --form "video_attachment=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpo9ap1r14s0ig4XJkEbn" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -20406,7 +20304,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>This field is required when <code>advertisement_type</code> is <code>restaurant_promotion</code>. Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php8e8fd5iqop6vc6863Jb</code></p>
+<p>This field is required when <code>advertisement_type</code> is <code>restaurant_promotion</code>. Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpv0nqikc1ijq45n3jNKX</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>profile_image</code></b>&nbsp;&nbsp;
@@ -20418,7 +20316,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>This field is required when <code>advertisement_type</code> is <code>restaurant_promotion</code>. Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php2jjc1k162jt2c1aiAP8</code></p>
+<p>This field is required when <code>advertisement_type</code> is <code>restaurant_promotion</code>. Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php2m36ga2o7brl6916hRt</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>video_attachment</code></b>&nbsp;&nbsp;
@@ -20430,7 +20328,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>This field is required when <code>advertisement_type</code> is <code>video_promotion</code>. Must be a file. Must not be greater than 5120 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpmtakjvg26ripdbOPDL2</code></p>
+<p>This field is required when <code>advertisement_type</code> is <code>video_promotion</code>. Must be a file. Must not be greater than 5120 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpo9ap1r14s0ig4XJkEbn</code></p>
         </div>
         </form>
 
@@ -20455,9 +20353,9 @@ Must be one of:
     --form "description=Animi quos velit et fugiat."\
     --form "dates=architecto"\
     --form "advertisement_type=restaurant_promotion"\
-    --form "cover_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php04k3i8tu2c03cVqRWEb" \
-    --form "profile_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpv02pjmbb6sohfWegOAE" \
-    --form "video_attachment=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php0anvdsone3221VyHtne" </code></pre></div>
+    --form "cover_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php32ap5lpmh88rc0ZPf8a" \
+    --form "profile_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpvkv2qn73ibid6r5wjAG" \
+    --form "video_attachment=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php7t6an65ing76eRbWSq3" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -20647,7 +20545,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php04k3i8tu2c03cVqRWEb</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php32ap5lpmh88rc0ZPf8a</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>profile_image</code></b>&nbsp;&nbsp;
@@ -20659,7 +20557,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpv02pjmbb6sohfWegOAE</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpvkv2qn73ibid6r5wjAG</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>video_attachment</code></b>&nbsp;&nbsp;
@@ -20671,7 +20569,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be a file. Must not be greater than 5120 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php0anvdsone3221VyHtne</code></p>
+<p>Must be a file. Must not be greater than 5120 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php7t6an65ing76eRbWSq3</code></p>
         </div>
         </form>
 
@@ -20868,9 +20766,9 @@ Must be one of:
     --form "description=Animi quos velit et fugiat."\
     --form "dates=architecto"\
     --form "advertisement_type=restaurant_promotion"\
-    --form "cover_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpn177e1d94gg4a7kfNRf" \
-    --form "profile_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpfir9gmer6bvs6L9Tkez" \
-    --form "video_attachment=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpep2o9u1gepd24IAKtUW" </code></pre></div>
+    --form "cover_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpev428j3an54s87ei3ye" \
+    --form "profile_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpptulkjanv9k30uO53uK" \
+    --form "video_attachment=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpon34a35ndb8o5kkgGmT" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -21047,7 +20945,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpn177e1d94gg4a7kfNRf</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpev428j3an54s87ei3ye</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>profile_image</code></b>&nbsp;&nbsp;
@@ -21059,7 +20957,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpfir9gmer6bvs6L9Tkez</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpptulkjanv9k30uO53uK</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>video_attachment</code></b>&nbsp;&nbsp;
@@ -21071,7 +20969,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be a file. Must not be greater than 5120 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpep2o9u1gepd24IAKtUW</code></p>
+<p>Must be a file. Must not be greater than 5120 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpon34a35ndb8o5kkgGmT</code></p>
         </div>
         </form>
 
@@ -21203,8 +21101,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --form "contact_number=bngzmiyvdljnikhw"\
     --form "meta_title=a"\
-    --form "logo=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php2i3vjfiao9qe9ReQojA" \
-    --form "cover_photo=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpr8ui9uom1pjg5DoA72b" </code></pre></div>
+    --form "logo=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpsbhn3rm3cttv23jL1au" \
+    --form "cover_photo=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php1g1shb1eh3d82XLRL29" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -21327,7 +21225,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php2i3vjfiao9qe9ReQojA</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpsbhn3rm3cttv23jL1au</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>cover_photo</code></b>&nbsp;&nbsp;
@@ -21339,7 +21237,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpr8ui9uom1pjg5DoA72b</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php1g1shb1eh3d82XLRL29</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>meta_title</code></b>&nbsp;&nbsp;
@@ -21816,7 +21714,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"opening_time\": \"02:14:44\",
+    \"opening_time\": \"15:58:02\",
     \"closing_time\": \"2051-12-11\",
     \"day\": \"architecto\"
 }"
@@ -21834,7 +21732,7 @@ const headers = {
 };
 
 let body = {
-    "opening_time": "02:14:44",
+    "opening_time": "15:58:02",
     "closing_time": "2051-12-11",
     "day": "architecto"
 };
@@ -21928,10 +21826,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="opening_time"                data-endpoint="POSTapi-v1-vendor-schedule-store"
-               value="02:14:44"
+               value="15:58:02"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>02:14:44</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>15:58:02</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>closing_time</code></b>&nbsp;&nbsp;
@@ -32647,7 +32545,7 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-categories">
             <blockquote>
-            <p>Example response (500):</p>
+            <p>Example response (200):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -32659,9 +32557,7 @@ x-ratelimit-limit: 240
 x-ratelimit-remaining: 132
  </code></pre></details>         <pre>
 
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Server Error&quot;
-}</code>
+<code class="language-json" style="max-height: 300px;">[]</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-v1-categories" hidden>
@@ -33093,7 +32989,7 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-categories-products--category_id--all">
             <blockquote>
-            <p>Example response (500):</p>
+            <p>Example response (200):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -33105,9 +33001,7 @@ x-ratelimit-limit: 240
 x-ratelimit-remaining: 129
  </code></pre></details>         <pre>
 
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Server Error&quot;
-}</code>
+<code class="language-json" style="max-height: 300px;">[]</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-v1-categories-products--category_id--all" hidden>
@@ -33209,7 +33103,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "https://api.hopa.delivery/api/v1/categories/restaurants/1" \
+    --get "https://api.hopa.delivery/api/v1/categories/restaurants/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -33221,7 +33115,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.hopa.delivery/api/v1/categories/restaurants/1"
+    "https://api.hopa.delivery/api/v1/categories/restaurants/16"
 );
 
 const headers = {
@@ -33345,10 +33239,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="category_id"                data-endpoint="GETapi-v1-categories-restaurants--category_id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the category. Example: <code>1</code></p>
+<p>The ID of the category. Example: <code>16</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -33414,7 +33308,7 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-cuisine">
             <blockquote>
-            <p>Example response (500):</p>
+            <p>Example response (200):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -33427,7 +33321,7 @@ x-ratelimit-remaining: 127
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Server Error&quot;
+    &quot;Cuisines&quot;: []
 }</code>
  </pre>
     </span>
@@ -43640,24 +43534,7 @@ x-ratelimit-limit: 240
 x-ratelimit-remaining: 107
  </code></pre></details>         <pre>
 
-<code class="language-json" style="max-height: 300px;">[
-    {
-        &quot;id&quot;: 1,
-        &quot;type&quot;: &quot;Cycle&quot;,
-        &quot;translations&quot;: [
-            {
-                &quot;id&quot;: 52,
-                &quot;translationable_type&quot;: &quot;App\\Models\\Vehicle&quot;,
-                &quot;translationable_id&quot;: 1,
-                &quot;locale&quot;: &quot;en&quot;,
-                &quot;key&quot;: &quot;type&quot;,
-                &quot;value&quot;: &quot;Cycle&quot;,
-                &quot;created_at&quot;: null,
-                &quot;updated_at&quot;: null
-            }
-        ]
-    }
-]</code>
+<code class="language-json" style="max-height: 300px;">[]</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-v1-get-vehicles" hidden>
@@ -44511,6 +44388,227 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="body">
     <br>
 
+        </div>
+        </form>
+
+                <h1 id="public-contact-api">Public Contact API</h1>
+
+    
+
+                                <h2 id="public-contact-api-POSTapi-v1-public-contact">Submit Contact Form</h2>
+
+<p>
+</p>
+
+<p>Submit a contact form message from the public website.
+This endpoint is for the React website contact page.</p>
+
+<span id="example-requests-POSTapi-v1-public-contact">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://api.hopa.delivery/api/v1/public/contact" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"John Doe\",
+    \"email\": \"john@example.com\",
+    \"mobile_number\": \"+972501234567\",
+    \"subject\": \"Question about delivery\",
+    \"message\": \"I would like to know about your delivery times.\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://api.hopa.delivery/api/v1/public/contact"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "John Doe",
+    "email": "john@example.com",
+    "mobile_number": "+972501234567",
+    "subject": "Question about delivery",
+    "message": "I would like to know about your delivery times."
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-public-contact">
+            <blockquote>
+            <p>Example response (201):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Thank you for contacting us! We&#039;ll get back to you soon.&quot;,
+    &quot;contact_id&quot;: 15
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;errors&quot;: [
+        {
+            &quot;code&quot;: &quot;name&quot;,
+            &quot;message&quot;: &quot;The name field is required&quot;
+        },
+        {
+            &quot;code&quot;: &quot;email&quot;,
+            &quot;message&quot;: &quot;The email field is required&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-public-contact" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-public-contact"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-public-contact"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-public-contact" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-public-contact">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-public-contact" data-method="POST"
+      data-path="api/v1/public/contact"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-public-contact', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-public-contact"
+                    onclick="tryItOut('POSTapi-v1-public-contact');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-public-contact"
+                    onclick="cancelTryOut('POSTapi-v1-public-contact');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-public-contact"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/public/contact</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-public-contact"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-public-contact"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-v1-public-contact"
+               value="John Doe"
+               data-component="body">
+    <br>
+<p>Full name. Example: <code>John Doe</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-v1-public-contact"
+               value="john@example.com"
+               data-component="body">
+    <br>
+<p>Email address. Example: <code>john@example.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>mobile_number</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="mobile_number"                data-endpoint="POSTapi-v1-public-contact"
+               value="+972501234567"
+               data-component="body">
+    <br>
+<p>optional Phone number. Example: <code>+972501234567</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>subject</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="subject"                data-endpoint="POSTapi-v1-public-contact"
+               value="Question about delivery"
+               data-component="body">
+    <br>
+<p>optional Subject/reason for contact. Example: <code>Question about delivery</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="message"                data-endpoint="POSTapi-v1-public-contact"
+               value="I would like to know about your delivery times."
+               data-component="body">
+    <br>
+<p>Message content. Example: <code>I would like to know about your delivery times.</code></p>
         </div>
         </form>
 

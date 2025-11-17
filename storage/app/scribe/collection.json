@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "GO-AdminPanel API Documentation",
-        "_postman_id": "7db83d2c-3932-479a-b0d5-52cf3cba151a",
+        "_postman_id": "db4b8ac1-589a-4620-96e3-64b6803eed19",
         "description": "Complete API documentation for GO-AdminPanel - Restaurant Management System",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -116,7 +116,7 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "[{\"id\":1,\"name\":\"Demo Zone\",\"coordinates\":{\"type\":\"Polygon\",\"coordinates\":[[[88.153989496582,26.322839841459],[90.043637934082,26.401590253196],[90.087583246582,25.373687844238],[92.526548090332,25.115323811515],[92.834165277832,21.360888061314],[92.394712152832,20.47835580494],[89.010923090332,21.544941165392],[87.912290277832,24.517017276456],[88.153989496582,26.322839841459]]]},\"status\":1,\"created_at\":\"2023-09-09T02:23:28.000000Z\",\"updated_at\":\"2023-09-09T02:24:00.000000Z\",\"restaurant_wise_topic\":\"zone_1_restaurant\",\"customer_wise_topic\":\"zone_1_customer\",\"deliveryman_wise_topic\":\"zone_1_delivery_man\",\"minimum_shipping_charge\":10,\"per_km_shipping_charge\":5,\"maximum_shipping_charge\":null,\"max_cod_order_amount\":null,\"increased_delivery_fee\":0,\"increased_delivery_fee_status\":0,\"increase_delivery_charge_message\":null,\"display_name\":\"Demo Zone\",\"formated_coordinates\":[{\"lat\":26.322839841459,\"lng\":88.153989496582},{\"lat\":26.401590253196,\"lng\":90.043637934082},{\"lat\":25.373687844238,\"lng\":90.087583246582},{\"lat\":25.115323811515,\"lng\":92.526548090332},{\"lat\":21.360888061314,\"lng\":92.834165277832},{\"lat\":20.47835580494,\"lng\":92.394712152832},{\"lat\":21.544941165392,\"lng\":89.010923090332},{\"lat\":24.517017276456,\"lng\":87.912290277832},{\"lat\":26.322839841459,\"lng\":88.153989496582}],\"translations\":[{\"id\":43,\"translationable_type\":\"App\\\\Models\\\\Zone\",\"translationable_id\":1,\"locale\":\"en\",\"key\":\"name\",\"value\":\"Demo Zone\",\"created_at\":null,\"updated_at\":null}]}]",
+                            "body": "[]",
                             "name": ""
                         }
                     ]
@@ -4132,7 +4132,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"title\":\"b\",\"scheduled_for\":\"2051-12-11\",\"type\":\"video\",\"media_url\":\"http:\\\/\\\/crooks.biz\\\/et-fugiat-sunt-nihil-accusantium\",\"thumbnail_url\":\"http:\\\/\\\/tillman.com\\\/\",\"duration_seconds\":14,\"overlays\":[{\"id\":\"w\",\"text\":\"a\",\"position\":{\"x\":0,\"y\":0},\"scale\":0,\"rotation\":-360,\"fontFamily\":\"y\",\"stylePreset\":\"u\",\"color\":\"#fEEeDb\",\"backgroundColor\":\"#fEEeDb\",\"backgroundMode\":\"l\",\"alignment\":\"left\",\"zIndex\":1}]}"
+                            "raw": "{\"title\":\"b\",\"scheduled_for\":\"2051-12-12\",\"type\":\"video\",\"media_url\":\"http:\\\/\\\/crooks.biz\\\/et-fugiat-sunt-nihil-accusantium\",\"thumbnail_url\":\"http:\\\/\\\/tillman.com\\\/\",\"duration_seconds\":14,\"overlays\":[{\"id\":\"w\",\"text\":\"a\",\"position\":{\"x\":0,\"y\":0},\"scale\":0,\"rotation\":-360,\"fontFamily\":\"y\",\"stylePreset\":\"u\",\"color\":\"#fEEeDb\",\"backgroundColor\":\"#fEEeDb\",\"backgroundMode\":\"l\",\"alignment\":\"left\",\"zIndex\":1}]}"
                         },
                         "description": "",
                         "auth": {
@@ -4257,7 +4257,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"title\":\"b\",\"publish_at\":\"2051-12-11\",\"publish_now\":false,\"status\":\"draft\",\"type\":\"video\",\"media_url\":\"http:\\\/\\\/rempel.com\\\/sunt-nihil-accusantium-harum-mollitia\",\"thumbnail_url\":\"http:\\\/\\\/www.considine.com\\\/provident-perspiciatis-quo-omnis-nostrum-aut-adipisci-quidem\",\"duration_seconds\":8,\"overlays\":[{\"id\":\"l\",\"text\":\"v\",\"position\":{\"x\":0,\"y\":0},\"scale\":1,\"rotation\":-360,\"fontFamily\":\"i\",\"stylePreset\":\"t\",\"color\":\"#fEEeDb\",\"backgroundColor\":\"#fEEeDb\",\"backgroundMode\":\"l\",\"alignment\":\"left\",\"zIndex\":1}]}"
+                            "raw": "{\"title\":\"b\",\"publish_at\":\"2051-12-12\",\"publish_now\":false,\"status\":\"draft\",\"type\":\"video\",\"media_url\":\"http:\\\/\\\/rempel.com\\\/sunt-nihil-accusantium-harum-mollitia\",\"thumbnail_url\":\"http:\\\/\\\/www.considine.com\\\/provident-perspiciatis-quo-omnis-nostrum-aut-adipisci-quidem\",\"duration_seconds\":8,\"overlays\":[{\"id\":\"l\",\"text\":\"v\",\"position\":{\"x\":0,\"y\":0},\"scale\":1,\"rotation\":-360,\"fontFamily\":\"i\",\"stylePreset\":\"t\",\"color\":\"#fEEeDb\",\"backgroundColor\":\"#fEEeDb\",\"backgroundMode\":\"l\",\"alignment\":\"left\",\"zIndex\":1}]}"
                         },
                         "description": "",
                         "auth": {
@@ -5578,7 +5578,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"opening_time\":\"02:14:44\",\"closing_time\":\"2051-12-11\",\"day\":\"architecto\"}"
+                            "raw": "{\"opening_time\":\"15:58:02\",\"closing_time\":\"2051-12-11\",\"day\":\"architecto\"}"
                         },
                         "description": "",
                         "auth": {
@@ -9065,8 +9065,8 @@
                                     "value": "132"
                                 }
                             ],
-                            "code": 500,
-                            "body": "{\n    \"message\": \"Server Error\"\n}",
+                            "code": 200,
+                            "body": "[]",
                             "name": ""
                         }
                     ]
@@ -9248,8 +9248,8 @@
                                     "value": "129"
                                 }
                             ],
-                            "code": 500,
-                            "body": "{\n    \"message\": \"Server Error\"\n}",
+                            "code": 200,
+                            "body": "[]",
                             "name": ""
                         }
                     ]
@@ -9266,7 +9266,7 @@
                                 {
                                     "id": "category_id",
                                     "key": "category_id",
-                                    "value": "1",
+                                    "value": "16",
                                     "description": "The ID of the category."
                                 }
                             ]
@@ -9363,8 +9363,8 @@
                                     "value": "127"
                                 }
                             ],
-                            "code": 500,
-                            "body": "{\n    \"message\": \"Server Error\"\n}",
+                            "code": 200,
+                            "body": "{\"Cuisines\":[]}",
                             "name": ""
                         }
                     ]
@@ -12304,7 +12304,7 @@
                                 }
                             ],
                             "code": 200,
-                            "body": "[{\"id\":1,\"type\":\"Cycle\",\"translations\":[{\"id\":52,\"translationable_type\":\"App\\\\Models\\\\Vehicle\",\"translationable_id\":1,\"locale\":\"en\",\"key\":\"type\",\"value\":\"Cycle\",\"created_at\":null,\"updated_at\":null}]}]",
+                            "body": "[]",
                             "name": ""
                         }
                     ]
@@ -12526,6 +12526,56 @@
                         }
                     },
                     "response": []
+                }
+            ]
+        },
+        {
+            "name": "Public Contact API",
+            "description": "",
+            "item": [
+                {
+                    "name": "Submit Contact Form",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/public\/contact",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/public\/contact"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"John Doe\",\"email\":\"john@example.com\",\"mobile_number\":\"+972501234567\",\"subject\":\"Question about delivery\",\"message\":\"I would like to know about your delivery times.\"}"
+                        },
+                        "description": "Submit a contact form message from the public website.\nThis endpoint is for the React website contact page.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"message\": \"Thank you for contacting us! We'll get back to you soon.\",\n  \"contact_id\": 15\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n  \"errors\": [\n    {\"code\": \"name\", \"message\": \"The name field is required\"},\n    {\"code\": \"email\", \"message\": \"The email field is required\"}\n  ]\n}",
+                            "name": ""
+                        }
+                    ]
                 }
             ]
         },
