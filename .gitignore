@@ -18,6 +18,7 @@ error_log
 # Admin-Created Languages (managed via admin panel, not Git)
 /resources/lang/*
 !/resources/lang/en
+!/resources/lang/ar
 
 # Docker-related
 docker-compose.yml
