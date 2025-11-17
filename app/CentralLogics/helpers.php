@@ -2298,17 +2298,29 @@ class Helpers
             }
 
             $disk = self::getDisk();
-            $image_path = Storage::disk($disk)->path($dir . $image_filename);
 
-            if (!file_exists($image_path)) {
-                \Illuminate\Support\Facades\Log::warning('Blurhash: Image file not found', [
-                    'path' => $image_path
-                ]);
-                return null;
+            // For S3/remote storage, get the file contents
+            if ($disk === 's3') {
+                $file_contents = Storage::disk($disk)->get($dir . $image_filename);
+                if (!$file_contents) {
+                    \Illuminate\Support\Facades\Log::warning('Blurhash: Image not found on S3', [
+                        'path' => $dir . $image_filename
+                    ]);
+                    return null;
+                }
+                // Use Intervention Image to read from string
+                $img = \Intervention\Image\Facades\Image::make($file_contents);
+            } else {
+                // For local storage, use file path
+                $image_path = Storage::disk($disk)->path($dir . $image_filename);
+                if (!file_exists($image_path)) {
+                    \Illuminate\Support\Facades\Log::warning('Blurhash: Image file not found', [
+                        'path' => $image_path
+                    ]);
+                    return null;
+                }
+                $img = \Intervention\Image\Facades\Image::make($image_path);
             }
-
-            // Use Intervention Image for better color accuracy
-            $img = \Intervention\Image\Facades\Image::make($image_path);
 
             // Resize to max 100px for faster generation (maintains aspect ratio)
             $img->resize(100, 100, function ($constraint) {
