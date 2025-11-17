@@ -15,11 +15,21 @@ return [
     |
     */
 
-    'paths' => ['api/*'],
+    'paths' => ['api/*', 'v1/*', 'v2/*'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [
+        'https://hopa.delivery',
+        'https://www.hopa.delivery',
+        'https://api.hopa.delivery',
+        'https://hq-secure-panel-1337.hopa.delivery',
+        'https://admin.hopa.delivery', // Keep for backward compatibility during transition
+        'http://localhost:3000', // React development
+        'http://localhost:3001', // Alternative React dev port
+        'http://localhost:8000', // Laravel development
+        'http://127.0.0.1:8000', // Laravel development
+    ],
 
     'allowed_origins_patterns' => [],
 
@@ -29,6 +39,6 @@ return [
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
 ];

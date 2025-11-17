@@ -49,29 +49,100 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
 
-            Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/web.php'));
+            // Get the current domain
+            $currentDomain = request()->getHost();
 
-            Route::prefix('admin')
-                ->middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/admin.php'));
+            // Define domain constants from environment
+            $adminDomain = env('ADMIN_DOMAIN', 'hq-secure-panel-1337.hopa.delivery');
+            $apiDomain = env('API_DOMAIN', 'api.hopa.delivery');
+            $oldAdminDomain = 'admin.hopa.delivery'; // For backward compatibility
 
-            Route::prefix('restaurant-panel')
-                ->middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/vendor.php'));
+            // Admin Panel Routes (hq-secure-panel-1337.hopa.delivery OR admin.hopa.delivery for backward compat)
+            if ($currentDomain === $adminDomain || $currentDomain === $oldAdminDomain) {
 
-            Route::prefix('api/v1')
-                ->middleware('api')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/api/v1/api.php'));
+                Route::middleware('web')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/web.php'));
 
-            Route::prefix('api/v2')
-                ->middleware('api')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/api/v2/api.php'));
+                Route::prefix('admin')
+                    ->middleware('web')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/admin.php'));
+
+                Route::prefix('restaurant-panel')
+                    ->middleware('web')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/vendor.php'));
+
+                // Also allow API access from admin domain for backward compatibility
+                Route::prefix('api/v1')
+                    ->middleware('api')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/api/v1/api.php'));
+
+                Route::prefix('api/v2')
+                    ->middleware('api')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/api/v2/api.php'));
+            }
+
+            // API Routes (api.hopa.delivery)
+            elseif ($currentDomain === $apiDomain) {
+
+                // Only API routes on API subdomain
+                Route::prefix('api/v1')
+                    ->middleware('api')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/api/v1/api.php'));
+
+                Route::prefix('api/v2')
+                    ->middleware('api')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/api/v2/api.php'));
+
+                // Also support routes without /api prefix for cleaner URLs
+                Route::prefix('v1')
+                    ->middleware('api')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/api/v1/api.php'));
+
+                Route::prefix('v2')
+                    ->middleware('api')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/api/v2/api.php'));
+
+                // Return 404 for any non-API routes on API domain
+                Route::any('/{any}', function() {
+                    return response()->json(['error' => 'Not Found', 'message' => 'This domain only serves API endpoints'], 404);
+                })->where('any', '^(?!api|v1|v2).*$');
+            }
+
+            // Fallback for localhost, IP access, or any other domain (development/backward compatibility)
+            else {
+                Route::middleware('web')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/web.php'));
+
+                Route::prefix('admin')
+                    ->middleware('web')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/admin.php'));
+
+                Route::prefix('restaurant-panel')
+                    ->middleware('web')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/vendor.php'));
+
+                Route::prefix('api/v1')
+                    ->middleware('api')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/api/v1/api.php'));
+
+                Route::prefix('api/v2')
+                    ->middleware('api')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/api/v2/api.php'));
+            }
 
         });
     }

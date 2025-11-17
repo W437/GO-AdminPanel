@@ -54,7 +54,8 @@
                                 <small class="text-muted">
                                     <strong>Used for:</strong> Browser maps (admin panel)<br>
                                     <strong>Restriction:</strong> HTTP referrers<br>
-                                    <strong class="text-primary">Add:</strong> https://admin.hopa.delivery/*<br>
+                                    <strong class="text-primary">Add:</strong> https://{{ env('ADMIN_DOMAIN', 'hq-secure-panel-1337.hopa.delivery') }}/*<br>
+                                    <strong class="text-muted">Also add (for transition):</strong> https://admin.hopa.delivery/*<br>
                                     <strong>Enable APIs:</strong>
                                     <ul class="mb-0 pl-3">
                                         <li>Maps JavaScript API</li>
