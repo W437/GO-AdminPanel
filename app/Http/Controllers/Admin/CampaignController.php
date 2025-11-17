@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\Models\ItemCampaign;
 use Illuminate\Http\Request;
 use App\CentralLogics\Helpers;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use App\Exports\FoodCampaignExport;
 use App\Exports\BasicCampaignExport;
@@ -102,6 +103,9 @@ class CampaignController extends Controller
         Helpers::add_or_update_translations(request: $request, key_data: 'title', name_field: 'title', model_name: 'Campaign', data_id: $campaign->id, data_value: $campaign->title);
         Helpers::add_or_update_translations(request: $request, key_data: 'description', name_field: 'description', model_name: 'Campaign', data_id: $campaign->id, data_value: $campaign->description);
 
+        // Clear cache to show changes immediately
+        Cache::flush();
+
         return response()->json([], 200);
     }
 
@@ -140,6 +144,9 @@ class CampaignController extends Controller
 
         Helpers::add_or_update_translations(request: $request, key_data: 'title', name_field: 'title', model_name: 'Campaign', data_id: $campaign->id, data_value: $campaign->title);
         Helpers::add_or_update_translations(request: $request, key_data: 'description', name_field: 'description', model_name: 'Campaign', data_id: $campaign->id, data_value: $campaign->description);
+
+        // Clear cache to show changes immediately
+        Cache::flush();
 
         return response()->json([], 200);
     }
@@ -285,6 +292,10 @@ class CampaignController extends Controller
                 }
             }
         }
+
+        // Clear cache to show changes immediately
+        Cache::flush();
+
         return response()->json([], 200);
     }
 
@@ -421,6 +432,8 @@ class CampaignController extends Controller
             }
         }
 
+        // Clear cache to show changes immediately
+        Cache::flush();
 
         return response()->json([], 200);
     }
@@ -502,6 +515,10 @@ class CampaignController extends Controller
         }
         $campaign->status = $status;
         $campaign->save();
+
+        // Clear cache to show changes immediately
+        Cache::flush();
+
         Toastr::success(translate('messages.campaign_status_updated'));
         return back();
     }
@@ -511,6 +528,10 @@ class CampaignController extends Controller
         Helpers::check_and_delete('campaign/' , $campaign->image);
         $campaign?->translations()?->delete();
         $campaign->delete();
+
+        // Clear cache to show changes immediately
+        Cache::flush();
+
         Toastr::success(translate('messages.campaign_deleted_successfully'));
         return back();
     }
@@ -520,6 +541,10 @@ class CampaignController extends Controller
         $campaign?->translations()?->delete();
         $campaign?->taxVats()->delete();
         $campaign->delete();
+
+        // Clear cache to show changes immediately
+        Cache::flush();
+
         Toastr::success(translate('messages.campaign_deleted_successfully'));
         return back();
     }
@@ -528,6 +553,10 @@ class CampaignController extends Controller
     {
         $campaign?->restaurants()?->detach($restaurant);
         $campaign->save();
+
+        // Clear cache to show changes immediately
+        Cache::flush();
+
         Toastr::success(translate('messages.restaurant_remove_from_campaign'));
         return back();
     }
@@ -535,6 +564,10 @@ class CampaignController extends Controller
     {
         $campaign?->restaurants()?->attach($request->restaurant_id,['campaign_status' => 'confirmed']);
         $campaign->save();
+
+        // Clear cache to show changes immediately
+        Cache::flush();
+
         Toastr::success(translate('messages.restaurant_added_to_campaign'));
         return back();
     }
@@ -608,6 +641,9 @@ class CampaignController extends Controller
         {
             info($e->getMessage());
         }
+        // Clear cache to show changes immediately
+        Cache::flush();
+
         if($status=='rejected' ){
 
             Toastr::success(translate('messages.campaign_join_request_rejected'));
