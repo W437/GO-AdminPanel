@@ -143,6 +143,32 @@
                                             {{ translate('Image format - jpg png jpeg gif Image Size -maximum size 2 MB Image Ratio - 2:1')}}
                                         </p>
                                     </div>
+
+                                    <div class="d-flex flex-column align-items-center gap-3 mt-4">
+                                        <p class="mb-0">{{ translate('Banner_video') }} <span class="text-muted">({{ translate('optional') }})</span></p>
+
+                                        <div class="image-box banner2">
+                                            <label for="video-input" class="d-flex flex-column align-items-center justify-content-center h-100 cursor-pointer gap-2">
+                                                @if($banner->video)
+                                                    <video class="upload-icon initial-26" controls>
+                                                        <source src="{{ $banner['video_full_url'] }}" type="video/mp4">
+                                                    </video>
+                                                @else
+                                                    <i class="tio-cloud-upload upload-icon" style="font-size: 30px;"></i>
+                                                    <span class="upload-text">{{ translate('Upload Video')}}</span>
+                                                @endif
+                                                <video class="preview-video" controls style="display: none; max-width: 100%; max-height: 150px;"></video>
+                                            </label>
+                                            <button type="button" class="delete_video" style="{{ $banner->video ? '' : 'display: none;' }}">
+                                                <i class="tio-delete"></i>
+                                            </button>
+                                            <input type="file" id="video-input" name="video" accept="video/mp4,video/mov,video/avi,video/x-matroska,video/webm,video/x-m4v" hidden>
+                                        </div>
+
+                                        <p class="opacity-75 max-w220 mx-auto text-center">
+                                            {{ translate('Video format - mp4 mov avi mkv webm m4v Video Size - maximum 10 MB')}}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="btn--container justify-content-end">

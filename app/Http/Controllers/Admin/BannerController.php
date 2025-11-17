@@ -24,7 +24,8 @@ class BannerController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:191',
-            'image' => 'required|max:2048',
+            'image' => 'nullable|max:2048',
+            'video' => 'nullable|mimes:mp4,mov,avi,mkv,webm,m4v|max:10240',
             'banner_type' => 'required',
             'zone_id' => 'required',
             'restaurant_id' => 'required_if:banner_type,restaurant_wise',
@@ -33,12 +34,20 @@ class BannerController extends Controller
             'zone_id.required' => translate('messages.select_a_zone'),
             'restaurant_id.required_if'=> translate('messages.Restaurant is required when banner type is restaurant wise'),
             'item_id.required_if'=> translate('messages.Food is required when banner type is food wise'),
+            'video.mimes' => translate('messages.video_must_be_mp4_mov_avi_mkv_webm_or_m4v'),
+            'video.max' => translate('messages.video_size_must_not_exceed_10MB'),
         ]);
 
         if($request->title[array_search('default', $request->lang)] == '' ){
             $validator->getMessageBag()->add('title', translate('messages.default_title_is_required'));
                     return response()->json(['errors' => Helpers::error_processor($validator)]);
             }
+
+        if (!$request->hasFile('image') && !$request->hasFile('video')) {
+            $validator->getMessageBag()->add('media', translate('messages.either_image_or_video_is_required'));
+            return response()->json(['errors' => Helpers::error_processor($validator)]);
+        }
+
         if ($validator->fails()) {
             return response()->json(['errors' => Helpers::error_processor($validator)]);
         }
@@ -47,7 +56,8 @@ class BannerController extends Controller
         $banner->title = $request->title[array_search('default', $request->lang)];
         $banner->type = $request->banner_type;
         $banner->zone_id = $request->zone_id;
-        $banner->image = Helpers::upload(dir:'banner/',  format:'png', image: $request->file('image'));
+        $banner->image = $request->hasFile('image') ? Helpers::upload(dir:'banner/',  format:'png', image: $request->file('image')) : null;
+        $banner->video = $request->hasFile('video') ? Helpers::upload(dir:'banner/', format: $request->file('video')->getClientOriginalExtension(), image: $request->file('video')) : null;
         $banner->data = ($request->banner_type == 'restaurant_wise')?$request->restaurant_id:$request->item_id;
         $banner->save();
         $data=[];
@@ -101,12 +111,15 @@ class BannerController extends Controller
             'banner_type' => 'required',
             'zone_id' => 'required',
             'image' => 'nullable|max:2048',
+            'video' => 'nullable|mimes:mp4,mov,avi,mkv,webm,m4v|max:10240',
             'restaurant_id' => 'required_if:banner_type,restaurant_wise',
             'item_id' => 'required_if:banner_type,item_wise',
         ], [
             'zone_id.required' => translate('messages.select_a_zone'),
             'restaurant_id.required_if'=> translate('messages.Restaurant is required when banner type is restaurant wise'),
             'item_id.required_if'=> translate('messages.Food is required when banner type is food wise'),
+            'video.mimes' => translate('messages.video_must_be_mp4_mov_avi_mkv_webm_or_m4v'),
+            'video.max' => translate('messages.video_size_must_not_exceed_10MB'),
         ]);
 
 
@@ -123,6 +136,7 @@ class BannerController extends Controller
         $banner->type = $request->banner_type;
         $banner->zone_id = $request->zone_id;
         $banner->image = $request->has('image') ? Helpers::update(dir:'banner/',old_image: $banner->image, format:'png', image: $request->file('image')) : $banner->image;
+        $banner->video = $request->has('video') ? Helpers::update(dir:'banner/', old_image: $banner->video, format: $request->file('video')->getClientOriginalExtension(), image: $request->file('video')) : $banner->video;
         $banner->data = $request->banner_type=='restaurant_wise'?$request->restaurant_id:$request->item_id;
         $banner->save();
         $default_lang = str_replace('_', '-', app()->getLocale());
@@ -160,6 +174,9 @@ class BannerController extends Controller
     public function delete(Banner $banner)
     {
         Helpers::check_and_delete('banner/' , $banner['image']);
+        if ($banner['video']) {
+            Helpers::check_and_delete('banner/' , $banner['video']);
+        }
         $banner?->translations()?->delete();
         $banner->delete();
         Toastr::success(translate('messages.banner_deleted_successfully'));
