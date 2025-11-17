@@ -2290,6 +2290,106 @@ class Helpers
         }
     }
 
+    public static function generate_blurhash(string $dir, string $image_filename)
+    {
+        try {
+            if (!$image_filename || $image_filename === 'def.png') {
+                return null;
+            }
+
+            $disk = self::getDisk();
+            $image_path = Storage::disk($disk)->path($dir . $image_filename);
+
+            if (!file_exists($image_path)) {
+                \Illuminate\Support\Facades\Log::warning('Blurhash: Image file not found', [
+                    'path' => $image_path
+                ]);
+                return null;
+            }
+
+            // Load image using GD or Imagick
+            $image_info = getimagesize($image_path);
+            $mime_type = $image_info['mime'] ?? '';
+
+            $image_resource = null;
+            switch ($mime_type) {
+                case 'image/jpeg':
+                    $image_resource = imagecreatefromjpeg($image_path);
+                    break;
+                case 'image/png':
+                    $image_resource = imagecreatefrompng($image_path);
+                    break;
+                case 'image/gif':
+                    $image_resource = imagecreatefromgif($image_path);
+                    break;
+                case 'image/webp':
+                    $image_resource = imagecreatefromwebp($image_path);
+                    break;
+                default:
+                    \Illuminate\Support\Facades\Log::warning('Blurhash: Unsupported image type', [
+                        'mime' => $mime_type
+                    ]);
+                    return null;
+            }
+
+            if (!$image_resource) {
+                return null;
+            }
+
+            $width = imagesx($image_resource);
+            $height = imagesy($image_resource);
+
+            // Resize to max 100px for faster blurhash generation
+            $max_dimension = 100;
+            if ($width > $max_dimension || $height > $max_dimension) {
+                $ratio = min($max_dimension / $width, $max_dimension / $height);
+                $new_width = (int)($width * $ratio);
+                $new_height = (int)($height * $ratio);
+
+                $resized = imagecreatetruecolor($new_width, $new_height);
+                imagecopyresampled($resized, $image_resource, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+                imagedestroy($image_resource);
+                $image_resource = $resized;
+                $width = $new_width;
+                $height = $new_height;
+            }
+
+            // Generate pixel array for blurhash
+            $pixels = [];
+            for ($y = 0; $y < $height; $y++) {
+                $row = [];
+                for ($x = 0; $x < $width; $x++) {
+                    $rgb = imagecolorat($image_resource, $x, $y);
+                    $row[] = [
+                        ($rgb >> 16) & 0xFF, // R
+                        ($rgb >> 8) & 0xFF,  // G
+                        $rgb & 0xFF          // B
+                    ];
+                }
+                $pixels[] = $row;
+            }
+
+            imagedestroy($image_resource);
+
+            // Generate blurhash (4x3 components for good quality/size balance)
+            $blurhash = \kornrunner\Blurhash\Blurhash::encode($pixels, 4, 3);
+
+            \Illuminate\Support\Facades\Log::info('Blurhash generated successfully', [
+                'image' => $image_filename,
+                'blurhash' => $blurhash
+            ]);
+
+            return $blurhash;
+
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Blurhash generation exception', [
+                'image' => $image_filename ?? 'unknown',
+                'error' => $e->getMessage()
+            ]);
+            return null;
+        }
+    }
+
     public static function get_full_url($path,$data,$type,$placeholder = null){
         $place_holders = [
             'default' => dynamicAsset('public/assets/admin/img/100x100/no-image-found.png'),

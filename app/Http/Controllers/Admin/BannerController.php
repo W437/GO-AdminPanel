@@ -57,15 +57,27 @@ class BannerController extends Controller
         $banner->title = $request->title[array_search('default', $request->lang)];
         $banner->type = $request->banner_type;
         $banner->zone_id = $request->zone_id;
-        $banner->image = $request->hasFile('image') ? Helpers::upload(dir:'banner/',  format:'png', image: $request->file('image')) : null;
 
-        // Handle video upload and thumbnail generation
+        // Handle image upload and blurhash generation
+        if ($request->hasFile('image')) {
+            $banner->image = Helpers::upload(dir:'banner/',  format:'png', image: $request->file('image'));
+            if ($banner->image) {
+                $banner->image_blurhash = Helpers::generate_blurhash('banner/', $banner->image);
+            }
+        }
+
+        // Handle video upload, thumbnail, and blurhash generation
         if ($request->hasFile('video')) {
             $banner->video = Helpers::upload(dir:'banner/', format: $request->file('video')->getClientOriginalExtension(), image: $request->file('video'));
 
             // Generate thumbnail automatically
             if ($banner->video) {
                 $banner->video_thumbnail = Helpers::generate_video_thumbnail('banner/', $banner->video);
+
+                // Generate blurhash for thumbnail
+                if ($banner->video_thumbnail) {
+                    $banner->video_thumbnail_blurhash = Helpers::generate_blurhash('banner/', $banner->video_thumbnail);
+                }
             }
         }
 
@@ -154,9 +166,16 @@ class BannerController extends Controller
         $banner->title = $request->title[array_search('default', $request->lang)];;
         $banner->type = $request->banner_type;
         $banner->zone_id = $request->zone_id;
-        $banner->image = $request->has('image') ? Helpers::update(dir:'banner/',old_image: $banner->image, format:'png', image: $request->file('image')) : $banner->image;
 
-        // Handle video update and thumbnail regeneration
+        // Handle image update and blurhash regeneration
+        if ($request->has('image')) {
+            $banner->image = Helpers::update(dir:'banner/',old_image: $banner->image, format:'png', image: $request->file('image'));
+            if ($banner->image) {
+                $banner->image_blurhash = Helpers::generate_blurhash('banner/', $banner->image);
+            }
+        }
+
+        // Handle video update, thumbnail, and blurhash regeneration
         if ($request->has('video')) {
             // Delete old thumbnail if exists
             if ($banner->video_thumbnail) {
@@ -165,9 +184,13 @@ class BannerController extends Controller
 
             $banner->video = Helpers::update(dir:'banner/', old_image: $banner->video, format: $request->file('video')->getClientOriginalExtension(), image: $request->file('video'));
 
-            // Generate new thumbnail
+            // Generate new thumbnail and blurhash
             if ($banner->video) {
                 $banner->video_thumbnail = Helpers::generate_video_thumbnail('banner/', $banner->video);
+
+                if ($banner->video_thumbnail) {
+                    $banner->video_thumbnail_blurhash = Helpers::generate_blurhash('banner/', $banner->video_thumbnail);
+                }
             }
         }
 
