@@ -2242,6 +2242,54 @@ class Helpers
         return true;
     }
 
+    public static function generate_video_thumbnail(string $dir, string $video_filename)
+    {
+        try {
+            $disk = self::getDisk();
+            $video_path = Storage::disk($disk)->path($dir . $video_filename);
+
+            // Generate thumbnail filename
+            $thumbnail_filename = pathinfo($video_filename, PATHINFO_FILENAME) . '-thumb.jpg';
+            $thumbnail_path = Storage::disk($disk)->path($dir . $thumbnail_filename);
+
+            // Create directory if it doesn't exist
+            $thumbnail_dir = dirname($thumbnail_path);
+            if (!is_dir($thumbnail_dir)) {
+                mkdir($thumbnail_dir, 0755, true);
+            }
+
+            // Use FFmpeg to extract first frame at 0.1 seconds
+            $ffmpeg_command = sprintf(
+                'ffmpeg -i %s -ss 00:00:00.1 -vframes 1 -q:v 2 %s 2>&1',
+                escapeshellarg($video_path),
+                escapeshellarg($thumbnail_path)
+            );
+
+            exec($ffmpeg_command, $output, $return_code);
+
+            if ($return_code === 0 && file_exists($thumbnail_path)) {
+                \Illuminate\Support\Facades\Log::info('Video thumbnail generated successfully', [
+                    'video' => $video_filename,
+                    'thumbnail' => $thumbnail_filename
+                ]);
+                return $thumbnail_filename;
+            } else {
+                \Illuminate\Support\Facades\Log::error('FFmpeg thumbnail generation failed', [
+                    'video' => $video_filename,
+                    'return_code' => $return_code,
+                    'output' => implode("\n", $output)
+                ]);
+                return null;
+            }
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Video thumbnail generation exception', [
+                'video' => $video_filename ?? 'unknown',
+                'error' => $e->getMessage()
+            ]);
+            return null;
+        }
+    }
+
     public static function get_full_url($path,$data,$type,$placeholder = null){
         $place_holders = [
             'default' => dynamicAsset('public/assets/admin/img/100x100/no-image-found.png'),

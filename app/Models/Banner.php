@@ -18,7 +18,7 @@ class Banner extends Model
         'zone_id' => 'integer',
     ];
 
-    protected $appends = ['image_full_url', 'video_full_url'];
+    protected $appends = ['image_full_url', 'video_full_url', 'video_thumbnail_url'];
 
     public function getImageFullUrlAttribute(){
         $value = $this->image;
@@ -41,6 +41,22 @@ class Banner extends Model
         if (count($this->storage) > 0) {
             foreach ($this->storage as $storage) {
                 if ($storage['key'] == 'video') {
+                    return Helpers::get_full_url('banner',$value,$storage['value']);
+                }
+            }
+        }
+
+        return Helpers::get_full_url('banner',$value,'public');
+    }
+
+    public function getVideoThumbnailUrlAttribute(){
+        $value = $this->video_thumbnail;
+        if (!$value) {
+            return null;
+        }
+        if (count($this->storage) > 0) {
+            foreach ($this->storage as $storage) {
+                if ($storage['key'] == 'video_thumbnail') {
                     return Helpers::get_full_url('banner',$value,$storage['value']);
                 }
             }
@@ -118,6 +134,19 @@ class Banner extends Model
                     'data_type' => get_class($model),
                     'data_id' => $model->id,
                     'key' => 'video',
+                ], [
+                    'value' => $value,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+            if($model->isDirty('video_thumbnail')){
+                $value = Helpers::getDisk();
+
+                DB::table('storages')->updateOrInsert([
+                    'data_type' => get_class($model),
+                    'data_id' => $model->id,
+                    'key' => 'video_thumbnail',
                 ], [
                     'value' => $value,
                     'created_at' => now(),

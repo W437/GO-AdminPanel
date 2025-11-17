@@ -28,10 +28,12 @@ class BannerLogic
                         'type'=>$banner->type,
                         'image'=>$banner->image,
                         'video'=>$banner->video,
+                        'video_thumbnail'=>$banner->video_thumbnail,
                         'restaurant'=> $restaurant?Helpers::restaurant_data_formatting(data:$restaurant, multi_data:false):null,
                         'food'=>null,
                         'image_full_url'=>$banner->image_full_url,
                         'video_full_url'=>$banner->video_full_url,
+                        'video_thumbnail_url'=>$banner->video_thumbnail_url,
                     ];
                 }
             }
@@ -47,10 +49,12 @@ class BannerLogic
                         'type'=>$banner->type,
                         'image'=>$banner->image,
                         'video'=>$banner->video,
+                        'video_thumbnail'=>$banner->video_thumbnail,
                         'restaurant'=> null,
                         'food'=> $food?Helpers::product_data_formatting(data:$food, multi_data:false, trans:false, local:app()->getLocale()):null,
                         'image_full_url'=>$banner->image_full_url,
                         'video_full_url'=>$banner->video_full_url,
+                        'video_thumbnail_url'=>$banner->video_thumbnail_url,
                     ];
                 }
             }

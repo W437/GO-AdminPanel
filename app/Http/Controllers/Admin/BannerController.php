@@ -57,7 +57,17 @@ class BannerController extends Controller
         $banner->type = $request->banner_type;
         $banner->zone_id = $request->zone_id;
         $banner->image = $request->hasFile('image') ? Helpers::upload(dir:'banner/',  format:'png', image: $request->file('image')) : null;
-        $banner->video = $request->hasFile('video') ? Helpers::upload(dir:'banner/', format: $request->file('video')->getClientOriginalExtension(), image: $request->file('video')) : null;
+
+        // Handle video upload and thumbnail generation
+        if ($request->hasFile('video')) {
+            $banner->video = Helpers::upload(dir:'banner/', format: $request->file('video')->getClientOriginalExtension(), image: $request->file('video'));
+
+            // Generate thumbnail automatically
+            if ($banner->video) {
+                $banner->video_thumbnail = Helpers::generate_video_thumbnail('banner/', $banner->video);
+            }
+        }
+
         $banner->data = ($request->banner_type == 'restaurant_wise')?$request->restaurant_id:$request->item_id;
         $banner->save();
         $data=[];
@@ -136,7 +146,22 @@ class BannerController extends Controller
         $banner->type = $request->banner_type;
         $banner->zone_id = $request->zone_id;
         $banner->image = $request->has('image') ? Helpers::update(dir:'banner/',old_image: $banner->image, format:'png', image: $request->file('image')) : $banner->image;
-        $banner->video = $request->has('video') ? Helpers::update(dir:'banner/', old_image: $banner->video, format: $request->file('video')->getClientOriginalExtension(), image: $request->file('video')) : $banner->video;
+
+        // Handle video update and thumbnail regeneration
+        if ($request->has('video')) {
+            // Delete old thumbnail if exists
+            if ($banner->video_thumbnail) {
+                Helpers::check_and_delete('banner/', $banner->video_thumbnail);
+            }
+
+            $banner->video = Helpers::update(dir:'banner/', old_image: $banner->video, format: $request->file('video')->getClientOriginalExtension(), image: $request->file('video'));
+
+            // Generate new thumbnail
+            if ($banner->video) {
+                $banner->video_thumbnail = Helpers::generate_video_thumbnail('banner/', $banner->video);
+            }
+        }
+
         $banner->data = $request->banner_type=='restaurant_wise'?$request->restaurant_id:$request->item_id;
         $banner->save();
         $default_lang = str_replace('_', '-', app()->getLocale());
@@ -176,6 +201,9 @@ class BannerController extends Controller
         Helpers::check_and_delete('banner/' , $banner['image']);
         if ($banner['video']) {
             Helpers::check_and_delete('banner/' , $banner['video']);
+        }
+        if ($banner['video_thumbnail']) {
+            Helpers::check_and_delete('banner/' , $banner['video_thumbnail']);
         }
         $banner?->translations()?->delete();
         $banner->delete();
