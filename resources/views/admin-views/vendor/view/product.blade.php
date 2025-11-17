@@ -111,7 +111,7 @@
                             <span class="dropdown-header">{{ translate('messages.download_options') }}</span>
 
                             <a target="__blank" id="export-excel" class="dropdown-item"
-                                href="{{ route('admin.food.restaurant-food-export', ['type' => 'excel', 'restaurant_id' => $restaurant->id, request()->getQueryString()]) }}">
+                                href="{{ route('admin.food.restaurant-food-export.get', ['type' => 'excel', 'restaurant_id' => $restaurant->id, request()->getQueryString()]) }}">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                     src="{{ dynamicAsset('public/assets/admin') }}/svg/components/excel.svg"
                                     alt="Image Description">
@@ -119,7 +119,7 @@
                             </a>
 
                             <a target="__blank" id="export-csv" class="dropdown-item"
-                                href="{{ route('admin.food.restaurant-food-export', ['type' => 'csv', 'restaurant_id' => $restaurant->id, request()->getQueryString()]) }}">
+                                href="{{ route('admin.food.restaurant-food-export.get', ['type' => 'csv', 'restaurant_id' => $restaurant->id, request()->getQueryString()]) }}">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                     src="{{ dynamicAsset('public/assets/admin') }}/svg/components/placeholder-csv-format.svg"
                                     alt="Image Description">
