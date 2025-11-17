@@ -54,7 +54,11 @@
                                     {{$contact['email']}}
                                 </div>
                             </td>
-                            <td class="text-center" style="width: 50%;">{{Str::limit($contact['message'],120,'...') }}</td>
+                            <td class="text-center" style="width: 50%;">
+                                <div class="text-truncate" style="max-width: 400px;">
+                                    {{Str::limit($contact['message'], 80, '...') }}
+                                </div>
+                            </td>
                             <td style="width: 7%;">
                                 @if ($contact->seen == 1)
                                 <label class="badge badge-success">{{ translate('Seen') }}</label>
