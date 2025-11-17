@@ -308,7 +308,7 @@
                             <span class="card-header-icon mr-2">
                                 <i class="tio-user"></i>
                             </span>
-                            <span class="ml-1">{{ translate('Business TIN') }}</span>
+                            <span class="ml-1">{{ translate('messages.business_registration_tax_id') }}</span>
                         </h5>
                     </div>
                     <div class="card-body">
@@ -343,7 +343,7 @@
 
                                 <div class=" d-flex justify-content-start gap-1">
                                     <span class="text-custom-nowrap text-wrap"><strong class=" text-dark">
-                                            {{ translate('Taxpayer Identification Number(TIN)') }}: </strong></span>
+                                            {{ translate('messages.business_registration_tax_id') }}: </strong></span>
                                     <span class="pl-1">{{ $restaurant->tin }}</span>
                                 </div>
 
@@ -371,7 +371,7 @@
                             <span class="card-header-icon mr-2">
                                 <i class="tio-user"></i>
                             </span>
-                            <span class="ml-1">{{ translate('Business TIN') }}</span>
+                            <span class="ml-1">{{ translate('messages.business_registration_tax_id') }}</span>
                         </h5>
                     </div>
                     <div class="card-body">
@@ -411,7 +411,7 @@
                                                     <i class="tio-image" style="font-size: 34px;"></i>
                                                 @endif
                                                 <div class="file-name-wrapper">
-                                                    <span class="file-name js-filename-truncate text-limit-show" data-limit="15">{{ $restaurant->tin_certificate_image }}</span>
+                                            <span class="file-name js-filename-truncate text-limit-show" data-limit="15">{{ $restaurant->tin_certificate_image }}</span>
                                                     <span class="opacity-50">{{ translate('Click to view the file') }}</span>
                                                 </div>
                                             </div>
@@ -420,7 +420,7 @@
                                     <div class="d-flex-column address-info address-info-2 list-unstyled list-unstyled-py-3">
                                         <div class=" d-flex justify-content-start gap-1">
                                             <span class="text-custom-nowrap text-wrap"><strong class=" text-dark">
-                                                    {{ translate('Taxpayer Identification Number(TIN)') }}: </strong></span>
+                                                    {{ translate('messages.business_registration_tax_id') }}: </strong></span>
                                             <span class="pl-1">{{ $restaurant->tin }}</span>
                                         </div>
                                         <div class=" d-flex justify-content-start gap-1">
@@ -463,7 +463,7 @@
 
                                 <div class=" d-flex justify-content-start gap-1">
                                     <span class="text-custom-nowrap text-wrap"><strong class=" text-dark">
-                                            {{ translate('Taxpayer Identification Number(TIN)') }}: </strong></span>
+                                            {{ translate('messages.business_registration_tax_id') }}: </strong></span>
                                     <span class="pl-1">{{ $restaurant->tin }}</span>
                                 </div>
 

@@ -344,7 +344,7 @@
                     <div>
                         <div class="card p-20">
                             <div class="mb-20">
-                                <h3 class="mb-1">{{ translate('Business TIN') }}</h3>
+                                <h3 class="mb-1">{{ translate('messages.business_registration_tax_id') }}</h3>
                                 {{-- <p class="fz-12px mb-0">{{translate('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')}}</p> --}}
                             </div>
                             <div class="row g-3">
@@ -352,9 +352,9 @@
                                     <div class="bg--secondary rounded p-20 h-100">
                                         <div class="form-group">
                                             <label class="input-label mb-2 d-block title-clr fw-normal"
-                                                for="exampleFormControlInput1">{{ translate('Taxpayer Identification Number(TIN)') }}</label>
+                                                for="exampleFormControlInput1">{{ translate('messages.business_registration_tax_id') }}</label>
                                             <input type="text" name="tin" id="tin"
-                                                placeholder="{{ translate('Type Your Taxpayer Identification Number(TIN)') }}"
+                                                placeholder="{{ translate('messages.business_registration_tax_id_placeholder') }}"
                                                 class="form-control" value="{{ $restaurant->tin }}">
                                         </div>
                                         <div class="form-group mb-0">
@@ -371,7 +371,7 @@
                                         data-document-uploader>
                                         <div class="d-flex align-items-center gap-1 justify-content-between mb-20">
                                             <div>
-                                                <h4 class="mb-1 fz--14px">{{ translate('TIN Certificate') }}</h4>
+                                                <h4 class="mb-1 fz--14px">{{ translate('messages.business_registration_tax_id_document') }}</h4>
                                                 <p class="fz-12px mb-0">
                                                     {{ translate('pdf, doc, jpg. File size : max 2 MB') }}</p>
                                             </div>

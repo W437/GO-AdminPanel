@@ -378,18 +378,18 @@
                                 <div class="shadow-sm rounded p-lg-3 bg-clr-none">
                                     <div class="mb-20">
                                         <h4 class="m-0">
-                                            {{translate('Business TIN')}}
+                                            {{ translate('messages.business_registration_tax_id') }}
                                         </h4>
-                                        <p class="m-0 fs-12">{{ translate('Setup your Business TIN') }}</p>
+                                        <p class="m-0 fs-12">{{ translate('messages.setup_business_registration_tax_id') }}</p>
                                     </div>
                                     <div class="row g-3">
                                         <div class="col-md-7 col-xxl-8">
                                             <div class="bg-light rounded p-20 h-100">
                                                 <div class="form-group">
-                                                    <label class="input-label mb-2 d-block title-clr fw-normal" for="exampleFormControlInput1">{{translate('Taxpayer Identification Number(TIN)')}}
-                                                    <span class="input-label-secondary ps-1" data-toggle="tooltip" title="{{ translate('messages.Taxpayer Identification Number(TIN)') }}"><i class="tio-info text-muted fs-14"></i></span>
+                                                    <label class="input-label mb-2 d-block title-clr fw-normal" for="exampleFormControlInput1">{{ translate('messages.business_registration_tax_id') }}
+                                                    <span class="input-label-secondary ps-1" data-toggle="tooltip" title="{{ translate('messages.business_registration_tax_id') }}"><i class="tio-info text-muted fs-14"></i></span>
                                                 </label>
-                                                    <input type="text" id="tin" name="tin" placeholder="{{translate('Type Your Taxpayer Identification Number(TIN)')}}" class="form-control">
+                                                    <input type="text" id="tin" name="tin" placeholder="{{ translate('messages.business_registration_tax_id_placeholder') }}" class="form-control">
                                                 </div>
                                                 <div class="form-group mb-0">
                                                     <label class="input-label mb-2 d-block title-clr fw-normal" for="exampleFormControlInput1">{{translate('Expire Date')}}
@@ -403,7 +403,7 @@
                                             <div class="bg-light rounded h-100 p-20 single-document-uploaderwrap" data-document-uploader>
                                                 <div class="d-flex align-items-center gap-1 justify-content-between mb-20">
                                                     <div>
-                                                        <h4 class="mb-1 fz--14px">{{translate('TIN Certificate')}}</h4>
+                                                        <h4 class="mb-1 fz--14px">{{ translate('messages.business_registration_tax_id_document') }}</h4>
                                                         <p class="fz-12px mb-0">{{translate('pdf, doc, jpg. File size : max 2 MB')}}</p>
                                                     </div>
                                                     <div class="d-flex gap-3 align-items-center">

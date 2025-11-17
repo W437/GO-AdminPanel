@@ -482,14 +482,14 @@
 
 
                         <h5 class="card-title mb-3 text--primary text-capitalize mt-4 pt-1">
-                            {{ translate('messages.Business TIN') }}
+                            {{ translate('messages.business_registration_tax_id') }}
                         </h5>
                         <div class="row g-3">
                             <div class="col-md-6 col-xxl-7">
                                 <div class="bg-light p-3 rounded h-100">
                                     <div class="form-group">
-                                        <label class="input-label mb-2 d-block title-clr fw-normal" for="exampleFormControlInput1">{{translate('Taxpayer Identification Number(TIN)')}} </label>
-                                        <input type="text" id="tin" name="tin" placeholder="{{translate('Type Your Taxpayer Identification Number(TIN)')}}" class="form-control" >
+                                        <label class="input-label mb-2 d-block title-clr fw-normal" for="exampleFormControlInput1">{{ translate('messages.business_registration_tax_id') }} </label>
+                                        <input type="text" id="tin" name="tin" placeholder="{{ translate('messages.business_registration_tax_id_placeholder') }}" class="form-control" >
                                     </div>
                                     <div class="form-group mb-0">
                                         <label class="input-label mb-2 d-block title-clr fw-normal" for="exampleFormControlInput1">{{translate('Expire Date')}} </label>
@@ -501,7 +501,7 @@
                                 <div class="bg-light rounded p-3 h-100 single-document-uploaderwrap" data-document-uploader>
                                     <div class="d-flex align-items-center gap-1 justify-content-between mb-4 pb-2">
                                         <div>
-                                            <h4 class="mb-3 font-medium d-block fz--14px">{{translate('TIN Certificate')}}</h4>
+                                            <h4 class="mb-3 font-medium d-block fz--14px">{{ translate('messages.business_registration_tax_id_document') }}</h4>
                                             <p class="fs-12 lh-1 mb-0">{{translate('pdf, doc, jpg. File size : max 2 MB')}}</p>
                                         </div>
                                         <button type="button" class="doc_edit_btn m-0 w-30px h-30px rounded d-flex align-items-center justify-content-center px-3 icon-btn">
