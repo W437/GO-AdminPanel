@@ -8379,7 +8379,7 @@ endpoints:
         name: opening_time
         description: 'Must be a valid date in the format <code>H:i:s</code>.'
         required: true
-        example: '17:17:23'
+        example: '18:06:27'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -8408,7 +8408,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      opening_time: '17:17:23'
+      opening_time: '18:06:27'
       closing_time: '2051-12-10'
       day: architecto
     fileParameters: []

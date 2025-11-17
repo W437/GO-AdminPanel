@@ -3,7 +3,7 @@
 Complete API documentation for GO-AdminPanel - Restaurant Management System
 
 <aside>
-    <strong>Base URL</strong>: <code>http://localhost:8000</code>
+    <strong>Base URL</strong>: <code>https://api.hopa.delivery</code>
 </aside>
 
     Welcome to the GO-AdminPanel API documentation. This API provides comprehensive endpoints for managing restaurants, orders, customers, delivery personnel, and more.
