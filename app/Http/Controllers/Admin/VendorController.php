@@ -164,6 +164,15 @@ class VendorController extends Controller
         $restaurant->email = $request->email;
         $restaurant->logo = Helpers::upload( dir: 'restaurant/', format: 'png',  image: $request->file('logo'));
         $restaurant->cover_photo = Helpers::upload( dir: 'restaurant/cover/',  format:'png', image:  $request->file('cover_photo'));
+
+        // Generate blurhash for restaurant images
+        if ($restaurant->logo) {
+            $restaurant->logo_blurhash = Helpers::generate_blurhash('restaurant/', $restaurant->logo);
+        }
+        if ($restaurant->cover_photo) {
+            $restaurant->cover_photo_blurhash = Helpers::generate_blurhash('restaurant/cover/', $restaurant->cover_photo);
+        }
+
         $restaurant->address = $request->address[array_search('default', $request->lang)];
         $restaurant->latitude = $request->latitude;
         $restaurant->longitude = $request->longitude;
@@ -362,6 +371,15 @@ class VendorController extends Controller
         $restaurant->phone = $request->phone;
         $restaurant->logo = $request->has('logo') ? Helpers::update( dir:'restaurant/',old_image: $restaurant->logo, format:'png',image: $request->file('logo')) : $restaurant->logo;
         $restaurant->cover_photo = $request->has('cover_photo') ? Helpers::update( dir:'restaurant/cover/', old_image: $restaurant->cover_photo, format:'png', image:$request->file('cover_photo')) : $restaurant->cover_photo;
+
+        // Generate blurhash for updated restaurant images
+        if ($request->has('logo') && $restaurant->logo) {
+            $restaurant->logo_blurhash = Helpers::generate_blurhash('restaurant/', $restaurant->logo);
+        }
+        if ($request->has('cover_photo') && $restaurant->cover_photo) {
+            $restaurant->cover_photo_blurhash = Helpers::generate_blurhash('restaurant/cover/', $restaurant->cover_photo);
+        }
+
         $restaurant->name = $request->name[array_search('default', $request->lang)];
         $restaurant->address = $request->address[array_search('default', $request->lang)];
         $restaurant->latitude = $request->latitude;
