@@ -4771,6 +4771,7 @@ return array (
   'and_press' => 'And press',
   'android' => 'Android',
   'answer' => 'Answer',
+  'api_documentation' => 'API Documentation',
   'api_key' => 'API key',
   'api_secret' => 'API Secret',
   'app_&_web_settings' => 'App & Web Settings',

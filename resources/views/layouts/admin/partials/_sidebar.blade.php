@@ -1495,6 +1495,20 @@ $order_sch = Cache::rememberForever('order_scheduled_stats', function () {
                                 <span class="text-truncate">{{ translate('messages.business_setup') }}</span>
                             </a>
                         </li>
+
+                        <!-- API Documentation -->
+                        <li class="navbar-vertical-aside-has-menu {{ Request::is('docs*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ url('/docs') }}" target="_blank"
+                                title="{{ translate('messages.api_documentation') }}">
+                                <span class="tio-code nav-icon"></span>
+                                <span class="text-truncate">{{ translate('messages.api_documentation') }}</span>
+                                <span class="badge badge-soft-success badge-pill ml-1">
+                                    <i class="tio-open-in-new"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <!-- End API Documentation -->
+
                         @if (addon_published_status('TaxModule'))
                             <li class="navbar-vertical-aside-has-menu @yield('taxModule')">
                                 <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:">
