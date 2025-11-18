@@ -3,6 +3,7 @@
 namespace App\CentralLogics\Media;
 
 use App\CentralLogics\Helpers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -232,5 +233,21 @@ class MediaService
         }
 
         return $place_holder;
+    }
+
+    public static function updateStorageRecord($dataType, $dataId, $image)
+    {
+        $value = self::getDisk();
+        DB::table('storages')->updateOrInsert([
+            'data_type' => $dataType,
+            'data_id' => $dataId,
+            'key' => 'image',
+        ], [
+            'value' => $value,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return true;
     }
 }

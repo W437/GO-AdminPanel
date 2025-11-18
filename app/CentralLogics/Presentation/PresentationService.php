@@ -166,4 +166,28 @@ class PresentationService
             return 0;
         }
     }
+
+    public static function getImageForExport($imagePath)
+    {
+        $temporaryImage = self::getTemporaryImageForExport($imagePath);
+        $pngImage = imagecreatetruecolor(imagesx($temporaryImage), imagesy($temporaryImage));
+        imagealphablending($pngImage, false);
+        imagesavealpha($pngImage, true);
+        imagecopy($pngImage, $temporaryImage, 0, 0, 0, 0, imagesx($temporaryImage), imagesy($temporaryImage));
+
+        return $pngImage;
+    }
+
+    public static function getTemporaryImageForExport($imagePath)
+    {
+        try {
+            $imageData = file_get_contents($imagePath);
+
+            return imagecreatefromstring($imageData);
+        } catch (\Throwable $th) {
+            $imageData = file_get_contents(dynamicAsset('public/assets/admin/img/100x100/no-image-found.png'));
+
+            return imagecreatefromstring($imageData);
+        }
+    }
 }

@@ -1683,43 +1683,12 @@ class Helpers
 
 
     public static function checkCurrency($data , $type= null){
-
-        $digital_payment=self::get_business_settings('digital_payment');
-
-        if($digital_payment && $digital_payment['status']==1){
-            if($type === null){
-                if(is_array(self::getActivePaymentGateways())){
-                    foreach(self::getActivePaymentGateways() as $payment_gateway){
-
-                        if(!empty(self::getPaymentGatewaySupportedCurrencies($payment_gateway['gateway'])) && !array_key_exists($data,self::getPaymentGatewaySupportedCurrencies($payment_gateway['gateway']))    ){
-                            return  $payment_gateway['gateway'];
-                        }
-                    }
-                }
-            }
-            elseif($type == 'payment_gateway'){
-                $currency=  BusinessSetting::where('key','currency')->first()?->value;
-                    if(!empty(self::getPaymentGatewaySupportedCurrencies($data)) && !array_key_exists($currency,self::getPaymentGatewaySupportedCurrencies($data))    ){
-                        return  $data;
-                    }
-            }
-        }
-
-        return true;
-        }
+        return PaymentUtilityService::checkCurrency($data, $type);
+    }
 
     public static function updateStorageTable($dataType, $dataId, $image)
     {
-        $value = Helpers::getDisk();
-        DB::table('storages')->updateOrInsert([
-            'data_type' => $dataType,
-            'data_id' => $dataId,
-            'key' => 'image',
-        ], [
-            'value' => $value,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        return MediaService::updateStorageRecord($dataType, $dataId, $image);
     }
 
 
@@ -1748,25 +1717,13 @@ class Helpers
             return true;
         }
 
-        public static function  getImageForExport($imagePath)
+    public static function  getImageForExport($imagePath)
     {
-        $temporaryImage = self::getTemporaryImageForExport($imagePath);
-        $pngImage = imagecreatetruecolor(imagesx($temporaryImage), imagesy($temporaryImage));
-        imagealphablending($pngImage, false);
-        imagesavealpha($pngImage, true);
-        imagecopy($pngImage, $temporaryImage, 0, 0, 0, 0, imagesx($temporaryImage), imagesy($temporaryImage));
-        return $pngImage;
+        return PresentationService::getImageForExport($imagePath);
     }
     public static function  getTemporaryImageForExport($imagePath)
     {
-        try {
-            $imageData = file_get_contents($imagePath);
-            return imagecreatefromstring($imageData);
-            } catch (\Throwable $th) {
-            $imageData = file_get_contents(dynamicAsset('public/assets/admin/img/100x100/no-image-found.png'));
-            return imagecreatefromstring($imageData);
-
-        }
+        return PresentationService::getTemporaryImageForExport($imagePath);
     }
     public static function  CheckOldSubscriptionSettings()
     {

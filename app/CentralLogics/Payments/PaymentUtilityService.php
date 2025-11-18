@@ -4,11 +4,14 @@ namespace App\CentralLogics\Payments;
 
 use App\CentralLogics\Helpers;
 use App\Models\BusinessSetting;
+use App\Traits\PaymentGatewayTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class PaymentUtilityService
 {
+    use PaymentGatewayTrait;
+
     public static function offline_payment_formater($user_data)
     {
         $userInputs = [];
@@ -83,5 +86,31 @@ class PaymentUtilityService
             }
         }
         return $data;
+    }
+
+    public static function checkCurrency($data, $type = null)
+    {
+        $digital_payment = Helpers::get_business_settings('digital_payment');
+
+        if ($digital_payment && $digital_payment['status'] == 1) {
+            if ($type === null) {
+                foreach (self::getActivePaymentGateways() as $payment_gateway) {
+                    $supported = self::getPaymentGatewaySupportedCurrencies($payment_gateway['gateway']);
+
+                    if (!empty($supported) && !array_key_exists($data, $supported)) {
+                        return $payment_gateway['gateway'];
+                    }
+                }
+            } elseif ($type == 'payment_gateway') {
+                $currency = BusinessSetting::where('key', 'currency')->first()?->value;
+                $supported = self::getPaymentGatewaySupportedCurrencies($data);
+
+                if (!empty($supported) && !array_key_exists($currency, $supported)) {
+                    return $data;
+                }
+            }
+        }
+
+        return true;
     }
 }
