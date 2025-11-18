@@ -63,6 +63,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\RestaurantNotificationSetting;
 use MatanYadaev\EloquentSpatial\Objects\Point;
 use App\Models\SubscriptionBillingAndRefundHistory;
+use App\CentralLogics\Pricing\PricingService;
 use App\Traits\NotificationDataSetUpTrait;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
@@ -550,139 +551,37 @@ class Helpers
 
     public static function tax_calculate($food, $price)
     {
-        if ($food['tax_type'] == 'percent') {
-            $price_tax = ($price / 100) * $food['tax'];
-        } else {
-            $price_tax = $food['tax'];
-        }
-        return $price_tax;
+        return PricingService::tax_calculate($food, $price);
     }
 
     public static function discount_calculate($product, $price)
     {
-        if ($product['restaurant_discount']) {
-            $price_discount = ($price / 100) * $product['restaurant_discount'];
-        } else if ($product['discount_type'] == 'percent') {
-            $price_discount = ($price / 100) * $product['discount'];
-        } else {
-            $price_discount = $product['discount'];
-        }
-        return $price_discount;
+        return PricingService::discount_calculate($product, $price);
     }
 
     public static function get_product_discount($product)
     {
-        $restaurant_discount = self::get_restaurant_discount($product->restaurant);
-        if ($restaurant_discount) {
-            $discount = $restaurant_discount['discount'] . ' %';
-        } else if ($product['discount_type'] == 'percent') {
-            $discount = $product['discount'] . ' %';
-        } else {
-            $discount = self::format_currency($product['discount']);
-        }
-        return $discount;
+        return PricingService::get_product_discount($product);
     }
 
     public static function product_discount_calculate($product, $price, $restaurant)
     {
-        $restaurant_discount = self::get_restaurant_discount($restaurant);
-        if (isset($restaurant_discount)) {
-            $price_discount = ($price / 100) * $restaurant_discount['discount'];
-        } else if ($product['discount_type'] == 'percent') {
-            $price_discount = ($price / 100) * $product['discount'];
-        } else {
-            $price_discount = $product['discount'];
-        }
-        return $price_discount;
+        return PricingService::product_discount_calculate($product, $price, $restaurant);
     }
+
     public static function product_discount_calculate_data($product, $restaurant)
     {
-        $restaurant_discount = self::get_restaurant_discount($restaurant);
-        if (isset($restaurant_discount)) {
-            $price_discount = $restaurant_discount['discount'];
-            $original_discount_type='percent';
-
-        }  else {
-            $original_discount_type=  $product['discount_type'];
-            $price_discount = $product['discount'];
-        }
-          return [
-            'discount_percentage' => $price_discount,
-            'original_discount_type' => $original_discount_type,
-        ];
+        return PricingService::product_discount_calculate_data($product, $restaurant);
     }
 
     public static function food_discount_calculate($product, $price, $restaurant, $check_restaurant_discount = true)
     {
-        $discount_percentage = 0;
-        $restaurant_discount_percentage = 0;
-        $restaurant_discount = null;
-        $restaurant_price_discount = 0;
-
-        if($check_restaurant_discount){
-            $restaurant_discount = self::get_restaurant_discount($restaurant);
-            if (isset($restaurant_discount)) {
-                $restaurant_price_discount = ($price / 100) * $restaurant_discount['discount'];
-                $restaurant_discount_percentage = $restaurant_discount['discount'];
-            }
-        }
-
-        $discount_percentage = $product['discount'];
-        if ($product['discount_type'] == 'percent') {
-            $price_discount = ($price / 100) * $product['discount'];
-        } else {
-            $price_discount = $product['discount'];
-        }
-
-        $discount_percentage = isset($restaurant_discount) && $price_discount == $restaurant_price_discount ? $restaurant_discount_percentage : $discount_percentage ?? 0;
-
-        $price_discount = max($restaurant_price_discount, $price_discount);
-        $discount_type = isset($restaurant_discount) && $price_discount == $restaurant_price_discount ? 'admin' : 'discount_on_product';
-
-        return [
-            'discount_type' => $discount_type,
-            'discount_amount' => $price_discount,
-            'discount_percentage' => $discount_type == 'admin'? $restaurant_discount['discount'] : $product['discount'],
-            'original_discount_type' => $discount_type == 'admin' ? 'percent' : $product['discount_type'],
-        ];
+        return PricingService::food_discount_calculate($product, $price, $restaurant, $check_restaurant_discount);
     }
 
     public static function get_price_range($product, $discount = false)
     {
-        $lowest_price = $product->price;
-        // $highest_price = $product->price;
-
-            // foreach(json_decode($product->variations,true) as $variation){
-            //     if(isset($variation["price"])){
-            //         foreach (json_decode($product->variations) as $key => $variation) {
-            //             if ($lowest_price > $variation->price) {
-            //                 $lowest_price = round($variation->price, 2);
-            //             }
-            //             if ($highest_price < $variation->price) {
-            //                 $highest_price = round($variation->price, 2);
-            //             }
-            //         }
-            //         break;
-            //     }
-            //     else{
-            //         foreach ($variation['values'] as $value){
-            //             $value['optionPrice'];
-            //         }
-            //     }
-            // }
-
-        if ($discount) {
-            $lowest_price -= self::product_discount_calculate($product, $lowest_price, $product->restaurant);
-            // $highest_price -= self::product_discount_calculate($product, $highest_price, $product->restaurant);
-        }
-        $lowest_price = self::format_currency($lowest_price);
-        // $highest_price = self::format_currency($highest_price);
-
-        // if ($lowest_price == $highest_price) {
-        //     return $lowest_price;
-        // }
-        // return $lowest_price . ' - ' . $highest_price;
-        return $lowest_price;
+        return PricingService::get_price_range($product, $discount);
     }
 
     public static function get_restaurant_discount($restaurant)
