@@ -11,7 +11,7 @@ use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
 use App\CentralLogics\Helpers;
 use Illuminate\Support\Carbon;
-use App\CentralLogics\SMS_module;
+use App\CentralLogics\SMSModule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
@@ -92,7 +92,7 @@ class PasswordResetController extends Controller
             if ($publishedStatus == 1) {
                 $response = SmsGateway::send($value, $token);
             } else {
-                $response = SMS_module::send($value, $token);
+                $response = SMSModule::send($value, $token);
             }
 
             if ($response === 'success') {

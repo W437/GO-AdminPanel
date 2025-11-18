@@ -8,7 +8,7 @@ use App\Models\DeliveryMan;
 use Illuminate\Http\Request;
 use App\CentralLogics\Helpers;
 use Illuminate\Support\Carbon;
-use App\CentralLogics\SMS_module;
+use App\CentralLogics\SMSModule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
@@ -88,7 +88,7 @@ class DMPasswordResetController extends Controller
                 if($published_status == 1){
                     $response = SmsGateway::send($request['phone'],$token);
                 }else{
-                    $response = SMS_module::send($request['phone'],$token);
+                    $response = SMSModule::send($request['phone'],$token);
                 }
             }
 

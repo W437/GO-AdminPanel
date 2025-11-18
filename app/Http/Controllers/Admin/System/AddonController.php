@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\System;
 
 use Illuminate\Http\Request;
 use App\CentralLogics\Helpers;
-use App\CentralLogics\SMS_module;
+use App\CentralLogics\SMSModule;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;

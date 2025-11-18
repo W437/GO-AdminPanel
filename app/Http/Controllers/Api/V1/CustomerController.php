@@ -15,7 +15,7 @@ use App\CentralLogics\Helpers;
 use App\Mail\EmailVerification;
 use App\Models\BusinessSetting;
 use App\Models\CustomerAddress;
-use App\CentralLogics\SMS_module;
+use App\CentralLogics\SMSModule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\EmailVerifications;
@@ -425,7 +425,7 @@ class CustomerController extends Controller
         if ($published_status == 1) {
             $response = SmsGateway::send($phone, $otp);
         } else {
-            $response = SMS_module::send($phone, $otp);
+            $response = SMSModule::send($phone, $otp);
         }
         if (env('APP_MODE') != 'test' && $response !== 'success') {
             return ['is_success' => false,  'message' => translate('failed_to_send_otp'), 'code' => 403];

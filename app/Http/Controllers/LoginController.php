@@ -10,7 +10,7 @@ use App\CentralLogics\Helpers;
 use App\Models\VendorEmployee;
 use Illuminate\Support\Carbon;
 use App\Models\BusinessSetting;
-use App\CentralLogics\SMS_module;
+use App\CentralLogics\SMSModule;
 use App\Models\PhoneVerification;
 use Illuminate\Support\Facades\DB;
 use App\Models\SubscriptionPackage;
@@ -354,7 +354,7 @@ class LoginController extends Controller
             if($published_status == 1){
                 $response = SmsGateway::send($admin['phone'],$otp);
             }else{
-                $response = SMS_module::send($admin['phone'],$otp);
+                $response = SMSModule::send($admin['phone'],$otp);
             }
 
 
@@ -509,7 +509,7 @@ class LoginController extends Controller
                 if($published_status == 1){
                     $response = SmsGateway::send($admin['phone'],$otp);
                 }else{
-                    $response = SMS_module::send($admin['phone'],$otp);
+                    $response = SMSModule::send($admin['phone'],$otp);
                 }
             if($response != 'success')
             {

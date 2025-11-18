@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Nexmo\Laravel\Facade\Nexmo;
 use Twilio\Rest\Client;
 
-class SMS_module
+class SMSModule
 {
     public static function send($receiver, $otp,$message = null)
     {

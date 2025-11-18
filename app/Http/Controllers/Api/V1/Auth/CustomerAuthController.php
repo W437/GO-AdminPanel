@@ -13,7 +13,7 @@ use App\CentralLogics\Helpers;
 use Illuminate\Support\Carbon;
 use App\Mail\EmailVerification;
 use App\Models\BusinessSetting;
-use App\CentralLogics\SMS_module;
+use App\CentralLogics\SMSModule;
 use App\Models\WalletTransaction;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -564,7 +564,7 @@ class CustomerAuthController extends Controller
                     if($published_status == 1){
                         $response = SmsGateway::send($request['phone'],$otp);
                     }else{
-                        $response = SMS_module::send($request['phone'],$otp);
+                        $response = SMSModule::send($request['phone'],$otp);
                     }
 
                     $token = null;
@@ -1106,7 +1106,7 @@ class CustomerAuthController extends Controller
             if($published_status == 1){
                 $response = SmsGateway::send($request_data['phone'],$otp);
             }else{
-                $response = SMS_module::send($request_data['phone'],$otp);
+                $response = SMSModule::send($request_data['phone'],$otp);
             }
 
            if((env('APP_MODE') != 'test') && $response !== 'success')
