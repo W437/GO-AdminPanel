@@ -34,8 +34,8 @@ class ConfigServiceProvider extends ServiceProvider
         $mode = env('APP_MODE');
 
         try {
-            $data = BusinessSetting::where(['key' => 'mail_config'])->first();
-            $emailServices = json_decode($data['value'], true);
+            $mailSetting = BusinessSetting::where(['key' => 'mail_config'])->first();
+            $emailServices = $mailSetting && $mailSetting->value ? json_decode($mailSetting->value, true) : null;
             if ($emailServices) {
                 // Safely decrypt password with backward compatibility
                 $password = null;
