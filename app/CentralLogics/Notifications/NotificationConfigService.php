@@ -2,6 +2,7 @@
 
 namespace App\CentralLogics\Notifications;
 
+use App\Models\BusinessSetting;
 use App\Models\NotificationSetting;
 use App\Models\RestaurantNotificationSetting;
 use App\Traits\NotificationDataSetUpTrait;
@@ -64,6 +65,11 @@ class NotificationConfigService
         self::addNewAdminNotificationSetupData();
 
         return true;
+    }
+
+    public static function getMailStatus($name)
+    {
+        return BusinessSetting::where('key', $name)->first()?->value ?? 0;
     }
 
     protected static function getRestaurantNotificationSetting($restaurantId, string $key): ?RestaurantNotificationSetting

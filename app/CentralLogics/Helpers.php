@@ -10,7 +10,6 @@ use DateInterval;
 use App\Models\Log;
 use App\Models\Food;
 use App\Models\User;
-use App\Models\Zone;
 use App\Models\Order;
 use App\Library\Payer;
 use App\Models\Coupon;
@@ -20,7 +19,6 @@ use App\Models\TimeLog;
 use App\Traits\Payment;
 use App\Mail\PlaceOrder;
 use App\Models\CashBack;
-use App\Models\Category;
 use App\Models\Currency;
 use App\Models\DMReview;
 use App\Library\Receiver;
@@ -69,6 +67,7 @@ use App\CentralLogics\Finance\FinanceService;
 use App\CentralLogics\Info\InfoService;
 use App\CentralLogics\Inventory\InventoryService;
 use App\CentralLogics\Logistics\LogisticsService;
+use App\CentralLogics\Presentation\PresentationService;
 use App\CentralLogics\Payments\PaymentUtilityService;
 use App\CentralLogics\Access\AccessService;
 use GuzzleHttp\Client;
@@ -1325,10 +1324,7 @@ class Helpers
     }
 
     public static function Export_generator($datas) {
-        foreach ($datas as $data) {
-            yield $data;
-        }
-        return true;
+        return PresentationService::exportGenerator($datas);
     }
 
     public static function vehicle_extra_charge(float $distance_data) {
@@ -1337,158 +1333,79 @@ class Helpers
 
     public static function react_services_formater($data)
     {
-        $storage = [];
-        foreach ($data as $item) {
-            $storage[] = [
-                'Id' => $item['id'],
-                'Title' => $item['title'],
-                'Sub_title' => $item['sub_title'],
-                'Status' => $item['status'] == 1 ? 'active' : 'inactive',
-            ];
-        }
-        $data = $storage;
-        return $data;
+        return PresentationService::formatReactServices($data);
     }
     public static function react_react_promotional_banner_formater($data)
     {
-        $storage = [];
-        foreach ($data as $item) {
-            $storage[] = [
-                'Id' => $item['id'],
-                'Title' => $item['title'],
-                'Description' => $item['description'],
-                'Status' => $item['status'] == 1 ? 'active' : 'inactive',
-            ];
-        }
-        $data = $storage;
-        return $data;
+        return PresentationService::formatReactPromotionalBanners($data);
     }
 
     public static function get_mail_status($name)
     {
-        return BusinessSetting::where('key', $name)->first()?->value ?? 0;
+        return NotificationConfigService::getMailStatus($name);
     }
 
     public static function text_variable_data_format($value,$user_name=null,$restaurant_name=null,$delivery_man_name=null,$transaction_id=null,$order_id=null,$add_id= null)
     {
-        $data = $value;
-        if ($value) {
-            if($user_name){
-                $data =  str_replace("{userName}", $user_name, $data);
-            }
-
-            if($restaurant_name){
-                $data =  str_replace("{restaurantName}", $restaurant_name, $data);
-            }
-
-            if($delivery_man_name){
-                $data =  str_replace("{deliveryManName}", $delivery_man_name, $data);
-            }
-
-            if($transaction_id){
-                $data =  str_replace("{transactionId}", $transaction_id, $data);
-            }
-
-            if($order_id){
-                $data =  str_replace("{orderId}", $order_id, $data);
-            }
-            if($add_id){
-                $data =  str_replace("{advertisementId}", $add_id, $data);
-            }
-        }
-
-        return $data;
+        return PresentationService::formatTextVariables(
+            value: $value,
+            userName: $user_name,
+            restaurantName: $restaurant_name,
+            deliveryManName: $delivery_man_name,
+            transactionId: $transaction_id,
+            orderId: $order_id,
+            advertisementId: $add_id
+        );
     }
 
     public static function get_login_url($type){
-        $data=DataSetting::whereIn('key',['restaurant_employee_login_url','restaurant_login_url','admin_employee_login_url','admin_login_url'
-        ])->pluck('key','value')->toArray();
-
-        return array_search($type,$data);
+        return PresentationService::getLoginUrl($type);
     }
 
     public static function time_date_format($data){
-            $time=config('timeformat') ?? 'H:i';
-        return  Carbon::parse($data)->locale(app()->getLocale())->translatedFormat('d M Y ' . $time);
+        return PresentationService::formatDateTime($data);
     }
     public static function date_format($data){
-        return  Carbon::parse($data)->locale(app()->getLocale())->translatedFormat('d M Y');
+        return PresentationService::formatDate($data);
     }
     public static function time_format($data){
-            $time=config('timeformat') ?? 'H:i';
-        return  Carbon::parse($data)->locale(app()->getLocale())->translatedFormat($time);
+        return PresentationService::formatTime($data);
     }
 
 
     public static function get_zones_name($zones){
-        if(is_array($zones)){
-            $data = Zone::whereIn('id',$zones)->pluck('name')->toArray();
-        }else{
-            $data = Zone::where('id',$zones)->pluck('name')->toArray();
-        }
-        $data = implode(', ', $data);
-        return $data;
+        return PresentationService::getZonesName($zones);
     }
 
     public static function get_restaurant_name($restaurant){
-        if(is_array($restaurant)){
-            $data = Restaurant::whereIn('id',$restaurant)->pluck('name')->toArray();
-        }else{
-            $data = Restaurant::where('id',$restaurant)->pluck('name')->toArray();
-        }
-        $data = implode(', ', $data);
-        return $data;
+        return PresentationService::getRestaurantName($restaurant);
     }
 
     public static function get_category_name($id){
-        $id=Json_decode($id,true);
-        $id=data_get($id,'0.id','NA');
-        $data= Category::with('translations')->where('id',$id)->first()?->name ?? translate('messages.uncategorize');
-        return $data;
+        return PresentationService::getCategoryName($id);
     }
     public static function get_sub_category_name($id){
-        $id=Json_decode($id,true);
-        $id=data_get($id,'1.id','NA');
-        return Category::where('id',$id)->first()?->name;
+        return PresentationService::getSubCategoryName($id);
     }
 
 
     public static function get_food_variations($variations){
-        try{
-            $data=[];
-            $data2=[];
-            foreach((array)json_decode($variations,true) as $key => $choice){
-                if(data_get($choice,'values',null)){
-                    foreach( data_get($choice,'values',[]) as $k => $v){
-                        $data2[$k] =  $v['label'];
-                    // if(!next($choice['values'] )) {
-                        //     $data2[$k] =  $v['label'].";";
-                        // }
-                        }
-                        $data[$choice['name']] = $data2;
-                    }
-                }
-            return str_ireplace(['\'', '"', '{','}', '[',']', '<', '>', '?'], ' ',json_encode($data));
-            } catch (\Exception $ex) {
-                info(["line___{$ex->getLine()}",$ex->getMessage()]);
-                return 0;
-            }
+        return PresentationService::getFoodVariations($variations);
+    }
 
-        }
+    public static function get_customer_name($id){
+        return InfoService::get_customer_name($id);
+    }
+    public static function get_addon_data($id){
+        return InfoService::get_addon_data($id);
+    }
+    public static function get_business_data($name)
+    {
+        return InfoService::get_business_data($name);
+    }
 
-        public static function get_customer_name($id){
-            return InfoService::get_customer_name($id);
-        }
-        public static function get_addon_data($id){
-            return InfoService::get_addon_data($id);
-        }
-        public static function get_business_data($name)
-        {
-            return InfoService::get_business_data($name);
-        }
-
-        public static function add_or_update_translations($request, $key_data,$name_field ,$model_name, $data_id,$data_value ){
-            return InfoService::add_or_update_translations($request, $key_data,$name_field ,$model_name, $data_id,$data_value );
+    public static function add_or_update_translations($request, $key_data,$name_field ,$model_name, $data_id,$data_value ){
+        return InfoService::add_or_update_translations($request, $key_data,$name_field ,$model_name, $data_id,$data_value );
     }
 
 
