@@ -66,6 +66,7 @@ use App\Models\SubscriptionBillingAndRefundHistory;
 use App\CentralLogics\Pricing\PricingService;
 use App\CentralLogics\Config\ConfigService;
 use App\CentralLogics\Notifications\PushNotificationService;
+use App\CentralLogics\Media\MediaService;
 use App\Traits\NotificationDataSetUpTrait;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
@@ -849,258 +850,36 @@ class Helpers
 
     public static function getDisk()
     {
-        $config=self::get_business_settings('local_storage');
-
-        return isset($config)?($config==0?'s3':'public'):'public';
+        return MediaService::getDisk();
     }
 
     public static function upload(string $dir, string $format, $image = null)
     {
-        try {
-            if ($image != null) {
-                $imageName = \Carbon\Carbon::now()->toDateString() . "-" . uniqid() . "." . $format;
-                $disk = self::getDisk();
-
-                if (!Storage::disk($disk)->exists($dir)) {
-                    Storage::disk($disk)->makeDirectory($dir);
-                }
-
-                if ($disk === 's3') {
-                    // For S3 (AWS & DigitalOcean Spaces)
-                    // Don't set visibility/ACL - rely on bucket policy for public access
-                    // This works for both ACL-disabled buckets (modern AWS) and DO Spaces
-                    Storage::disk($disk)->put($dir . $imageName, file_get_contents($image->getRealPath()), 'public');
-                } else {
-                    // For local storage, use putFileAs as before
-                    Storage::disk($disk)->putFileAs($dir, $image, $imageName);
-                }
-            } else {
-                $imageName = 'def.png';
-            }
-        } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Log::error('S3 Upload Error', [
-                'disk' => self::getDisk(),
-                'dir' => $dir,
-                'error' => $e->getMessage(),
-                'code' => $e->getCode(),
-                'line' => $e->getLine()
-            ]);
-            // Fall back to default image on S3 failure
-            $imageName = 'def.png';
-        }
-        return $imageName ?? 'def.png';
+        return MediaService::upload($dir, $format, $image);
     }
 
     public static function update(string $dir, $old_image, string $format, $image = null)
     {
-        if ($image == null) {
-            return $old_image;
-        }
-        try {
-            if (Storage::disk(self::getDisk())->exists($dir . $old_image)) {
-                Storage::disk(self::getDisk())->delete($dir . $old_image);
-            }
-        } catch (\Exception $e) {
-        }
-        $imageName = Helpers::upload($dir, $format, $image);
-        return $imageName;
+        return MediaService::update($dir, $old_image, $format, $image);
     }
 
     public static function check_and_delete(string $dir, $old_image)
     {
-
-        try {
-            if (Storage::disk('public')->exists($dir . $old_image)) {
-                Storage::disk('public')->delete($dir . $old_image);
-            }
-            if (Storage::disk('s3')->exists($dir . $old_image)) {
-                Storage::disk('s3')->delete($dir . $old_image);
-            }
-        } catch (\Exception $e) {
-        }
-
-        return true;
+        return MediaService::check_and_delete($dir, $old_image);
     }
 
     public static function generate_video_thumbnail(string $dir, string $video_filename)
     {
-        try {
-            $disk = self::getDisk();
-            $video_path = Storage::disk($disk)->path($dir . $video_filename);
-
-            // Generate thumbnail filename
-            $thumbnail_filename = pathinfo($video_filename, PATHINFO_FILENAME) . '-thumb.jpg';
-            $thumbnail_path = Storage::disk($disk)->path($dir . $thumbnail_filename);
-
-            // Create directory if it doesn't exist
-            $thumbnail_dir = dirname($thumbnail_path);
-            if (!is_dir($thumbnail_dir)) {
-                mkdir($thumbnail_dir, 0755, true);
-            }
-
-            // Use FFmpeg to extract first frame at 0.1 seconds
-            $ffmpeg_command = sprintf(
-                'ffmpeg -i %s -ss 00:00:00.1 -vframes 1 -q:v 2 %s 2>&1',
-                escapeshellarg($video_path),
-                escapeshellarg($thumbnail_path)
-            );
-
-            exec($ffmpeg_command, $output, $return_code);
-
-            if ($return_code === 0 && file_exists($thumbnail_path)) {
-                \Illuminate\Support\Facades\Log::info('Video thumbnail generated successfully', [
-                    'video' => $video_filename,
-                    'thumbnail' => $thumbnail_filename
-                ]);
-                return $thumbnail_filename;
-            } else {
-                \Illuminate\Support\Facades\Log::error('FFmpeg thumbnail generation failed', [
-                    'video' => $video_filename,
-                    'return_code' => $return_code,
-                    'output' => implode("\n", $output)
-                ]);
-                return null;
-            }
-        } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Log::error('Video thumbnail generation exception', [
-                'video' => $video_filename ?? 'unknown',
-                'error' => $e->getMessage()
-            ]);
-            return null;
-        }
+        return MediaService::generate_video_thumbnail($dir, $video_filename);
     }
 
     public static function generate_blurhash(string $dir, string $image_filename, int $components_x = 5, int $components_y = 4)
     {
-        try {
-            if (!$image_filename || $image_filename === 'def.png') {
-                return null;
-            }
-
-            $disk = self::getDisk();
-
-            // For S3/remote storage, get the file contents
-            if ($disk === 's3') {
-                $file_contents = Storage::disk($disk)->get($dir . $image_filename);
-                if (!$file_contents) {
-                    \Illuminate\Support\Facades\Log::warning('Blurhash: Image not found on S3', [
-                        'path' => $dir . $image_filename
-                    ]);
-                    return null;
-                }
-                // Use Intervention Image to read from string
-                $img = \Intervention\Image\Facades\Image::make($file_contents);
-            } else {
-                // For local storage, use file path
-                $image_path = Storage::disk($disk)->path($dir . $image_filename);
-                if (!file_exists($image_path)) {
-                    \Illuminate\Support\Facades\Log::warning('Blurhash: Image file not found', [
-                        'path' => $image_path
-                    ]);
-                    return null;
-                }
-                $img = \Intervention\Image\Facades\Image::make($image_path);
-            }
-
-            // Resize to max 100px for faster generation (maintains aspect ratio)
-            $img->resize(100, 100, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-
-            $width = $img->width();
-            $height = $img->height();
-
-            // Generate pixel array with correct RGB values
-            $pixels = [];
-            for ($y = 0; $y < $height; $y++) {
-                $row = [];
-                for ($x = 0; $x < $width; $x++) {
-                    $color = $img->pickColor($x, $y);
-                    // pickColor returns [R, G, B, Alpha] - we only need RGB
-                    $row[] = [$color[0], $color[1], $color[2]];
-                }
-                $pixels[] = $row;
-            }
-
-            // Generate blurhash with custom components (5x4 for quality/size balance)
-            $blurhash = \kornrunner\Blurhash\Blurhash::encode($pixels, $components_x, $components_y);
-
-            \Illuminate\Support\Facades\Log::info('Blurhash generated successfully', [
-                'image' => $image_filename,
-                'blurhash' => $blurhash,
-                'components' => "{$components_x}x{$components_y}"
-            ]);
-
-            return $blurhash;
-
-        } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Log::error('Blurhash generation exception', [
-                'image' => $image_filename ?? 'unknown',
-                'error' => $e->getMessage()
-            ]);
-            return null;
-        }
+        return MediaService::generate_blurhash($dir, $image_filename, $components_x, $components_y);
     }
 
     public static function get_full_url($path,$data,$type,$placeholder = null){
-        $place_holders = [
-            'default' => dynamicAsset('public/assets/admin/img/100x100/no-image-found.png'),
-            'admin' => dynamicAsset('public/assets/admin/img/160x160/img1.jpg'),
-            'restaurant' => dynamicAsset('public/assets/admin/img/100x100/1.png'),
-            'business' => dynamicAsset('public/assets/admin/img/160x160/img2.jpg'),
-            'product' => dynamicAsset('public/assets/admin/img/100x100/food-default-image.png'),
-            'payment_modules/gateway_image' => dynamicAsset('public/assets/admin/img/blank3.png'),
-            'banner' => dynamicAsset('public/assets/admin/img/900x400/img1.jpg'),
-            'upload_image' => dynamicAsset('public/assets/admin/img/upload-img.png'),
-            'upload_1_1' => dynamicAsset('public/assets/admin/img/upload-3.png'),
-            'upload_placeholder' => dynamicAsset('/public/assets/admin/img/upload-placeholder.png'),
-            'email_template' => dynamicAsset('/public/assets/admin/img/blank1.png'),
-            'campaign' => dynamicAsset('public/assets/admin/img/900x400/img1.png'),
-            'category' => dynamicAsset('public/assets/admin/img/900x400/img1.jpg'),
-            'cuisine' => dynamicAsset('/public/assets/admin/img/upload-6.png'),
-            'delivery-man' => dynamicAsset('public/assets/admin/img/160x160/img1.jpg'),
-            'react_promotional_banner' => dynamicAsset('public/assets/admin/img/upload-3.png'),
-            'react_service_image' => dynamicAsset('/public/assets/admin/img/aspect-1.png'),
-            'conversation' => dynamicAsset('public/assets/admin/img/900x400/img1.png'),
-            'notification' => dynamicAsset('public/assets/admin/img/900x400/img1.png'),
-            'vendor' => dynamicAsset('public/assets/admin/img/160x160/img1.jpg'),
-            'react_restaurant_section_image' => dynamicAsset('/public/assets/admin/img/upload-3.png'),
-            'react_delivery_section_image' => dynamicAsset('/public/assets/admin/img/upload-3.png'),
-            'favicon' => dynamicAsset('public/assets/admin/img/favicon.png'),
-            'authfav' => dynamicAsset('/public/assets/admin/img/auth-fav.png'),
-            'refund' => dynamicAsset('public/assets/admin/img/160x160/img2.jpg'),
-            'order' => dynamicAsset('public/assets/admin/img/160x160/img2.jpg'),
-            'ad_cover' => dynamicAsset('public/assets/admin/img/900x400/img1.png'),
-        ];
-
-        try {
-            if ($data && $type == 's3' && Storage::disk('s3')->exists($path .'/'. $data)) {
-                return Storage::disk('s3')->url($path .'/'. $data);
-//                $awsUrl = config('filesystems.disks.s3.url');
-//                $awsBucket = config('filesystems.disks.s3.bucket');
-//                return rtrim($awsUrl, '/') . '/' . ltrim($awsBucket . '/' . $path . '/' . $data, '/');
-            }
-        } catch (\Exception $e){
-        }
-
-        if ($data && Storage::disk('public')->exists($path .'/'. $data)) {
-            return dynamicStorage('storage/app/public') . '/' . $path . '/' . $data;
-        }
-
-        if (request()->is('api/*')) {
-            return null;
-        }
-
-        if(isset($placeholder) && array_key_exists($placeholder, $place_holders)){
-            return $place_holders[$placeholder];
-        }elseif(array_key_exists($path, $place_holders)){
-            return $place_holders[$path];
-        }else{
-            return $place_holders['default'];
-        }
-
-        return 'def.png';
+        return MediaService::get_full_url($path,$data,$type,$placeholder);
     }
 
     public static function format_coordiantes($coordinates)
