@@ -118,6 +118,58 @@
                                 @endif
                                 </div>
                             </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-0 lang_form default-form">
+                                        <label for="short_description" class="form-label">{{ translate('messages.short_description')}} ({{translate('messages.default')}})</label>
+                                        <textarea type="text" rows="4" name="short_description[]" placeholder="{{ translate('messages.enter_short_description') }}" class="form-control min-height-149px" id="short_description">{{$shop?->getRawOriginal('short_description')}}</textarea>
+                                    </div>
+                                    @if ($language)
+                                    @foreach(json_decode($language) as $lang)
+                                        <?php
+                                            if(count($shop['translations'])){
+                                                $translate = [];
+                                                foreach($shop['translations'] as $t)
+                                                {
+                                                    if($t->locale == $lang && $t->key=="short_description"){
+                                                        $translate[$lang]['short_description'] = $t->value;
+                                                    }
+                                                }
+                                            }
+                                        ?>
+                                        <div class="form-group mb-0 d-none lang_form" id="{{$lang}}-form-short-desc">
+                                            <label class="input-label" for="exampleFormControlInput1">{{ translate('messages.short_description') }} ({{strtoupper($lang)}})</label>
+                                            <textarea type="text" rows="4" name="short_description[]" placeholder="{{ translate('messages.enter_short_description') }}" class="form-control min-height-149px">{{ $translate[$lang]['short_description'] ?? ''}}</textarea>
+                                        </div>
+                                    @endforeach
+                                    @endif
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-0 lang_form default-form">
+                                        <label for="description" class="form-label">{{ translate('messages.description')}} ({{translate('messages.default')}})</label>
+                                        <textarea type="text" rows="4" name="description[]" placeholder="{{ translate('messages.enter_description') }}" class="form-control min-height-149px" id="description">{{$shop?->getRawOriginal('description')}}</textarea>
+                                    </div>
+                                    @if ($language)
+                                    @foreach(json_decode($language) as $lang)
+                                        <?php
+                                            if(count($shop['translations'])){
+                                                $translate = [];
+                                                foreach($shop['translations'] as $t)
+                                                {
+                                                    if($t->locale == $lang && $t->key=="description"){
+                                                        $translate[$lang]['description'] = $t->value;
+                                                    }
+                                                }
+                                            }
+                                        ?>
+                                        <div class="form-group mb-0 d-none lang_form" id="{{$lang}}-form-desc">
+                                            <label class="input-label" for="exampleFormControlInput1">{{ translate('messages.description') }} ({{strtoupper($lang)}})</label>
+                                            <textarea type="text" rows="4" name="description[]" placeholder="{{ translate('messages.enter_description') }}" class="form-control min-height-149px">{{ $translate[$lang]['description'] ?? ''}}</textarea>
+                                        </div>
+                                    @endforeach
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

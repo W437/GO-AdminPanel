@@ -4,7 +4,7 @@
 - > **Golden Rule for All Coding Agents**  
 > Always treat `database/schema/mysql-schema.sql` as the single source of truth for the live database. 
 
-- When creating migrations, always read @MIGRATION_VALIDATION_PIPELINE to validate locally, then after user pushes and the latest version is deployed, agent SSH's in and migrates in production.
+- After database schema changes (migration file), always read @MIGRATION_VALIDATION_PIPELINE to validate the migration locally, then after user pushes and the latest version is deployed, agent SSH's in and migrates in production.
 
 - Production DB name: go-adminpanel
 

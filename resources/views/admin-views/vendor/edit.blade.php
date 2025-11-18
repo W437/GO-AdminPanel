@@ -71,6 +71,22 @@
                                         <textarea id="address" name="address[]" class="form-control h-70px"
                                             placeholder="{{ translate('messages.Ex:_House#94,_Road#8,_Abc_City') }} ">{{ $restaurant?->getRawOriginal('address') }}</textarea>
                                     </div>
+
+                                    <div>
+                                        <label class="input-label"
+                                            for="short_description">{{ translate('messages.short_description') }}
+                                            ({{ translate('messages.default') }})</label>
+                                        <textarea id="short_description" name="short_description[]" class="form-control h-70px"
+                                            placeholder="{{ translate('messages.enter_short_description') }}">{{ $restaurant?->getRawOriginal('short_description') }}</textarea>
+                                    </div>
+
+                                    <div>
+                                        <label class="input-label"
+                                            for="description">{{ translate('messages.description') }}
+                                            ({{ translate('messages.default') }})</label>
+                                        <textarea id="description" name="description[]" class="form-control h-120px"
+                                            placeholder="{{ translate('messages.enter_description') }}">{{ $restaurant?->getRawOriginal('description') }}</textarea>
+                                    </div>
                                 </div>
                                 @if ($language)
                                     @foreach (json_decode($language) as $lang)
@@ -83,6 +99,12 @@
                                                 }
                                                 if ($t->locale == $lang && $t->key == 'address') {
                                                     $translate[$lang]['address'] = $t->value;
+                                                }
+                                                if ($t->locale == $lang && $t->key == 'description') {
+                                                    $translate[$lang]['description'] = $t->value;
+                                                }
+                                                if ($t->locale == $lang && $t->key == 'short_description') {
+                                                    $translate[$lang]['short_description'] = $t->value;
                                                 }
                                             }
                                         }
@@ -106,6 +128,22 @@
                                                     ({{ strtoupper($lang) }})</label>
                                                 <textarea id="address{{ $lang }}" name="address[]" class="form-control h-70px"
                                                     placeholder="{{ translate('messages.Ex:_House#94,_Road#8,_Abc_City') }} "> {{ $translate[$lang]['address'] ?? '' }}</textarea>
+                                            </div>
+
+                                            <div>
+                                                <label class="input-label"
+                                                    for="short_description{{ $lang }}">{{ translate('messages.short_description') }}
+                                                    ({{ strtoupper($lang) }})</label>
+                                                <textarea id="short_description{{ $lang }}" name="short_description[]" class="form-control h-70px"
+                                                    placeholder="{{ translate('messages.enter_short_description') }}">{{ $translate[$lang]['short_description'] ?? '' }}</textarea>
+                                            </div>
+
+                                            <div>
+                                                <label class="input-label"
+                                                    for="description{{ $lang }}">{{ translate('messages.description') }}
+                                                    ({{ strtoupper($lang) }})</label>
+                                                <textarea id="description{{ $lang }}" name="description[]" class="form-control h-120px"
+                                                    placeholder="{{ translate('messages.enter_description') }}">{{ $translate[$lang]['description'] ?? '' }}</textarea>
                                             </div>
                                         </div>
                                     @endforeach

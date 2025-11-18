@@ -30,6 +30,8 @@ class RestaurantController extends Controller
         $request->validate([
             'name' => 'required|max:191',
             'address' => 'nullable|max:1000',
+            'description' => 'nullable|max:5000',
+            'short_description' => 'nullable|max:1000',
             'contact' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:9|max:20|unique:restaurants,phone,'.Helpers::get_restaurant_id(),
             'image' => 'nullable|max:2048',
             'photo' => 'nullable|max:2048',
@@ -50,6 +52,8 @@ class RestaurantController extends Controller
         $shop = Restaurant::findOrFail(Helpers::get_restaurant_id());
         $shop->name = $request->name[array_search('default', $request->lang)];
         $shop->address = $request->address[array_search('default', $request->lang)];
+        $shop->description = $request->description ? $request->description[array_search('default', $request->lang)] : null;
+        $shop->short_description = $request->short_description ? $request->short_description[array_search('default', $request->lang)] : null;
         $shop->phone = $request->contact;
         $shop->logo = $request->has('image') ? Helpers::update(dir: 'restaurant/',old_image:  $shop->logo ,format: 'png', image: $request->file('image')) : $shop->logo;
         $shop->cover_photo = $request->has('photo') ? Helpers::update(dir: 'restaurant/cover/',old_image:  $shop->cover_photo,  format:'png',image:  $request->file('photo')) : $shop->cover_photo;
@@ -103,6 +107,58 @@ class RestaurantController extends Controller
                         'key'                   => 'address'],
                         ['value'                 => $request->address[$index]]
                     );
+                }
+            }
+            // Handle description translations
+            if(isset($request->description) && $request->description[$index]) {
+                if($default_lang == $key && !($request->description[$index])){
+                    if ($key != 'default') {
+                        Translation::updateOrInsert(
+                            [
+                                'translationable_type' => 'App\Models\Restaurant',
+                                'translationable_id' => $shop->id,
+                                'locale' => $key,
+                                'key' => 'description'
+                            ],
+                            ['value' => $shop->description]
+                        );
+                    }
+                }else{
+                    if ($request->description[$index] && $key != 'default') {
+                        Translation::updateOrInsert(
+                            ['translationable_type'  => 'App\Models\Restaurant',
+                            'translationable_id'    => $shop->id,
+                            'locale'                => $key,
+                            'key'                   => 'description'],
+                            ['value'                 => $request->description[$index]]
+                        );
+                    }
+                }
+            }
+            // Handle short_description translations
+            if(isset($request->short_description) && $request->short_description[$index]) {
+                if($default_lang == $key && !($request->short_description[$index])){
+                    if ($key != 'default') {
+                        Translation::updateOrInsert(
+                            [
+                                'translationable_type' => 'App\Models\Restaurant',
+                                'translationable_id' => $shop->id,
+                                'locale' => $key,
+                                'key' => 'short_description'
+                            ],
+                            ['value' => $shop->short_description]
+                        );
+                    }
+                }else{
+                    if ($request->short_description[$index] && $key != 'default') {
+                        Translation::updateOrInsert(
+                            ['translationable_type'  => 'App\Models\Restaurant',
+                            'translationable_id'    => $shop->id,
+                            'locale'                => $key,
+                            'key'                   => 'short_description'],
+                            ['value'                 => $request->short_description[$index]]
+                        );
+                    }
                 }
             }
         }

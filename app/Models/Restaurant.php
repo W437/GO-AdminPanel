@@ -555,6 +555,30 @@ class Restaurant extends Model
         return $value;
     }
 
+    public function getDescriptionAttribute($value){
+        if (count($this->translations) > 0) {
+            foreach ($this->translations as $translation) {
+                if ($translation['key'] == 'description') {
+                    return $translation['value'];
+                }
+            }
+        }
+
+        return $value;
+    }
+
+    public function getShortDescriptionAttribute($value){
+        if (count($this->translations) > 0) {
+            foreach ($this->translations as $translation) {
+                if ($translation['key'] == 'short_description') {
+                    return $translation['value'];
+                }
+            }
+        }
+
+        return $value;
+    }
+
 
 
     protected static function booted()

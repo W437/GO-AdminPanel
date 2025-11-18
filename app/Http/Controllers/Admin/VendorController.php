@@ -290,6 +290,8 @@ class VendorController extends Controller
             'logo' => 'nullable|max:2048',
             'cover_photo' => 'nullable|max:2048',
             'delivery_time_type'=>'required',
+            'description' => 'nullable|max:5000',
+            'short_description' => 'nullable|max:1000',
         ], [
             'f_name.required' => translate('messages.first_name_is_required'),
             'password.min_length' => translate('The password must be at least :min characters long'),
@@ -382,6 +384,8 @@ class VendorController extends Controller
 
         $restaurant->name = $request->name[array_search('default', $request->lang)];
         $restaurant->address = $request->address[array_search('default', $request->lang)];
+        $restaurant->description = $request->description ? $request->description[array_search('default', $request->lang)] : null;
+        $restaurant->short_description = $request->short_description ? $request->short_description[array_search('default', $request->lang)] : null;
         $restaurant->latitude = $request->latitude;
         $restaurant->longitude = $request->longitude;
         $restaurant->zone_id = $request->zone_id;
@@ -444,6 +448,58 @@ class VendorController extends Controller
                             'key'                   => 'address'],
                         ['value'                 => $request->address[$index]]
                     );
+                }
+            }
+            // Handle description translations
+            if(isset($request->description) && $request->description[$index]) {
+                if($default_lang == $key && !($request->description[$index])){
+                    if ($key != 'default') {
+                        Translation::updateOrInsert(
+                            [
+                                'translationable_type' => 'App\Models\Restaurant',
+                                'translationable_id' => $restaurant->id,
+                                'locale' => $key,
+                                'key' => 'description'
+                            ],
+                            ['value' => $restaurant->description]
+                        );
+                    }
+                }else{
+                    if ($request->description[$index] && $key != 'default') {
+                        Translation::updateOrInsert(
+                            ['translationable_type'  => 'App\Models\Restaurant',
+                            'translationable_id'    => $restaurant->id,
+                            'locale'                => $key,
+                            'key'                   => 'description'],
+                            ['value'                 => $request->description[$index]]
+                        );
+                    }
+                }
+            }
+            // Handle short_description translations
+            if(isset($request->short_description) && $request->short_description[$index]) {
+                if($default_lang == $key && !($request->short_description[$index])){
+                    if ($key != 'default') {
+                        Translation::updateOrInsert(
+                            [
+                                'translationable_type' => 'App\Models\Restaurant',
+                                'translationable_id' => $restaurant->id,
+                                'locale' => $key,
+                                'key' => 'short_description'
+                            ],
+                            ['value' => $restaurant->short_description]
+                        );
+                    }
+                }else{
+                    if ($request->short_description[$index] && $key != 'default') {
+                        Translation::updateOrInsert(
+                            ['translationable_type'  => 'App\Models\Restaurant',
+                            'translationable_id'    => $restaurant->id,
+                            'locale'                => $key,
+                            'key'                   => 'short_description'],
+                            ['value'                 => $request->short_description[$index]]
+                        );
+                    }
                 }
             }
         }
