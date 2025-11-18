@@ -174,11 +174,20 @@ class MediaService
     {
         $host = env('APP_URL', config('app.url'));
 
-        $local = [
-            'logo' => 'storage/restaurant/' . $data['logo'],
-            'cover_photo' => 'storage/restaurant/' . $data['cover_photo'],
-            'image' => 'storage/product/' . $data['image'],
-        ];
+        // Handle case where $data is a string instead of an array
+        if (is_string($data)) {
+            $local = [
+                'logo' => 'storage/restaurant/' . $data,
+                'cover_photo' => 'storage/restaurant/' . $data,
+                'image' => 'storage/product/' . $data,
+            ];
+        } else {
+            $local = [
+                'logo' => 'storage/restaurant/' . ($data['logo'] ?? ''),
+                'cover_photo' => 'storage/restaurant/' . ($data['cover_photo'] ?? ''),
+                'image' => 'storage/product/' . ($data['image'] ?? ''),
+            ];
+        }
 
         $host = str_replace('index.php', '', $host);
 
