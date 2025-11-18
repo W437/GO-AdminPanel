@@ -11,7 +11,6 @@ use App\Models\Log;
 use App\Models\Food;
 use App\Models\User;
 use App\Models\Order;
-use App\Library\Payer;
 use App\Models\Coupon;
 use App\Models\Review;
 use App\Models\Expense;
@@ -21,7 +20,6 @@ use App\Mail\PlaceOrder;
 use App\Models\CashBack;
 use App\Models\Currency;
 use App\Models\DMReview;
-use App\Library\Receiver;
 use App\Models\Restaurant;
 use App\Models\VisitorLog;
 use App\Models\DataSetting;
@@ -38,7 +36,6 @@ use App\Models\WalletTransaction;
 use Illuminate\Support\Facades\DB;
 use App\Mail\OrderVerificationMail;
 use App\Models\NotificationMessage;
-use App\Models\SubscriptionPackage;
 use App\Traits\PaymentGatewayTrait;
 use Illuminate\Support\Facades\App;
 use App\Mail\SubscriptionSuccessful;
@@ -49,7 +46,6 @@ use App\Mail\SubscriptionRenewOrShift;
 use App\Models\RestaurantSubscription;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
-use App\Library\Payment as PaymentInfo;
 use App\Models\SubscriptionTransaction;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cache;
@@ -59,6 +55,7 @@ use App\CentralLogics\Pricing\PricingService;
 use App\CentralLogics\Config\ConfigService;
 use App\CentralLogics\Notifications\PushNotificationService;
 use App\CentralLogics\Notifications\NotificationConfigService;
+use App\CentralLogics\Notifications\NotificationUtilityService;
 use App\CentralLogics\Media\MediaService;
 use App\CentralLogics\Orders\OrderNotificationService;
 use App\CentralLogics\Subscription\SubscriptionService;
@@ -1693,29 +1690,8 @@ class Helpers
 
 
     public static function add_fund_push_notification($user_id, $amount = ''){
-            $customer_push_notification_status=self::getNotificationStatusData('customer','customer_add_fund_to_wallet');
-            $user= User::where('id',$user_id)->first();
-            if ($customer_push_notification_status?->push_notification_status  == 'active' && $user?->cm_firebase_token) {
-                $data = [
-                    'title' => translate('messages.Fund_added'),
-                    'description' => translate('messages.Fund_added_to_your_wallet'),
-                    'order_id' => '',
-                    'image' => '',
-                    'type' => 'add_fund',
-                    'order_status' =>'',
-                    'amount' => $amount,
-                ];
-                self::send_push_notif_to_device($user?->cm_firebase_token, $data);
-
-                DB::table('user_notifications')->insert([
-                    'data' => json_encode($data),
-                    'user_id' => $user_id,
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ]);
-            }
-            return true;
-        }
+        return NotificationUtilityService::addFundPushNotification($user_id, $amount);
+    }
 
     public static function  getImageForExport($imagePath)
     {
@@ -1727,38 +1703,7 @@ class Helpers
     }
     public static function  CheckOldSubscriptionSettings()
     {
-        if(BusinessSetting::where(['key' => 'free_trial_period'])->exists()){
-            $old_trial_data = BusinessSetting::where(['key' => 'free_trial_period'])->first();
-            $data = json_decode($old_trial_data?->value,true);
-                if(isset($data['status']) && $data['status'] == 1){
-                    $type= data_get($data,'type');
-
-                        if($type == 'year'){
-                            $free_trial_period = data_get($data,'data') * 365;
-                        } else if($type == 'month'){
-                            $free_trial_period = data_get($data,'data') * 30;
-                        } else{
-                            $free_trial_period = data_get($data,'data',1);
-                        }
-
-                    $key=['subscription_free_trial_days','subscription_free_trial_type','subscription_free_trial_status'];
-                    foreach ($key as $value) {
-                            $status = BusinessSetting::firstOrNew([
-                                'key' => $value
-                            ]);
-                            if( $value == 'subscription_free_trial_days'){
-                                $status->value = $free_trial_period;
-                            } elseif($value == 'subscription_free_trial_type'){
-                                $status->value =$type ?? 'day';
-                            } elseif($value == 'subscription_free_trial_status'){
-                                $status->value =$data['status'];
-                            }
-                            $status->save();
-                    }
-                }
-
-                $old_trial_data?->delete();
-            }
+        return SubscriptionService::checkOldSubscriptionSettings();
     }
 
     public static function calculateSubscriptionRefundAmount($restaurant,$return_data=null){
@@ -1770,39 +1715,7 @@ class Helpers
     }
 
     public static function subscriptionPayment($restaurant_id,$package_id,$payment_gateway,$url,$pending_bill=0,$type='payment',$payment_platform='web'){
-        $restaurant = Restaurant::where('id',$restaurant_id)->first();
-        $package = SubscriptionPackage::where('id',$package_id)->first();
-        $type == null ? 'payment' :$type ;
-
-        $payer = new Payer(
-            $restaurant->name ,
-            $restaurant->email,
-            $restaurant->phone,
-            ''
-        );
-        $restaurant_logo= BusinessSetting::where(['key' => 'logo'])->first();
-        $additional_data = [
-            'business_name' => BusinessSetting::where(['key'=>'business_name'])->first()?->value,
-            'business_logo' => \App\CentralLogics\Helpers::get_full_url('business',$restaurant_logo?->value,$restaurant_logo?->storage[0]?->value ?? 'public')
-        ];
-        $payment_info = new PaymentInfo(
-            success_hook: 'sub_success',
-            failure_hook: 'sub_fail',
-            currency_code: Helpers::currency_code(),
-            payment_method: $payment_gateway,
-            payment_platform: $payment_platform,
-            payer_id: $restaurant->id,
-            receiver_id:  $package->id,
-            additional_data: $additional_data,
-            payment_amount: $package->price + $pending_bill,
-            external_redirect_link: $url,
-            attribute: 'restaurant_subscription_'.$type,
-            attribute_id: $package->id,
-        );
-        $receiver_info = new Receiver('Admin','example.png');
-        $redirect_link = Payment::generate_link($payer, $payment_info, $receiver_info);
-
-        return $redirect_link;
+        return SubscriptionService::subscriptionPayment($restaurant_id,$package_id,$payment_gateway,$url,$pending_bill,$type,$payment_platform);
     }
 
     public static function getSettingsDataFromConfig($settings,$relations=[])

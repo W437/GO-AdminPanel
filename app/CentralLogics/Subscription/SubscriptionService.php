@@ -4,6 +4,9 @@ namespace App\CentralLogics\Subscription;
 
 use App\CentralLogics\Helpers;
 use App\CentralLogics\OrderLogic;
+use App\Library\Payer;
+use App\Library\Payment as PaymentInfo;
+use App\Library\Receiver;
 use App\Mail\SubscriptionRenewOrShift;
 use App\Mail\SubscriptionSuccessful;
 use App\Models\BusinessSetting;
@@ -15,6 +18,7 @@ use App\Models\RestaurantWallet;
 use App\Models\SubscriptionBillingAndRefundHistory;
 use App\Models\SubscriptionPackage;
 use App\Models\SubscriptionTransaction;
+use App\Traits\Payment;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -22,6 +26,8 @@ use Illuminate\Support\Str;
 
 class SubscriptionService
 {
+    use Payment;
+
     public static function subscription_check()
     {
         $business_model = Helpers::getSettingsDataFromConfig(settings: 'business_model');
@@ -352,5 +358,80 @@ class SubscriptionService
             }
         }
         return true;
+    }
+
+    public static function checkOldSubscriptionSettings()
+    {
+        if (BusinessSetting::where(['key' => 'free_trial_period'])->exists()) {
+            $old_trial_data = BusinessSetting::where(['key' => 'free_trial_period'])->first();
+            $data = json_decode($old_trial_data?->value, true);
+            if (isset($data['status']) && $data['status'] == 1) {
+                $type = data_get($data, 'type');
+
+                if ($type == 'year') {
+                    $free_trial_period = data_get($data, 'data') * 365;
+                } elseif ($type == 'month') {
+                    $free_trial_period = data_get($data, 'data') * 30;
+                } else {
+                    $free_trial_period = data_get($data, 'data', 1);
+                }
+
+                $keys = ['subscription_free_trial_days', 'subscription_free_trial_type', 'subscription_free_trial_status'];
+                foreach ($keys as $value) {
+                    $status = BusinessSetting::firstOrNew([
+                        'key' => $value
+                    ]);
+                    if ($value == 'subscription_free_trial_days') {
+                        $status->value = $free_trial_period;
+                    } elseif ($value == 'subscription_free_trial_type') {
+                        $status->value = $type ?? 'day';
+                    } elseif ($value == 'subscription_free_trial_status') {
+                        $status->value = $data['status'];
+                    }
+                    $status->save();
+                }
+            }
+
+            $old_trial_data?->delete();
+        }
+
+        return true;
+    }
+
+    public static function subscriptionPayment($restaurant_id, $package_id, $payment_gateway, $url, $pending_bill = 0, $type = 'payment', $payment_platform = 'web')
+    {
+        $restaurant = Restaurant::where('id', $restaurant_id)->first();
+        $package = SubscriptionPackage::where('id', $package_id)->first();
+        $type = $type ?? 'payment';
+
+        $payer = new Payer(
+            $restaurant->name,
+            $restaurant->email,
+            $restaurant->phone,
+            ''
+        );
+        $restaurant_logo = BusinessSetting::where(['key' => 'logo'])->first();
+        $additional_data = [
+            'business_name' => BusinessSetting::where(['key' => 'business_name'])->first()?->value,
+            'business_logo' => Helpers::get_full_url('business', $restaurant_logo?->value, $restaurant_logo?->storage[0]?->value ?? 'public')
+        ];
+        $payment_info = new PaymentInfo(
+            success_hook: 'sub_success',
+            failure_hook: 'sub_fail',
+            currency_code: Helpers::currency_code(),
+            payment_method: $payment_gateway,
+            payment_platform: $payment_platform,
+            payer_id: $restaurant->id,
+            receiver_id: $package->id,
+            additional_data: $additional_data,
+            payment_amount: $package->price + $pending_bill,
+            external_redirect_link: $url,
+            attribute: 'restaurant_subscription_' . $type,
+            attribute_id: $package->id,
+        );
+        $receiver_info = new Receiver('Admin', 'example.png');
+        $redirect_link = Payment::generate_link($payer, $payment_info, $receiver_info);
+
+        return $redirect_link;
     }
 }
