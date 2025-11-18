@@ -837,6 +837,10 @@ class Helpers
                 $item['schedule_advance_dine_in_booking_duration'] =   (int)  $item?->restaurant_config?->schedule_advance_dine_in_booking_duration;
                 $item['schedule_advance_dine_in_booking_duration_time_format'] =   $item?->restaurant_config?->schedule_advance_dine_in_booking_duration_time_format ?? 'min';
 
+                // Include description fields (will use translated values based on app locale)
+                $item['description'] = $item->description;
+                $item['short_description'] = $item->short_description;
+
                 $item['characteristics'] = $item->characteristics()->pluck('characteristic')->toArray();
                 // $item['tags'] = $item->tags()->pluck('tag')->toArray();
 
