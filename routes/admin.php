@@ -112,6 +112,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::get('{type}/add-new', 'CampaignController@index')->name('add-new');
             Route::post('store/basic', 'CampaignController@storeBasic')->name('store-basic');
             Route::post('store/item', 'CampaignController@storeItem')->name('store-item');
+            Route::get('get-zone-foods', 'CampaignController@getZoneFoods')->name('get-zone-foods');
             Route::get('{type}/edit/{campaign}', 'CampaignController@edit')->name('edit');
             Route::get('{type}/view/{campaign}', 'CampaignController@view')->name('view');
             Route::post('basic/update/{campaign}', 'CampaignController@update')->name('update-basic');

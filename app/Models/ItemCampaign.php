@@ -16,21 +16,14 @@ class ItemCampaign extends Model
     use HasFactory;
 
     protected $casts = [
-        'tax' => 'float',
-        'price' => 'float',
-        'discount' => 'float',
         'status' => 'integer',
-        'restaurant_id' => 'integer',
-        'category_id' => 'integer',
-        'veg' => 'integer',
+        'zone_id' => 'integer',
         'created_at'=>'datetime',
         'start_date'=>'datetime',
         'updated_at'=>'datetime',
         'end_date'=>'datetime',
         'start_time'=>'datetime',
         'end_time'=>'datetime',
-        'maximum_cart_quantity' => 'integer',
-
     ];
     protected $appends = ['image_full_url'];
 
@@ -80,6 +73,17 @@ class ItemCampaign extends Model
     public function translations()
     {
         return $this->morphMany(Translation::class, 'translationable');
+    }
+
+    public function zone()
+    {
+        return $this->belongsTo(Zone::class);
+    }
+
+    public function foods()
+    {
+        return $this->belongsToMany(Food::class, 'campaign_food', 'campaign_id', 'food_id')
+            ->withTimestamps();
     }
 
     public function restaurant()

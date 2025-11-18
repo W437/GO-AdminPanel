@@ -147,6 +147,12 @@ class Food extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    public function campaigns()
+    {
+        return $this->belongsToMany(ItemCampaign::class, 'campaign_food', 'food_id', 'campaign_id')
+            ->withTimestamps();
+    }
+
     public function orders()
     {
         return $this->hasMany(OrderDetail::class);

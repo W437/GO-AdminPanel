@@ -155,287 +155,205 @@ class CampaignController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:191|unique:item_campaigns',
-            'image' => 'required|max:2048',
-            'category_id' => 'required',
-            'price' => 'required|numeric|between:0.01,999999999999.99',
-            'restaurant_id' => 'required',
+            'image' => 'nullable|max:2048',
+            'zone_id' => 'required|exists:zones,id',
             'start_time' => 'required',
             'end_time' => 'required',
-            'start_date' => 'required',
-            'veg' => 'required',
-            'description'=>'max:1000',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'food_ids' => 'required|array|min:1',
+            'food_ids.*' => 'exists:food,id',
+            'description' => 'nullable|max:1000',
             'title.0' => 'required',
-            'description.0' => 'required',
         ], [
-            'category_id.required' => translate('messages.select_category'),
-            'title.0.required'=>translate('default_title_is_required'),
-            'description.0.required'=>translate('default_description_is_required'),
+            'zone_id.required' => translate('messages.zone_is_required'),
+            'zone_id.exists' => translate('messages.zone_not_found'),
+            'food_ids.required' => translate('messages.please_select_at_least_one_food_item'),
+            'food_ids.min' => translate('messages.please_select_at_least_one_food_item'),
+            'title.0.required' => translate('default_title_is_required'),
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors' => Helpers::error_processor($validator)]);
         }
 
-        if ($request['discount_type'] == 'percent') {
-            $dis = ($request['price'] / 100) * $request['discount'];
-        } else {
-            $dis = $request['discount'];
-        }
+        // Verify all selected food items belong to restaurants in the selected zone
+        $invalidFoods = \App\Models\Food::whereIn('id', $request->food_ids)
+            ->whereHas('restaurant', function($q) use ($request) {
+                $q->where('zone_id', '!=', $request->zone_id);
+            })
+            ->count();
 
-        if ($request['price'] <= $dis) {
-            $validator->getMessageBag()->add('unit_price', translate('messages.discount_can_not_be_more_than_or_equal'));
-        }
-
-        if ($request['price'] <= $dis || $validator->fails()) {
+        if ($invalidFoods > 0) {
+            $validator->getMessageBag()->add('food_ids', translate('messages.some_food_items_dont_belong_to_selected_zone'));
             return response()->json(['errors' => Helpers::error_processor($validator)]);
         }
 
         $campaign = new ItemCampaign;
 
-        $category = [];
-        if ($request->category_id != null) {
-            array_push($category, [
-                'id' => $request->category_id,
-                'position' => 1,
-            ]);
-        }
-        if ($request->sub_category_id != null) {
-            array_push($category, [
-                'id' => $request->sub_category_id,
-                'position' => 2,
-            ]);
-        }
-        if ($request->sub_sub_category_id != null) {
-            array_push($category, [
-                'id' => $request->sub_sub_category_id,
-                'position' => 3,
-            ]);
-        }
-
-        $campaign->category_ids = json_encode($category);
-
-        $campaign->choice_options = json_encode([]);
-        $variations = [];
-        if($request?->options)
-        {
-            foreach(array_values($request->options) as $key=>$option)
-            {
-
-                $temp_variation['name']= $option['name'];
-                $temp_variation['type']= $option['type'];
-                $temp_variation['min']= $option['min'] ?? 0;
-                $temp_variation['max']= $option['max'] ?? 0;
-                if($option['min'] > 0 &&  $option['min'] > $option['max']  ){
-                    $validator->getMessageBag()->add('name', translate('messages.minimum_value_can_not_be_greater_then_maximum_value'));
-                    return response()->json(['errors' => Helpers::error_processor($validator)]);
-                }
-                if(!isset($option['values'])){
-                    $validator->getMessageBag()->add('name', translate('messages.please_add_options_for').$option['name']);
-                    return response()->json(['errors' => Helpers::error_processor($validator)]);
-                }
-                if($option['max'] > count($option['values'])  ){
-                    $validator->getMessageBag()->add('name', translate('messages.please_add_more_options_or_change_the_max_value_for').$option['name']);
-                    return response()->json(['errors' => Helpers::error_processor($validator)]);
-                }
-                $temp_variation['required']= $option['required']??'off';
-
-                $temp_value = [];
-                foreach(array_values($option['values']) as $value)
-                {
-                    if(isset($value['label'])){
-                        $temp_option['label'] = $value['label'];
-                    }
-                    $temp_option['optionPrice'] = $value['optionPrice'];
-                    array_push($temp_value,$temp_option);
-                }
-                $temp_variation['values']= $temp_value;
-                array_push($variations,$temp_variation);
-            }
-        }
-
-        $slug = Str::slug($request->title[array_search('default', $request->lang)]);
-        $campaign->slug = $campaign->slug? $campaign->slug :"{$slug}{$campaign->id}";
-
         $campaign->admin_id = auth('admin')->id();
+        $campaign->zone_id = $request->zone_id;
         $campaign->title = $request->title[array_search('default', $request->lang)];
-        $campaign->description = $request->description[array_search('default', $request->lang)];
-        $campaign->image = Helpers::upload(dir: 'campaign/', format: 'png', image: $request->file('image'));
+        $campaign->description = $request->description[array_search('default', $request->lang)] ?? null;
+
+        if ($request->hasFile('image')) {
+            $campaign->image = Helpers::upload(dir: 'campaign/', format: 'png', image: $request->file('image'));
+        }
+
         $campaign->start_date = $request->start_date;
         $campaign->end_date = $request->end_date;
         $campaign->start_time = $request->start_time;
         $campaign->end_time = $request->end_time;
-        $campaign->variations = json_encode($variations);
-        $campaign->price = $request->price;
-        $campaign->discount =  $request->discount ?? 0;
-        $campaign->discount_type = $request->discount_type;
-        $campaign->attributes =  json_encode([]);
-        $campaign->add_ons = $request->has('addon_ids') ? json_encode($request->addon_ids) : json_encode([]);
-        $campaign->restaurant_id = $request->restaurant_id;
-        $campaign->maximum_cart_quantity = $request->maximum_cart_quantity;
+        $campaign->status = 1;
 
-        $campaign->veg = $request->veg;
         $campaign->save();
-        Helpers::add_or_update_translations(request: $request, key_data: 'title', name_field: 'title', model_name: 'ItemCampaign', data_id: $campaign->id, data_value: $campaign->title);
-        Helpers::add_or_update_translations(request: $request, key_data: 'description', name_field: 'description', model_name: 'ItemCampaign', data_id: $campaign->id, data_value: $campaign->description);
-         if (addon_published_status('TaxModule')) {
-            $SystemTaxVat = \Modules\TaxModule\Entities\SystemTaxSetup::where('is_active', 1)->where('is_default', 1)->first();
-            if ($SystemTaxVat?->tax_type == 'product_wise') {
-                foreach ($request['tax_ids'] ?? [] as $tax_id) {
-                    \Modules\TaxModule\Entities\Taxable::create(
-                        [
-                            'taxable_type' => ItemCampaign::class,
-                            'taxable_id' => $campaign->id,
-                            'system_tax_setup_id' => $SystemTaxVat->id,
-                            'tax_id' => $tax_id
-                        ],
-                    );
-                }
-            }
+
+        // Attach selected food items to campaign
+        $campaign->foods()->attach($request->food_ids);
+
+        // Handle translations
+        Helpers::add_or_update_translations(
+            request: $request,
+            key_data: 'title',
+            name_field: 'title',
+            model_name: 'ItemCampaign',
+            data_id: $campaign->id,
+            data_value: $campaign->title
+        );
+
+        if ($request->description) {
+            Helpers::add_or_update_translations(
+                request: $request,
+                key_data: 'description',
+                name_field: 'description',
+                model_name: 'ItemCampaign',
+                data_id: $campaign->id,
+                data_value: $campaign->description
+            );
         }
 
         // Clear cache to show changes immediately
         Cache::flush();
 
-        return response()->json([], 200);
+        return response()->json(['message' => translate('messages.campaign_created_successfully')], 200);
     }
 
     public function updateItem(ItemCampaign $campaign, Request $request)
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|unique:item_campaigns,title,' . $campaign->id,
-            'category_id' => 'required',
-            'price' => 'required|numeric|between:0.01,999999999999.99',
-            'restaurant_id' => 'required',
-            'veg' => 'required',
+            'zone_id' => 'required|exists:zones,id',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'food_ids' => 'required|array|min:1',
+            'food_ids.*' => 'exists:food,id',
             'image' => 'nullable|max:2048',
-            'description.*'=>'max:1000',
+            'description' => 'nullable|max:1000',
             'title.0' => 'required',
-            'description.0' => 'required',
-        ],[
-            'title.0.required'=>translate('default_title_is_required'),
-            'description.0.required'=>translate('default_description_is_required'),
+        ], [
+            'zone_id.required' => translate('messages.zone_is_required'),
+            'zone_id.exists' => translate('messages.zone_not_found'),
+            'food_ids.required' => translate('messages.please_select_at_least_one_food_item'),
+            'food_ids.min' => translate('messages.please_select_at_least_one_food_item'),
+            'title.0.required' => translate('default_title_is_required'),
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors' => Helpers::error_processor($validator)]);
         }
 
-        if ($request['discount_type'] == 'percent') {
-            $dis = ($request['price'] / 100) * $request['discount'];
-        } else {
-            $dis = $request['discount'];
-        }
+        // Verify all selected food items belong to restaurants in the selected zone
+        $invalidFoods = \App\Models\Food::whereIn('id', $request->food_ids)
+            ->whereHas('restaurant', function($q) use ($request) {
+                $q->where('zone_id', '!=', $request->zone_id);
+            })
+            ->count();
 
-        if ($request['price'] <= $dis) {
-            $validator->getMessageBag()->add('unit_price', translate('messages.discount_can_not_be_more_than_or_equal'));
-        }
-
-        if ($request['price'] <= $dis || $validator->fails()) {
+        if ($invalidFoods > 0) {
+            $validator->getMessageBag()->add('food_ids', translate('messages.some_food_items_dont_belong_to_selected_zone'));
             return response()->json(['errors' => Helpers::error_processor($validator)]);
         }
 
-        $category = [];
-        if ($request->category_id != null) {
-            array_push($category, [
-                'id' => $request->category_id,
-                'position' => 1,
-            ]);
-        }
-        if ($request->sub_category_id != null) {
-            array_push($category, [
-                'id' => $request->sub_category_id,
-                'position' => 2,
-            ]);
-        }
-        if ($request->sub_sub_category_id != null) {
-            array_push($category, [
-                'id' => $request->sub_sub_category_id,
-                'position' => 3,
-            ]);
-        }
-
-        $campaign->category_ids = json_encode($category);
-
-
-        $campaign->choice_options = json_encode([]);
-        $variations = [];
-        if($request?->options)
-        {
-            foreach(array_values($request->options) as $key=>$option)
-            {
-                $temp_variation['name']= $option['name'];
-                $temp_variation['type']= $option['type'];
-                $temp_variation['min']= $option['min'] ?? 0;
-                $temp_variation['max']= $option['max'] ?? 0;
-                if($option['min'] > 0 &&  $option['min'] > $option['max']  ){
-                    $validator->getMessageBag()->add('name', translate('messages.minimum_value_can_not_be_greater_then_maximum_value'));
-                    return response()->json(['errors' => Helpers::error_processor($validator)]);
-                }
-                if(!isset($option['values'])){
-                    $validator->getMessageBag()->add('name', translate('messages.please_add_options_for').$option['name']);
-                    return response()->json(['errors' => Helpers::error_processor($validator)]);
-                }
-                if($option['max'] > count($option['values'])  ){
-                    $validator->getMessageBag()->add('name', translate('messages.please_add_more_options_or_change_the_max_value_for').$option['name']);
-                    return response()->json(['errors' => Helpers::error_processor($validator)]);
-                }
-                $temp_variation['required']= $option['required']??'off';
-
-                $temp_value = [];
-                foreach(array_values($option['values']) as $value)
-                {
-                    if(isset($value['label'])){
-                        $temp_option['label'] = $value['label'];
-                    }
-                    $temp_option['optionPrice'] = $value['optionPrice'];
-                    array_push($temp_value,$temp_option);
-                }
-                $temp_variation['values']= $temp_value;
-                array_push($variations,$temp_variation);
-            }
-        }
-
+        $campaign->zone_id = $request->zone_id;
         $campaign->title = $request->title[array_search('default', $request->lang)];
-        $campaign->description = $request->description[array_search('default', $request->lang)];
-        $campaign->image = $request->has('image') ? Helpers::update(dir:'campaign/',old_image: $campaign->image,format: 'png', image:$request->file('image')) : $campaign->image;
+        $campaign->description = $request->description[array_search('default', $request->lang)] ?? null;
+
+        if ($request->hasFile('image')) {
+            $campaign->image = Helpers::update(dir: 'campaign/', old_image: $campaign->image, format: 'png', image: $request->file('image'));
+        }
+
         $campaign->start_date = $request->start_date;
         $campaign->end_date = $request->end_date;
         $campaign->start_time = $request->start_time;
         $campaign->end_time = $request->end_time;
-        $campaign->restaurant_id = $request->restaurant_id;
-        $campaign->variations = json_encode($variations);
-        $campaign->price = $request->price;
-        $campaign->discount =  $request->discount ?? 0;
-        $campaign->discount_type = $request->discount_type;
-        $campaign->attributes = json_encode([]);
-        $campaign->add_ons = $request->has('addon_ids') ? json_encode($request->addon_ids) : json_encode([]);
-        $campaign->veg = $request->veg;
-        $campaign->maximum_cart_quantity = $request->maximum_cart_quantity;
 
         $campaign->save();
-        Helpers::add_or_update_translations(request: $request, key_data: 'title', name_field: 'title', model_name: 'ItemCampaign', data_id: $campaign->id, data_value: $campaign->title);
-        Helpers::add_or_update_translations(request: $request, key_data: 'description', name_field: 'description', model_name: 'ItemCampaign', data_id: $campaign->id, data_value: $campaign->description);
-          if (addon_published_status('TaxModule')) {
-            $SystemTaxVat = \Modules\TaxModule\Entities\SystemTaxSetup::where('is_active', 1)->where('is_default', 1)->first();
-            if ($SystemTaxVat?->tax_type == 'product_wise') {
-                $campaign->taxVats()->delete();
-                foreach ($request['tax_ids'] ?? [] as $tax_id) {
-                    \Modules\TaxModule\Entities\Taxable::create(
-                        [
-                            'taxable_type' => ItemCampaign::class,
-                            'taxable_id' => $campaign->id,
-                            'system_tax_setup_id' => $SystemTaxVat->id,
-                            'tax_id' => $tax_id
-                        ],
-                    );
-                }
-            }
+
+        // Sync food items (add new, remove old)
+        $campaign->foods()->sync($request->food_ids);
+
+        // Handle translations
+        Helpers::add_or_update_translations(
+            request: $request,
+            key_data: 'title',
+            name_field: 'title',
+            model_name: 'ItemCampaign',
+            data_id: $campaign->id,
+            data_value: $campaign->title
+        );
+
+        if ($request->description) {
+            Helpers::add_or_update_translations(
+                request: $request,
+                key_data: 'description',
+                name_field: 'description',
+                model_name: 'ItemCampaign',
+                data_id: $campaign->id,
+                data_value: $campaign->description
+            );
         }
 
         // Clear cache to show changes immediately
         Cache::flush();
 
-        return response()->json([], 200);
+        return response()->json(['message' => translate('messages.campaign_updated_successfully')], 200);
+    }
+
+    public function getZoneFoods(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'zone_id' => 'required|exists:zones,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => Helpers::error_processor($validator)], 422);
+        }
+
+        // Get all active food items from restaurants in the selected zone
+        $foods = \App\Models\Food::with(['restaurant:id,name'])
+            ->whereHas('restaurant', function($q) use ($request) {
+                $q->where('zone_id', $request->zone_id)
+                  ->where('status', 1); // Only active restaurants
+            })
+            ->where('status', 1) // Only active food items
+            ->select('id', 'name', 'price', 'restaurant_id', 'image')
+            ->orderBy('restaurant_id')
+            ->orderBy('name')
+            ->get()
+            ->map(function($food) {
+                return [
+                    'id' => $food->id,
+                    'name' => $food->name,
+                    'price' => $food->price,
+                    'restaurant_name' => $food->restaurant->name ?? 'Unknown',
+                    'restaurant_id' => $food->restaurant_id,
+                    'display_text' => $food->name . ' - ' . ($food->restaurant->name ?? 'Unknown') . ' ($' . number_format($food->price, 2) . ')',
+                ];
+            });
+
+        return response()->json($foods, 200);
     }
 
     public function edit($type, $campaign)
