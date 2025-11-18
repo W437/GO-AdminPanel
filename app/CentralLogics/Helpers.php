@@ -11,14 +11,12 @@ use App\Models\Log;
 use App\Models\Food;
 use App\Models\User;
 use App\Models\Zone;
-use App\Models\AddOn;
 use App\Models\Order;
 use App\Library\Payer;
 use App\Models\Coupon;
 use App\Models\Review;
 use App\Models\Expense;
 use App\Models\TimeLog;
-use App\Models\Vehicle;
 use App\Traits\Payment;
 use App\Mail\PlaceOrder;
 use App\Models\CashBack;
@@ -34,7 +32,6 @@ use App\Models\Translation;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use App\Models\BusinessSetting;
-use App\Models\VariationOption;
 use App\Models\RestaurantWallet;
 use App\CentralLogics\OrderLogic;
 use App\CentralLogics\Formatting\DataFormatter;
@@ -43,7 +40,6 @@ use App\Models\WalletTransaction;
 use Illuminate\Support\Facades\DB;
 use App\Mail\OrderVerificationMail;
 use App\Models\NotificationMessage;
-use App\Models\NotificationSetting;
 use App\Models\SubscriptionPackage;
 use App\Traits\PaymentGatewayTrait;
 use Illuminate\Support\Facades\App;
@@ -60,21 +56,21 @@ use App\Models\SubscriptionTransaction;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
-use App\Models\RestaurantNotificationSetting;
-use MatanYadaev\EloquentSpatial\Objects\Point;
 use App\Models\SubscriptionBillingAndRefundHistory;
 use App\CentralLogics\Pricing\PricingService;
 use App\CentralLogics\Config\ConfigService;
 use App\CentralLogics\Notifications\PushNotificationService;
+use App\CentralLogics\Notifications\NotificationConfigService;
 use App\CentralLogics\Media\MediaService;
 use App\CentralLogics\Orders\OrderNotificationService;
 use App\CentralLogics\Subscription\SubscriptionService;
 use App\CentralLogics\Localization\TranslationService;
 use App\CentralLogics\Finance\FinanceService;
 use App\CentralLogics\Info\InfoService;
+use App\CentralLogics\Inventory\InventoryService;
+use App\CentralLogics\Logistics\LogisticsService;
 use App\CentralLogics\Payments\PaymentUtilityService;
 use App\CentralLogics\Access\AccessService;
-use App\Traits\NotificationDataSetUpTrait;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
@@ -85,7 +81,7 @@ use GuzzleHttp\Pool;
 
 class Helpers
 {
-    use PaymentGatewayTrait, NotificationDataSetUpTrait;
+    use PaymentGatewayTrait;
     public static function error_processor($validator)
     {
         $err_keeper = [];
@@ -544,43 +540,12 @@ class Helpers
 
     public static function calculate_addon_price($addons, $add_on_qtys , $incrementCount = false ,$old_selected_addons =[])
     {
-        $add_ons_cost = 0;
-        $data = [];
-        if ($addons) {
-            foreach ($addons as $key2 => $addon) {
-                if ($add_on_qtys == null) {
-                    $add_on_qty = 1;
-                } else {
-                    $add_on_qty = $add_on_qtys[$key2];
-                }
-                // if($add_on_qty > 0 ){
-                    if($addon->stock_type != 'unlimited'){
-
-                        $availableStock=$addon->addon_stock;
-
-                        if(data_get($old_selected_addons, $addon->id)){
-                            $availableStock= $availableStock + data_get($old_selected_addons, $addon->id);
-                        }
-
-                        if(  $availableStock <= 0 || $availableStock < $add_on_qty  ){
-                            return ['out_of_stock' => $addon->name .' ' . translate('Addon_is_out_of_stock_!!!'),
-                            'id'=>$addon->id,
-                            'current_stock' =>   $availableStock > 0 ?  $availableStock : 0 ,
-                            'type'=>'addon'
-                        ];
-                        }
-                    }
-                    if($incrementCount == true){
-                        $addon->increment('sell_count' ,$add_on_qty);
-                    }
-                // }
-
-                $data[] = ['id' => $addon->id, 'name' => $addon->name, 'price' => $addon->price, 'quantity' => $add_on_qty];
-                $add_ons_cost += $addon['price'] * $add_on_qty;
-            }
-            return ['addons' => $data, 'total_add_on_price' => $add_ons_cost];
-        }
-        return null;
+        return InventoryService::calculateAddonPrice(
+            addons: $addons,
+            addOnQtys: $add_on_qtys,
+            incrementCount: $incrementCount,
+            oldSelectedAddons: $old_selected_addons
+        );
     }
 
     public static function get_settings($name)
@@ -1367,20 +1332,7 @@ class Helpers
     }
 
     public static function vehicle_extra_charge(float $distance_data) {
-        $data =[];
-        $vehicle = Vehicle::active()
-        ->where(function ($query) use ($distance_data) {
-            $query->where('starting_coverage_area', '<=', $distance_data)->where('maximum_coverage_area', '>=', $distance_data)
-            ->orWhere(function ($query) use ($distance_data) {
-                $query->where('starting_coverage_area', '>=', $distance_data);
-            });
-        })->orderBy('starting_coverage_area')->first();
-        if(empty($vehicle)){
-            $vehicle = Vehicle::active()->orderBy('maximum_coverage_area', 'desc')->first();
-        }
-        $data['extra_charge'] = $vehicle->extra_charges  ?? 0;
-        $data['vehicle_id'] =  $vehicle->id  ?? null;
-        return $data;
+        return LogisticsService::vehicleExtraCharge($distance_data);
     }
 
     public static function react_services_formater($data)
@@ -1546,85 +1498,7 @@ class Helpers
 
     public static function getDeliveryFee($restaurant): string
     {
-        if(!request()->header('latitude') || !request()->header('longitude')){
-            return 'out_of_range';
-        }
-            $zone = Zone::where('id', $restaurant->zone_id)->whereContains('coordinates', new Point(request()->header('latitude') && request()->header('longitude'), POINT_SRID))->first();
-        if(!$zone) {
-            return 'out_of_range';
-        }
-        if(isset($restaurant->distance) && $restaurant->distance > 0){
-            $distance = $restaurant->distance / 1000;
-            $distance=   round($distance,5);
-        }
-        elseif( $restaurant->latitude &&  $restaurant->longitude){
-
-        $originCoordinates =[
-            $restaurant->latitude,
-            $restaurant->longitude
-        ];
-        $destinationCoordinates =[
-            request()->header('latitude') ,
-            request()->header('longitude')
-        ];
-            $distance = self::get_distance($originCoordinates, $destinationCoordinates);
-            $distance=   round($distance,5);
-        } else {
-            return 'out_of_range';
-        }
-
-        if($restaurant['self_delivery_system'] ==  1){
-
-            if($restaurant->free_delivery == 1){
-                return 'free_delivery';
-            }
-            if($restaurant->free_delivery_distance_status == 1 &&  $distance <= $restaurant->free_delivery_distance_value){
-                return 'free_delivery';
-            }
-
-            $per_km_shipping_charge = $restaurant->per_km_shipping_charge ?? 0 ;
-            $minimum_shipping_charge = $restaurant->minimum_shipping_charge ?? 0;
-            $maximum_shipping_charge = $restaurant->maximum_shipping_charge ?? 0;
-            $extra_charges= 0;
-            $increased= 0;
-
-        }
-        else{
-
-        $businessSettings = BusinessSetting::whereIn('key', [ 'free_delivery_over', 'free_delivery_distance','admin_free_delivery_status', 'admin_free_delivery_option'])->pluck('value', 'key');
-
-        $free_delivery_over = (float) ($businessSettings['free_delivery_over'] ?? 0);
-        $free_delivery_distance = (float) ($businessSettings['free_delivery_distance'] ?? 0);
-        $admin_free_delivery_status = (int) ($businessSettings['admin_free_delivery_status'] ?? 0);
-        $admin_free_delivery_option = $businessSettings['admin_free_delivery_option'] ?? null;
-
-
-        if ($admin_free_delivery_status == 1) {
-
-            if ($admin_free_delivery_option === 'free_delivery_to_all_store' ||($admin_free_delivery_option === 'free_delivery_by_specific_criteria' && ($free_delivery_distance > 0 && $distance <= $free_delivery_distance)) ) {
-                return 'free_delivery';
-            }
-        }
-
-            $per_km_shipping_charge = $zone->per_km_shipping_charge ?? 0;
-            $minimum_shipping_charge = $zone->minimum_shipping_charge ?? 0;
-            $maximum_shipping_charge = $zone->maximum_shipping_charge ?? 0;
-            $increased= 0;
-            if($zone->increased_delivery_fee_status == 1){
-                $increased=$zone->increased_delivery_fee ?? 0;
-            }
-            $data = self::vehicle_extra_charge(distance_data:$distance);
-            $extra_charges = (float) (isset($data) ? $data['extra_charge']  : 0);
-
-        }
-
-            $original_delivery_charge = ($distance * $per_km_shipping_charge > $minimum_shipping_charge) ? $distance * $per_km_shipping_charge + $extra_charges  : $minimum_shipping_charge + $extra_charges;
-        if($increased > 0  && $original_delivery_charge > 0){
-                $increased_fee = ($original_delivery_charge * $increased) / 100;
-                $original_delivery_charge = $original_delivery_charge + $increased_fee;
-        }
-        return (string) $original_delivery_charge ;
-
+        return LogisticsService::getDeliveryFee($restaurant);
     }
 
 
@@ -1632,28 +1506,7 @@ class Helpers
 
     public static function get_distance(array $originCoordinates,array $destinationCoordinates, $unit = 'K'): float
     {
-        $lat1 = (float) $originCoordinates[0];
-        $lat2 = (float) $destinationCoordinates[0];
-        $lon1 = (float) $originCoordinates[1];
-        $lon2 = (float) $destinationCoordinates[1];
-
-        if (($lat1 == $lat2) && ($lon1 == $lon2)) {
-            return 0;
-        } else {
-            $theta = $lon1 - $lon2;
-            $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
-            $dist = acos($dist);
-            $dist = rad2deg($dist);
-            $miles = $dist * 60 * 1.1515;
-            $unit = strtoupper($unit);
-            if ($unit == "K") {
-                return ($miles * 1.609344);
-            } else if ($unit == "N") {
-                return ($miles * 0.8684);
-            } else {
-                return $miles;
-            }
-        }
+        return LogisticsService::getDistance($originCoordinates, $destinationCoordinates, $unit);
     }
 
     public static function onerror_image_helper($data, $src, $error_src ,$path){
@@ -1864,109 +1717,45 @@ class Helpers
 
 
     public static function addonAndVariationStockCheck($product, $quantity=1, $add_on_qtys=1, $variation_options=null,$add_on_ids= null ,$incrementCount = false ,$old_selected_variations=[] ,$old_selected_without_variation = 0,$old_selected_addons=[]){
-
-        if($product?->stock_type && $product?->stock_type !== 'unlimited'){
-            $availableMainStock=$product->item_stock + $old_selected_without_variation ;
-            if(  $availableMainStock <= 0 || $availableMainStock < $quantity  ){
-                return [
-                    'out_of_stock' =>$availableMainStock > 0 ? translate('Only') .' '.$availableMainStock . " ". translate('Quantity_is_abailable_for').' '.$product?->name : $product?->name.' ' . translate('is_out_of_stock_!!!') ,
-                    'id'=>$product->id,
-                'current_stock' =>  $availableMainStock > 0 ?  $availableMainStock : 0,
-                ];
-            }
-            if($product?->stock_type && $incrementCount == true){
-                $product->increment('sell_count',$quantity);
-            }
-
-            if(is_array($variation_options) && (data_get($variation_options,0) != ''|| data_get($variation_options,0)  != null)) {
-                $variation_options= VariationOption::whereIn('id', $variation_options)->get();
-                foreach($variation_options as $variation_option){
-                        if($variation_option->stock_type !== 'unlimited'){
-                            $availableStock=$variation_option->total_stock  - $variation_option->sell_count;
-                            if(is_array($old_selected_variations) && data_get($old_selected_variations, $variation_option->id) ){
-                                $availableStock= $availableStock + data_get($old_selected_variations, $variation_option->id);
-                            }
-                            if($availableStock <= 0 || $availableStock < $quantity){
-                                return ['out_of_stock' => $availableStock > 0 ? translate('Only') .' '.$availableStock . " ". translate('Quantity_is_abailable_for').' '.$product?->name.' \'s ' . $variation_option->option_name .' ' . translate('Variation_!!!') : $product?->name.' \'s ' . $variation_option->option_name .' ' . translate('Variation_is_out_of_stock_!!!') ,
-                                        'id'=>$variation_option->id,
-                                        'current_stock' =>  $availableStock > 0 ?  $availableStock : 0,
-                                        ];
-                            }
-                            if($incrementCount == true){
-                                $variation_option->increment('sell_count',$quantity);
-                            }
-                        }
-                    }
-            }
-        }
-
-        if(is_array($add_on_ids) && count($add_on_ids) > 0) {
-            return  Helpers::calculate_addon_price(addons: AddOn::whereIn('id',$add_on_ids)->get(), add_on_qtys: $add_on_qtys ,incrementCount:$incrementCount ,old_selected_addons:$old_selected_addons);
-        }
-        return null;
+        return InventoryService::addonAndVariationStockCheck(
+            product: $product,
+            quantity: $quantity,
+            addOnQtys: $add_on_qtys,
+            variationOptions: $variation_options,
+            addOnIds: $add_on_ids,
+            incrementCount: $incrementCount,
+            oldSelectedVariations: $old_selected_variations,
+            oldSelectedWithoutVariation: $old_selected_without_variation,
+            oldSelectedAddons: $old_selected_addons
+        );
     }
 
 
     public static function decreaseSellCount($order_details){
-        foreach ($order_details as $detail) {
-            $optionIds=[];
-            if($detail->variation != '[]'){
-                foreach (json_decode($detail->variation, true) as $value) {
-                    foreach (data_get($value,'values' ,[]) as $item) {
-                        if(data_get($item, 'option_id', null ) != null){
-                            $optionIds[] = data_get($item, 'option_id', null );
-                        }
-                    }
-                }
-                VariationOption::whereIn('id', $optionIds)->where('sell_count', '>', 0)->decrement('sell_count' ,$detail->quantity);
-            }
-            $detail->food()->where('sell_count', '>', 0)->decrement('sell_count' ,$detail->quantity);
-
-            foreach (json_decode($detail->add_ons, true) as $add_ons) {
-                if(data_get($add_ons, 'id', null ) != null){
-                AddOn::where('id',data_get($add_ons, 'id', null ))->where('sell_count', '>', 0)->decrement('sell_count' ,data_get($add_ons, 'quantity', 1 ));
-                }
-            }
-        }
-        return true;
+        return InventoryService::decreaseSellCount($order_details);
     }
 
 
     public static function notificationDataSetup(){
-        $data=self::getAdminNotificationSetupData();
-        $data = NotificationSetting::upsert($data,['key','type'],['title','mail_status','sms_status','push_notification_status','sub_title']);
-        return true;
+        return NotificationConfigService::syncAdminNotificationSettings();
     }
 
     public static function restaurantNotificationDataSetup($id){
-        $data=self::getRestaurantNotificationSetupData($id);
-        $data = RestaurantNotificationSetting::upsert($data,['key','restaurant_id'],['title','mail_status','sms_status','push_notification_status','sub_title']);
-        return true;
+        return NotificationConfigService::syncRestaurantNotificationSettings($id);
     }
 
 
     public static function getNotificationStatusData($user_type,$key){
-        $data= NotificationSetting::where('type',$user_type)->where('key',$key)->select(['mail_status','push_notification_status','sms_status'])->first();
-        return $data ?? null ;
+        return NotificationConfigService::getNotificationStatus($user_type, $key);
     }
 
 
 
     public static function getRestaurantNotificationStatusData($restaurant_id,$key){
-        $data= RestaurantNotificationSetting::where('restaurant_id',$restaurant_id)->where('key',$key)->select(['mail_status','push_notification_status','sms_status'])->first();
-        if(!$data){
-            self::addNewRestaurantNotificationSetupData($restaurant_id);
-            $data= RestaurantNotificationSetting::where('restaurant_id',$restaurant_id)->where('key',$key)->select(['mail_status','push_notification_status','sms_status'])->first();
-            if (!$data) {
-                self::restaurantNotificationDataSetup($restaurant_id);
-                $data= RestaurantNotificationSetting::where('restaurant_id',$restaurant_id)->where('key',$key)->select(['mail_status','push_notification_status','sms_status'])->first();
-            }
-        }
-        return $data ?? null ;
+        return NotificationConfigService::getRestaurantNotificationStatus($restaurant_id, $key);
     }
     public static function addNewAdminNotificationSetupDataSetup(){
-        self::addNewAdminNotificationSetupData();
-    return true;
+        return NotificationConfigService::ensureAdminNotificationSeed();
     }
 
     public static function getActivePaymentGateways(){
