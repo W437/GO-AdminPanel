@@ -68,6 +68,7 @@ use App\CentralLogics\Config\ConfigService;
 use App\CentralLogics\Notifications\PushNotificationService;
 use App\CentralLogics\Media\MediaService;
 use App\CentralLogics\Orders\OrderNotificationService;
+use App\CentralLogics\Subscription\SubscriptionService;
 use App\CentralLogics\Access\AccessService;
 use App\Traits\NotificationDataSetUpTrait;
 use GuzzleHttp\Client;
@@ -1016,352 +1017,23 @@ class Helpers
 
     public Static function subscription_check()
     {
-        // $business_model= BusinessSetting::where('key', '')->first();
-        $business_model =Helpers::getSettingsDataFromConfig(settings:'business_model');
-        if(!$business_model)
-            {
-                Helpers::insert_business_settings_key('refund_active_status', '1');
-                Helpers::insert_business_settings_key('business_model',
-                json_encode([
-                    'commission'        =>  1,
-                    'subscription'     =>  0,
-                ]));
-                $business_model = [
-                    'commission'        =>  1,
-                    'subscription'     =>  0,
-                ];
-            } else{
-                $business_model = $business_model->value ? json_decode($business_model->value, true) : [
-                    'commission'        =>  1,
-                    'subscription'     =>  0,
-                ];
-            }
-
-        if ($business_model['subscription'] == 1 ){
-            return true;
-        }
-        return false;
+        return SubscriptionService::subscription_check();
     }
 
     public Static function commission_check()
     {
-        // $business_model= BusinessSetting::where('key', 'business_model')->first();
-          $business_model=  self::get_business_settings('business_model');
-
-        if(!$business_model)
-            {
-                Helpers::insert_business_settings_key('business_model',
-                json_encode([
-                    'commission'        =>  1,
-                    'subscription'     =>  0,
-                ]));
-                $business_model = [
-                    'commission'        =>  1,
-                    'subscription'     =>  0,
-                ];
-            } else{
-                $business_model = $business_model ?? [
-                    'commission'        =>  1,
-                    'subscription'     =>  0,
-                ];
-            }
-
-        if ($business_model['commission'] == 1 ){
-            return true;
-        }
-        return false;
+        return SubscriptionService::commission_check();
     }
 
     public static function check_subscription_validity()
     {
-        //only For supscription order
-        $current_date = date('Y-m-d');
-        $check_subscription_validity_on= BusinessSetting::where('key', 'check_subscription_validity_on')->first();
-        if(!$check_subscription_validity_on){
-            Helpers::insert_business_settings_key('check_subscription_validity_on', date('Y-m-d'));
-        }
-        if($check_subscription_validity_on && $check_subscription_validity_on->value != $current_date){
-            // Restaurant::whereHas('restaurant_subs',function ($query)use($current_date){
-            //     $query->where('status',1)->where('expiry_date', '<', $current_date);
-            // })->update(['status' => 0,
-            //             'pos_system'=>1,
-            //             'self_delivery_system'=>1,
-            //             'reviews_section'=>1,
-            //             'free_delivery'=>0,
-            //             'restaurant_model'=>'unsubscribed',
-            //             ]);
-            // RestaurantSubscription::where('status',1)->where('expiry_date', '<', $current_date)->update([
-            //     'status' => 0
-            // ]);
-            $check_subscription_validity_on->value=$current_date;
-            $check_subscription_validity_on->save();
-            Helpers::create_subscription_order_logs();
-        }
-        return false;
+        return SubscriptionService::check_subscription_validity();
     }
 
     public static function subscription_plan_chosen($restaurant_id ,$package_id, $payment_method  ,$discount = 0,$pending_bill =0,$reference=null ,$type=null){
-        $restaurant=Restaurant::find($restaurant_id);
-        $package = SubscriptionPackage::withoutGlobalScope('translate')->find($package_id);
-        $add_days=0;
-        $add_orders=0;
-
-        try {
-            $restaurant_subscription=$restaurant->restaurant_sub;
-            if (isset($restaurant_subscription) && $type == 'renew') {
-                $restaurant_subscription->total_package_renewed= $restaurant_subscription->total_package_renewed + 1;
-
-                $day_left=$restaurant_subscription->expiry_date_parsed->format('Y-m-d');
-                if (Carbon::now()->diffInDays($day_left, false) > 0 && $restaurant_subscription->is_canceled != 1) {
-                    $add_days= Carbon::now()->subDays(1)->diffInDays($day_left, false);
-                }
-                if ($restaurant_subscription->max_order != 'unlimited' && $restaurant_subscription->max_order > 0) {
-                    $add_orders=$restaurant_subscription->max_order;
-                }
-
-            }
-            elseif($restaurant->restaurant_sub_update_application && $restaurant->restaurant_sub_update_application->package_id == $package->id && $type == 'renew' ){
-                $restaurant_subscription=$restaurant->restaurant_sub_update_application;
-                $restaurant_subscription->total_package_renewed= $restaurant_subscription->total_package_renewed + 1;
-            }
-
-            else{
-                self::calculateSubscriptionRefundAmount($restaurant);
-                RestaurantSubscription::where('restaurant_id',$restaurant->id)->update([
-                    'status' => 0,
-                ]);
-                $restaurant_subscription =new RestaurantSubscription();
-                $restaurant_subscription->total_package_renewed= 0;
-
-                }
-
-            $restaurant_subscription->is_trial= 0;
-            $restaurant_subscription->renewed_at=now();
-            $restaurant_subscription->package_id=$package->id;
-            $restaurant_subscription->restaurant_id=$restaurant->id;
-            if ($payment_method  == 'free_trial' ) {
-
-                $free_trial_period= BusinessSetting::where(['key' => 'subscription_free_trial_days'])->first()?->value ?? 1;
-
-                $restaurant_subscription->expiry_date= Carbon::now()->addDays($free_trial_period)->format('Y-m-d');
-                $restaurant_subscription->validity= $free_trial_period;
-            }
-            else{
-                $restaurant_subscription->expiry_date= Carbon::now()->addDays($package->validity+$add_days)->format('Y-m-d');
-                $restaurant_subscription->validity=$package->validity+$add_days;
-            }
-            if($package->max_order != 'unlimited'){
-                $restaurant_subscription->max_order=$package->max_order + $add_orders;
-            } else{
-                $restaurant_subscription->max_order=$package->max_order;
-            }
-
-
-            $restaurant_subscription->max_product=$package->max_product;
-            $restaurant_subscription->pos=$package->pos;
-            $restaurant_subscription->mobile_app=$package->mobile_app;
-            $restaurant_subscription->chat=$package->chat;
-            $restaurant_subscription->review=$package->review;
-            $restaurant_subscription->self_delivery=$package->self_delivery;
-            $restaurant_subscription->is_canceled=0;
-            $restaurant_subscription->canceled_by='none';
-
-            $restaurant->food_section= 1;
-            $restaurant->pos_system= 1;
-            if ($type == 'new_join' && $restaurant->vendor?->status == 0 ) {
-                $restaurant->status= 0;
-                $restaurant_subscription->status= 0;
-
-            }else{
-                $restaurant->status= 1;
-                $restaurant_subscription->status= 1;
-
-            }
-
-            // For Restaurant Free Delivery
-            if($restaurant->free_delivery == 1 && $package->self_delivery == 1){
-                $restaurant->free_delivery = 1 ;
-            } else{
-                $restaurant->free_delivery = 0 ;
-                $restaurant->coupon()->where('created_by','vendor')->where('coupon_type','free_delivery')->delete();
-            }
-
-
-            $restaurant->reviews_section= 1;
-            $restaurant->self_delivery_system= 1;
-            $restaurant->restaurant_model= 'subscription';
-
-            $subscription_transaction= new SubscriptionTransaction();
-            $subscription_transaction->id=   (string) Str::uuid();
-
-            $subscription_transaction->package_id=$package->id;
-            $subscription_transaction->restaurant_id=$restaurant->id;
-            $subscription_transaction->price=$package->price;
-
-            $subscription_transaction->validity=$package->validity;
-            $subscription_transaction->paid_amount= $package->price - (($package->price*$discount)/100) + $pending_bill;
-
-            $subscription_transaction->payment_status = 'success';
-            $subscription_transaction->created_by=  in_array($payment_method,['wallet_payment_by_admin','manual_payment_by_admin' ,'plan_shift_by_admin'] )?'Admin': 'Restaurant';
-
-            if ($payment_method  == 'free_trial') {
-                $subscription_transaction->validity= $free_trial_period;
-                $subscription_transaction->paid_amount= 0;
-                $subscription_transaction->is_trial= 1;
-                $restaurant_subscription->is_trial= 1;
-            }
-            elseif($payment_method  == 'pay_now'){
-                $subscription_transaction->payment_status ='on_hold';
-                $subscription_transaction->transaction_status = 0;
-                $restaurant_subscription->status= 0;
-            }
-
-            $subscription_transaction->payment_method=$payment_method;
-            $subscription_transaction->reference=$reference ?? null;
-            $subscription_transaction->discount=$discount ?? 0;
-            $subscription_transaction->plan_type='first_purchased';
-
-            if(in_array($type ,['renew','free_trial'])){
-                $subscription_transaction->plan_type=$type;
-            } elseif(RestaurantSubscription::where('restaurant_id',$restaurant->id)->where('is_trial',0)->count() > 0 || $reference == 'plan_shift_by_admin'){
-                $subscription_transaction->plan_type='new_plan';
-            }
-
-
-            $subscription_transaction->package_details=[
-                'pos'=>$package->pos,
-                'review'=>$package->review,
-                'self_delivery'=>$package->self_delivery,
-                'chat'=>$package->chat,
-                'mobile_app'=>$package->mobile_app,
-                'max_order'=>$package->max_order,
-                'max_product'=>$package->max_product,
-            ];
-            DB::beginTransaction();
-            $restaurant->save();
-            $subscription_transaction->save();
-            $restaurant_subscription->save();
-            DB::commit();
-            $subscription_transaction->restaurant_subscription_id= $restaurant_subscription->id;
-            $subscription_transaction->save();
-
-            SubscriptionBillingAndRefundHistory::where(['restaurant_id'=>$restaurant->id,
-            'transaction_type'=>'pending_bill', 'is_success' =>0])->update([
-                'is_success'=> 1,
-                'reference'=> 'payment_via_'.$payment_method.' _transaction_id_'.$subscription_transaction->id
-            ]);
-
-            if($reference == 'plan_shift_by_admin'){
-                $billing= new SubscriptionBillingAndRefundHistory();
-                $billing->restaurant_id= $restaurant->id;
-                $billing->subscription_id= $restaurant_subscription->id;
-                $billing->package_id= $restaurant_subscription->package_id;
-                $billing->transaction_type= 'pending_bill';
-                $billing->is_success= 0;
-                $billing->amount= $package->price;
-                $billing->save();
-            }
-
-
-        } catch(\Exception $e){
-            DB::rollBack();
-            info(["line___{$e->getLine()}",$e->getMessage()]);
-            return false;
-        }
-
-
-
-
-        if(data_get(self::subscriptionConditionsCheck(restaurant_id:$restaurant->id,package_id:$package->id) , 'disable_item_count') > 0){
-            $disable_item_count=data_get(Helpers::subscriptionConditionsCheck(restaurant_id:$restaurant->id,package_id:$package->id) , 'disable_item_count');
-            $restaurant->food_section= 0;
-            $restaurant->save();
-
-            Food::where('restaurant_id',$restaurant->id)->oldest()->take($disable_item_count)->update([
-                'status' => 0
-            ]);
-        }
-
-
-        try {
-
-                if($type == 'renew'){
-                    $notification_status=self::getNotificationStatusData('restaurant','restaurant_subscription_renew');
-                    $restaurant_push_notification_status=self::getRestaurantNotificationStatusData($restaurant->id,'restaurant_subscription_renew');
-                    $title=translate('subscription_renewed');
-                    $des=translate('Your_subscription_successfully_renewed');
-                }
-                elseif($type != 'renew' && $subscription_transaction->plan_type !='first_purchased'){
-                    $des=translate('Your_subscription_successfully_shifted');
-                    $title=translate('subscription_shifted');
-                    $notification_status=self::getNotificationStatusData('restaurant','restaurant_subscription_shift');
-                    $restaurant_push_notification_status=self::getRestaurantNotificationStatusData($restaurant->id,'restaurant_subscription_shift');
-                }
-
-
-
-            if($notification_status?->push_notification_status == 'active' && $restaurant_push_notification_status?->push_notification_status == 'active'  &&  $restaurant?->vendor?->firebase_token){
-                $data = [
-                    'title' => $title ?? '',
-                    'description' => $des ?? '',
-                    'order_id' => '',
-                    'image' => '',
-                    'type' => 'subscription',
-                    'order_status' => '',
-                ];
-                Helpers::send_push_notif_to_device($restaurant?->vendor?->firebase_token, $data);
-                DB::table('user_notifications')->insert([
-                    'data' => json_encode($data),
-                    'vendor_id' => $restaurant?->vendor_id,
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ]);
-            }
-
-
-            if (config('mail.status') && Helpers::get_mail_status('subscription_renew_mail_status_restaurant') == '1' && $type == 'renew' && $notification_status?->mail_status == 'active' && $restaurant_push_notification_status?->mail_status == 'active') {
-                Mail::to($restaurant->email)->send(new SubscriptionRenewOrShift($type,$restaurant->name));
-            }
-            if (config('mail.status') && Helpers::get_mail_status('subscription_shift_mail_status_restaurant') == '1' && $type != 'renew' && $subscription_transaction->plan_type != 'first_purchased'  && $notification_status?->mail_status == 'active' && $restaurant_push_notification_status?->mail_status == 'active') {
-                Mail::to($restaurant->email)->send(new SubscriptionRenewOrShift($type,$restaurant->name));
-            }
-
-
-            $notification_status=self::getNotificationStatusData('restaurant','restaurant_subscription_success');
-            $restaurant_push_notification_status=self::getRestaurantNotificationStatusData($restaurant->id,'restaurant_subscription_success');
-
-
-            if (config('mail.status') && Helpers::get_mail_status('subscription_successful_mail_status_restaurant') == '1' && $notification_status?->mail_status == 'active' && $restaurant_push_notification_status?->mail_status == 'active' && $subscription_transaction->plan_type =='first_purchased'  ) {
-                $url=route('subscription_invoice',['id' => base64_encode($subscription_transaction->id)]);
-                Mail::to($restaurant->email)->send(new SubscriptionSuccessful($restaurant->name,$url));
-            }
-
-
-            if( $notification_status?->push_notification_status == 'active' && $restaurant_push_notification_status?->push_notification_status == 'active'  &&  $restaurant?->vendor?->firebase_token && $subscription_transaction->plan_type == 'first_purchased'){
-                $data = [
-                    'title' => translate('subscription_successful'),
-                    'description' => translate('You_are_successfully_subscribed'),
-                    'order_id' => '',
-                    'image' => '',
-                    'type' => 'subscription',
-                    'order_status' => '',
-                ];
-                Helpers::send_push_notif_to_device($restaurant?->vendor?->firebase_token, $data);
-                DB::table('user_notifications')->insert([
-                    'data' => json_encode($data),
-                    'vendor_id' => $restaurant?->vendor_id,
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ]);
-            }
-
-
-        } catch (\Exception $ex) {
-            info($ex->getMessage());
-        }
-
-        return  $subscription_transaction->id;
+        return SubscriptionService::subscription_plan_chosen($restaurant_id ,$package_id, $payment_method  ,$discount,$pending_bill,$reference,$type);
     }
+
     public static function expenseCreate($amount,$type,$datetime,$created_by,$order_id=null,$restaurant_id=null,$user_id=null,$description='',$delivery_man_id=null)
     {
         $expense = new Expense();
@@ -2224,21 +1896,8 @@ class Helpers
 
     public static function create_subscription_order_logs()
     {
-        $order_schedule_day=now()->dayOfWeek;
-            $o=Order::HasSubscriptionTodayGet()->with(['restaurant.schedule_today','subscription.schedule_today'])->whereHas('restaurant.schedules',function ($q)use($order_schedule_day){
-                $q->where('day',$order_schedule_day);
-            })
-            ->get();
-            foreach($o as $order){
-                foreach($order->restaurant->schedule_today as $rest_sh){
-                    if(Carbon::parse($rest_sh->opening_time) <= Carbon::parse($order->subscription->schedule_today->time) && Carbon::parse($rest_sh->closing_time) >= Carbon::parse($order->subscription->schedule_today->time) ){
-                    OrderLogic::create_subscription_log($order->id);
-                    }
-                }
-            }
-        return true;
+        return SubscriptionService::create_subscription_order_logs();
     }
-
 
     // public static function create_all_logs($object , $action_type, $model){
     //     $restaurant_id = null;
@@ -3165,59 +2824,13 @@ class Helpers
     }
 
     public static function calculateSubscriptionRefundAmount($restaurant,$return_data=null){
-
-        $restaurant_subscription=$restaurant->restaurant_sub;
-        if($restaurant_subscription && $restaurant_subscription?->is_canceled === 0 && $restaurant_subscription?->is_trial === 0 ){
-            $day_left=$restaurant_subscription->expiry_date_parsed->format('Y-m-d');
-            if (Carbon::now()->diffInDays($day_left, false) > 0) {
-                $add_days= Carbon::now()->diffInDays($day_left, false);
-                $validity=$restaurant_subscription?->validity;
-                $subscription_usage_max_time=BusinessSetting::where('key', 'subscription_usage_max_time')->first()?->value ?? 50 ;
-                $subscription_usage_max_time=  ($validity * $subscription_usage_max_time) /100 ;
-
-                if(($validity - $add_days) < $subscription_usage_max_time ){
-                        $per_day= $restaurant->restaurant_sub_trans->price / $restaurant->restaurant_sub_trans->validity;
-                        $back_amount= $per_day *  $add_days;
-
-                        if($return_data == true){
-                            return ['back_amount' => $back_amount, 'days'=> $add_days];
-                        }
-
-                        $vendorWallet = RestaurantWallet::firstOrNew(
-                            ['vendor_id' => $restaurant->vendor_id]
-                        );
-                        $vendorWallet->total_earning = $vendorWallet->total_earning+$back_amount;
-                        $vendorWallet->save();
-
-                        $refund=new SubscriptionBillingAndRefundHistory();
-                        $refund->restaurant_id= $restaurant->id;
-                        $refund->subscription_id= $restaurant_subscription->id;
-                        $refund->package_id= $restaurant_subscription->package_id;
-                        $refund->transaction_type= 'refund';
-                        $refund->is_success= 1;
-                        $refund->amount= $back_amount;
-                        $refund->reference= 'validity_left_'.$add_days ;
-                        $refund->save();
-
-                    }
-            }
-
-        }
-
-        return true;
+        return SubscriptionService::calculateSubscriptionRefundAmount($restaurant,$return_data);
     }
 
     public static function subscriptionConditionsCheck($restaurant_id ,$package_id,){
-        $restaurant=Restaurant::findOrFail($restaurant_id);
-        $package = SubscriptionPackage::withoutGlobalScope('translate')->find($package_id);
-
-        $total_food= $restaurant->foods()->withoutGlobalScope(\App\Scopes\RestaurantScope::class)->count();
-        if ($package->max_product != 'unlimited' &&  $total_food >= $package->max_product  ){
-            return ['disable_item_count' => $total_food - $package->max_product];
-            // return 'downgrade_error';
-        }
-        return null;
+        return SubscriptionService::subscriptionConditionsCheck($restaurant_id,$package_id);
     }
+
     public static function subscriptionPayment($restaurant_id,$package_id,$payment_gateway,$url,$pending_bill=0,$type='payment',$payment_platform='web'){
         $restaurant = Restaurant::where('id',$restaurant_id)->first();
         $package = SubscriptionPackage::where('id',$package_id)->first();
