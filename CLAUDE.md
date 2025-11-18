@@ -6,6 +6,6 @@
 
 - After database schema changes (migration file), always read @MIGRATION_VALIDATION_PIPELINE to validate the migration locally, then after user pushes and the latest version is deployed, agent SSH's in and migrates in production.
 
-- Production DB name: go-adminpanel
+- Production DB name: goadmin_db
 
 - Production server: ssh root@138.197.188.120 
