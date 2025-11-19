@@ -545,7 +545,151 @@ class FoodController extends Controller
         return back();
     }
 
+    public function bulkDelete(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'ids' => 'required|array',
+            'ids.*' => 'exists:food,id'
+        ]);
 
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => translate('messages.invalid_request')
+            ], 400);
+        }
+
+        try {
+            $products = Food::withoutGlobalScope(RestaurantScope::class)
+                ->withoutGlobalScope('translate')
+                ->whereIn('id', $request->ids)
+                ->get();
+
+            $deletedCount = 0;
+            foreach ($products as $product) {
+                // Delete associated image
+                if ($product->image) {
+                    Helpers::check_and_delete('product/', $product->image);
+                }
+
+                // Delete related records
+                $product->translations()->delete();
+                $product->carts()->delete();
+                $product->newVariationOptions()->delete();
+                $product->newVariations()->delete();
+                $product->taxVats()->delete();
+
+                // Delete the product
+                $product->delete();
+                $deletedCount++;
+            }
+
+            // Clear cache
+            Cache::flush();
+
+            return response()->json([
+                'success' => true,
+                'message' => translate('messages.items_deleted_successfully', ['count' => $deletedCount])
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => translate('messages.an_error_occurred')
+            ], 500);
+        }
+    }
+
+    public function bulkDuplicate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'ids' => 'required|array',
+            'ids.*' => 'exists:food,id'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => translate('messages.invalid_request')
+            ], 400);
+        }
+
+        try {
+            $products = Food::withoutGlobalScope(RestaurantScope::class)
+                ->withoutGlobalScope('translate')
+                ->with(['translations', 'newVariations', 'newVariationOptions', 'taxVats'])
+                ->whereIn('id', $request->ids)
+                ->get();
+
+            $duplicatedCount = 0;
+            foreach ($products as $product) {
+                // Create a copy of the product
+                $newProduct = $product->replicate();
+                $newProduct->name = $product->name . ' (Copy)';
+                $newProduct->created_at = now();
+                $newProduct->updated_at = now();
+
+                // Copy image if exists
+                if ($product->image) {
+                    $imagePath = 'product/' . $product->image;
+                    $newImageName = \Carbon\Carbon::now()->toDateString() . '-' . uniqid() . '.png';
+
+                    if (\Illuminate\Support\Facades\Storage::disk('public')->exists($imagePath)) {
+                        \Illuminate\Support\Facades\Storage::disk('public')->copy(
+                            $imagePath,
+                            'product/' . $newImageName
+                        );
+                        $newProduct->image = $newImageName;
+                    }
+                }
+
+                $newProduct->save();
+
+                // Duplicate translations
+                foreach ($product->translations as $translation) {
+                    $newTranslation = $translation->replicate();
+                    $newTranslation->translationable_id = $newProduct->id;
+                    $newTranslation->save();
+                }
+
+                // Duplicate variations
+                foreach ($product->newVariations as $variation) {
+                    $newVariation = $variation->replicate();
+                    $newVariation->food_id = $newProduct->id;
+                    $newVariation->save();
+                }
+
+                // Duplicate variation options
+                foreach ($product->newVariationOptions as $option) {
+                    $newOption = $option->replicate();
+                    $newOption->food_id = $newProduct->id;
+                    $newOption->save();
+                }
+
+                // Duplicate tax/vat relationships
+                foreach ($product->taxVats as $taxVat) {
+                    $newProduct->taxVats()->create([
+                        'tax_id' => $taxVat->tax_id,
+                    ]);
+                }
+
+                $duplicatedCount++;
+            }
+
+            // Clear cache
+            Cache::flush();
+
+            return response()->json([
+                'success' => true,
+                'message' => translate('messages.items_duplicated_successfully', ['count' => $duplicatedCount])
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Bulk duplicate error: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => translate('messages.an_error_occurred')
+            ], 500);
+        }
+    }
 
     public function variant_price(Request $request)
     {

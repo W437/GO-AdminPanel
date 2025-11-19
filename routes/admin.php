@@ -94,6 +94,8 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::post('update/{id}', 'FoodController@update')->name('update');
             Route::get('list', 'FoodController@list')->name('list');
             Route::delete('delete/{id}', 'FoodController@delete')->name('delete');
+            Route::post('bulk-delete', 'FoodController@bulkDelete')->name('bulk-delete');
+            Route::post('bulk-duplicate', 'FoodController@bulkDuplicate')->name('bulk-duplicate');
             Route::get('status/{id}/{status}', 'FoodController@status')->name('status');
             Route::get('review-status/{id}/{status}', 'FoodController@reviews_status')->name('reviews.status');
             Route::post('search-restaurant', 'FoodController@search_vendor')->name('search-restaurant');

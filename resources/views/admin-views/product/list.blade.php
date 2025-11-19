@@ -66,6 +66,23 @@
                 <div class="card">
                     <!-- Header -->
                     <div class="card-header border-0 py-2">
+                        <!-- Bulk Actions Bar -->
+                        <div id="bulk-actions-bar" class="d-none mb-3 p-3 bg-light rounded">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <span id="selected-count" class="font-weight-bold">0</span> {{ translate('messages.items_selected') }}
+                                </div>
+                                <div class="btn--container">
+                                    <button type="button" class="btn btn-sm btn--primary" id="bulk-duplicate-btn">
+                                        <i class="tio-copy"></i> {{ translate('messages.duplicate') }}
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn--danger" id="bulk-delete-btn">
+                                        <i class="tio-delete"></i> {{ translate('messages.delete') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="search--button-wrapper">
                             <h5 class="card-title d-none d-xl-block"></h5>
                             <form id="search-form">
@@ -142,6 +159,12 @@
                                 }'>
                             <thead class="thead-light">
                                 <tr>
+                                    <th class="w-40px">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="datatableCheckAll">
+                                            <label class="form-check-label" for="datatableCheckAll"></label>
+                                        </div>
+                                    </th>
                                     <th class="w-60px">{{ translate('messages.sl') }}</th>
                                     <th class="w-100px">{{ translate('messages.name') }}</th>
                                     <th class="w-120px">{{ translate('messages.category') }}</th>
@@ -163,6 +186,12 @@
                                 @php( $stock_out = null)
 
                                     <tr>
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input food-checkbox" type="checkbox" value="{{ $food->id }}" id="foodCheck{{ $food->id }}">
+                                                <label class="form-check-label" for="foodCheck{{ $food->id }}"></label>
+                                            </div>
+                                        </td>
                                         <td>{{ $key + $foods->firstItem() }}</td>
                                         <td>
                                             <a class="media align-items-center"
@@ -549,6 +578,139 @@
             }
         });
 
+        // Multi-select functionality
+        const updateBulkActionsBar = () => {
+            const checkedBoxes = $('.food-checkbox:checked');
+            const count = checkedBoxes.length;
+
+            if (count > 0) {
+                $('#bulk-actions-bar').removeClass('d-none');
+                $('#selected-count').text(count);
+            } else {
+                $('#bulk-actions-bar').addClass('d-none');
+            }
+        };
+
+        // Select all checkbox
+        $('#datatableCheckAll').on('change', function() {
+            const isChecked = $(this).is(':checked');
+            $('.food-checkbox').prop('checked', isChecked);
+            updateBulkActionsBar();
+        });
+
+        // Individual checkbox change
+        $(document).on('change', '.food-checkbox', function() {
+            const totalCheckboxes = $('.food-checkbox').length;
+            const checkedCheckboxes = $('.food-checkbox:checked').length;
+
+            $('#datatableCheckAll').prop('checked', totalCheckboxes === checkedCheckboxes);
+            updateBulkActionsBar();
+        });
+
+        // Get selected IDs
+        const getSelectedIds = () => {
+            return $('.food-checkbox:checked').map(function() {
+                return $(this).val();
+            }).get();
+        };
+
+        // Bulk delete
+        $('#bulk-delete-btn').on('click', function() {
+            const selectedIds = getSelectedIds();
+
+            if (selectedIds.length === 0) {
+                toastr.warning('{{ translate('messages.please_select_items_to_delete') }}');
+                return;
+            }
+
+            Swal.fire({
+                title: '{{ translate('messages.are_you_sure') }}',
+                text: '{{ translate('messages.you_want_to_delete_selected_items') }}',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#FC6A57',
+                cancelButtonColor: '#363636',
+                confirmButtonText: '{{ translate('messages.yes_delete') }}',
+                cancelButtonText: '{{ translate('messages.cancel') }}'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: '{{ route('admin.food.bulk-delete') }}',
+                        method: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            ids: selectedIds
+                        },
+                        beforeSend: function() {
+                            $('#loading').show();
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                toastr.success(response.message);
+                                location.reload();
+                            } else {
+                                toastr.error(response.message);
+                            }
+                        },
+                        error: function() {
+                            toastr.error('{{ translate('messages.an_error_occurred') }}');
+                        },
+                        complete: function() {
+                            $('#loading').hide();
+                        }
+                    });
+                }
+            });
+        });
+
+        // Bulk duplicate
+        $('#bulk-duplicate-btn').on('click', function() {
+            const selectedIds = getSelectedIds();
+
+            if (selectedIds.length === 0) {
+                toastr.warning('{{ translate('messages.please_select_items_to_duplicate') }}');
+                return;
+            }
+
+            Swal.fire({
+                title: '{{ translate('messages.are_you_sure') }}',
+                text: '{{ translate('messages.you_want_to_duplicate_selected_items') }}',
+                type: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#377dff',
+                cancelButtonColor: '#363636',
+                confirmButtonText: '{{ translate('messages.yes_duplicate') }}',
+                cancelButtonText: '{{ translate('messages.cancel') }}'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: '{{ route('admin.food.bulk-duplicate') }}',
+                        method: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            ids: selectedIds
+                        },
+                        beforeSend: function() {
+                            $('#loading').show();
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                toastr.success(response.message);
+                                location.reload();
+                            } else {
+                                toastr.error(response.message);
+                            }
+                        },
+                        error: function() {
+                            toastr.error('{{ translate('messages.an_error_occurred') }}');
+                        },
+                        complete: function() {
+                            $('#loading').hide();
+                        }
+                    });
+                }
+            });
+        });
 
     </script>
 @endpush
