@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Models\BusinessSetting;
 use App\Models\DataSetting;
+use App\Models\Zone;
 use App\Observers\BusinessSettingObserver;
 use App\Observers\DataSettingObserver;
+use App\Observers\ZoneObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -32,5 +34,6 @@ class EventServiceProvider extends ServiceProvider
     {
         BusinessSetting::observe(BusinessSettingObserver::class);
         DataSetting::observe(DataSettingObserver::class);
+        Zone::observe(ZoneObserver::class);
     }
 }
