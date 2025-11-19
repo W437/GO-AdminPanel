@@ -25,17 +25,15 @@ class AdvertisementUpdateRequest extends FormRequest
     public function rules()
     {
         return [
+            'restaurant_id' => 'required|exists:restaurants,id',
             'title.*' => 'max:255',
-            'title.0' => 'required',
-            'description.*' => 'nullable|max:65000',
-            'restaurant_id' => 'required',
+            'title.0' => 'required|max:255',
+            'description.*' => 'nullable|max:1000',
             'dates' => 'required',
-            'advertisement_type' => 'required|in:video_promotion,restaurant_promotion',
-            'cover_image' => 'nullable|image|mimes:jpg,png,jpeg,webp|max:2048',
-            'profile_image' => 'nullable|image|mimes:jpg,png,jpeg,webp|max:2048',
-            'video_attachment' => 'nullable|file|mimes:mp4,mkv,webm|max:5120',
-
-
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after:start_date',
+            'priority' => 'nullable|integer|min:0',
+            'status' => 'nullable|in:approved,pending,denied',
         ];
     }
 
@@ -43,7 +41,9 @@ class AdvertisementUpdateRequest extends FormRequest
     {
         return [
             'restaurant_id.required' => translate('messages.Please_select_a_restaurant'),
-            'title.0.required'=>translate('default_title_is_required'),
+            'restaurant_id.exists' => translate('messages.restaurant_not_found'),
+            'title.0.required' => translate('default_title_is_required'),
+            'end_date.after' => translate('messages.End date must be after start date'),
         ];
     }
 

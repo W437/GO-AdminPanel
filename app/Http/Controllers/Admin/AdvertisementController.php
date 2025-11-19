@@ -135,28 +135,23 @@ class AdvertisementController extends Controller
         $startDate = $startDate->startOfDay();
         $endDate = $endDate->endOfDay();
 
-
-        $newPriority = $request['priority'];
+        $newPriority = $request['priority'] ?? 1;
         $request['priority'] > 0 ? Advertisement::where('priority', '>=', $newPriority)->increment('priority') : null;
 
         $advertisement = New Advertisement();
         $advertisement->restaurant_id = $request->restaurant_id;
-        $advertisement->add_type = $request->advertisement_type;
+        $advertisement->add_type = 'restaurant_promotion';
         $advertisement->title = $request->title[array_search('default', $request->lang)];
-        $advertisement->description = $request->description[array_search('default', $request->lang)];
+        $advertisement->description = $request->description[array_search('default', $request->lang)] ?? null;
         $advertisement->start_date = $startDate;
         $advertisement->end_date = $endDate;
         $advertisement->priority = $newPriority;
-        $advertisement->is_rating_active = $request->advertisement_type == 'restaurant_promotion' ?  $request?->rating ?? 0 : 0;
-        $advertisement->is_review_active = $request->advertisement_type == 'restaurant_promotion' ?  $request?->review ?? 0 : 0;
-        $advertisement->is_paid =  1 ;
+        $advertisement->is_rating_active = 0;
+        $advertisement->is_review_active = 0;
+        $advertisement->is_paid = 1;
         $advertisement->created_by_id = auth('admin')->id();
         $advertisement->created_by_type = 'App\Models\Admin';
-        $advertisement->status = 'approved';
-
-        $advertisement->cover_image = $request->has('cover_image') &&  $request->advertisement_type == 'restaurant_promotion' ?  Helpers::upload(dir: 'advertisement/', format:$request->file('cover_image')->getClientOriginalExtension(), image:$request->file('cover_image')) : null;
-        $advertisement->profile_image = $request->has('profile_image') &&  $request->advertisement_type == 'restaurant_promotion' ?  Helpers::upload(dir: 'advertisement/', format:$request->file('profile_image')->getClientOriginalExtension(), image:$request->file('profile_image')) : null;
-        $advertisement->video_attachment = $request->has('video_attachment') &&  $request->advertisement_type == 'video_promotion' ?  Helpers::upload(dir: 'advertisement/', format:$request->file('video_attachment')->getClientOriginalExtension(), image:$request->file('video_attachment')) : null;
+        $advertisement->status = $request->status ?? 'approved';
         $advertisement->save();
         Helpers::add_or_update_translations(request: $request, key_data:'title' , name_field:'title' , model_name: 'Advertisement' ,data_id: $advertisement->id,data_value: $advertisement->title);
 
@@ -427,76 +422,34 @@ class AdvertisementController extends Controller
         $startDate = $startDate->startOfDay();
         $endDate = $endDate->endOfDay();
 
-
-        if( $advertisement->add_type != $request->advertisement_type){
-
-            if($request->advertisement_type == 'video_promotion' &&  !$request->has('video_attachment')){
-                return response([ 'file_required' => 1 , 'message' => translate('You_must_need_to_add_a_promotional_video_file')], 200);
-            }
-
-            if($request->advertisement_type == 'restaurant_promotion' &&  (!$request->has('cover_image') || !$request->has('profile_image'))  ){
-                return response([ 'file_required' => 1 , 'message' => translate('You_must_need_to_add_cover_&_profile_image')], 200);
-            }
-
-            if($advertisement->cover_image && $request->advertisement_type == 'video_promotion')
-            {
-                Helpers::check_and_delete('advertisement/' , $advertisement->cover_image);
-            }
-            if($advertisement->profile_image && $request->advertisement_type == 'video_promotion')
-            {
-                Helpers::check_and_delete('advertisement/' , $advertisement->profile_image);
-            }
-
-
-            if($advertisement->video_attachment && $request->advertisement_type == 'restaurant_promotion')
-            {
-                Helpers::check_and_delete('advertisement/' , $advertisement->video_attachment);
-            }
-        }
-
-
         $oldPriority = $advertisement['priority'];
         $newPriority = $request['priority'] ?? null;
         if ($oldPriority != $newPriority) {
-
             if ($oldPriority === null) {
                 Advertisement::where('priority', '>=', $newPriority)
-                    ->lockForUpdate() // Lock rows for update
+                    ->lockForUpdate()
                     ->increment('priority');
-
             } else if ($newPriority !== null) {
                 if ($newPriority < $oldPriority) {
                     Advertisement::whereBetween('priority', [$newPriority, $oldPriority - 1])
                         ->lockForUpdate()
                         ->increment('priority');
-
                 } else if ($newPriority > $oldPriority) {
                     Advertisement::whereBetween('priority', [$oldPriority + 1, $newPriority])
                         ->lockForUpdate()
                         ->decrement('priority');
-
                 }
             }
         }
+
         $advertisement->restaurant_id = $request->restaurant_id;
         $advertisement->title = $request->title[array_search('default', $request->lang)];
-        $advertisement->description = $request->description[array_search('default', $request->lang)];
+        $advertisement->description = $request->description[array_search('default', $request->lang)] ?? null;
         $advertisement->start_date = $startDate;
         $advertisement->end_date = $endDate;
         $advertisement->priority = $newPriority;
-        $advertisement->is_rating_active = $request->advertisement_type == 'restaurant_promotion' ?  $request?->rating ?? 0 : 0;
-        $advertisement->is_review_active = $request->advertisement_type == 'restaurant_promotion' ?  $request?->review ?? 0 : 0;
-
-        $advertisement->is_updated =0;
-        $advertisement->status = 'approved';
-
-
-        $advertisement->add_type = $request->advertisement_type;
-        $advertisement->cover_image = $request->has('cover_image') &&  $request->advertisement_type == 'restaurant_promotion' ? Helpers::update(dir:'advertisement/', old_image: $advertisement->cover_image, format:$request->file('cover_image')->getClientOriginalExtension(), image: $request->file('cover_image')) : $advertisement->cover_image;
-        $advertisement->profile_image = $request->has('profile_image') &&  $request->advertisement_type == 'restaurant_promotion' ? Helpers::update(dir:'advertisement/', old_image: $advertisement->profile_image, format:$request->file('profile_image')->getClientOriginalExtension(), image: $request->file('profile_image')) : $advertisement->profile_image;
-        $advertisement->video_attachment = $request->has('video_attachment') &&  $request->advertisement_type == 'video_promotion' ? Helpers::update(dir:'advertisement/', old_image: $advertisement->video_attachment, format:$request->file('video_attachment')->getClientOriginalExtension(), image: $request->file('video_attachment')) : $advertisement->video_attachment;
-
-
+        $advertisement->is_updated = 0;
+        $advertisement->status = $request->status ?? 'approved';
         $advertisement->save();
         Helpers::add_or_update_translations(request: $request, key_data:'title' , name_field:'title' , model_name: 'Advertisement' ,data_id: $advertisement->id,data_value: $advertisement->title);
         Helpers::add_or_update_translations(request: $request, key_data:'description' , name_field:'description' , model_name: 'Advertisement' ,data_id: $advertisement->id,data_value: $advertisement->description);

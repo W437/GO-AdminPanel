@@ -9,3 +9,5 @@
 - Production DB name: goadmin_db
 
 - Production server: ssh root@138.197.188.120 
+
+- Production URL: https://hq-secure-panel-1337.hopa.delivery
