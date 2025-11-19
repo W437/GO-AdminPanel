@@ -1,5 +1,27 @@
 <?php
 
+/**
+ * ADMIN ROUTES FILE
+ * ==================
+ * Purpose: Defines all routes for the admin panel/dashboard
+ * Access: Only users with 'admin' role/middleware
+ * URL Prefix: /admin/* (defined in RouteServiceProvider)
+ * Middleware: 'admin' middleware checks admin authentication
+ *
+ * This file contains routes for:
+ * - Admin dashboard and statistics
+ * - Restaurant management (CRUD operations)
+ * - Order management and tracking
+ * - User management (customers, delivery personnel, employees)
+ * - Financial management (transactions, payouts, reports)
+ * - System settings and configuration
+ * - Marketing tools (banners, campaigns, notifications)
+ * - Content management (pages, FAQs, translations)
+ *
+ * All routes are protected by admin authentication middleware
+ * and grouped under the 'admin.' name prefix for easy reference
+ */
+
 use App\Http\Controllers\Admin\AddonCategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CashBackController;

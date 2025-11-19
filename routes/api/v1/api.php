@@ -4,16 +4,34 @@ use Illuminate\Support\Facades\Route;
 use App\WebSockets\Handler\DMLocationSocketHandler;
 use BeyondCode\LaravelWebSockets\Facades\WebSocketsRouter;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+/**
+ * API ROUTES V1 - MAIN API VERSION
+ * ==================================
+ * Purpose: RESTful API endpoints for mobile apps and external integrations
+ * Base URL: /api/v1/* (defined in RouteServiceProvider)
+ * Middleware: 'localization' (handles app language), 'react' (request tracking)
+ *
+ * This file contains API endpoints for:
+ * - Customer authentication (register, login, social auth, OTP)
+ * - Restaurant browsing and details
+ * - Food/product catalog and search
+ * - Order placement and tracking
+ * - Payment processing (multiple gateways)
+ * - Delivery tracking and updates
+ * - User profile management
+ * - Reviews and ratings
+ * - Push notifications
+ * - Real-time WebSocket connections
+ *
+ * Authentication:
+ * - Public endpoints: No auth required
+ * - Protected endpoints: Bearer token via Passport OAuth2
+ * - Delivery endpoints: Separate auth for delivery personnel
+ * - Vendor endpoints: Restaurant owner authentication
+ *
+ * Response Format: JSON with standard structure
+ * Rate Limiting: Applied per route basis
+ */
 
 Route::group(['namespace' => 'Api\V1', 'middleware'=>['localization','react']], function () {
     Route::get('zone/list', 'ZoneController@get_zones');

@@ -3,6 +3,41 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Vendor\SubscriptionController;
 
+/**
+ * VENDOR ROUTES (RESTAURANT OWNER PANEL)
+ * =======================================
+ * Purpose: Restaurant owner/manager dashboard and management interface
+ * URL Prefix: /vendor/* or /restaurant/* (defined in RouteServiceProvider)
+ * Middleware: 'vendor' (checks restaurant owner authentication)
+ *
+ * This file contains routes for restaurant owners to:
+ * - View restaurant dashboard and analytics
+ * - Manage food items and categories
+ * - Process orders (accept, reject, prepare)
+ * - Handle POS (Point of Sale) operations
+ * - Manage delivery personnel
+ * - Configure restaurant settings (hours, delivery zones)
+ * - Handle withdrawals and financial reports
+ * - Manage promotions and discounts
+ * - View customer reviews and respond
+ * - Track real-time orders
+ *
+ * Subscription-based Features:
+ * - Some routes check subscription status (subscription:module)
+ * - Features may be limited based on subscription plan
+ * - POS system requires active subscription
+ *
+ * Key Sections:
+ * - Dashboard: Sales analytics, order statistics
+ * - POS System: In-restaurant order taking
+ * - Food Management: Menu items CRUD
+ * - Order Management: Order processing workflow
+ * - Employee Management: Staff accounts
+ * - Financial: Earnings, withdrawals, reports
+ * - Settings: Restaurant configuration
+ *
+ * Note: Vendors can only access their own restaurant's data
+ */
 
 Route::group(['namespace' => 'Vendor', 'as' => 'vendor.'], function () {
     Route::group(['middleware' => ['vendor' ,'maintenance']], function () {

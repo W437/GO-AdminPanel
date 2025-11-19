@@ -2,6 +2,36 @@
 
 use Illuminate\Support\Facades\Route;
 
+/**
+ * INSTALLATION ROUTES
+ * ====================
+ * Purpose: Handles initial application setup and installation wizard
+ * URL: /install/* (only accessible before installation is complete)
+ * Middleware: 'installation-check' prevents access after setup
+ *
+ * Installation Flow:
+ * Step 0: Welcome screen and requirements check
+ * Step 1: Server requirements validation (PHP version, extensions)
+ * Step 2: Folder permissions check (storage, bootstrap/cache)
+ * Step 3: Database configuration and testing
+ * Step 4: Import database schema and seed data
+ * Step 5: Admin account creation and finalization
+ *
+ * Features:
+ * - Environment file (.env) creation
+ * - Database connection testing
+ * - SQL schema import with rollback on failure
+ * - Purchase code validation (licensing)
+ * - Admin user setup
+ * - Installation lock file creation
+ *
+ * Security:
+ * - These routes are disabled after successful installation
+ * - Installation lock file prevents re-running
+ * - Database credentials are validated before saving
+ *
+ * Note: After installation, these routes return 404
+ */
 
 Route::get('/', 'InstallController@step0')->name('step0');
 Route::get('/step1', 'InstallController@step1')->name('step1');

@@ -18,16 +18,46 @@ use App\Http\Controllers\FlutterwaveV3Controller;
 use App\Http\Controllers\PaypalPaymentController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\SslCommerzPaymentController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
+/**
+ * WEB ROUTES - PUBLIC & UTILITY ROUTES
+ * =====================================
+ * Purpose: Public web pages, payment callbacks, and utility endpoints
+ * Base URL: / (root domain)
+ * Middleware: 'web' (sessions, CSRF, cookies)
+ *
+ * This file contains routes for:
+ * - Homepage and landing pages
+ * - Authentication pages (login, register, password reset)
+ * - Payment gateway callbacks and webhooks
+ * - File downloads and exports
+ * - Terms, privacy, and legal pages
+ * - Language switching
+ * - Social authentication callbacks
+ * - Email verification
+ * - Maintenance mode page
+ *
+ * Payment Gateway Integrations:
+ * - Stripe, PayPal, Razorpay, Paystack
+ * - Flutterwave, MercadoPago, Paytm
+ * - SSLCommerz, bKash, LiqPay, Paymob
+ * - Paytabs, SenangPay
+ *
+ * Each payment gateway has:
+ * - Payment initiation route
+ * - Success callback route
+ * - Failure/cancel callback route
+ * - Webhook endpoint for async notifications
+ *
+ * Security Notes:
+ * - Payment callbacks should verify transaction status
+ * - Webhooks should validate signatures
+ * - CSRF protection on form submissions
+ * - Rate limiting on authentication routes
+ *
+ * Note: Most business logic is in API routes
+ * Web routes mainly handle browser-based flows and payments
+ */
 
 Route::post('/subscribeToTopic', [FirebaseController::class, 'subscribeToTopic']);
 Route::get('/', function() { return redirect('/login/admin'); })->name('home');
