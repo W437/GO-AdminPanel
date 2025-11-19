@@ -61,6 +61,7 @@ class Restaurant extends Model
         'package_id'=>'integer',
         'distance' => 'float',
         'stories_enabled' => 'boolean',
+        'total_food_likes'=>'integer',
     ];
 
     protected $appends = ['gst_status','gst_code','free_delivery_distance_status','free_delivery_distance_value','logo_full_url','cover_photo_full_url','meta_image_full_url','tin_certificate_image_full_url'];

@@ -321,6 +321,7 @@ Route::group(['namespace' => 'Api\V1', 'middleware'=>['localization','react']], 
         Route::get('reviews/{food_id}', 'ProductController@get_product_reviews');
         Route::get('rating/{food_id}', 'ProductController@get_product_rating');
         Route::post('reviews/submit', 'ProductController@submit_product_review')->middleware('auth:api');
+        Route::post('{id}/like', 'ProductController@toggleLike')->middleware('auth:api');
         Route::get('food-or-restaurant-search', 'ProductController@food_or_restaurant_search');
         Route::get('recommended/most-reviewed', 'ProductController@recommended_most_reviewed');
     });

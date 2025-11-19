@@ -255,6 +255,50 @@ $reviewsInfo = $product->rating()->first();
                 </div>
             </div>
         </div>
+
+        <!-- Likes Section -->
+        <div class="card mb-3">
+            <div class="card-header border-0 py-2">
+                <div class="search--button-wrapper">
+                    <h5 class="card-title">
+                        <i class="tio-star text-warning"></i>
+                        {{ translate('Customer Likes') }}
+                        <span class="badge badge-soft-secondary ml-2">{{ $product->like_count ?? 0 }}</span>
+                    </h5>
+                </div>
+            </div>
+            <div class="card-body">
+                @if($recentLikers->count() > 0)
+                    <div class="d-flex flex-wrap gap-2">
+                        @foreach($recentLikers as $liker)
+                            <div class="d-flex align-items-center gap-2 border rounded p-2" style="min-width: 200px;">
+                                <div class="avatar avatar-sm avatar-circle">
+                                    <img class="avatar-img"
+                                         src="{{ $liker->image_full_url ?? dynamicAsset('public/assets/admin/img/160x160/img1.jpg') }}"
+                                         alt="{{ $liker->f_name }} avatar">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-0">{{ $liker->f_name }} {{ $liker->l_name }}</h6>
+                                    <small class="text-muted">{{ $liker->pivot->created_at->diffForHumans() }}</small>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    @if($product->like_count > 10)
+                        <p class="text-muted mt-3 mb-0">
+                            <small>{{ translate('And') }} {{ $product->like_count - 10 }} {{ translate('more customers like this food') }}</small>
+                        </p>
+                    @endif
+                @else
+                    <div class="text-center py-4">
+                        <img src="{{ dynamicAsset('public/assets/admin/img/empty-state.png') }}" alt="no likes" style="width: 100px;">
+                        <p class="text-muted mt-3">{{ translate('No likes yet') }}</p>
+                    </div>
+                @endif
+            </div>
+        </div>
+        <!-- End Likes Section -->
+
         <div class="card mb-3">
             <div class="card-body p-0">
                 <div class="table-responsive">

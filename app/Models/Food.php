@@ -37,6 +37,7 @@ class Food extends Model
         'order_count'=>'integer',
         'rating_count'=>'integer',
         'is_halal'=>'integer',
+        'like_count'=>'integer',
     ];
 
     protected $appends = ['image_full_url'];
@@ -65,6 +66,17 @@ class Food extends Model
     {
         return $this->hasMany(Wishlist::class,'food_id');
     }
+
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'food_likes', 'food_id', 'user_id')->withTimestamps();
+    }
+
+    public function likedBy($userId)
+    {
+        return $this->likes()->where('user_id', $userId)->exists();
+    }
+
     public function newVariationOptions()
     {
         return $this->hasMany(VariationOption::class,'food_id');

@@ -596,4 +596,61 @@ class ProductController extends Controller
         $names= Nutrition::select(['nutrition'])->pluck('nutrition');
         return response()->json($names, 200);
     }
+
+    public function toggleLike(Request $request, $id)
+    {
+        $validator = Validator::make(['id' => $id], [
+            'id' => 'required|exists:food,id'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => Helpers::error_processor($validator)], 404);
+        }
+
+        $user = $request->user();
+        $food = Food::find($id);
+
+        if (!$food) {
+            return response()->json([
+                'errors' => [['code' => 'food', 'message' => translate('messages.food_not_found')]]
+            ], 404);
+        }
+
+        // Check if already liked
+        $existingLike = DB::table('food_likes')
+            ->where('user_id', $user->id)
+            ->where('food_id', $id)
+            ->first();
+
+        if ($existingLike) {
+            // Unlike - remove the like
+            DB::table('food_likes')
+                ->where('user_id', $user->id)
+                ->where('food_id', $id)
+                ->delete();
+
+            $isLiked = false;
+            $message = translate('messages.food_unliked_successfully');
+        } else {
+            // Like - add the like
+            DB::table('food_likes')->insert([
+                'user_id' => $user->id,
+                'food_id' => $id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            $isLiked = true;
+            $message = translate('messages.food_liked_successfully');
+        }
+
+        // Refresh food to get updated like_count
+        $food = Food::find($id);
+
+        return response()->json([
+            'message' => $message,
+            'is_liked' => $isLiked,
+            'like_count' => $food->like_count,
+        ], 200);
+    }
 }

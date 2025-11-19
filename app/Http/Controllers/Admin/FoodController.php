@@ -249,9 +249,17 @@ class FoodController extends Controller
         $taxData = Helpers::getTaxSystemType();
         $productWiseTax = $taxData['productWiseTax'];
 
-        $product = Food::with($productWiseTax ? ['taxVats.tax','newVariationOptions.variation'] : ['newVariationOptions.variation'] )->withoutGlobalScope(RestaurantScope::class)->findOrFail($id);
+        $product = Food::with($productWiseTax ? ['taxVats.tax','newVariationOptions.variation'] : ['newVariationOptions.variation'] )
+            ->withCount('likes')
+            ->withoutGlobalScope(RestaurantScope::class)
+            ->findOrFail($id);
+
         $reviews=Review::where(['food_id'=>$id])->with('customer')->latest()->paginate(config('default_pagination'));
-        return view('admin-views.product.view', compact('product','reviews','productWiseTax'));
+
+        // Get recent likers (top 10)
+        $recentLikers = $product->likes()->with('userinfo')->latest()->take(10)->get();
+
+        return view('admin-views.product.view', compact('product','reviews','productWiseTax','recentLikers'));
     }
 
     public function edit($id)

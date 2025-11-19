@@ -104,6 +104,11 @@ class User extends Authenticatable
         return $this->hasMany(WalletTransaction::class);
     }
 
+    public function foodLikes()
+    {
+        return $this->belongsToMany(Food::class, 'food_likes', 'user_id', 'food_id')->withTimestamps();
+    }
+
     public function category_visit_log()
     {
         return $this->morphedByMany(Category::class ,'visitor_log' );

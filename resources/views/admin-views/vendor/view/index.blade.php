@@ -121,6 +121,15 @@
                     </div>
                 </div>
 
+                <!-- Total Food Likes Card -->
+                <div class="col-sm-6">
+                    <div class="resturant-card bg--4">
+                        <h4 class="title">{{ number_format($restaurant->total_food_likes ?? 0) }}</h4>
+                        <span class="subtitle">{{translate('messages.total_food_likes')}}</span>
+                        <i class="tio-star resturant-icon"></i>
+                    </div>
+                </div>
+
             </div>
 
         </div>
