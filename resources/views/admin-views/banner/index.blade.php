@@ -150,7 +150,7 @@
                                             <button type="button" class="delete_video" style="display: none;">
                                                 <i class="tio-delete"></i>
                                             </button>
-                                            <input type="file" id="video-input" name="video" accept="video/mp4,video/mov,video/avi,video/x-matroska,video/webm,video/x-m4v" hidden>
+                                            <input type="file" id="video-input" name="video" accept="video/mp4,video/quicktime,video/avi,video/x-matroska,video/webm,video/x-m4v" hidden>
                                         </div>
 
                                         <p class="opacity-75 max-w220 mx-auto text-center">
