@@ -16,7 +16,7 @@ class LogisticsService
         }
 
         $zone = Zone::where('id', $restaurant->zone_id)
-            ->whereContains('coordinates', new Point(request()->header('latitude'), request()->header('longitude'), POINT_SRID))
+            ->whereContains('coordinates', new Point((float)request()->header('latitude'), (float)request()->header('longitude'), POINT_SRID))
             ->first();
 
         if (!$zone) {
