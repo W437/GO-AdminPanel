@@ -196,7 +196,7 @@
                                 "entries": "#datatableEntries",
                                 "isResponsive": false,
                                 "isShowPaging": false,
-                                "paging": false,
+                                "paging": false
                                }'>
                             <thead class="thead-light">
                                 <tr>
@@ -276,7 +276,7 @@
 <script src="{{dynamicAsset('public/assets/admin')}}/js/view-pages/banner-index.js"></script>
 <script>
 "use strict";
-let zone_id ={{ auth('admin')?->user()?->zone_id ? auth('admin')->user()->zone_id : '[]' }} ;
+let zone_id ={{ auth('admin')?->user()?->zone_id ?? '[]' }};
 $(document).on('ready', function () {
         let select_control = $('#banner_type, #restaurant_wise select, #item_wise select');
         $('#zone').on('change', function(){
