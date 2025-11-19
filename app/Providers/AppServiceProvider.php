@@ -14,8 +14,28 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Redirect;
 
-// ini_set('memory_limit', '512M');
-ini_set("memory_limit",-1);
+// ============================================================================
+// PHP Runtime Configuration - Applied from .env via config/upload.php
+// ============================================================================
+// These settings override php.ini values at runtime, allowing you to control
+// upload limits via .env file without needing to modify server configuration
+
+// Memory limit - set from .env (PHP_MEMORY_LIMIT) or default to unlimited
+$memoryLimit = config('upload.memory_limit', '-1');
+ini_set('memory_limit', $memoryLimit);
+
+// File upload limits - set from .env
+$uploadMaxFilesize = config('upload.max_filesize', '20M');
+$postMaxSize = config('upload.post_max_size', '25M');
+ini_set('upload_max_filesize', $uploadMaxFilesize);
+ini_set('post_max_size', $postMaxSize);
+
+// Script execution time limits - set from .env
+$maxExecutionTime = config('upload.max_execution_time', 300);
+$maxInputTime = config('upload.max_input_time', 300);
+ini_set('max_execution_time', $maxExecutionTime);
+ini_set('max_input_time', $maxInputTime);
+
 class AppServiceProvider extends ServiceProvider
 {
     use AddonHelper;

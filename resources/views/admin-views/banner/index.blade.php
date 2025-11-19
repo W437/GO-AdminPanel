@@ -404,17 +404,19 @@ $(document).on('ready', function () {
         $('#banner_form').on('submit', function (e) {
             e.preventDefault();
             let formData = new FormData(this);
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.post({
+            $.ajax({
                 url: '{{route('admin.banner.store')}}',
+                method: 'POST',
                 data: formData,
                 cache: false,
                 contentType: false,
                 processData: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                beforeSend: function() {
+                    $('#loading').show();
+                },
                 success: function (data) {
                     if (data.errors) {
                         for (let i = 0; i < data.errors.length; i++) {
@@ -432,6 +434,16 @@ $(document).on('ready', function () {
                             location.href = '{{route('admin.banner.add-new')}}';
                         }, 2000);
                     }
+                },
+                error: function(xhr, status, error) {
+                    toastr.error('{{ translate('messages.an_error_occurred') }}', {
+                        CloseButton: true,
+                        ProgressBar: true
+                    });
+                    console.error('Upload error:', error);
+                },
+                complete: function() {
+                    $('#loading').hide();
                 }
             });
         });
