@@ -111,10 +111,23 @@ class RouteServiceProvider extends ServiceProvider
                     ->namespace($this->namespace)
                     ->group(base_path('routes/api/v2/api.php'));
 
+                // Handle root path on API domain
+                Route::get('/', function() {
+                    return response()->json([
+                        'message' => 'GO Admin API',
+                        'status' => 'active',
+                        'endpoints' => [
+                            'v1' => url('/api/v1'),
+                            'v2' => url('/api/v2'),
+                        ],
+                        'documentation' => 'API endpoints are available at /api/v1 and /api/v2'
+                    ], 200);
+                });
+
                 // Return 404 for any non-API routes on API domain
                 Route::any('/{any}', function() {
-                    return response()->json(['error' => 'Not Found', 'message' => 'This domain only serves API endpoints'], 404);
-                })->where('any', '^(?!api|v1|v2).*$');
+                    return response()->json(['error' => 'Not Found', 'message' => 'This domain only serves API endpoints. Please use /api/v1 or /api/v2 for API access.'], 404);
+                })->where('any', '.*');
             }
 
             // Fallback for localhost, IP access, or any other domain (development/backward compatibility)
