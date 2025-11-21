@@ -379,7 +379,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
         });
 
         Route::group(['prefix' => 'zone', 'as' => 'zone.', 'middleware' => ['module:zone']], function () {
-            Route::get('/', 'ZoneController@index')->name('home');
+            Route::get('/', 'ZoneController@index')->name('index');
             Route::post('store', 'ZoneController@store')->name('store');
             Route::get('edit/{id}', 'ZoneController@edit')->name('edit');
             Route::post('update/{id}', 'ZoneController@update')->name('update');
