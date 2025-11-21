@@ -135,7 +135,7 @@
                                 </div>
 
                                 <p class="opacity-75 max-w220 mx-auto text-center">
-                                    {{ translate('Image format - jpg png jpeg gif Image Size -maximum size 2 MB Image Ratio - 1:1')}}
+                                    {{ translate('Image format - jpg png jpeg gif Image Size -maximum size 10 MB Image Ratio - 1:1')}}
                                 </p>
                             </div>
                         </div>
@@ -892,16 +892,17 @@
         });
 
 
-        $('#product_form').on('submit', function() {
+        $('#product_form').on('submit', function(e) {
+            e.preventDefault();
             var formData = new FormData(this);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $.post({
+            $.ajax({
                 url: '{{ route('admin.food.update', [$product['id']]) }}',
-                data: $('#product_form').serialize(),
+                type: 'POST',
                 data: formData,
                 cache: false,
                 contentType: false,
@@ -923,11 +924,39 @@
                             CloseButton: true,
                             ProgressBar: true
                         });
-                        // location.reload(true);
                         setTimeout(function() {
                             location.href =
                                 '{{ \Request::server('HTTP_REFERER') ?? route('admin.food.list') }}';
                         }, 2000);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#loading').hide();
+                    console.error('AJAX Error:', xhr.responseText);
+
+                    if (xhr.status === 422) {
+                        // Validation errors
+                        var errors = xhr.responseJSON.errors;
+                        for (var field in errors) {
+                            if (errors.hasOwnProperty(field)) {
+                                for (var i = 0; i < errors[field].length; i++) {
+                                    toastr.error(errors[field][i], {
+                                        CloseButton: true,
+                                        ProgressBar: true
+                                    });
+                                }
+                            }
+                        }
+                    } else if (xhr.status === 413) {
+                        toastr.error('{{ translate('File size too large. Maximum upload size is 10MB.') }}', {
+                            CloseButton: true,
+                            ProgressBar: true
+                        });
+                    } else {
+                        toastr.error('{{ translate('An error occurred. Please try again.') }} ' + (xhr.responseJSON?.message || error), {
+                            CloseButton: true,
+                            ProgressBar: true
+                        });
                     }
                 }
             });
