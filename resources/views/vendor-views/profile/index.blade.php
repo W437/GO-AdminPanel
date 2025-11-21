@@ -70,7 +70,7 @@
             </div>
 
             <div class="col-lg-9">
-                <form action="{{env('APP_MODE')!='demo'?route('vendor.profile.update'):'javascript:'}}" method="post" enctype="multipart/form-data" id="vendor-settings-form">
+                <form action="{{route('vendor.profile.update')}}" method="post" enctype="multipart/form-data" id="vendor-settings-form">
                 @csrf
                 <!-- Card -->
                     <div class="card mb-3 mb-lg-5" id="generalDiv">
@@ -154,7 +154,7 @@
                             </div>
 
                             <div class="d-flex justify-content-end">
-                                <button type="button" data-id="vendor-settings-form" data-message="{{translate('messages.you_want_to_update_user_info')}}" class="btn btn-primary @if(env('APP_MODE')!='demo') form-alert @else call-demo @endif">{{translate('messages.save_changes')}}</button>
+                                <button type="button" data-id="vendor-settings-form" data-message="{{translate('messages.you_want_to_update_user_info')}}" class="btn btn-primary form-alert">{{translate('messages.save_changes')}}</button>
                             </div>
 
                             <!-- End Form -->
@@ -173,7 +173,7 @@
                     <!-- Body -->
                     <div class="card-body">
                         <!-- Form -->
-                        <form id="changePasswordForm" action="{{env('APP_MODE')!='demo'?route('vendor.profile.settings-password'):'javascript:'}}" method="post"
+                        <form id="changePasswordForm" action="{{route('vendor.profile.settings-password')}}" method="post"
                               enctype="multipart/form-data">
                         @csrf
 
@@ -223,12 +223,7 @@
                             <!-- End Form Group -->
 
                             <div class="d-flex justify-content-end">
-                                @if (env('APP_MODE')!='demo')
                                 <button type="submit" class="btn btn--primary">{{translate('messages.Save_changes')}}</button>
-                                @else
-                                    <button type="button" class="btn btn--primary call-demo">{{translate('messages.Save_changes')}}</button>
-                                @endif
-
                             </div>
                         </form>
                         <!-- End Form -->

@@ -25,10 +25,6 @@ class RegistrationPageController extends Controller
 
     public function react_hero_save(Request $request)
     {
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
         $request->validate([
             'hero_image_content' => 'required|image|max:5120',
         ], [
@@ -102,11 +98,6 @@ class RegistrationPageController extends Controller
 
     public function update_react_stepper(Request $request, $tab)
     {
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
-
         $steps = [
             'step1' => ['title' => 'step1_title', 'sub_title' => 'step1_sub_title', 'image' => 'step1_image'],
             'step2' => ['title' => 'step2_title', 'sub_title' => 'step2_sub_title', 'image' => 'step2_image'],
@@ -205,11 +196,6 @@ class RegistrationPageController extends Controller
 
     public function opportunity_status(Request $request)
     {
-
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
         $opportunities = ReactOpportunity::findOrFail($request->id);
         $opportunities->status = $request->status;
         $opportunities->save();
@@ -226,10 +212,6 @@ class RegistrationPageController extends Controller
 
     public function opportunity_update(Request $request, $id)
     {
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
         $request->validate([
             'title' => 'required|max:100',
             'sub_title' => 'required|max:1000',
@@ -257,11 +239,6 @@ class RegistrationPageController extends Controller
 
     public function opportunity_destroy(ReactOpportunity $opportunity)
     {
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.delete_option_is_disable_for_demo'));
-            return back();
-        }
-
         Helpers::check_and_delete('opportunity_image/' , $opportunity->image);
 
         $opportunity?->translations()?->delete();
@@ -323,11 +300,6 @@ class RegistrationPageController extends Controller
 
     public function faq_status(Request $request)
     {
-
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
         $faqs = ReactFaq::findOrFail($request->id);
         $faqs->status = $request->status;
         $faqs->save();
@@ -344,10 +316,6 @@ class RegistrationPageController extends Controller
 
     public function faq_update(Request $request, $id)
     {
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
         $request->validate([
             'question' => 'required|max:100',
             'answer' => 'required|max:1000',
@@ -396,11 +364,6 @@ class RegistrationPageController extends Controller
 
     public function faq_destroy(ReactFaq $faq)
     {
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.delete_option_is_disable_for_demo'));
-            return back();
-        }
-
         Helpers::check_and_delete('faq_image/' , $faq->image);
 
         $faq?->translations()?->delete();

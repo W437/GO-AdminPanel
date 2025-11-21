@@ -100,10 +100,6 @@ class BusinessSettingsController extends Controller
     }
     public function update_dm(Request $request)
     {
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
         Helpers::businessUpdateOrInsert(['key' => 'min_amount_to_pay_dm'], [
             'value' => $request['min_amount_to_pay_dm']
         ]);
@@ -146,11 +142,6 @@ class BusinessSettingsController extends Controller
 
     public function update_disbursement(Request $request)
     {
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
-
         Helpers::businessUpdateOrInsert(['key' => 'disbursement_type'], [
             'value' => $request['disbursement_type']
         ]);
@@ -449,13 +440,6 @@ class BusinessSettingsController extends Controller
     public function business_setup(Request $request)
 
     {
-
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
-
-
         $validator = Validator::make($request->all(), [
             'logo' => 'nullable|max:2048',
             'icon' => 'nullable|max:2048',
@@ -790,10 +774,6 @@ class BusinessSettingsController extends Controller
 
     public function mail_config(Request $request)
     {
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
         Helpers::businessUpdateOrInsert(
             ['key' => 'mail_config'],
             [
@@ -816,10 +796,6 @@ class BusinessSettingsController extends Controller
     }
     public function mail_config_status(Request $request)
     {
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
         $config = BusinessSetting::where(['key' => 'mail_config'])->first();
 
         $data = $config ? json_decode($config['value'], true) : null;
@@ -1026,10 +1002,6 @@ class BusinessSettingsController extends Controller
     }
     public function update_theme_settings(Request $request)
     {
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
         Helpers::businessUpdateOrInsert(['key' => 'theme'], [
             'value' => $request['theme']
         ]);
@@ -1044,10 +1016,6 @@ class BusinessSettingsController extends Controller
 
     public function update_app_settings(Request $request)
     {
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
         if($request->type == 'user_app'){
             Helpers::businessUpdateOrInsert(['key' => 'app_minimum_version_android'], [
                 'value' => $request['app_minimum_version_android']
@@ -1138,11 +1106,6 @@ class BusinessSettingsController extends Controller
 
     public function update_landing_page_settings(Request $request, $tab)
     {
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
-
         if ($tab == 'text') {
             Helpers::businessUpdateOrInsert(['key' => 'landing_page_text'], [
                 'value' => json_encode([
@@ -1832,10 +1795,6 @@ class BusinessSettingsController extends Controller
 
     public function delete_landing_page_settings($tab, $key)
     {
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
         $item = BusinessSetting::where('key', $tab)->first();
         $data = $item ? json_decode($item?->value, true) : null;
         if ($data && array_key_exists($key, $data)) {
@@ -2639,10 +2598,6 @@ class BusinessSettingsController extends Controller
 
 
     public function site_direction(Request $request){
-        if (env('APP_MODE') == 'demo') {
-            session()->put('site_direction', ($request->status == 1?'ltr':'rtl'));
-            return response()->json();
-        }
         if($request->status == 1){
             Helpers::businessUpdateOrInsert(['key' => 'site_direction'], [
                 'value' => 'ltr'
@@ -2752,10 +2707,6 @@ class BusinessSettingsController extends Controller
 
     public function update_email_index(Request $request,$type,$tab)
     {
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
         if ($tab == 'new-order') {
             $email_type = 'new_order';
             $template = EmailTemplate::where('type',$type)->where('email_type', 'new_order')->first();
@@ -3077,11 +3028,6 @@ class BusinessSettingsController extends Controller
 
     public function update_email_status(Request $request,$type,$tab,$status)
     {
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
-
         if ($tab == 'place-order') {
             Helpers::businessUpdateOrInsert(['key' => 'place_order_mail_status_'.$type], [
                 'value' => $status

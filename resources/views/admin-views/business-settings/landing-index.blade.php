@@ -342,9 +342,6 @@ $('.zip-upload').on('click', function(){
 
         $('.landing-page').on('click', function(event) {
                 event.preventDefault();
-            @if (env('APP_MODE') == 'demo')
-                toastr.warning('Sorry! You can not change landing page in demo!');
-            @else
                 Swal.fire({
                     title: '{{ isset($config) && $config ? translate('messages.Want_to_Turn_Off_the_Default_Admin_Landing_Page_?') : translate('messages.Want_to_Turn_On_the_Default_Admin_Landing_Page_?') }}',
                     text: '{{ isset($config) && $config ? translate('If_disabled,_the_landing_page_won’t_be_visible_to_anyone') : translate('If_enabled,_the_landing_page_will_be_visible_to_everyone') }}',
@@ -374,7 +371,6 @@ $('.zip-upload').on('click', function(){
                         });
                     }
                 })
-            @endif
         });
 
 

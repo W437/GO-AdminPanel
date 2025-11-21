@@ -51,11 +51,6 @@ class LandingPageController extends Controller
 
     public function testimonial_status(Request $request)
     {
-
-        if (env('APP_MODE') == 'demo' && $request->id == 1) {
-            Toastr::warning('Sorry!You can not inactive this review!');
-            return back();
-        }
         $review = AdminTestimonial::findOrFail($request->id);
         $review->status = $request->status;
         $review->save();
@@ -93,11 +88,6 @@ class LandingPageController extends Controller
 
     public function testimonial_destroy(AdminTestimonial $testimonial)
     {
-        if (env('APP_MODE') == 'demo' && $testimonial->id == 1) {
-            Toastr::warning(translate('messages.you_can_not_delete_this_review_please_add_a_new_review_to_delete'));
-            return back();
-        }
-
         Helpers::check_and_delete('reviewer_image/' , $testimonial->reviewer_image);
         Helpers::check_and_delete('reviewer_image/' , $testimonial->company_image);
         $testimonial->delete();
@@ -191,11 +181,6 @@ class LandingPageController extends Controller
 
     public function feature_status(Request $request)
     {
-
-        if (env('APP_MODE') == 'demo' && $request->id == 1) {
-            Toastr::warning('Sorry!You can not inactive this review!');
-            return back();
-        }
         $features = AdminFeature::findOrFail($request->id);
         $features->status = $request->status;
         $features->save();
@@ -288,11 +273,6 @@ class LandingPageController extends Controller
 
     public function feature_destroy(AdminFeature $feature)
     {
-        if (env('APP_MODE') == 'demo' && $feature->id == 1) {
-            Toastr::warning(translate('messages.you_can_not_delete_this_review_please_add_a_new_review_to_delete'));
-            return back();
-        }
-
         Helpers::check_and_delete('feature_image/' , $feature->image);
 
         $feature?->translations()?->delete();
@@ -592,10 +572,6 @@ class LandingPageController extends Controller
 
     public function react_service_status(Request $request)
     {
-        if (env('APP_MODE') == 'demo' && $request->id == 1) {
-            Toastr::warning('Sorry!You can not inactive this review!');
-            return back();
-        }
         $ReactService = ReactService::findOrFail($request->id);
         $ReactService->status = $request->status;
         $ReactService->save();
@@ -689,11 +665,6 @@ class LandingPageController extends Controller
 
     public function react_service_destroy(ReactService $service)
     {
-        if (env('APP_MODE') == 'demo' && $service->id == 1) {
-            Toastr::warning(translate('messages.you_can_not_delete_this_review_please_add_a_new_review_to_delete'));
-            return back();
-        }
-
         Helpers::check_and_delete('react_service_image/' , $service->image);
 
         $service?->translations()?->delete();
@@ -790,10 +761,6 @@ class LandingPageController extends Controller
 
     public function react_promotional_banner_status(Request $request)
     {
-        if (env('APP_MODE') == 'demo' && $request->id == 1) {
-            Toastr::warning('Sorry!You can not inactive this review!');
-            return back();
-        }
         $ReactPromotionalBanner = ReactPromotionalBanner::findOrFail($request->id);
         $ReactPromotionalBanner->status = $request->status;
         $ReactPromotionalBanner->save();
@@ -880,11 +847,6 @@ class LandingPageController extends Controller
 
     public function react_promotional_banner_destroy(ReactPromotionalBanner $react_promotional_banner)
     {
-        if (env('APP_MODE') == 'demo' && $react_promotional_banner->id == 1) {
-            Toastr::warning(translate('messages.you_can_not_delete_this_review_please_add_a_new_review_to_delete'));
-            return back();
-        }
-
         Helpers::check_and_delete('react_promotional_banner/' , $react_promotional_banner->image);
 
         $react_promotional_banner?->translations()?->delete();
@@ -952,11 +914,7 @@ class LandingPageController extends Controller
     }
 
     public function update_react_landing_page_settings(Request $request, $tab){
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
-        elseif($tab == 'fixed-data-newsletter'){
+        if($tab == 'fixed-data-newsletter'){
             $request->validate([
                 'title' => 'required|max:254',
                 'sub_title' => 'required|max:254',
@@ -1634,11 +1592,6 @@ class LandingPageController extends Controller
 
     public function update_admin_landing_page_settings(Request $request, $tab)
     {
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
-
         if ($tab == 'header-data') {
             $request->validate([
                 'header_title' => 'required|max:254',

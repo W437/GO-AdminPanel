@@ -39,7 +39,6 @@
                                 data-on_message= "{{ translate('do you want to turn on the VAT status from your system ? It will  effect on tax calculation & report.') }}"
                                 data-off_message= "{{ translate('do you want to turn off the VAT status from your system ? It will  effect on tax calculation & report.') }}"
                                 data-url="{{ route('taxvat.systemTaxVatVendorStatus', ['id' => $systemTaxVat?->id, 'country_code' =>$country_code ?? ($systemTaxVat?->country_code ?? null) , 'type' => $tax_payer ]) }}"
-                                data-env="{{ env('APP_MODE') }}"
                                 for="vendor_tax_status">
                                 <input type="checkbox" class="toggle-switch-input"
                                     {{ $systemTaxVat?->is_active == 1 ? 'checked' : '' }} id="vendor_tax_status">
@@ -291,7 +290,7 @@
                     <div class="d-flex align-items-center justify-content-end mt-4 gap-md-3 gap-2">
                         <button type="button"
                             class="btn bg--secondary h--42px title-clr px-4">{{ translate('messages.Reset') }}</button>
-                        <button type="{{ env('APP_MODE') != 'demo' ? 'submit' : 'button' }}" class="btn btn--primary call-demo">{{ translate('Save Information') }}</button>
+                        <button type="submit" class="btn btn--primary">{{ translate('Save Information') }}</button>
                     </div>
                 </form>
             </div>
@@ -328,13 +327,5 @@
     <script src="{{ dynamicAsset('Modules/TaxModule/public/assets/js/admin/toastr_notification.js') }}"></script>
     <script src="{{ dynamicAsset('Modules/TaxModule/public/assets/js/admin/system_taxvat.js') }}"></script>
     <script>
-        $(document).on('click', '.call-demo', function () {
-            @if(env('APP_MODE') =='demo')
-                toastr.info('{{ translate('Update option is disabled for demo!') }}', {
-                    CloseButton: true,
-                    ProgressBar: true
-                });
-            @endif
-        });
     </script>
 @endpush

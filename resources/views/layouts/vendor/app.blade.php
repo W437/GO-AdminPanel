@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <?php
-    if (env('APP_MODE') == 'demo') {
-        $site_direction = session()->get('site_direction_vendor');
-    }else{
-        $site_direction = session()->has('vendor_site_direction')?session()->get('vendor_site_direction'):'ltr';
-    }
+    $site_direction = session()->has('vendor_site_direction')?session()->get('vendor_site_direction'):'ltr';
     $country=\App\Models\BusinessSetting::where('key','country')->first();
             $countryCode= strtolower($country?$country->value:'auto');
 ?>
@@ -99,13 +95,6 @@
         setTimeout(addLoadedClass, 2000);
     })();
 </script>
-
-    @if (env('APP_MODE')=='demo')
-    <div class="direction-toggle">
-        <i class="tio-settings"></i>
-        <span></span>
-    </div>
-    @endif
 
     <div id="pre--loader" class="pre--loader">
     </div>
@@ -725,14 +714,6 @@
         conversationView();
     }
 
-    $(document).on('click', '.call-demo', function () {
-            @if(env('APP_MODE') =='demo')
-            toastr.info('{{ translate('Update option is disabled for demo!') }}', {
-                CloseButton: true,
-                ProgressBar: true
-            });
-            @endif
-        });
 
 
     if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="{{dynamicAsset('public/assets/admin')}}/vendor/babel-polyfill/polyfill.min.js"><\/script>');

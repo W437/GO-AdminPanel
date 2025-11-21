@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{env('APP_MODE')!='demo'?route('admin.business-settings.update-fcm'):'javascript:'}}" method="post"
+                <form action="{{route('admin.business-settings.update-fcm')}}" method="post"
                         enctype="multipart/form-data">
                     @csrf
                     @php($serviceFileContent = \App\CentralLogics\Helpers::get_business_settings('push_notification_service_file_content'))
@@ -58,7 +58,7 @@
                             </i>
                         </label>
                         <textarea name="push_notification_service_file_content" class="form-control" rows="15"
-                                  required>{{env('APP_MODE')!='demo'?($serviceFileContent?json_encode($serviceFileContent):''):''}}</textarea>
+                                  required>{{$serviceFileContent?json_encode($serviceFileContent):''}}</textarea>
                     </div>
 {{--                    @php($key=\App\Models\BusinessSetting::where('key','push_notification_key')->first())--}}
                     <div class="form-group">
@@ -136,7 +136,7 @@
                     </div>
 
                     <div class="text-right">
-                        <button type="{{env('APP_MODE')!='demo'?'submit':'button'}}" class="btn btn--primary call-demo">{{translate('messages.submit')}}</button>
+                        <button type="submit" class="btn btn--primary">{{translate('messages.submit')}}</button>
                     </div>
                 </form>
             </div>

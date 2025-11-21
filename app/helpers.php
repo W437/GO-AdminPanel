@@ -298,24 +298,4 @@ if (!function_exists('getWebConfig')) {
         return $config;
     }
 
-    if (!function_exists('getDemoModeFormButton')) {
-        function getDemoModeFormButton($type = ''): string
-        {
-            $result = '';
-            if ($type == 'class') {
-                $result = env('APP_MODE') != 'demo' ? '' : 'call-demo';
-            } elseif ($type == 'button') {
-                $result = env('APP_MODE') != 'demo' ? 'submit' : 'button';
-            }
-            return $result;
-        }
-    }
-
-    if (!function_exists('showDemoModeInputValue')) {
-        function showDemoModeInputValue($value = null): string
-        {
-            return env('APP_MODE') != 'demo' ? $value : '';
-        }
-    }
-
 }

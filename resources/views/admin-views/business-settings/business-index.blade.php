@@ -1279,8 +1279,8 @@
                     </div>
                     <div class="btn--container justify-content-end flex-wrap mt-3">
                         <button type="reset" id="reset_btn" class="btn btn--reset location-reload">{{ translate('messages.Reset') }} </button>
-                        <button type="{{ env('APP_MODE') != 'demo' ? 'submit' : 'button' }}"
-                                class="btn btn--primary call-demo"><i class="tio-save-outlined mr-2"></i>{{ translate('messages.save_info')}}</button>
+                        <button type="submit"
+                                class="btn btn--primary"><i class="tio-save-outlined mr-2"></i>{{ translate('messages.save_info')}}</button>
                     </div>
                 </div>
             </div>
@@ -1547,7 +1547,7 @@
                     <div class="modal-footer">
                         <div class="d-flex flex-wrap gap-3 justify-content-end">
                             <button data-dismiss="modal" class="btn btn--cancel" data-bs-dismiss="modal">{{ translate('Cancel') }}</button>
-                            <button type="{{env('APP_MODE')!='demo'?'submit':'button'}}" class="btn btn--primary {{env('APP_MODE') =='demo'? 'demo_check':''}}">{{ translate('Active') }}</button>
+                            <button type="submit" class="btn btn--primary">{{ translate('Active') }}</button>
                         </div>
                     </div>
                 </form>

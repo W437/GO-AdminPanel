@@ -264,10 +264,6 @@ class VendorController extends Controller
 
     public function edit($id)
     {
-        if (env('APP_MODE') == 'demo' && $id == 2) {
-            Toastr::warning(translate('messages.you_can_not_edit_this_restaurant_please_add_a_new_restaurant_to_edit'));
-            return back();
-        }
         $restaurant = Restaurant::withoutGlobalScope('translate')->with('translations')->find($id);
         return view('admin-views.vendor.edit', compact('restaurant'));
     }
@@ -522,10 +518,6 @@ class VendorController extends Controller
 
     public function destroy(Request $request, Restaurant $restaurant)
     {
-        if (env('APP_MODE') == 'demo' && $restaurant->id == 2) {
-            Toastr::warning(translate('messages.you_can_not_delete_this_restaurant_please_add_a_new_restaurant_to_delete'));
-            return back();
-        }
         Helpers::check_and_delete('restaurant/' , $restaurant['logo']);
         $vendor = Vendor::findOrFail($restaurant?->vendor?->id);
         $restaurant?->delete();

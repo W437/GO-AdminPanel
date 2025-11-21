@@ -183,7 +183,6 @@ class ConfigController extends Controller
             'order_delivery_verification' => (bool)$settings['order_delivery_verification'],
             'cash_on_delivery' => (bool)($cod['status'] == 1 ? true : false),
             'digital_payment' => (bool)($digital_payment['status'] == 1 ? true : false),
-            'demo' => (bool)(env('APP_MODE') == 'demo' ? true : false),
             'maintenance_mode' => (bool)Helpers::get_business_settings('maintenance_mode') ?? 0,
             'order_confirmation_model' => config('order_confirmation_model'),
             'popular_food' => (float)$settings['popular_food'],

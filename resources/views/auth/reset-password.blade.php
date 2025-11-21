@@ -218,19 +218,6 @@
         }
 </script>
 
-@if(env('APP_MODE')=='demo')
-    <script>
-        function copy_cred() {
-            $('#signinSrEmail').val('admin@admin.com');
-            $('#signupSrPassword').val('12345678');
-            toastr.success('Copied successfully!', 'Success!', {
-                CloseButton: true,
-                ProgressBar: true
-            });
-        }
-    </script>
-@endif
-
 <!-- IE Support -->
 <script>
     if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="{{dynamicAsset('public//assets/admin')}}/vendor/babel-polyfill/polyfill.min.js"><\/script>');

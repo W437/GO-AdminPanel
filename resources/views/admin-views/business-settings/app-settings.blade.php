@@ -205,7 +205,7 @@
                                         </span>
                                     </label>
                                     <input type="number" id="app_minimum_version_android" placeholder="{{translate('messages.app_minimum_version')}}" class="form-control h--45px" name="app_minimum_version_android"
-                                        step="0.001"   min="0" value="{{env('APP_MODE')!='demo'?$app_minimum_version_android??'':''}}">
+                                        step="0.001"   min="0" value="{{$app_minimum_version_android??''}}">
                                 </div>
                                 <div class="form-group mb-md-0">
                                     <label for="app_url_android" class="form-label">
@@ -217,7 +217,7 @@
                                         </span>
                                     </label>
                                     <input type="text" id="app_url_android" placeholder="{{translate('messages.Download_Url')}}" class="form-control h--45px" name="app_url_android"
-                                        value="{{env('APP_MODE')!='demo'?$app_url_android??'':''}}">
+                                        value="{{$app_url_android??''}}">
                                 </div>
                             </div>
                         </div>
@@ -236,7 +236,7 @@
                                         </span>
                                     </label>
                                     <input type="number" id="$app_minimum_version_ios" placeholder="{{translate('messages.app_minimum_version')}}"  class="form-control h--45px" name="app_minimum_version_ios"
-                                    step="0.001"  min="0" value="{{env('APP_MODE')!='demo'?$app_minimum_version_ios??'':''}}">
+                                    step="0.001"  min="0" value="{{$app_minimum_version_ios??''}}">
                                 </div>
                                 <div class="form-group mb-md-0">
                                     <label for="app_url_ios" class="form-label">
@@ -248,14 +248,14 @@
                                         </span>
                                     </label>
                                     <input type="text" id="app_url_ios" placeholder="{{translate('messages.Download_Url')}}" class="form-control h--45px" name="app_url_ios"
-                                    value="{{env('APP_MODE')!='demo'?$app_url_ios??'':''}}">
+                                    value="{{$app_url_ios??''}}">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="btn--container justify-content-end mt-3">
                         <button type="reset" class="btn btn--reset">{{translate('messages.reset')}}</button>
-                        <button type="{{env('APP_MODE')!='demo'?'submit':'button'}}" class="btn btn--primary call-demo">{{translate('messages.submit')}}</button>
+                        <button type="submit" class="btn btn--primary">{{translate('messages.submit')}}</button>
                     </div>
                 </div>
             </div>
@@ -287,7 +287,7 @@
                                     </span>
                                     </label>
                                     <input type="number" id="app_minimum_version_android_restaurant" placeholder="{{translate('messages.app_minimum_version')}}" class="form-control h--45px" name="app_minimum_version_android_restaurant"
-                                        step="0.001"   min="0" value="{{env('APP_MODE')!='demo'?$app_minimum_version_android_restaurant??'':''}}">
+                                        step="0.001"   min="0" value="{{$app_minimum_version_android_restaurant??''}}">
                                 </div>
                                 <div class="form-group mb-md-0">
                                     <label  for="app_url_android_restaurant" class="form-label text-capitalize">
@@ -299,7 +299,7 @@
                                         </span>
                                     </label>
                                     <input type="text" id="app_url_android_restaurant" placeholder="{{translate('messages.Download_Url')}}" class="form-control h--45px" name="app_url_android_restaurant"
-                                        value="{{env('APP_MODE')!='demo'?$app_url_android_restaurant??'':''}}">
+                                        value="{{$app_url_android_restaurant??''}}">
                                 </div>
                             </div>
                         </div>
@@ -318,7 +318,7 @@
                                     </span>
                                     </label>
                                     <input type="number" id="app_minimum_version_ios_restaurant" placeholder="{{translate('messages.app_minimum_version')}}" class="form-control h--45px" name="app_minimum_version_ios_restaurant"
-                                    step="0.001"  min="0" value="{{env('APP_MODE')!='demo'?$app_minimum_version_ios_restaurant??'':''}}">
+                                    step="0.001"  min="0" value="{{$app_minimum_version_ios_restaurant??''}}">
                                 </div>
                                 <div class="form-group mb-md-0">
                                     <label for="app_url_ios_restaurant" class="form-label text-capitalize">
@@ -330,14 +330,14 @@
                                         </span>
                                     </label>
                                     <input type="text" id="app_url_ios_restaurant" placeholder="{{translate('messages.Download_Url')}}" class="form-control h--45px" name="app_url_ios_restaurant"
-                                    value="{{env('APP_MODE')!='demo'?$app_url_ios_restaurant??'':''}}">
+                                    value="{{$app_url_ios_restaurant??''}}">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="btn--container justify-content-end mt-3">
                         <button type="reset" class="btn btn--reset">{{translate('messages.reset')}}</button>
-                        <button type="{{env('APP_MODE')!='demo'?'submit':'button'}}"  class="btn btn--primary call-demo">{{translate('messages.submit')}}</button>
+                        <button type="submit"  class="btn btn--primary">{{translate('messages.submit')}}</button>
                     </div>
                 </div>
             </div>
@@ -370,7 +370,7 @@
                                     </span>
                                     </label>
                                     <input type="number" id="app_minimum_version_android_deliveryman" placeholder="{{translate('messages.app_minimum_version')}}" class="form-control h--45px" name="app_minimum_version_android_deliveryman"
-                                        step="0.001"   min="0" value="{{env('APP_MODE')!='demo'?$app_minimum_version_android_deliveryman??'':''}}">
+                                        step="0.001"   min="0" value="{{$app_minimum_version_android_deliveryman??''}}">
                                 </div>
                                 <div class="form-group mb-md-0">
                                     <label for="app_url_android_deliveryman" class="form-label text-capitalize">
@@ -382,7 +382,7 @@
                                         </span>
                                     </label>
                                     <input type="text" id="app_url_android_deliveryman" placeholder="{{translate('messages.Download_Url')}}" class="form-control h--45px" name="app_url_android_deliveryman"
-                                    value="{{env('APP_MODE')!='demo'?$app_url_android_deliveryman??'':''}}">
+                                    value="{{$app_url_android_deliveryman??''}}">
                                 </div>
                             </div>
                         </div>
@@ -401,7 +401,7 @@
                                     </span>
                                     </label>
                                     <input type="number" id="app_minimum_version_ios_deliveryman" placeholder="{{translate('messages.app_minimum_version')}}" class="form-control h--45px" name="app_minimum_version_ios_deliveryman"
-                                    step="0.001"  min="0" value="{{env('APP_MODE')!='demo'?$app_minimum_version_ios_deliveryman??'':''}}">
+                                    step="0.001"  min="0" value="{{$app_minimum_version_ios_deliveryman??''}}">
                                 </div>
                                 <div class="form-group mb-md-0">
                                     <label for="app_url_ios_deliveryman" class="form-label text-capitalize">
@@ -413,14 +413,14 @@
                                         </span>
                                     </label>
                                     <input type="text" id="app_url_ios_deliveryman" placeholder="{{translate('messages.Download_Url')}}" class="form-control h--45px" name="app_url_ios_deliveryman"
-                                    value="{{env('APP_MODE')!='demo'?$app_url_ios_deliveryman??'':''}}">
+                                    value="{{$app_url_ios_deliveryman??''}}">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="btn--container justify-content-end mt-3">
                         <button type="reset" class="btn btn--reset">{{translate('messages.reset')}}</button>
-                        <button type="{{env('APP_MODE')!='demo'?'submit':'button'}}"  class="btn btn--primary call-demo">{{translate('messages.submit')}}</button>
+                        <button type="submit"  class="btn btn--primary">{{translate('messages.submit')}}</button>
                     </div>
                 </div>
             </div>

@@ -126,12 +126,6 @@ class DatabaseSettingController extends Controller
 
     public function updateRow(Request $request, string $table, $primary)
     {
-        if (env('APP_MODE') === 'demo') {
-            return response()->json([
-                'message' => translate('messages.this_option_is_disabled_in_demo_mode'),
-            ], 403);
-        }
-
         $table = $this->ensureTable($table, true);
         $structure = $this->getTableStructure($table);
         $primaryKey = $structure['primary_key'];

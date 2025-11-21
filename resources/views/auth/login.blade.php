@@ -314,7 +314,7 @@
                                    required
                                    placeholder="{{translate('Enter recaptcha value')}}"
                                    autocomplete="off"
-                                   value="{{env('APP_MODE')=='dev'? session('six_captcha'):''}}">
+>
                         </div>
                         <div class="col-6 bg-white rounded d-flex">
                             <img src="<?php echo $custome_recaptcha->inline(); ?>" class="rounded w-100" />
@@ -335,7 +335,7 @@
                                    required
                                    placeholder="{{translate('Enter recaptcha value')}}"
                                    autocomplete="off"
-                                   value="{{env('APP_MODE')=='dev'? session('six_captcha'):''}}">
+>
                         </div>
                         <div class="col-6 bg-white rounded d-flex">
                             <img src="<?php echo $custome_recaptcha->inline(); ?>" class="rounded w-100" />
@@ -353,36 +353,6 @@
                 {{translate('messages.sign_in')}}
             </button>
         </form>
-        
-        <!-- Demo Credentials (if in demo mode) -->
-        @if(env('APP_MODE') =='demo' )
-            @if (isset($role) &&  $role == 'admin')
-                <div style="margin-top: 24px; padding: 16px; background: #f8f9fa; border-radius: 8px; text-align: left;">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div style="font-size: 14px; color: #64748b;">
-                            <div><strong>Email:</strong> admin@admin.com</div>
-                            <div><strong>Password:</strong> 12345678</div>
-                        </div>
-                        <button class="btn btn-sm" id="copy_cred" style="background: #9463ac; color: white; border: none; border-radius: 4px; padding: 8px 12px;">
-                            <i class="tio-copy"></i>
-                        </button>
-                    </div>
-                </div>
-            @endif
-            @if (isset($role) &&  $role == 'vendor')
-                <div style="margin-top: 24px; padding: 16px; background: #f8f9fa; border-radius: 8px; text-align: left;">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div style="font-size: 14px; color: #64748b;">
-                            <div><strong>Email:</strong> test.restaurant@gmail.com</div>
-                            <div><strong>Password:</strong> 12345678</div>
-                        </div>
-                        <button class="btn btn-sm" id="copy_cred2" style="background: #9463ac; color: white; border: none; border-radius: 4px; padding: 8px 12px;">
-                            <i class="tio-copy"></i>
-                        </button>
-                    </div>
-                </div>
-            @endif
-        @endif
     </div>
     
     <!-- Version Badge -->
@@ -503,25 +473,6 @@
                 $.HSCore.components.HSValidation.init($(this));
             });
         });
-
-        @if(env('APP_MODE') =='demo')
-            $("#copy_cred").click(function() {
-                $('#signinSrEmail').val('admin@admin.com');
-                $('#signupSrPassword').val('12345678');
-                toastr.success('Credentials copied!', 'Success', {
-                    CloseButton: true,
-                    ProgressBar: true
-                });
-            })
-            $("#copy_cred2").click(function() {
-                $('#signinSrEmail').val('test.restaurant@gmail.com');
-                $('#signupSrPassword').val('12345678');
-                toastr.success('Credentials copied!', 'Success', {
-                    CloseButton: true,
-                    ProgressBar: true
-                });
-            })
-        @endif
     </script>
 
     @if(isset($recaptcha) && $recaptcha['status'] == 1)

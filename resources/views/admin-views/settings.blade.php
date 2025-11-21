@@ -72,7 +72,7 @@
             </div>
 
             <div class="col-lg-9">
-                <form action="{{env('APP_MODE')!='demo'?route('admin.settings'):'javascript:'}}" method="post" enctype="multipart/form-data" id="admin-settings-form">
+                <form action="{{route('admin.settings')}}" method="post" enctype="multipart/form-data" id="admin-settings-form">
                 @csrf
                 <!-- Card -->
                     <div class="card mb-3" id="generalDiv">
@@ -158,7 +158,7 @@
                             </div>
 
                             <div class="d-flex justify-content-end">
-                                <button type="button" data-id="admin-settings-form" data-message="{{translate('Want to update admin info ?')}}" class="btn btn-primary {{env('APP_MODE')!='demo'?"form-alert":"call-demo"}}">{{translate('messages.save')}}</button>
+                                <button type="button" data-id="admin-settings-form" data-message="{{translate('Want to update admin info ?')}}" class="btn btn-primary form-alert">{{translate('messages.save')}}</button>
                             </div>
 
                             <!-- End Form -->
@@ -177,7 +177,7 @@
                     <!-- Body -->
                     <div class="card-body">
                         <!-- Form -->
-                        <form id="changePasswordForm" class="js-validate" action="{{env('APP_MODE')!='demo'?route('admin.settings-password'):'javascript:'}}" method="post"
+                        <form id="changePasswordForm" class="js-validate" action="{{route('admin.settings-password')}}" method="post"
                               enctype="multipart/form-data">
                         @csrf
 
@@ -235,12 +235,7 @@
                             <!-- End Form Group -->
 
                             <div class="d-flex justify-content-end">
-                                @if (env('APP_MODE')!='demo')
                                     <button type="submit" class="btn btn--primary">{{translate('messages.save')}}</button>
-                                @else
-                                    <button type="button" class="btn btn--primary call-demo">{{translate('messages.save')}}</button>
-
-                                @endif
                             </div>
                         </form>
                         <!-- End Form -->

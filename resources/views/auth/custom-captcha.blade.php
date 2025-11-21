@@ -1,6 +1,6 @@
 <div class="col-6 pr-0">
     <input type="text" class="form-control form-control-lg form-recapcha" name="custome_recaptcha"
-            id="custome_recaptcha" required placeholder="{{\translate('Enter_recaptcha_value')}}" autocomplete="off" value="{{env('APP_MODE')=='dev'? session('six_captcha'):''}}">
+            id="custome_recaptcha" required placeholder="{{\translate('Enter_recaptcha_value')}}" autocomplete="off">
 </div>
 <div class="col-6 bg-white rounded d-flex">
     <img src="<?php echo $custome_recaptcha->inline(); ?>" class="rounded w-100" />

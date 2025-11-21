@@ -109,12 +109,6 @@
     })();
 </script>
 
-    @if(env('APP_MODE')=='demo')
-    <div id="direction-toggle" class="direction-toggle">
-        <i class="tio-settings"></i>
-        <span></span>
-    </div>
-    @endif
     <div id="pre--loader" class="pre--loader">
     </div>
     <div class="container">
@@ -860,14 +854,6 @@
             dmConversationView();
         }
 
-        $(document).on('click', '.call-demo', function () {
-            @if(env('APP_MODE') =='demo')
-            toastr.info('{{ translate('Update option is disabled for demo!') }}', {
-                CloseButton: true,
-                ProgressBar: true
-            });
-            @endif
-        });
         $(document).on('click', '.check-order', function () {
             location.href = '{{ route('admin.order.list', ['status' => 'all']) }}';
         });

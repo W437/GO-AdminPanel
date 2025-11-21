@@ -40,8 +40,8 @@
                         @endforeach
                     </div>
                     <div class="text-right mt-3">
-                        <button type="{{ env('APP_MODE') != 'demo' ? 'submit' : 'button' }}"
-                        class="btn btn--primary call-demo" id="submitForm">{{ translate('Clear') }}</button>
+                        <button type="submit"
+                        class="btn btn--primary" id="submitForm">{{ translate('Clear') }}</button>
                     </div>
                 </form>
             </div>

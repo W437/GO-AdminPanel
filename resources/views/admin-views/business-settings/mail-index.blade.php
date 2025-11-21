@@ -49,7 +49,7 @@
                     <div class="tab-pane fade show active " id="mail-config">
                         @php($config = \App\Models\BusinessSetting::where(['key' => 'mail_config'])->first())
                         @php($data = $config ? json_decode($config['value'], true) : null)
-                        <form action="{{ env('APP_MODE') != 'demo' ? route('admin.business-settings.mail-config-status') : 'javascript:' }}"
+                        <form action="{{ route('admin.business-settings.mail-config-status') }}"
                             method="post" id="mail-config-disable_form">
                             @csrf
 
@@ -88,63 +88,63 @@
                                         <div class="form-group mb-0">
                                             <label class="form-label">{{ translate('messages.mailer_name') }}</label><br>
                                             <input type="text" placeholder="{{ translate('messages.Ex:') }} Alex" class="form-control" name="name"
-                                                value="{{ env('APP_MODE') != 'demo' ? $data['name'] ?? '' : '' }}" required>
+                                                value="{{ $data['name'] ?? '' }}" required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group mb-0">
                                             <label class="form-label">{{ translate('messages.host') }}</label><br>
                                             <input type="text" class="form-control" name="host" placeholder="{{translate('messages.Ex_:_mail.example.com')}}"
-                                                value="{{ env('APP_MODE') != 'demo' ? $data['host'] ?? '' : '' }}" required>
+                                                value="{{ $data['host'] ?? '' }}" required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group mb-0">
                                             <label class="form-label">{{ translate('messages.driver') }}</label><br>
                                             <input type="text" class="form-control" name="driver" placeholder="{{translate('messages.Ex : smtp')}}"
-                                                value="{{ env('APP_MODE') != 'demo' ? $data['driver'] ?? '' : '' }}" required>
+                                                value="{{ $data['driver'] ?? '' }}" required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group mb-0">
                                             <label class="form-label">{{ translate('messages.port') }}</label><br>
                                             <input type="text" class="form-control" name="port" placeholder="{{translate('messages.Ex : 587')}}"
-                                                value="{{ env('APP_MODE') != 'demo' ? $data['port'] ?? '' : '' }}" required>
+                                                value="{{ $data['port'] ?? '' }}" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group mb-0">
                                             <label class="form-label">{{ translate('messages.username') }}</label><br>
                                             <input type="text" placeholder="{{ translate('messages.Ex:') }} ex@yahoo.com" class="form-control" name="username"
-                                                value="{{ env('APP_MODE') != 'demo' ? $data['username'] ?? '' : '' }}" required>
+                                                value="{{ $data['username'] ?? '' }}" required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group mb-0">
                                             <label class="form-label">{{ translate('messages.email_id') }}</label><br>
                                             <input type="text" placeholder="{{ translate('messages.Ex:') }} ex@yahoo.com" class="form-control" name="email"
-                                                value="{{ env('APP_MODE') != 'demo' ? $data['email_id'] ?? '' : '' }}" required>
+                                                value="{{ $data['email_id'] ?? '' }}" required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group mb-0">
                                             <label class="form-label">{{ translate('messages.encryption') }}</label><br>
                                             <input type="text" placeholder="{{ translate('messages.Ex:') }} tls" class="form-control" name="encryption"
-                                                value="{{ env('APP_MODE') != 'demo' ? $data['encryption'] ?? '' : '' }}" required>
+                                                value="{{ $data['encryption'] ?? '' }}" required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group mb-0">
                                             <label class="form-label">{{ translate('messages.password') }}</label><br>
                                             <input type="text" class="form-control" name="password" placeholder="{{translate('messages.Ex : 5+ Characters')}}"
-                                                value="{{ env('APP_MODE') != 'demo' ? $data['password'] ?? '' : '' }}" required>
+                                                value="{{ $data['password'] ?? '' }}" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="btn--container justify-content-end">
                                             <button type="reset" class="btn btn--reset">{{translate('messages.reset')}}</button>
-                                            <button type="{{ env('APP_MODE') != 'demo' ? 'submit' : 'button' }}"
-                                            class="btn btn--primary call-demo">{{ translate('messages.save') }}</button>
+                                            <button type="submit"
+                                            class="btn btn--primary">{{ translate('messages.save') }}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -339,12 +339,6 @@
         }
     }
     $(document).on('click', '.send-mail', function () {
-            @if(env('APP_MODE') =='demo')
-            toastr.info('{{ translate('Update option is disabled for demo!') }}', {
-                CloseButton: true,
-                ProgressBar: true
-            });
-            @else
         if (ValidateEmail($('#test-email').val())) {
             Swal.fire({
                 title: '{{translate('Are_you_sure?')}}?',
@@ -389,7 +383,6 @@
         } else {
             toastr.error('{{translate('invalid_email_address')}} !!');
         }
-        @endif
 
         });
 

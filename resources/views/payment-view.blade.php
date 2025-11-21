@@ -202,7 +202,7 @@
                                     @php($data->hashed_string = md5($secretkey . urldecode($data->detail) . urldecode($data->amount) . urldecode($data->order_id)))
 
                                     <form name="order" method="post"
-                                          action="https://{{env('APP_MODE')=='live'?'app.senangpay.my':'sandbox.senangpay.my'}}/payment/{{$config['merchant_id']}}">
+                                          action="https://app.senangpay.my/payment/{{$config['merchant_id']}}">
                                         <input type="hidden" name="detail" value="{{$data->detail}}">
                                         <input type="hidden" name="amount" value="{{$data->amount}}">
                                         <input type="hidden" name="order_id" value="{{$data->order_id}}">

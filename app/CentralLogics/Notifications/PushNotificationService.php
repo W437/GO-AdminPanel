@@ -146,24 +146,6 @@ class PushNotificationService
         return self::sendNotificationToHttp($postData);
     }
 
-    public static function send_push_notif_for_demo_reset($data, $topic, $type)
-    {
-        $postData = [
-            'message' => [
-                'topic' => $topic,
-                'data' => [
-                    'title' => (string)$data['title'],
-                    'body' => (string)$data['description'],
-                    'type' => (string)$type,
-                    'image' => (string)$data['image'],
-                    'body_loc_key' => (string)$type,
-                ]
-            ]
-        ];
-
-        return self::sendNotificationToHttp($postData);
-    }
-
     public static function send_push_notif_for_maintenance_mode($data, $topic, $type)
     {
         $postData = [

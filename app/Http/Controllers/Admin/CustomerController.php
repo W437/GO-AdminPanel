@@ -337,12 +337,6 @@ class CustomerController extends Controller
 
     public function update_settings(Request $request)
     {
-
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
-
         $request->validate([
             'add_fund_bonus' => 'nullable|numeric|max:100|min:0',
             'loyalty_point_exchange_rate' => 'nullable|numeric',

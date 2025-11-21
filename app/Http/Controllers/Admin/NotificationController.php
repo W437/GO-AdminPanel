@@ -31,9 +31,6 @@ class NotificationController extends Controller
 
     public function store(Request $request)
     {
-        if (env('APP_MODE') == 'demo') {
-            return response()->json(['errors' => Helpers::error_formater('feature-disable', 'This option is disabled for demo!')]);
-        }
         $validator = Validator::make($request->all(), [
             'notification_title' => 'required|max:191',
             'description' => 'required|max:1000',
@@ -100,10 +97,6 @@ class NotificationController extends Controller
 
     public function update(Request $request, $id)
     {
-        if (env('APP_MODE') == 'demo') {
-            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
-            return back();
-        }
         $request->validate([
             'notification_title' => 'required|max:191',
             'description' => 'required|max:1000',

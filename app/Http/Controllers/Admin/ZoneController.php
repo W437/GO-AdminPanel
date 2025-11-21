@@ -87,32 +87,17 @@ class ZoneController extends Controller
 
     public function edit($id)
     {
-        if(env('APP_MODE')=='demo' && $id == 1)
-        {
-            Toastr::warning(translate('messages.you_can_not_edit_this_zone_please_add_a_new_zone_to_edit'));
-            return back();
-        }
         $zone=Zone::selectRaw("*,ST_AsText(ST_Centroid(`coordinates`)) as center")->withoutGlobalScope('translate')->with('translations')->findOrFail($id);
         $area = json_decode($zone->coordinates[0]->toJson(),true);
         return view('admin-views.zone.edit', compact(['zone','area']));
     }
     public function latest_zone_settings()
     {
-        if(env('APP_MODE')=='demo')
-        {
-            Toastr::warning(translate('messages.you_can_not_edit_this_zone_please_add_a_new_zone_to_edit'));
-            return back();
-        }
         $zone=Zone::with('incentives')->selectRaw("*,ST_AsText(ST_Centroid(`coordinates`)) as center")->latest()->first();
         return view('admin-views.zone.settings', compact('zone'));
     }
     public function zone_settings($id)
     {
-        if(env('APP_MODE')=='demo' && $id == 1)
-        {
-            Toastr::warning(translate('messages.you_can_not_edit_this_zone_please_add_a_new_zone_to_edit'));
-            return back();
-        }
         $zone=Zone::with('incentives')->selectRaw("*,ST_AsText(ST_Centroid(`coordinates`)) as center")->findOrFail($id);
         return view('admin-views.zone.settings', compact('zone'));
     }
@@ -194,11 +179,6 @@ class ZoneController extends Controller
 
     public function destroy(Zone $zone)
     {
-        if(env('APP_MODE')=='demo' && $zone->id == 1)
-        {
-            Toastr::warning(translate('messages.you_can_not_delete_this_zone_please_add_a_new_zone_to_delete'));
-            return back();
-        }
         $zone->delete();
         Toastr::success(translate('messages.zone_deleted_successfully'));
         return back();
@@ -206,11 +186,6 @@ class ZoneController extends Controller
 
     public function status(Request $request)
     {
-        if(env('APP_MODE')=='demo' && $request->id == 1)
-        {
-            Toastr::warning('Sorry!You can not inactive this zone!');
-            return back();
-        }
         $zone = Zone::findOrFail($request->id);
         $zone->status = $request->status;
         $zone->save();

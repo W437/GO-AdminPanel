@@ -265,10 +265,6 @@ class Helpers
     {
         return PushNotificationService::send_push_notif_to_topic($data, $topic, $type, $web_push_link);
     }
-    public static function send_push_notif_for_demo_reset($data, $topic, $type)
-    {
-        return PushNotificationService::send_push_notif_for_demo_reset($data, $topic, $type);
-    }
 
     public static function send_push_notif_for_maintenance_mode($data, $topic, $type)
     {

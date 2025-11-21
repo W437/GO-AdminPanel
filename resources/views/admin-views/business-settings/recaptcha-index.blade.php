@@ -44,7 +44,7 @@
                 </div>
                 @php($config=\App\CentralLogics\Helpers::get_business_settings('recaptcha'))
                 <form
-                    action="{{env('APP_MODE')!='demo'?route('admin.business-settings.recaptcha_update',['recaptcha']):'javascript:'}}"
+                    action="{{route('admin.business-settings.recaptcha_update',['recaptcha'])}}"
                     method="post">
                     @csrf
                     <label class="toggle-switch h--45px toggle-switch-sm d-flex justify-content-between border rounded px-3 py-0 form-control mb-4">
@@ -77,20 +77,20 @@
                             <div class="form-group">
                                 <label for="site_key" class="form-label">{{translate('messages.Site Key')}}</label><br>
                                 <input id="site_key" type="text" class="form-control" name="site_key"
-                                       value="{{env('APP_MODE')!='demo'?$config['site_key']??"":''}}">
+                                       value="{{$config['site_key']??""}}">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="site_key" class="form-label">{{translate('messages.Secret Key')}}</label><br>
                                 <input id="site_key" type="text" class="form-control" name="secret_key"
-                                       value="{{env('APP_MODE')!='demo'?$config['secret_key']??"":''}}">
+                                       value="{{$config['secret_key']??""}}">
                             </div>
                         </div>
                     </div>
                     <div class="btn--container justify-content-end">
                         <button type="reset" class="btn btn--reset">{{translate('messages.reset')}}</button>
-                        <button type="{{env('APP_MODE')!='demo'?'submit':'button'}}" class="btn btn--primary call-demo">{{translate('messages.save')}}</button>
+                        <button type="submit" class="btn btn--primary">{{translate('messages.save')}}</button>
                     </div>
                 </form>
             </div>

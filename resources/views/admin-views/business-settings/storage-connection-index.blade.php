@@ -139,7 +139,7 @@
             <div class="card-body">
                 <div class="mt-2 px-3">
                     <form
-                        action="{{env('APP_MODE')!='demo'?route('admin.business-settings.storage_connection_update',['storage_connection']):'javascript:'}}"
+                        action="{{route('admin.business-settings.storage_connection_update',['storage_connection'])}}"
                         method="post">
                         @csrf
                                 <div class="border pt-5 radius-10 row mb-3">
@@ -149,7 +149,7 @@
                                     <div class="col-lg-8 col-sm-6">
                                         <div class="form-group">
                                             <input required id="key" type="text" class="form-control mb-2" name="key"
-                                                   value="{{env('APP_MODE')!='demo'?$config['key']??"":''}}">
+                                                   value="{{$config['key']??""}}">
 
                                         </div>
                                     </div>
@@ -161,7 +161,7 @@
                                     <div class="col-lg-8 col-sm-6">
                                         <div class="form-group">
                                             <input required id="secret" type="text" class="form-control mb-2" name="secret"
-                                                   value="{{env('APP_MODE')!='demo'?$config['secret']??"":''}}">
+                                                   value="{{$config['secret']??""}}">
 
                                         </div>
                                     </div>
@@ -173,7 +173,7 @@
                                     <div class="col-lg-8 col-sm-6">
                                         <div class="form-group">
                                             <input required id="region" type="text" class="form-control mb-2" name="region"
-                                                   value="{{env('APP_MODE')!='demo'?$config['region']??"":''}}">
+                                                   value="{{$config['region']??""}}">
 
                                         </div>
                                     </div>
@@ -185,7 +185,7 @@
                                     <div class="col-lg-8 col-sm-6">
                                         <div class="form-group">
                                             <input required id="bucket" type="text" class="form-control mb-2" name="bucket"
-                                                   value="{{env('APP_MODE')!='demo'?$config['bucket']??"":''}}">
+                                                   value="{{$config['bucket']??""}}">
 
                                         </div>
                                     </div>
@@ -198,7 +198,7 @@
                                         <div class="form-group">
                                             <input id="url" type="text" class="form-control mb-2" name="url"
                                                    placeholder="{{translate('Leave empty for AWS S3, required for DigitalOcean Spaces')}}"
-                                                   value="{{env('APP_MODE')!='demo'?$config['url']??"":''}}">
+                                                   value="{{$config['url']??""}}">
                                             <small class="form-text text-muted">{{translate('For DigitalOcean Spaces: https://your-space.region.digitaloceanspaces.com')}}</small>
                                         </div>
                                     </div>
@@ -211,14 +211,14 @@
                                         <div class="form-group">
                                             <input id="end_point" type="text" class="form-control mb-2" name="end_point"
                                                    placeholder="{{translate('e.g., https://nyc3.digitaloceanspaces.com')}}"
-                                                   value="{{env('APP_MODE')!='demo'?$config['end_point']??"":''}}">
+                                                   value="{{$config['end_point']??""}}">
                                             <small class="form-text text-muted">{{translate('Required only for DigitalOcean Spaces or S3-compatible services')}}</small>
                                         </div>
                                     </div>
                                 </div>
                         <div class="btn--container justify-content-end">
                             <button type="reset" class="btn btn--reset">{{translate('messages.reset')}}</button>
-                            <button type="{{env('APP_MODE')!='demo'?'submit':'button'}}" class="btn btn--primary call-demo">{{translate('messages.save')}}</button>
+                            <button type="submit" class="btn btn--primary">{{translate('messages.save')}}</button>
                         </div>
                     </form>
                 </div>

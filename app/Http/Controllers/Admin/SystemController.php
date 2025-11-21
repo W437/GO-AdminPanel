@@ -84,12 +84,6 @@ class SystemController extends Controller
 
     public function maintenance_mode(Request $request)
     {
-
-        if(env('APP_MODE') == 'demo'){
-            Toastr::warning('Sorry! You can not enable maintainance mode in demo!');
-            return back();
-        }
-
         if($request->maintenance_duration !== 'until_change' ){
             $start = Carbon::parse($request['start_date']);
             $end = Carbon::parse($request['end_date']);
