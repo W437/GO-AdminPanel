@@ -38,7 +38,7 @@ class FoodController extends Controller
             'veg' => 'required|boolean',
             'translations'=>'required',
             'stock_type'=>'required',
-            'image' => 'nullable|max:2048',
+            'image' => 'nullable|max:10240',
 
         ], [
             'category_id.required' => translate('messages.category_required'),
@@ -331,7 +331,7 @@ class FoodController extends Controller
             'price' => 'required|numeric|min:0.01',
             'discount' => 'required|numeric|min:0',
             'veg' => 'required|boolean',
-            'image' => 'nullable|max:2048',
+            'image' => 'nullable|max:10240',
             'stock_type'=>'required',
         ], [
             'category_id.required' => translate('messages.category_required'),

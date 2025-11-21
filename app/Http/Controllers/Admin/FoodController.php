@@ -47,7 +47,7 @@ class FoodController extends Controller
             'name.0' => 'required',
             'name.*' => 'max:191',
             'category_id' => 'required',
-            'image' => 'nullable|max:2048',
+            'image' => 'nullable|max:10240',
             'price' => 'required|numeric|between:.01,999999999999.99',
             'discount' => 'required|numeric|min:0',
             'restaurant_id' => 'required',
@@ -311,7 +311,7 @@ class FoodController extends Controller
             'description' => 'array',
             'description.*' => 'max:1000',
             'discount' => 'required|numeric|min:0',
-            'image' => 'nullable|max:2048',
+            'image' => 'nullable|max:10240',
         ], [
             'description.*.max' => translate('messages.description_length_warning'),
             'name.0.required' => translate('messages.item_name_required'),
