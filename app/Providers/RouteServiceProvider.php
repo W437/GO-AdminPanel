@@ -91,6 +91,7 @@ class RouteServiceProvider extends ServiceProvider
                 });
 
             // Admin Panel Routes (hq-secure-panel-1337.hopa.delivery)
+            // Web and admin routes only - API calls should use api.hopa.delivery domain
             Route::domain($adminDomain)
                 ->group(function () {
                     Route::middleware('web')
@@ -106,17 +107,6 @@ class RouteServiceProvider extends ServiceProvider
                         ->middleware('web')
                         ->namespace($this->namespace)
                         ->group(base_path('routes/vendor.php'));
-
-                    // Also allow API access from admin domain for backward compatibility
-                    Route::prefix('api/v1')
-                        ->middleware('api')
-                        ->namespace($this->namespace)
-                        ->group(base_path('routes/api/v1/api.php'));
-
-                    Route::prefix('api/v2')
-                        ->middleware('api')
-                        ->namespace($this->namespace)
-                        ->group(base_path('routes/api/v2/api.php'));
                 });
 
             // Old Admin Domain (admin.hopa.delivery) - For backward compatibility
