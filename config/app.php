@@ -17,6 +17,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application API Key
+    |--------------------------------------------------------------------------
+    |
+    | This key is used to authenticate API requests from mobile apps.
+    | It should be included in the X-API-Key header for public endpoints.
+    | Keep this value secret and do not commit it to version control.
+    |
+    */
+
+    'api_key' => env('API_KEY', null),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |
