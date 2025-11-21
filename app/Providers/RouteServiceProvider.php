@@ -158,7 +158,9 @@ class RouteServiceProvider extends ServiceProvider
                         ->group(base_path('routes/api/v2/api.php'));
                 });
 
-            // Fallback for localhost, IP access, or any other domain (development/backward compatibility)
+            // Fallback for localhost, IP access (development only - minimal routes to avoid conflicts)
+            // For production, use proper domain names above
+            // Only register web/admin routes, no API routes to avoid duplicate route name conflicts
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
@@ -172,16 +174,6 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/vendor.php'));
-
-            Route::prefix('api/v1')
-                ->middleware('api')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/api/v1/api.php'));
-
-            Route::prefix('api/v2')
-                ->middleware('api')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/api/v2/api.php'));
 
         });
     }
