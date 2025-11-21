@@ -60,7 +60,7 @@ class RouteServiceProvider extends ServiceProvider
                     // Root path returns API info
                     Route::get('/', function() {
                         return response()->json([
-                            'message' => 'GO Admin API',
+                            'message' => 'Hopa! Nothing to look for here.',
                             'status' => 'active',
                             'endpoints' => [
                                 'v1' => url('/api/v1'),
