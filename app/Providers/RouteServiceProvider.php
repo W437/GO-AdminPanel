@@ -68,7 +68,7 @@ class RouteServiceProvider extends ServiceProvider
                             ],
                             'documentation' => 'API endpoints are available at /api/v1 and /api/v2'
                         ], 200);
-                    });
+                    })->name('api.home');
 
                     // API routes with /api prefix (main endpoints)
                     Route::prefix('api/v1')
