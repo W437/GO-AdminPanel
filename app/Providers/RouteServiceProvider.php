@@ -70,24 +70,13 @@ class RouteServiceProvider extends ServiceProvider
                         ], 200);
                     });
 
-                    // API routes with /api prefix
+                    // API routes with /api prefix (main endpoints)
                     Route::prefix('api/v1')
                         ->middleware('api')
                         ->namespace($this->namespace)
                         ->group(base_path('routes/api/v1/api.php'));
 
                     Route::prefix('api/v2')
-                        ->middleware('api')
-                        ->namespace($this->namespace)
-                        ->group(base_path('routes/api/v2/api.php'));
-
-                    // API routes without /api prefix for cleaner URLs
-                    Route::prefix('v1')
-                        ->middleware('api')
-                        ->namespace($this->namespace)
-                        ->group(base_path('routes/api/v1/api.php'));
-
-                    Route::prefix('v2')
                         ->middleware('api')
                         ->namespace($this->namespace)
                         ->group(base_path('routes/api/v2/api.php'));
@@ -131,6 +120,7 @@ class RouteServiceProvider extends ServiceProvider
                 });
 
             // Old Admin Domain (admin.hopa.delivery) - For backward compatibility
+            // Only web/admin routes, no API to avoid route name conflicts
             Route::domain($oldAdminDomain)
                 ->group(function () {
                     Route::middleware('web')
@@ -146,16 +136,6 @@ class RouteServiceProvider extends ServiceProvider
                         ->middleware('web')
                         ->namespace($this->namespace)
                         ->group(base_path('routes/vendor.php'));
-
-                    Route::prefix('api/v1')
-                        ->middleware('api')
-                        ->namespace($this->namespace)
-                        ->group(base_path('routes/api/v1/api.php'));
-
-                    Route::prefix('api/v2')
-                        ->middleware('api')
-                        ->namespace($this->namespace)
-                        ->group(base_path('routes/api/v2/api.php'));
                 });
 
             // Fallback for localhost, IP access (development only - minimal routes to avoid conflicts)
