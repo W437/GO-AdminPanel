@@ -1,12 +1,12 @@
 # Introduction
 
-Complete API documentation for GO-AdminPanel - Restaurant Management System
+Complete API documentation for Hopa! - Restaurant & Food Delivery Platform
 
 <aside>
     <strong>Base URL</strong>: <code>https://api.hopa.delivery</code>
 </aside>
 
-    Welcome to the GO-AdminPanel API documentation. This API provides comprehensive endpoints for managing restaurants, orders, customers, delivery personnel, and more.
+    Welcome to the Hopa! API documentation. This API provides comprehensive endpoints for managing restaurants, orders, customers, delivery personnel, and more.
 
     <aside>
     <b>Base URL</b>: <code>/api/v1</code><br>

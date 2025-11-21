@@ -35,7 +35,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '239'
+          x-ratelimit-remaining: '103'
         description: null
     responseFields: []
     auth: []
@@ -115,7 +115,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '238'
+          x-ratelimit-remaining: '102'
         description: null
     responseFields: []
     auth: []
@@ -156,7 +156,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '237'
+          x-ratelimit-remaining: '101'
         description: null
     responseFields: []
     auth: []
@@ -221,7 +221,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '236'
+          x-ratelimit-remaining: '100'
         description: null
     responseFields: []
     auth: []
@@ -262,7 +262,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '235'
+          x-ratelimit-remaining: '99'
         description: null
     responseFields: []
     auth: []
@@ -293,14 +293,14 @@ endpoints:
         name: story
         description: 'The story.'
         required: true
-        example: 16
-        type: integer
+        example: architecto
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      story: 16
+      story: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -1918,7 +1918,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '234'
+          x-ratelimit-remaining: '98'
         description: null
     responseFields: []
     auth: []
@@ -2145,7 +2145,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '233'
+          x-ratelimit-remaining: '97'
         description: null
     responseFields: []
     auth: []
@@ -2198,7 +2198,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '232'
+          x-ratelimit-remaining: '96'
         description: null
     responseFields: []
     auth: []
@@ -2434,7 +2434,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '231'
+          x-ratelimit-remaining: '95'
         description: null
     responseFields: []
     auth: []
@@ -2475,7 +2475,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '230'
+          x-ratelimit-remaining: '94'
         description: null
     responseFields: []
     auth: []
@@ -2636,7 +2636,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '229'
+          x-ratelimit-remaining: '93'
         description: null
     responseFields: []
     auth: []
@@ -2677,7 +2677,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '228'
+          x-ratelimit-remaining: '92'
         description: null
     responseFields: []
     auth: []
@@ -2773,7 +2773,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '227'
+          x-ratelimit-remaining: '91'
         description: null
     responseFields: []
     auth: []
@@ -2826,7 +2826,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '226'
+          x-ratelimit-remaining: '90'
         description: null
     responseFields: []
     auth: []
@@ -3059,7 +3059,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '225'
+          x-ratelimit-remaining: '89'
         description: null
     responseFields: []
     auth: []
@@ -3112,7 +3112,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '224'
+          x-ratelimit-remaining: '88'
         description: null
     responseFields: []
     auth: []
@@ -3196,7 +3196,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '223'
+          x-ratelimit-remaining: '87'
         description: null
     responseFields: []
     auth: []
@@ -3268,7 +3268,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '222'
+          x-ratelimit-remaining: '86'
         description: null
     responseFields: []
     auth: []
@@ -3333,7 +3333,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '221'
+          x-ratelimit-remaining: '85'
         description: null
     responseFields: []
     auth: []
@@ -3374,7 +3374,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '220'
+          x-ratelimit-remaining: '84'
         description: null
     responseFields: []
     auth: []
@@ -3427,7 +3427,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '219'
+          x-ratelimit-remaining: '83'
         description: null
     responseFields: []
     auth: []
@@ -3468,7 +3468,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '218'
+          x-ratelimit-remaining: '82'
         description: null
     responseFields: []
     auth: []
@@ -3564,7 +3564,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '217'
+          x-ratelimit-remaining: '81'
         description: null
     responseFields: []
     auth: []
@@ -3899,7 +3899,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '216'
+          x-ratelimit-remaining: '80'
         description: null
     responseFields: []
     auth: []
@@ -3940,7 +3940,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '215'
+          x-ratelimit-remaining: '79'
         description: null
     responseFields: []
     auth: []
@@ -3981,7 +3981,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '214'
+          x-ratelimit-remaining: '78'
         description: null
     responseFields: []
     auth: []
@@ -4022,7 +4022,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '213'
+          x-ratelimit-remaining: '77'
         description: null
     responseFields: []
     auth: []
@@ -4094,7 +4094,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '212'
+          x-ratelimit-remaining: '76'
         description: null
     responseFields: []
     auth: []
@@ -4224,7 +4224,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '211'
+          x-ratelimit-remaining: '75'
         description: null
     responseFields: []
     auth: []
@@ -4313,7 +4313,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '210'
+          x-ratelimit-remaining: '74'
         description: null
     responseFields: []
     auth: []
@@ -4354,7 +4354,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '209'
+          x-ratelimit-remaining: '73'
         description: null
     responseFields: []
     auth: []
@@ -4489,7 +4489,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '208'
+          x-ratelimit-remaining: '72'
         description: null
     responseFields: []
     auth: []
@@ -4542,7 +4542,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '207'
+          x-ratelimit-remaining: '71'
         description: null
     responseFields: []
     auth: []
@@ -4626,7 +4626,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '206'
+          x-ratelimit-remaining: '70'
         description: null
     responseFields: []
     auth: []
@@ -4753,7 +4753,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '205'
+          x-ratelimit-remaining: '69'
         description: null
     responseFields: []
     auth: []
@@ -4794,7 +4794,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '204'
+          x-ratelimit-remaining: '68'
         description: null
     responseFields: []
     auth: []
@@ -5122,7 +5122,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '203'
+          x-ratelimit-remaining: '67'
         description: null
     responseFields: []
     auth: []
@@ -5211,7 +5211,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '202'
+          x-ratelimit-remaining: '66'
         description: null
     responseFields: []
     auth: []
@@ -5300,7 +5300,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '201'
+          x-ratelimit-remaining: '65'
         description: null
     responseFields: []
     auth: []
@@ -5365,7 +5365,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '200'
+          x-ratelimit-remaining: '64'
         description: null
     responseFields: []
     auth: []
@@ -5418,7 +5418,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '199'
+          x-ratelimit-remaining: '63'
         description: null
     responseFields: []
     auth: []
@@ -5483,7 +5483,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '198'
+          x-ratelimit-remaining: '62'
         description: null
     responseFields: []
     auth: []
@@ -5548,7 +5548,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '197'
+          x-ratelimit-remaining: '61'
         description: null
     responseFields: []
     auth: []
@@ -5613,7 +5613,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '196'
+          x-ratelimit-remaining: '60'
         description: null
     responseFields: []
     auth: []
@@ -5654,7 +5654,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '195'
+          x-ratelimit-remaining: '59'
         description: null
     responseFields: []
     auth: []
@@ -5700,7 +5700,7 @@ endpoints:
         name: scheduled_for
         description: 'Must be a valid date. Must be a date after or equal to <code>now</code>.'
         required: false
-        example: '2051-12-12'
+        example: '2051-12-16'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -5922,7 +5922,7 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       title: b
-      scheduled_for: '2051-12-12'
+      scheduled_for: '2051-12-16'
       type: video
       media_url: 'http://crooks.biz/et-fugiat-sunt-nihil-accusantium'
       thumbnail_url: 'http://tillman.com/'
@@ -5974,14 +5974,14 @@ endpoints:
         name: story
         description: 'The story.'
         required: true
-        example: 16
-        type: integer
+        example: architecto
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      story: 16
+      story: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -6115,14 +6115,14 @@ endpoints:
         name: story
         description: 'The story.'
         required: true
-        example: 16
-        type: integer
+        example: architecto
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      story: 16
+      story: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -6142,7 +6142,7 @@ endpoints:
         name: publish_at
         description: 'Must be a valid date. Must be a date after or equal to <code>now</code>.'
         required: false
-        example: '2051-12-12'
+        example: '2051-12-16'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -6389,7 +6389,7 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       title: b
-      publish_at: '2051-12-12'
+      publish_at: '2051-12-16'
       publish_now: false
       status: draft
       type: video
@@ -6443,14 +6443,14 @@ endpoints:
         name: story
         description: 'The story.'
         required: true
-        example: 16
-        type: integer
+        example: architecto
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      story: 16
+      story: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -6486,8 +6486,8 @@ endpoints:
         name: story
         description: 'The story.'
         required: true
-        example: 16
-        type: integer
+        example: architecto
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
@@ -6504,7 +6504,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      story: 16
+      story: architecto
       media: architecto
     queryParameters: []
     cleanQueryParameters: []
@@ -6575,7 +6575,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '194'
+          x-ratelimit-remaining: '58'
         description: null
     responseFields: []
     auth: []
@@ -6664,7 +6664,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '193'
+          x-ratelimit-remaining: '57'
         description: null
     responseFields: []
     auth: []
@@ -6705,7 +6705,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '192'
+          x-ratelimit-remaining: '56'
         description: null
     responseFields: []
     auth: []
@@ -6770,7 +6770,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '191'
+          x-ratelimit-remaining: '55'
         description: null
     responseFields: []
     auth: []
@@ -6976,7 +6976,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '190'
+          x-ratelimit-remaining: '54'
         description: null
     responseFields: []
     auth: []
@@ -7029,7 +7029,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '189'
+          x-ratelimit-remaining: '53'
         description: null
     responseFields: []
     auth: []
@@ -7442,7 +7442,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '188'
+          x-ratelimit-remaining: '52'
         description: null
     responseFields: []
     auth: []
@@ -7483,7 +7483,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '187'
+          x-ratelimit-remaining: '51'
         description: null
     responseFields: []
     auth: []
@@ -7536,7 +7536,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '186'
+          x-ratelimit-remaining: '50'
         description: null
     responseFields: []
     auth: []
@@ -8344,7 +8344,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '185'
+          x-ratelimit-remaining: '49'
         description: null
     responseFields: []
     auth: []
@@ -8379,7 +8379,7 @@ endpoints:
         name: opening_time
         description: 'Must be a valid date in the format <code>H:i:s</code>.'
         required: true
-        example: '15:58:02'
+        example: '00:15:59'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -8390,7 +8390,7 @@ endpoints:
         name: closing_time
         description: 'Must be a valid date in the format <code>H:i:s</code>. Must be a date after <code>opening_time</code>.'
         required: true
-        example: '2051-12-11'
+        example: '2051-12-16'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -8408,8 +8408,8 @@ endpoints:
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      opening_time: '15:58:02'
-      closing_time: '2051-12-11'
+      opening_time: '00:15:59'
+      closing_time: '2051-12-16'
       day: architecto
     fileParameters: []
     responses: []
@@ -8495,7 +8495,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '184'
+          x-ratelimit-remaining: '48'
         description: null
     responseFields: []
     auth: []
@@ -8536,7 +8536,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '183'
+          x-ratelimit-remaining: '47'
         description: null
     responseFields: []
     auth: []
@@ -8793,7 +8793,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '182'
+          x-ratelimit-remaining: '46'
         description: null
     responseFields: []
     auth: []
@@ -9009,7 +9009,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '181'
+          x-ratelimit-remaining: '45'
         description: null
     responseFields: []
     auth: []
@@ -9062,7 +9062,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '180'
+          x-ratelimit-remaining: '44'
         description: null
     responseFields: []
     auth: []
@@ -9127,7 +9127,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '179'
+          x-ratelimit-remaining: '43'
         description: null
     responseFields: []
     auth: []
@@ -9368,7 +9368,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '178'
+          x-ratelimit-remaining: '42'
         description: null
     responseFields: []
     auth: []
@@ -9433,7 +9433,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '177'
+          x-ratelimit-remaining: '41'
         description: null
     responseFields: []
     auth: []
@@ -9532,7 +9532,7 @@ endpoints:
       image:
         custom: []
         name: image
-        description: 'Must not be greater than 2048 characters.'
+        description: 'Must not be greater than 10240 characters.'
         required: false
         example: 'n'
         type: string
@@ -9636,7 +9636,7 @@ endpoints:
       image:
         custom: []
         name: image
-        description: 'Must not be greater than 2048 characters.'
+        description: 'Must not be greater than 10240 characters.'
         required: false
         example: m
         type: string
@@ -9759,7 +9759,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '176'
+          x-ratelimit-remaining: '40'
         description: null
     responseFields: []
     auth: []
@@ -9824,7 +9824,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '175'
+          x-ratelimit-remaining: '39'
         description: null
     responseFields: []
     auth: []
@@ -9908,7 +9908,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '174'
+          x-ratelimit-remaining: '38'
         description: null
     responseFields: []
     auth: []
@@ -10016,7 +10016,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '173'
+          x-ratelimit-remaining: '37'
         description: null
     responseFields: []
     auth: []
@@ -10088,7 +10088,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '172'
+          x-ratelimit-remaining: '36'
         description: null
     responseFields: []
     auth: []
@@ -10208,7 +10208,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '171'
+          x-ratelimit-remaining: '35'
         description: null
     responseFields: []
     auth: []
@@ -10249,7 +10249,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '170'
+          x-ratelimit-remaining: '34'
         description: null
     responseFields: []
     auth: []
@@ -10302,7 +10302,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '169'
+          x-ratelimit-remaining: '33'
         description: null
     responseFields: []
     auth: []
@@ -10343,7 +10343,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '168'
+          x-ratelimit-remaining: '32'
         description: null
     responseFields: []
     auth: []
@@ -10519,16 +10519,13 @@ endpoints:
     responses:
       -
         custom: []
-        status: 500
-        content: |-
-          {
-              "message": "Server Error"
-          }
+        status: 401
+        content: '{"error":"API key required","message":"Please provide a valid API key in the X-API-Key header"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '167'
+          x-ratelimit-remaining: '31'
         description: null
     responseFields: []
     auth: []
@@ -10587,16 +10584,13 @@ endpoints:
     responses:
       -
         custom: []
-        status: 500
-        content: |-
-          {
-              "message": "Server Error"
-          }
+        status: 401
+        content: '{"error":"API key required","message":"Please provide a valid API key in the X-API-Key header"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '166'
+          x-ratelimit-remaining: '30'
         description: null
     responseFields: []
     auth: []
@@ -10643,13 +10637,13 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '{"error":{"code":403,"message":"Method doesn''t allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API.","status":"PERMISSION_DENIED"}}'
+        status: 401
+        content: '{"error":"API key required","message":"Please provide a valid API key in the X-API-Key header"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '165'
+          x-ratelimit-remaining: '29'
         description: null
     responseFields: []
     auth: []
@@ -10732,13 +10726,13 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '{"error":{"code":403,"message":"Method doesn''t allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API.","status":"PERMISSION_DENIED"}}'
+        status: 401
+        content: '{"error":"API key required","message":"Please provide a valid API key in the X-API-Key header"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '164'
+          x-ratelimit-remaining: '28'
         description: null
     responseFields: []
     auth: []
@@ -10785,13 +10779,13 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '{"error":{"code":403,"message":"Method doesn''t allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API.","status":"PERMISSION_DENIED"}}'
+        status: 401
+        content: '{"error":"API key required","message":"Please provide a valid API key in the X-API-Key header"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '163'
+          x-ratelimit-remaining: '27'
         description: null
     responseFields: []
     auth: []
@@ -10850,13 +10844,13 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '{"error_message":"Invalid request. Invalid ''latlng'' parameter.","results":[],"status":"INVALID_REQUEST"}'
+        status: 401
+        content: '{"error":"API key required","message":"Please provide a valid API key in the X-API-Key header"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '162'
+          x-ratelimit-remaining: '26'
         description: null
     responseFields: []
     auth: []
@@ -10897,7 +10891,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '161'
+          x-ratelimit-remaining: '25'
         description: null
     responseFields: []
     auth: []
@@ -10938,7 +10932,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '160'
+          x-ratelimit-remaining: '24'
         description: null
     responseFields: []
     auth: []
@@ -11003,7 +10997,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '159'
+          x-ratelimit-remaining: '23'
         description: null
     responseFields: []
     auth: []
@@ -11056,7 +11050,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '158'
+          x-ratelimit-remaining: '22'
         description: null
     responseFields: []
     auth: []
@@ -11148,7 +11142,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '157'
+          x-ratelimit-remaining: '21'
         description: null
     responseFields: []
     auth: []
@@ -11189,7 +11183,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '156'
+          x-ratelimit-remaining: '20'
         description: null
     responseFields: []
     auth: []
@@ -11242,7 +11236,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '155'
+          x-ratelimit-remaining: '19'
         description: null
     responseFields: []
     auth: []
@@ -11295,7 +11289,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '154'
+          x-ratelimit-remaining: '18'
         description: null
     responseFields: []
     auth: []
@@ -11336,7 +11330,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '153'
+          x-ratelimit-remaining: '17'
         description: null
     responseFields: []
     auth: []
@@ -11377,7 +11371,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '152'
+          x-ratelimit-remaining: '16'
         description: null
     responseFields: []
     auth: []
@@ -11418,7 +11412,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '151'
+          x-ratelimit-remaining: '15'
         description: null
     responseFields: []
     auth: []
@@ -11471,7 +11465,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '150'
+          x-ratelimit-remaining: '14'
         description: null
     responseFields: []
     auth: []
@@ -11524,7 +11518,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '149'
+          x-ratelimit-remaining: '13'
         description: null
     responseFields: []
     auth: []
@@ -11577,7 +11571,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '148'
+          x-ratelimit-remaining: '12'
         description: null
     responseFields: []
     auth: []
@@ -11630,7 +11624,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '147'
+          x-ratelimit-remaining: '11'
         description: null
     responseFields: []
     auth: []
@@ -11732,6 +11726,61 @@ endpoints:
   -
     custom: []
     httpMethods:
+      - POST
+    uri: 'api/v1/products/{id}/like'
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the product.'
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: architecto
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The <code>id</code> of an existing record in the food table.'
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      id: architecto
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
       - GET
     uri: api/v1/products/food-or-restaurant-search
     metadata:
@@ -11775,7 +11824,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '146'
+          x-ratelimit-remaining: '10'
         description: null
     responseFields: []
     auth: []
@@ -11828,7 +11877,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '145'
+          x-ratelimit-remaining: '9'
         description: null
     responseFields: []
     auth: []
@@ -11881,7 +11930,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '144'
+          x-ratelimit-remaining: '8'
         description: null
     responseFields: []
     auth: []
@@ -11922,7 +11971,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '143'
+          x-ratelimit-remaining: '7'
         description: null
     responseFields: []
     auth: []
@@ -11963,7 +12012,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '142'
+          x-ratelimit-remaining: '6'
         description: null
     responseFields: []
     auth: []
@@ -12004,7 +12053,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '141'
+          x-ratelimit-remaining: '5'
         description: null
     responseFields: []
     auth: []
@@ -12057,7 +12106,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '140'
+          x-ratelimit-remaining: '4'
         description: null
     responseFields: []
     auth: []
@@ -12110,7 +12159,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '139'
+          x-ratelimit-remaining: '3'
         description: null
     responseFields: []
     auth: []
@@ -12151,7 +12200,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '138'
+          x-ratelimit-remaining: '2'
         description: null
     responseFields: []
     auth: []
@@ -12192,7 +12241,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '137'
+          x-ratelimit-remaining: '1'
         description: null
     responseFields: []
     auth: []
@@ -12245,7 +12294,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '136'
+          x-ratelimit-remaining: '0'
         description: null
     responseFields: []
     auth: []
@@ -12280,13 +12329,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 403
-        content: '{"errors":[{"code":"zoneId","message":"Delivery Zone ID is required"}]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '135'
         description: null
     responseFields: []
     auth: []
@@ -12321,13 +12375,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 401
-        content: '{"errors":[{"code":"auth-001","message":"Unauthorized."}]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '134'
         description: null
     responseFields: []
     auth: []
@@ -12362,13 +12421,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 403
-        content: '{"errors":[{"code":"zoneId","message":"Delivery Zone ID is required"}]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '133'
         description: null
     responseFields: []
     auth: []
@@ -12403,13 +12467,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '[]'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '132'
         description: null
     responseFields: []
     auth: []
@@ -12456,13 +12525,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '[]'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '131'
         description: null
     responseFields: []
     auth: []
@@ -12533,13 +12607,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 403
-        content: '{"errors":[{"code":"zoneId","message":"Delivery Zone ID is required"}]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '130'
         description: null
     responseFields: []
     auth: []
@@ -12586,13 +12665,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '[]'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '129'
         description: null
     responseFields: []
     auth: []
@@ -12663,13 +12747,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 403
-        content: '{"errors":[{"code":"zoneId","message":"Delivery Zone ID is required"}]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '128'
         description: null
     responseFields: []
     auth: []
@@ -12704,13 +12793,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '{"Cuisines":[]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '127'
         description: null
     responseFields: []
     auth: []
@@ -12781,13 +12875,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 403
-        content: '{"errors":[{"code":"zoneId","message":"Delivery Zone ID is required"}]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '126'
         description: null
     responseFields: []
     auth: []
@@ -14404,7 +14503,7 @@ endpoints:
         name: start_date
         description: 'This field is required when <code>status</code> is <code>paused</code>. Must be a valid date. Must be a date after or equal to <code>today</code>.'
         required: false
-        example: '2051-12-11'
+        example: '2051-12-16'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -14415,7 +14514,7 @@ endpoints:
         name: end_date
         description: 'This field is required when <code>status</code> is <code>paused</code>. Must be a valid date. Must be a date after or equal to <code>start_date</code>.'
         required: false
-        example: '2051-12-11'
+        example: '2051-12-16'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -14434,8 +14533,8 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       status: canceled
-      start_date: '2051-12-11'
-      end_date: '2051-12-11'
+      start_date: '2051-12-16'
+      end_date: '2051-12-16'
     fileParameters: []
     responses: []
     responseFields: []
@@ -14506,13 +14605,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 401
-        content: '{"errors":[{"code":"auth-001","message":"Unauthorized."}]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '125'
         description: null
     responseFields: []
     auth: []
@@ -14571,13 +14675,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 401
-        content: '{"errors":[{"code":"auth-001","message":"Unauthorized."}]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '124'
         description: null
     responseFields: []
     auth: []
@@ -14647,13 +14756,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 401
-        content: '{"errors":[{"code":"auth-001","message":"Unauthorized."}]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '123'
         description: null
     responseFields: []
     auth: []
@@ -14711,13 +14825,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 401
-        content: '{"errors":[{"code":"auth-001","message":"Unauthorized."}]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '122'
         description: null
     responseFields: []
     auth: []
@@ -14958,7 +15077,7 @@ endpoints:
         name: order_type
         description: ''
         required: true
-        example: dine_in
+        example: take_away
         type: string
         enumValues:
           - take_away
@@ -14979,7 +15098,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      order_type: dine_in
+      order_type: take_away
       restaurant_id: architecto
     fileParameters: []
     responses: []
@@ -15151,13 +15270,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 401
-        content: '{"errors":[{"code":"auth-001","message":"Unauthorized."}]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '121'
         description: null
     responseFields: []
     auth: []
@@ -15226,13 +15350,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 401
-        content: '{"errors":[{"code":"auth-001","message":"Unauthorized."}]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '120'
         description: null
     responseFields: []
     auth: []
@@ -15419,13 +15548,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 401
-        content: '{"errors":[{"code":"auth-001","message":"Unauthorized."}]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '119'
         description: null
     responseFields: []
     auth: []
@@ -15503,13 +15637,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 401
-        content: '{"errors":[{"code":"auth-001","message":"Unauthorized."}]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '118'
         description: null
     responseFields: []
     auth: []
@@ -15555,13 +15694,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 401
-        content: '{"errors":[{"code":"auth-001","message":"Unauthorized."}]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '117'
         description: null
     responseFields: []
     auth: []
@@ -15916,13 +16060,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '{"errors":[{"code":"zoneId","message":"Delivery Zone ID is required"}]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '116'
         description: null
     responseFields: []
     auth: []
@@ -15969,13 +16118,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '{"errors":[{"code":"zoneId","message":"Delivery Zone ID is required"}]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '115'
         description: null
     responseFields: []
     auth: []
@@ -16010,13 +16164,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '{"errors":[{"code":"zoneId","message":"Delivery Zone ID is required"}]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '114'
         description: null
     responseFields: []
     auth: []
@@ -16243,13 +16402,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 403
-        content: '{"errors":[{"code":"zoneId","message":"Delivery Zone ID is required"}]}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '113'
         description: null
     responseFields: []
     auth: []
@@ -16327,16 +16491,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 500
+        status: 429
         content: |-
           {
-              "message": "Server Error"
+              "message": "Too Many Attempts."
           }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '112'
         description: null
     responseFields: []
     auth: []
@@ -16371,16 +16537,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 500
+        status: 429
         content: |-
           {
-              "message": "Server Error"
+              "message": "Too Many Attempts."
           }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '111'
         description: null
     responseFields: []
     auth: []
@@ -16415,16 +16583,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 500
+        status: 429
         content: |-
           {
-              "message": "Server Error"
+              "message": "Too Many Attempts."
           }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '110'
         description: null
     responseFields: []
     auth: []
@@ -16471,16 +16641,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 500
+        status: 429
         content: |-
           {
-              "message": "Server Error"
+              "message": "Too Many Attempts."
           }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '109'
         description: null
     responseFields: []
     auth: []
@@ -16515,13 +16687,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '{"most_tips_amount":null}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '108'
         description: null
     responseFields: []
     auth: []
@@ -16556,13 +16733,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '[]'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '107'
         description: null
     responseFields: []
     auth: []
@@ -16597,16 +16779,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 500
+        status: 429
         content: |-
           {
-              "message": "Server Error"
+              "message": "Too Many Attempts."
           }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '106'
         description: null
     responseFields: []
     auth: []
@@ -16641,13 +16825,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '{}'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '105'
         description: null
     responseFields: []
     auth: []
@@ -16737,13 +16926,18 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '[]'
+        status: 429
+        content: |-
+          {
+              "message": "Too Many Attempts."
+          }
         headers:
+          x-ratelimit-limit: '240'
+          x-ratelimit-remaining: '0'
+          retry-after: '52'
+          x-ratelimit-reset: '1763763411'
           cache-control: 'no-cache, private'
           content-type: application/json
-          x-ratelimit-limit: '240'
-          x-ratelimit-remaining: '104'
         description: null
     responseFields: []
     auth: []

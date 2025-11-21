@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>GO-AdminPanel API Documentation</title>
+    <title>Hopa! API Documentation</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
@@ -45,6 +45,7 @@
     </span>
 </a>
 <div class="tocify-wrapper">
+            <img src="assets/admin/img/hopa-logo.png" alt="logo" class="logo" style="padding-top: 10px;" width="100%"/>
     
             <div class="lang-selector">
                                             <button type="button" class="lang-button" data-language-name="bash">bash</button>
@@ -639,6 +640,9 @@
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-products-reviews-submit">
                                 <a href="#endpoints-POSTapi-v1-products-reviews-submit">POST api/v1/products/reviews/submit</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-products--id--like">
+                                <a href="#endpoints-POSTapi-v1-products--id--like">POST api/v1/products/{id}/like</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-products-food-or-restaurant-search">
                                 <a href="#endpoints-GETapi-v1-products-food-or-restaurant-search">GET api/v1/products/food-or-restaurant-search</a>
                             </li>
@@ -974,7 +978,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: November 17, 2025</li>
+        <li>Last updated: November 22, 2025</li>
     </ul>
 </div>
 
@@ -982,11 +986,11 @@
     <div class="dark-box"></div>
     <div class="content">
         <h1 id="introduction">Introduction</h1>
-<p>Complete API documentation for GO-AdminPanel - Restaurant Management System</p>
+<p>Complete API documentation for Hopa! - Restaurant &amp; Food Delivery Platform</p>
 <aside>
     <strong>Base URL</strong>: <code>https://api.hopa.delivery</code>
 </aside>
-<pre><code>Welcome to the GO-AdminPanel API documentation. This API provides comprehensive endpoints for managing restaurants, orders, customers, delivery personnel, and more.
+<pre><code>Welcome to the Hopa! API documentation. This API provides comprehensive endpoints for managing restaurants, orders, customers, delivery personnel, and more.
 
 &lt;aside&gt;
 &lt;b&gt;Base URL&lt;/b&gt;: &lt;code&gt;/api/v1&lt;/code&gt;&lt;br&gt;
@@ -1307,7 +1311,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 239
+x-ratelimit-remaining: 103
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">[]</code>
@@ -1445,7 +1449,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 238
+x-ratelimit-remaining: 102
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -1609,7 +1613,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 237
+x-ratelimit-remaining: 101
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">[]</code>
@@ -1745,7 +1749,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 236
+x-ratelimit-remaining: 100
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">[]</code>
@@ -1895,7 +1899,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 235
+x-ratelimit-remaining: 99
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -1989,7 +1993,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://api.hopa.delivery/api/v1/stories/16/view" \
+    "https://api.hopa.delivery/api/v1/stories/architecto/view" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2001,7 +2005,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.hopa.delivery/api/v1/stories/16/view"
+    "https://api.hopa.delivery/api/v1/stories/architecto/view"
 );
 
 const headers = {
@@ -2098,15 +2102,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>story</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
+<small>string</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="story"                data-endpoint="POSTapi-v1-stories--story--view"
-               value="16"
+                <input type="text" style="display: none"
+                              name="story"                data-endpoint="POSTapi-v1-stories--story--view"
+               value="architecto"
                data-component="url">
     <br>
-<p>The story. Example: <code>16</code></p>
+<p>The story. Example: <code>architecto</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -5621,7 +5625,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 234
+x-ratelimit-remaining: 98
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -6105,7 +6109,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 233
+x-ratelimit-remaining: 97
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -6266,7 +6270,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 232
+x-ratelimit-remaining: 96
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{}</code>
@@ -6874,7 +6878,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 231
+x-ratelimit-remaining: 95
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -7006,7 +7010,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 230
+x-ratelimit-remaining: 94
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -7432,7 +7436,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 229
+x-ratelimit-remaining: 93
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -7564,7 +7568,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 228
+x-ratelimit-remaining: 92
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -7817,7 +7821,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 227
+x-ratelimit-remaining: 91
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -7983,7 +7987,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 226
+x-ratelimit-remaining: 90
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -8589,7 +8593,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 225
+x-ratelimit-remaining: 89
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -8743,7 +8747,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 224
+x-ratelimit-remaining: 88
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -9020,7 +9024,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 223
+x-ratelimit-remaining: 87
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -9262,7 +9266,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 222
+x-ratelimit-remaining: 86
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -9405,7 +9409,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 221
+x-ratelimit-remaining: 85
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -9562,7 +9566,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 220
+x-ratelimit-remaining: 84
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -9703,7 +9707,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 219
+x-ratelimit-remaining: 83
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -9848,7 +9852,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 218
+x-ratelimit-remaining: 82
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -10101,7 +10105,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 217
+x-ratelimit-remaining: 81
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -11084,7 +11088,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 216
+x-ratelimit-remaining: 80
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -11216,7 +11220,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 215
+x-ratelimit-remaining: 79
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -11348,7 +11352,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 214
+x-ratelimit-remaining: 78
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -11480,7 +11484,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 213
+x-ratelimit-remaining: 77
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -11722,7 +11726,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 212
+x-ratelimit-remaining: 76
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -12038,7 +12042,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 211
+x-ratelimit-remaining: 75
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -12185,7 +12189,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 210
+x-ratelimit-remaining: 74
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -12366,7 +12370,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 209
+x-ratelimit-remaining: 73
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -12679,7 +12683,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 208
+x-ratelimit-remaining: 72
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -12833,7 +12837,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 207
+x-ratelimit-remaining: 71
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -13110,7 +13114,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 206
+x-ratelimit-remaining: 70
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -13506,7 +13510,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 205
+x-ratelimit-remaining: 69
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -13638,7 +13642,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 204
+x-ratelimit-remaining: 68
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -14506,7 +14510,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 203
+x-ratelimit-remaining: 67
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -14653,7 +14657,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 202
+x-ratelimit-remaining: 66
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -14849,7 +14853,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 201
+x-ratelimit-remaining: 65
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -15041,7 +15045,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 200
+x-ratelimit-remaining: 64
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -15207,7 +15211,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 199
+x-ratelimit-remaining: 63
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -15363,7 +15367,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 198
+x-ratelimit-remaining: 62
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -15531,7 +15535,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 197
+x-ratelimit-remaining: 61
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -15699,7 +15703,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 196
+x-ratelimit-remaining: 60
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -15856,7 +15860,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 195
+x-ratelimit-remaining: 59
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -15960,7 +15964,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"title\": \"b\",
-    \"scheduled_for\": \"2051-12-12\",
+    \"scheduled_for\": \"2051-12-16\",
     \"type\": \"video\",
     \"media_url\": \"http:\\/\\/crooks.biz\\/et-fugiat-sunt-nihil-accusantium\",
     \"thumbnail_url\": \"http:\\/\\/tillman.com\\/\",
@@ -16000,7 +16004,7 @@ const headers = {
 
 let body = {
     "title": "b",
-    "scheduled_for": "2051-12-12",
+    "scheduled_for": "2051-12-16",
     "type": "video",
     "media_url": "http:\/\/crooks.biz\/et-fugiat-sunt-nihil-accusantium",
     "thumbnail_url": "http:\/\/tillman.com\/",
@@ -16127,10 +16131,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="scheduled_for"                data-endpoint="POSTapi-v1-vendor-stories"
-               value="2051-12-12"
+               value="2051-12-16"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after or equal to <code>now</code>. Example: <code>2051-12-12</code></p>
+<p>Must be a valid date. Must be a date after or equal to <code>now</code>. Example: <code>2051-12-16</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>type</code></b>&nbsp;&nbsp;
@@ -16379,7 +16383,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "https://api.hopa.delivery/api/v1/vendor/stories/16/media" \
+    "https://api.hopa.delivery/api/v1/vendor/stories/architecto/media" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --form "media_type=video"\
@@ -16388,13 +16392,13 @@ Must be one of:
     --form "cta_label=z"\
     --form "cta_url=http://rempel.com/sunt-nihil-accusantium-harum-mollitia"\
     --form "duration_seconds=8"\
-    --form "media=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpen592ir3mpn08L0IXgI" \
-    --form "thumbnail=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phphkl9ivkp9q03crVrqlv" </code></pre></div>
+    --form "media=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php6ps361mufpsd4h4XCHt" \
+    --form "thumbnail=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php81ovup7jvimv50XZoFm" </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.hopa.delivery/api/v1/vendor/stories/16/media"
+    "https://api.hopa.delivery/api/v1/vendor/stories/architecto/media"
 );
 
 const headers = {
@@ -16496,15 +16500,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>story</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
+<small>string</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="story"                data-endpoint="POSTapi-v1-vendor-stories--story--media"
-               value="16"
+                <input type="text" style="display: none"
+                              name="story"                data-endpoint="POSTapi-v1-vendor-stories--story--media"
+               value="architecto"
                data-component="url">
     <br>
-<p>The story. Example: <code>16</code></p>
+<p>The story. Example: <code>architecto</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -16591,7 +16595,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be a file. Must not be greater than 10240 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpen592ir3mpn08L0IXgI</code></p>
+<p>Must be a file. Must not be greater than 10240 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php6ps361mufpsd4h4XCHt</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>thumbnail</code></b>&nbsp;&nbsp;
@@ -16603,7 +16607,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be a file. Must not be greater than 10240 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phphkl9ivkp9q03crVrqlv</code></p>
+<p>Must be a file. Must not be greater than 10240 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php81ovup7jvimv50XZoFm</code></p>
         </div>
         </form>
 
@@ -16620,12 +16624,12 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "https://api.hopa.delivery/api/v1/vendor/stories/16" \
+    "https://api.hopa.delivery/api/v1/vendor/stories/architecto" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
     \"title\": \"b\",
-    \"publish_at\": \"2051-12-12\",
+    \"publish_at\": \"2051-12-16\",
     \"publish_now\": false,
     \"status\": \"draft\",
     \"type\": \"video\",
@@ -16657,7 +16661,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.hopa.delivery/api/v1/vendor/stories/16"
+    "https://api.hopa.delivery/api/v1/vendor/stories/architecto"
 );
 
 const headers = {
@@ -16667,7 +16671,7 @@ const headers = {
 
 let body = {
     "title": "b",
-    "publish_at": "2051-12-12",
+    "publish_at": "2051-12-16",
     "publish_now": false,
     "status": "draft",
     "type": "video",
@@ -16779,15 +16783,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>story</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
+<small>string</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="story"                data-endpoint="PATCHapi-v1-vendor-stories--story-"
-               value="16"
+                <input type="text" style="display: none"
+                              name="story"                data-endpoint="PATCHapi-v1-vendor-stories--story-"
+               value="architecto"
                data-component="url">
     <br>
-<p>The story. Example: <code>16</code></p>
+<p>The story. Example: <code>architecto</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -16809,10 +16813,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="publish_at"                data-endpoint="PATCHapi-v1-vendor-stories--story-"
-               value="2051-12-12"
+               value="2051-12-16"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after or equal to <code>now</code>. Example: <code>2051-12-12</code></p>
+<p>Must be a valid date. Must be a date after or equal to <code>now</code>. Example: <code>2051-12-16</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>publish_now</code></b>&nbsp;&nbsp;
@@ -17097,14 +17101,14 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://api.hopa.delivery/api/v1/vendor/stories/16" \
+    "https://api.hopa.delivery/api/v1/vendor/stories/architecto" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.hopa.delivery/api/v1/vendor/stories/16"
+    "https://api.hopa.delivery/api/v1/vendor/stories/architecto"
 );
 
 const headers = {
@@ -17195,15 +17199,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>story</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
+<small>string</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="story"                data-endpoint="DELETEapi-v1-vendor-stories--story-"
-               value="16"
+                <input type="text" style="display: none"
+                              name="story"                data-endpoint="DELETEapi-v1-vendor-stories--story-"
+               value="architecto"
                data-component="url">
     <br>
-<p>The story. Example: <code>16</code></p>
+<p>The story. Example: <code>architecto</code></p>
             </div>
                     </form>
 
@@ -17220,14 +17224,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "https://api.hopa.delivery/api/v1/vendor/stories/16/media/architecto" \
+    "https://api.hopa.delivery/api/v1/vendor/stories/architecto/media/architecto" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "https://api.hopa.delivery/api/v1/vendor/stories/16/media/architecto"
+    "https://api.hopa.delivery/api/v1/vendor/stories/architecto/media/architecto"
 );
 
 const headers = {
@@ -17318,15 +17322,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>story</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
+<small>string</small>&nbsp;
  &nbsp;
  &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="story"                data-endpoint="DELETEapi-v1-vendor-stories--story--media--media-"
-               value="16"
+                <input type="text" style="display: none"
+                              name="story"                data-endpoint="DELETEapi-v1-vendor-stories--story--media--media-"
+               value="architecto"
                data-component="url">
     <br>
-<p>The story. Example: <code>16</code></p>
+<p>The story. Example: <code>architecto</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>media</code></b>&nbsp;&nbsp;
@@ -17399,7 +17403,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 194
+x-ratelimit-remaining: 58
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -17571,7 +17575,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 193
+x-ratelimit-remaining: 57
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -17752,7 +17756,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 192
+x-ratelimit-remaining: 56
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -17895,7 +17899,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 191
+x-ratelimit-remaining: 55
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -18473,7 +18477,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 190
+x-ratelimit-remaining: 54
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -18639,7 +18643,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 189
+x-ratelimit-remaining: 53
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -19619,7 +19623,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 188
+x-ratelimit-remaining: 52
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -19764,7 +19768,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 187
+x-ratelimit-remaining: 51
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -19896,7 +19900,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 186
+x-ratelimit-remaining: 50
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -20138,9 +20142,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "description=Et animi quos velit et fugiat."\
     --form "dates=architecto"\
     --form "advertisement_type=restaurant_promotion"\
-    --form "cover_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpv0nqikc1ijq45n3jNKX" \
-    --form "profile_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php2m36ga2o7brl6916hRt" \
-    --form "video_attachment=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpo9ap1r14s0ig4XJkEbn" </code></pre></div>
+    --form "cover_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpfgqq4j6rbbga2h6jCbJ" \
+    --form "profile_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpl853a123n05mb9fDciM" \
+    --form "video_attachment=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php9u5m8of9ge5l8hIWqMT" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -20304,7 +20308,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>This field is required when <code>advertisement_type</code> is <code>restaurant_promotion</code>. Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpv0nqikc1ijq45n3jNKX</code></p>
+<p>This field is required when <code>advertisement_type</code> is <code>restaurant_promotion</code>. Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpfgqq4j6rbbga2h6jCbJ</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>profile_image</code></b>&nbsp;&nbsp;
@@ -20316,7 +20320,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>This field is required when <code>advertisement_type</code> is <code>restaurant_promotion</code>. Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php2m36ga2o7brl6916hRt</code></p>
+<p>This field is required when <code>advertisement_type</code> is <code>restaurant_promotion</code>. Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpl853a123n05mb9fDciM</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>video_attachment</code></b>&nbsp;&nbsp;
@@ -20328,7 +20332,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>This field is required when <code>advertisement_type</code> is <code>video_promotion</code>. Must be a file. Must not be greater than 5120 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpo9ap1r14s0ig4XJkEbn</code></p>
+<p>This field is required when <code>advertisement_type</code> is <code>video_promotion</code>. Must be a file. Must not be greater than 5120 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php9u5m8of9ge5l8hIWqMT</code></p>
         </div>
         </form>
 
@@ -20353,9 +20357,9 @@ Must be one of:
     --form "description=Animi quos velit et fugiat."\
     --form "dates=architecto"\
     --form "advertisement_type=restaurant_promotion"\
-    --form "cover_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php32ap5lpmh88rc0ZPf8a" \
-    --form "profile_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpvkv2qn73ibid6r5wjAG" \
-    --form "video_attachment=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php7t6an65ing76eRbWSq3" </code></pre></div>
+    --form "cover_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpte5hbb0rliffdDOyrJO" \
+    --form "profile_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpochslvdriren0x8lneR" \
+    --form "video_attachment=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpiju6rdjdiormbSc1ln7" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -20545,7 +20549,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php32ap5lpmh88rc0ZPf8a</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpte5hbb0rliffdDOyrJO</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>profile_image</code></b>&nbsp;&nbsp;
@@ -20557,7 +20561,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpvkv2qn73ibid6r5wjAG</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpochslvdriren0x8lneR</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>video_attachment</code></b>&nbsp;&nbsp;
@@ -20569,7 +20573,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be a file. Must not be greater than 5120 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php7t6an65ing76eRbWSq3</code></p>
+<p>Must be a file. Must not be greater than 5120 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpiju6rdjdiormbSc1ln7</code></p>
         </div>
         </form>
 
@@ -20766,9 +20770,9 @@ Must be one of:
     --form "description=Animi quos velit et fugiat."\
     --form "dates=architecto"\
     --form "advertisement_type=restaurant_promotion"\
-    --form "cover_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpev428j3an54s87ei3ye" \
-    --form "profile_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpptulkjanv9k30uO53uK" \
-    --form "video_attachment=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpon34a35ndb8o5kkgGmT" </code></pre></div>
+    --form "cover_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpqq786puqk6qc0Beybw9" \
+    --form "profile_image=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpvpi7kke3t64cdx6IWQV" \
+    --form "video_attachment=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpt8ppn3kb6nk44xis008" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -20945,7 +20949,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpev428j3an54s87ei3ye</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpqq786puqk6qc0Beybw9</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>profile_image</code></b>&nbsp;&nbsp;
@@ -20957,7 +20961,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpptulkjanv9k30uO53uK</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpvpi7kke3t64cdx6IWQV</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>video_attachment</code></b>&nbsp;&nbsp;
@@ -20969,7 +20973,7 @@ Must be one of:
                value=""
                data-component="body">
     <br>
-<p>Must be a file. Must not be greater than 5120 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpon34a35ndb8o5kkgGmT</code></p>
+<p>Must be a file. Must not be greater than 5120 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpt8ppn3kb6nk44xis008</code></p>
         </div>
         </form>
 
@@ -21101,8 +21105,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --form "contact_number=bngzmiyvdljnikhw"\
     --form "meta_title=a"\
-    --form "logo=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpsbhn3rm3cttv23jL1au" \
-    --form "cover_photo=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php1g1shb1eh3d82XLRL29" </code></pre></div>
+    --form "logo=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php3n3qv3kc8npaa3a9q0g" \
+    --form "cover_photo=@/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php6cv8jr2tbedkfqpGWzB" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -21225,7 +21229,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/phpsbhn3rm3cttv23jL1au</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php3n3qv3kc8npaa3a9q0g</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>cover_photo</code></b>&nbsp;&nbsp;
@@ -21237,7 +21241,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php1g1shb1eh3d82XLRL29</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>/private/var/folders/y6/rb4lhck14wv_dkfw1ltsblwh0000gn/T/php6cv8jr2tbedkfqpGWzB</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>meta_title</code></b>&nbsp;&nbsp;
@@ -21611,7 +21615,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 185
+x-ratelimit-remaining: 49
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -21714,8 +21718,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"opening_time\": \"15:58:02\",
-    \"closing_time\": \"2051-12-11\",
+    \"opening_time\": \"00:15:59\",
+    \"closing_time\": \"2051-12-16\",
     \"day\": \"architecto\"
 }"
 </code></pre></div>
@@ -21732,8 +21736,8 @@ const headers = {
 };
 
 let body = {
-    "opening_time": "15:58:02",
-    "closing_time": "2051-12-11",
+    "opening_time": "00:15:59",
+    "closing_time": "2051-12-16",
     "day": "architecto"
 };
 
@@ -21826,10 +21830,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="opening_time"                data-endpoint="POSTapi-v1-vendor-schedule-store"
-               value="15:58:02"
+               value="00:15:59"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>15:58:02</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>00:15:59</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>closing_time</code></b>&nbsp;&nbsp;
@@ -21838,10 +21842,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="closing_time"                data-endpoint="POSTapi-v1-vendor-schedule-store"
-               value="2051-12-11"
+               value="2051-12-16"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Must be a date after <code>opening_time</code>. Example: <code>2051-12-11</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Must be a date after <code>opening_time</code>. Example: <code>2051-12-16</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>day</code></b>&nbsp;&nbsp;
@@ -22026,7 +22030,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 184
+x-ratelimit-remaining: 48
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -22158,7 +22162,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 183
+x-ratelimit-remaining: 47
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -22687,7 +22691,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 182
+x-ratelimit-remaining: 46
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -23224,7 +23228,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 181
+x-ratelimit-remaining: 45
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -23365,7 +23369,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 180
+x-ratelimit-remaining: 44
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -23521,7 +23525,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 179
+x-ratelimit-remaining: 43
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -24167,7 +24171,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 178
+x-ratelimit-remaining: 42
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -24310,7 +24314,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 177
+x-ratelimit-remaining: 41
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -24643,7 +24647,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="n"
                data-component="body">
     <br>
-<p>Must not be greater than 2048 characters. Example: <code>n</code></p>
+<p>Must not be greater than 10240 characters. Example: <code>n</code></p>
         </div>
         </form>
 
@@ -24857,7 +24861,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="m"
                data-component="body">
     <br>
-<p>Must not be greater than 2048 characters. Example: <code>m</code></p>
+<p>Must not be greater than 10240 characters. Example: <code>m</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>stock_type</code></b>&nbsp;&nbsp;
@@ -25040,7 +25044,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 176
+x-ratelimit-remaining: 40
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -25218,7 +25222,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 175
+x-ratelimit-remaining: 39
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -25517,7 +25521,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 174
+x-ratelimit-remaining: 38
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -25795,7 +25799,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 173
+x-ratelimit-remaining: 37
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -26050,7 +26054,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 172
+x-ratelimit-remaining: 36
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -26351,7 +26355,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 171
+x-ratelimit-remaining: 35
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -26496,7 +26500,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 170
+x-ratelimit-remaining: 34
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -26637,7 +26641,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 169
+x-ratelimit-remaining: 33
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -26782,7 +26786,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 168
+x-ratelimit-remaining: 32
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -27306,7 +27310,7 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-config">
             <blockquote>
-            <p>Example response (500):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -27315,11 +27319,12 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 167
+x-ratelimit-remaining: 31
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Server Error&quot;
+    &quot;error&quot;: &quot;API key required&quot;,
+    &quot;message&quot;: &quot;Please provide a valid API key in the X-API-Key header&quot;
 }</code>
  </pre>
     </span>
@@ -27444,7 +27449,7 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-config-get-zone-id">
             <blockquote>
-            <p>Example response (500):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -27453,11 +27458,12 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 166
+x-ratelimit-remaining: 30
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Server Error&quot;
+    &quot;error&quot;: &quot;API key required&quot;,
+    &quot;message&quot;: &quot;Please provide a valid API key in the X-API-Key header&quot;
 }</code>
  </pre>
     </span>
@@ -27605,7 +27611,7 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-config-place-api-autocomplete">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -27614,15 +27620,12 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 165
+x-ratelimit-remaining: 29
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;error&quot;: {
-        &quot;code&quot;: 403,
-        &quot;message&quot;: &quot;Method doesn&#039;t allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API.&quot;,
-        &quot;status&quot;: &quot;PERMISSION_DENIED&quot;
-    }
+    &quot;error&quot;: &quot;API key required&quot;,
+    &quot;message&quot;: &quot;Please provide a valid API key in the X-API-Key header&quot;
 }</code>
  </pre>
     </span>
@@ -27764,7 +27767,7 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-config-distance-api">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -27773,15 +27776,12 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 164
+x-ratelimit-remaining: 28
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;error&quot;: {
-        &quot;code&quot;: 403,
-        &quot;message&quot;: &quot;Method doesn&#039;t allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API.&quot;,
-        &quot;status&quot;: &quot;PERMISSION_DENIED&quot;
-    }
+    &quot;error&quot;: &quot;API key required&quot;,
+    &quot;message&quot;: &quot;Please provide a valid API key in the X-API-Key header&quot;
 }</code>
  </pre>
     </span>
@@ -27953,7 +27953,7 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-config-place-api-details">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -27962,15 +27962,12 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 163
+x-ratelimit-remaining: 27
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;error&quot;: {
-        &quot;code&quot;: 403,
-        &quot;message&quot;: &quot;Method doesn&#039;t allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API.&quot;,
-        &quot;status&quot;: &quot;PERMISSION_DENIED&quot;
-    }
+    &quot;error&quot;: &quot;API key required&quot;,
+    &quot;message&quot;: &quot;Please provide a valid API key in the X-API-Key header&quot;
 }</code>
  </pre>
     </span>
@@ -28108,7 +28105,7 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-config-geocode-api">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (401):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -28117,13 +28114,12 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 162
+x-ratelimit-remaining: 26
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;error_message&quot;: &quot;Invalid request. Invalid &#039;latlng&#039; parameter.&quot;,
-    &quot;results&quot;: [],
-    &quot;status&quot;: &quot;INVALID_REQUEST&quot;
+    &quot;error&quot;: &quot;API key required&quot;,
+    &quot;message&quot;: &quot;Please provide a valid API key in the X-API-Key header&quot;
 }</code>
  </pre>
     </span>
@@ -28271,7 +28267,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 161
+x-ratelimit-remaining: 25
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">[]</code>
@@ -28396,7 +28392,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 160
+x-ratelimit-remaining: 24
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">[]</code>
@@ -28532,7 +28528,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 159
+x-ratelimit-remaining: 23
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -28687,7 +28683,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 158
+x-ratelimit-remaining: 22
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -28847,7 +28843,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 157
+x-ratelimit-remaining: 21
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -29023,7 +29019,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 156
+x-ratelimit-remaining: 20
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -29164,7 +29160,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 155
+x-ratelimit-remaining: 19
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -29318,7 +29314,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 154
+x-ratelimit-remaining: 18
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -29463,7 +29459,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 153
+x-ratelimit-remaining: 17
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -29595,7 +29591,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 152
+x-ratelimit-remaining: 16
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -29725,7 +29721,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 151
+x-ratelimit-remaining: 15
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -29857,7 +29853,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 150
+x-ratelimit-remaining: 14
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -30000,7 +29996,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 149
+x-ratelimit-remaining: 13
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -30143,7 +30139,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 148
+x-ratelimit-remaining: 12
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">[]</code>
@@ -30281,7 +30277,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 147
+x-ratelimit-remaining: 11
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -30567,6 +30563,151 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
+                    <h2 id="endpoints-POSTapi-v1-products--id--like">POST api/v1/products/{id}/like</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-products--id--like">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "https://api.hopa.delivery/api/v1/products/architecto/like" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"id\": \"architecto\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "https://api.hopa.delivery/api/v1/products/architecto/like"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "id": "architecto"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-products--id--like">
+</span>
+<span id="execution-results-POSTapi-v1-products--id--like" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-products--id--like"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-products--id--like"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-products--id--like" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-products--id--like">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-products--id--like" data-method="POST"
+      data-path="api/v1/products/{id}/like"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-products--id--like', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-products--id--like"
+                    onclick="tryItOut('POSTapi-v1-products--id--like');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-products--id--like"
+                    onclick="cancelTryOut('POSTapi-v1-products--id--like');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-products--id--like"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/products/{id}/like</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-products--id--like"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-products--id--like"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="POSTapi-v1-products--id--like"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the product. Example: <code>architecto</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="POSTapi-v1-products--id--like"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>The <code>id</code> of an existing record in the food table. Example: <code>architecto</code></p>
+        </div>
+        </form>
+
                     <h2 id="endpoints-GETapi-v1-products-food-or-restaurant-search">GET api/v1/products/food-or-restaurant-search</h2>
 
 <p>
@@ -30622,7 +30763,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 146
+x-ratelimit-remaining: 10
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -30776,7 +30917,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 145
+x-ratelimit-remaining: 9
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -30921,7 +31062,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 144
+x-ratelimit-remaining: 8
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -31066,7 +31207,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 143
+x-ratelimit-remaining: 7
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -31198,7 +31339,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 142
+x-ratelimit-remaining: 6
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -31330,7 +31471,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 141
+x-ratelimit-remaining: 5
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -31462,7 +31603,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 140
+x-ratelimit-remaining: 4
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{}</code>
@@ -31609,7 +31750,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 139
+x-ratelimit-remaining: 3
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">[]</code>
@@ -31747,7 +31888,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 138
+x-ratelimit-remaining: 2
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -31879,7 +32020,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 137
+x-ratelimit-remaining: 1
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -32020,7 +32161,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 x-ratelimit-limit: 240
-x-ratelimit-remaining: 136
+x-ratelimit-remaining: 0
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">[]</code>
@@ -32149,25 +32290,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-restaurants-recommended">
             <blockquote>
-            <p>Example response (403):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 135
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;zoneId&quot;,
-            &quot;message&quot;: &quot;Delivery Zone ID is required&quot;
-        }
-    ]
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -32281,25 +32419,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-restaurants-visit-again">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 134
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;auth-001&quot;,
-            &quot;message&quot;: &quot;Unauthorized.&quot;
-        }
-    ]
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -32413,25 +32548,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-banners">
             <blockquote>
-            <p>Example response (403):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 133
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;zoneId&quot;,
-            &quot;message&quot;: &quot;Delivery Zone ID is required&quot;
-        }
-    ]
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -32545,19 +32677,23 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-categories">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 132
  </code></pre></details>         <pre>
 
-<code class="language-json" style="max-height: 300px;">[]</code>
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
+}</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-v1-categories" hidden>
@@ -32670,19 +32806,23 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-categories-childes--category_id-">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 131
  </code></pre></details>         <pre>
 
-<code class="language-json" style="max-height: 300px;">[]</code>
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
+}</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-v1-categories-childes--category_id-" hidden>
@@ -32819,25 +32959,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-categories-products--category_id-">
             <blockquote>
-            <p>Example response (403):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 130
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;zoneId&quot;,
-            &quot;message&quot;: &quot;Delivery Zone ID is required&quot;
-        }
-    ]
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -32989,19 +33126,23 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-categories-products--category_id--all">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 129
  </code></pre></details>         <pre>
 
-<code class="language-json" style="max-height: 300px;">[]</code>
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
+}</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-v1-categories-products--category_id--all" hidden>
@@ -33138,25 +33279,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-categories-restaurants--category_id-">
             <blockquote>
-            <p>Example response (403):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 128
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;zoneId&quot;,
-            &quot;message&quot;: &quot;Delivery Zone ID is required&quot;
-        }
-    ]
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -33308,20 +33446,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-cuisine">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 127
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;Cuisines&quot;: []
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -33448,25 +33588,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-cuisine-get_restaurants">
             <blockquote>
-            <p>Example response (403):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 126
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;zoneId&quot;,
-            &quot;message&quot;: &quot;Delivery Zone ID is required&quot;
-        }
-    ]
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -37815,8 +37952,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"status\": \"canceled\",
-    \"start_date\": \"2051-12-11\",
-    \"end_date\": \"2051-12-11\"
+    \"start_date\": \"2051-12-16\",
+    \"end_date\": \"2051-12-16\"
 }"
 </code></pre></div>
 
@@ -37833,8 +37970,8 @@ const headers = {
 
 let body = {
     "status": "canceled",
-    "start_date": "2051-12-11",
-    "end_date": "2051-12-11"
+    "start_date": "2051-12-16",
+    "end_date": "2051-12-16"
 };
 
 fetch(url, {
@@ -37957,10 +38094,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="start_date"                data-endpoint="PUTapi-v1-customer-subscription--id-"
-               value="2051-12-11"
+               value="2051-12-16"
                data-component="body">
     <br>
-<p>This field is required when <code>status</code> is <code>paused</code>. Must be a valid date. Must be a date after or equal to <code>today</code>. Example: <code>2051-12-11</code></p>
+<p>This field is required when <code>status</code> is <code>paused</code>. Must be a valid date. Must be a date after or equal to <code>today</code>. Example: <code>2051-12-16</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>end_date</code></b>&nbsp;&nbsp;
@@ -37969,10 +38106,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="end_date"                data-endpoint="PUTapi-v1-customer-subscription--id-"
-               value="2051-12-11"
+               value="2051-12-16"
                data-component="body">
     <br>
-<p>This field is required when <code>status</code> is <code>paused</code>. Must be a valid date. Must be a date after or equal to <code>start_date</code>. Example: <code>2051-12-11</code></p>
+<p>This field is required when <code>status</code> is <code>paused</code>. Must be a valid date. Must be a date after or equal to <code>start_date</code>. Example: <code>2051-12-16</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>cancellation_reason</code></b>&nbsp;&nbsp;
@@ -38036,25 +38173,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-customer-order-list">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 125
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;auth-001&quot;,
-            &quot;message&quot;: &quot;Unauthorized.&quot;
-        }
-    ]
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -38216,25 +38350,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-customer-order-order-subscription-list">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 124
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;auth-001&quot;,
-            &quot;message&quot;: &quot;Unauthorized.&quot;
-        }
-    ]
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -38384,25 +38515,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-customer-order-running-orders">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 123
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;auth-001&quot;,
-            &quot;message&quot;: &quot;Unauthorized.&quot;
-        }
-    ]
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -38562,25 +38690,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-customer-order-details">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 122
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;auth-001&quot;,
-            &quot;message&quot;: &quot;Unauthorized.&quot;
-        }
-    ]
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -39085,7 +39210,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"order_type\": \"dine_in\",
+    \"order_type\": \"take_away\",
     \"restaurant_id\": \"architecto\"
 }"
 </code></pre></div>
@@ -39102,7 +39227,7 @@ const headers = {
 };
 
 let body = {
-    "order_type": "dine_in",
+    "order_type": "take_away",
     "restaurant_id": "architecto"
 };
 
@@ -39195,10 +39320,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="order_type"                data-endpoint="POSTapi-v1-customer-order-check-restaurant-validation"
-               value="dine_in"
+               value="take_away"
                data-component="body">
     <br>
-<p>Example: <code>dine_in</code></p>
+<p>Example: <code>take_away</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>take_away</code></li> <li><code>delivery</code></li> <li><code>dine_in</code></li></ul>
         </div>
@@ -39577,25 +39702,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-customer-order-refund-reasons">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 121
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;auth-001&quot;,
-            &quot;message&quot;: &quot;Unauthorized.&quot;
-        }
-    ]
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -39718,25 +39840,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-customer-order-track">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 120
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;auth-001&quot;,
-            &quot;message&quot;: &quot;Unauthorized.&quot;
-        }
-    ]
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -40298,25 +40417,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-customer-getPendingReviews">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 119
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;auth-001&quot;,
-            &quot;message&quot;: &quot;Unauthorized.&quot;
-        }
-    ]
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -40575,25 +40691,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-customer-order-again">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 118
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;auth-001&quot;,
-            &quot;message&quot;: &quot;Unauthorized.&quot;
-        }
-    ]
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -40708,25 +40821,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-customer-cart-list">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 117
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;auth-001&quot;,
-            &quot;message&quot;: &quot;Unauthorized.&quot;
-        }
-    ]
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -41625,25 +41735,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-campaigns-basic">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 116
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;zoneId&quot;,
-            &quot;message&quot;: &quot;Delivery Zone ID is required&quot;
-        }
-    ]
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -41766,25 +41873,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-campaigns-basic-campaign-details">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 115
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;zoneId&quot;,
-            &quot;message&quot;: &quot;Delivery Zone ID is required&quot;
-        }
-    ]
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -41911,25 +42015,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-campaigns-item">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 114
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;zoneId&quot;,
-            &quot;message&quot;: &quot;Delivery Zone ID is required&quot;
-        }
-    ]
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -42601,25 +42702,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-coupon-restaurant-wise-coupon">
             <blockquote>
-            <p>Example response (403):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 113
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;errors&quot;: [
-        {
-            &quot;code&quot;: &quot;zoneId&quot;,
-            &quot;message&quot;: &quot;Delivery Zone ID is required&quot;
-        }
-    ]
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -42865,20 +42963,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-landing-page">
             <blockquote>
-            <p>Example response (500):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 112
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Server Error&quot;
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -42992,20 +43092,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-react-landing-page">
             <blockquote>
-            <p>Example response (500):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 111
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Server Error&quot;
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -43119,20 +43221,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-react-registration-page">
             <blockquote>
-            <p>Example response (500):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 110
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Server Error&quot;
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -43255,20 +43359,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-vehicle-extra_charge">
             <blockquote>
-            <p>Example response (500):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 109
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Server Error&quot;
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -43395,20 +43501,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-most-tips">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 108
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;most_tips_amount&quot;: null
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -43522,19 +43630,23 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-get-vehicles">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 107
  </code></pre></details>         <pre>
 
-<code class="language-json" style="max-height: 300px;">[]</code>
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
+}</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-v1-get-vehicles" hidden>
@@ -43647,20 +43759,22 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-get-PaymentMethods">
             <blockquote>
-            <p>Example response (500):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 106
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Server Error&quot;
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
 }</code>
  </pre>
     </span>
@@ -43774,19 +43888,23 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-offline_payment_method_list">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 105
  </code></pre></details>         <pre>
 
-<code class="language-json" style="max-height: 300px;">{}</code>
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
+}</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-v1-offline_payment_method_list" hidden>
@@ -44020,19 +44138,23 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-taxvat-get-taxVat-list">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (429):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
+            <pre><code class="language-http">x-ratelimit-limit: 240
+x-ratelimit-remaining: 0
+retry-after: 52
+x-ratelimit-reset: 1763763411
+cache-control: no-cache, private
 content-type: application/json
-x-ratelimit-limit: 240
-x-ratelimit-remaining: 104
  </code></pre></details>         <pre>
 
-<code class="language-json" style="max-height: 300px;">[]</code>
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Too Many Attempts.&quot;
+}</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-v1-taxvat-get-taxVat-list" hidden>

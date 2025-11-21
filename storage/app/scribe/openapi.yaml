@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
-  title: 'GO-AdminPanel API Documentation'
-  description: 'Complete API documentation for GO-AdminPanel - Restaurant Management System'
+  title: 'Hopa! API Documentation'
+  description: 'Complete API documentation for Hopa! - Restaurant & Food Delivery Platform'
   version: 1.0.0
 servers:
   -
@@ -313,10 +313,10 @@ paths:
         in: path
         name: story
         description: 'The story.'
-        example: 16
+        example: architecto
         required: true
         schema:
-          type: integer
+          type: string
   /api/v1/auth/sign-up:
     post:
       summary: ''
@@ -3851,7 +3851,7 @@ paths:
                 scheduled_for:
                   type: string
                   description: 'Must be a valid date. Must be a date after or equal to <code>now</code>.'
-                  example: '2051-12-12'
+                  example: '2051-12-16'
                   nullable: true
                 type:
                   type: string
@@ -4032,10 +4032,10 @@ paths:
         in: path
         name: story
         description: 'The story.'
-        example: 16
+        example: architecto
         required: true
         schema:
-          type: integer
+          type: string
   '/api/v1/vendor/stories/{story}':
     patch:
       summary: ''
@@ -4060,7 +4060,7 @@ paths:
                 publish_at:
                   type: string
                   description: 'Must be a valid date. Must be a date after or equal to <code>now</code>.'
-                  example: '2051-12-12'
+                  example: '2051-12-16'
                   nullable: true
                 publish_now:
                   type: boolean
@@ -4198,10 +4198,10 @@ paths:
         in: path
         name: story
         description: 'The story.'
-        example: 16
+        example: architecto
         required: true
         schema:
-          type: integer
+          type: string
   '/api/v1/vendor/stories/{story}/media/{media}':
     delete:
       summary: ''
@@ -4217,10 +4217,10 @@ paths:
         in: path
         name: story
         description: 'The story.'
-        example: 16
+        example: architecto
         required: true
         schema:
-          type: integer
+          type: string
       -
         in: path
         name: media
@@ -5401,12 +5401,12 @@ paths:
                 opening_time:
                   type: string
                   description: 'Must be a valid date in the format <code>H:i:s</code>.'
-                  example: '15:58:02'
+                  example: '00:15:59'
                   nullable: false
                 closing_time:
                   type: string
                   description: 'Must be a valid date in the format <code>H:i:s</code>. Must be a date after <code>opening_time</code>.'
-                  example: '2051-12-11'
+                  example: '2051-12-16'
                   nullable: false
                 day:
                   type: string
@@ -6161,7 +6161,7 @@ paths:
                   nullable: false
                 image:
                   type: string
-                  description: 'Must not be greater than 2048 characters.'
+                  description: 'Must not be greater than 10240 characters.'
                   example: 'n'
                   nullable: true
               required:
@@ -6215,7 +6215,7 @@ paths:
                   nullable: false
                 image:
                   type: string
-                  description: 'Must not be greater than 2048 characters.'
+                  description: 'Must not be greater than 10240 characters.'
                   example: m
                   nullable: true
                 stock_type:
@@ -6828,18 +6828,22 @@ paths:
       description: ''
       parameters: []
       responses:
-        500:
+        401:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: 'Server Error'
+                  error: 'API key required'
+                  message: 'Please provide a valid API key in the X-API-Key header'
                 properties:
+                  error:
+                    type: string
+                    example: 'API key required'
                   message:
                     type: string
-                    example: 'Server Error'
+                    example: 'Please provide a valid API key in the X-API-Key header'
       tags:
         - Endpoints
       security: []
@@ -6850,18 +6854,22 @@ paths:
       description: ''
       parameters: []
       responses:
-        500:
+        401:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: 'Server Error'
+                  error: 'API key required'
+                  message: 'Please provide a valid API key in the X-API-Key header'
                 properties:
+                  error:
+                    type: string
+                    example: 'API key required'
                   message:
                     type: string
-                    example: 'Server Error'
+                    example: 'Please provide a valid API key in the X-API-Key header'
       tags:
         - Endpoints
       requestBody:
@@ -6892,30 +6900,22 @@ paths:
       description: ''
       parameters: []
       responses:
-        200:
+        401:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  error:
-                    code: 403
-                    message: "Method doesn't allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API."
-                    status: PERMISSION_DENIED
+                  error: 'API key required'
+                  message: 'Please provide a valid API key in the X-API-Key header'
                 properties:
                   error:
-                    type: object
-                    properties:
-                      code:
-                        type: integer
-                        example: 403
-                      message:
-                        type: string
-                        example: "Method doesn't allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API."
-                      status:
-                        type: string
-                        example: PERMISSION_DENIED
+                    type: string
+                    example: 'API key required'
+                  message:
+                    type: string
+                    example: 'Please provide a valid API key in the X-API-Key header'
       tags:
         - Endpoints
       requestBody:
@@ -6940,30 +6940,22 @@ paths:
       description: ''
       parameters: []
       responses:
-        200:
+        401:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  error:
-                    code: 403
-                    message: "Method doesn't allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API."
-                    status: PERMISSION_DENIED
+                  error: 'API key required'
+                  message: 'Please provide a valid API key in the X-API-Key header'
                 properties:
                   error:
-                    type: object
-                    properties:
-                      code:
-                        type: integer
-                        example: 403
-                      message:
-                        type: string
-                        example: "Method doesn't allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API."
-                      status:
-                        type: string
-                        example: PERMISSION_DENIED
+                    type: string
+                    example: 'API key required'
+                  message:
+                    type: string
+                    example: 'Please provide a valid API key in the X-API-Key header'
       tags:
         - Endpoints
       requestBody:
@@ -7006,30 +6998,22 @@ paths:
       description: ''
       parameters: []
       responses:
-        200:
+        401:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  error:
-                    code: 403
-                    message: "Method doesn't allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API."
-                    status: PERMISSION_DENIED
+                  error: 'API key required'
+                  message: 'Please provide a valid API key in the X-API-Key header'
                 properties:
                   error:
-                    type: object
-                    properties:
-                      code:
-                        type: integer
-                        example: 403
-                      message:
-                        type: string
-                        example: "Method doesn't allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API."
-                      status:
-                        type: string
-                        example: PERMISSION_DENIED
+                    type: string
+                    example: 'API key required'
+                  message:
+                    type: string
+                    example: 'Please provide a valid API key in the X-API-Key header'
       tags:
         - Endpoints
       requestBody:
@@ -7054,26 +7038,22 @@ paths:
       description: ''
       parameters: []
       responses:
-        200:
+        401:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  error_message: "Invalid request. Invalid 'latlng' parameter."
-                  results: []
-                  status: INVALID_REQUEST
+                  error: 'API key required'
+                  message: 'Please provide a valid API key in the X-API-Key header'
                 properties:
-                  error_message:
+                  error:
                     type: string
-                    example: "Invalid request. Invalid 'latlng' parameter."
-                  results:
-                    type: array
-                    example: []
-                  status:
+                    example: 'API key required'
+                  message:
                     type: string
-                    example: INVALID_REQUEST
+                    example: 'Please provide a valid API key in the X-API-Key header'
       tags:
         - Endpoints
       requestBody:
@@ -7718,6 +7698,39 @@ paths:
                 - order_id
                 - rating
       security: []
+  '/api/v1/products/{id}/like':
+    post:
+      summary: ''
+      operationId: postApiV1ProductsIdLike
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: 'The <code>id</code> of an existing record in the food table.'
+                  example: architecto
+                  nullable: false
+              required:
+                - id
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the product.'
+        example: architecto
+        required: true
+        schema:
+          type: string
   /api/v1/products/food-or-restaurant-search:
     get:
       summary: ''
@@ -8151,33 +8164,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        403:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  errors:
-                    -
-                      code: zoneId
-                      message: 'Delivery Zone ID is required'
+                  message: 'Too Many Attempts.'
                 properties:
-                  errors:
-                    type: array
-                    example:
-                      -
-                        code: zoneId
-                        message: 'Delivery Zone ID is required'
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: zoneId
-                        message:
-                          type: string
-                          example: 'Delivery Zone ID is required'
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       security: []
@@ -8188,33 +8186,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        401:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  errors:
-                    -
-                      code: auth-001
-                      message: Unauthorized.
+                  message: 'Too Many Attempts.'
                 properties:
-                  errors:
-                    type: array
-                    example:
-                      -
-                        code: auth-001
-                        message: Unauthorized.
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: auth-001
-                        message:
-                          type: string
-                          example: Unauthorized.
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       security: []
@@ -8225,33 +8208,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        403:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  errors:
-                    -
-                      code: zoneId
-                      message: 'Delivery Zone ID is required'
+                  message: 'Too Many Attempts.'
                 properties:
-                  errors:
-                    type: array
-                    example:
-                      -
-                        code: zoneId
-                        message: 'Delivery Zone ID is required'
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: zoneId
-                        message:
-                          type: string
-                          example: 'Delivery Zone ID is required'
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       security: []
@@ -8262,15 +8230,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        200:
+        429:
           description: ''
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                example: []
+                type: object
+                example:
+                  message: 'Too Many Attempts.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       security: []
@@ -8281,15 +8252,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        200:
+        429:
           description: ''
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                example: []
+                type: object
+                example:
+                  message: 'Too Many Attempts.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       security: []
@@ -8309,33 +8283,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        403:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  errors:
-                    -
-                      code: zoneId
-                      message: 'Delivery Zone ID is required'
+                  message: 'Too Many Attempts.'
                 properties:
-                  errors:
-                    type: array
-                    example:
-                      -
-                        code: zoneId
-                        message: 'Delivery Zone ID is required'
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: zoneId
-                        message:
-                          type: string
-                          example: 'Delivery Zone ID is required'
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       requestBody:
@@ -8375,15 +8334,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        200:
+        429:
           description: ''
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                example: []
+                type: object
+                example:
+                  message: 'Too Many Attempts.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       security: []
@@ -8403,33 +8365,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        403:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  errors:
-                    -
-                      code: zoneId
-                      message: 'Delivery Zone ID is required'
+                  message: 'Too Many Attempts.'
                 properties:
-                  errors:
-                    type: array
-                    example:
-                      -
-                        code: zoneId
-                        message: 'Delivery Zone ID is required'
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: zoneId
-                        message:
-                          type: string
-                          example: 'Delivery Zone ID is required'
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       requestBody:
@@ -8469,18 +8416,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        200:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  Cuisines: []
+                  message: 'Too Many Attempts.'
                 properties:
-                  Cuisines:
-                    type: array
-                    example: []
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       security: []
@@ -8491,33 +8438,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        403:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  errors:
-                    -
-                      code: zoneId
-                      message: 'Delivery Zone ID is required'
+                  message: 'Too Many Attempts.'
                 properties:
-                  errors:
-                    type: array
-                    example:
-                      -
-                        code: zoneId
-                        message: 'Delivery Zone ID is required'
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: zoneId
-                        message:
-                          type: string
-                          example: 'Delivery Zone ID is required'
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       requestBody:
@@ -9409,12 +9341,12 @@ paths:
                 start_date:
                   type: string
                   description: 'This field is required when <code>status</code> is <code>paused</code>. Must be a valid date. Must be a date after or equal to <code>today</code>.'
-                  example: '2051-12-11'
+                  example: '2051-12-16'
                   nullable: true
                 end_date:
                   type: string
                   description: 'This field is required when <code>status</code> is <code>paused</code>. Must be a valid date. Must be a date after or equal to <code>start_date</code>.'
-                  example: '2051-12-11'
+                  example: '2051-12-16'
                   nullable: true
                 cancellation_reason:
                   type: string
@@ -9471,33 +9403,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        401:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  errors:
-                    -
-                      code: auth-001
-                      message: Unauthorized.
+                  message: 'Too Many Attempts.'
                 properties:
-                  errors:
-                    type: array
-                    example:
-                      -
-                        code: auth-001
-                        message: Unauthorized.
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: auth-001
-                        message:
-                          type: string
-                          example: Unauthorized.
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       requestBody:
@@ -9533,33 +9450,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        401:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  errors:
-                    -
-                      code: auth-001
-                      message: Unauthorized.
+                  message: 'Too Many Attempts.'
                 properties:
-                  errors:
-                    type: array
-                    example:
-                      -
-                        code: auth-001
-                        message: Unauthorized.
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: auth-001
-                        message:
-                          type: string
-                          example: Unauthorized.
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       requestBody:
@@ -9590,33 +9492,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        401:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  errors:
-                    -
-                      code: auth-001
-                      message: Unauthorized.
+                  message: 'Too Many Attempts.'
                 properties:
-                  errors:
-                    type: array
-                    example:
-                      -
-                        code: auth-001
-                        message: Unauthorized.
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: auth-001
-                        message:
-                          type: string
-                          example: Unauthorized.
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       requestBody:
@@ -9652,33 +9539,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        401:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  errors:
-                    -
-                      code: auth-001
-                      message: Unauthorized.
+                  message: 'Too Many Attempts.'
                 properties:
-                  errors:
-                    type: array
-                    example:
-                      -
-                        code: auth-001
-                        message: Unauthorized.
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: auth-001
-                        message:
-                          type: string
-                          example: Unauthorized.
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       requestBody:
@@ -9821,7 +9693,7 @@ paths:
                 order_type:
                   type: string
                   description: ''
-                  example: dine_in
+                  example: take_away
                   nullable: false
                   enum:
                     - take_away
@@ -9914,33 +9786,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        401:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  errors:
-                    -
-                      code: auth-001
-                      message: Unauthorized.
+                  message: 'Too Many Attempts.'
                 properties:
-                  errors:
-                    type: array
-                    example:
-                      -
-                        code: auth-001
-                        message: Unauthorized.
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: auth-001
-                        message:
-                          type: string
-                          example: Unauthorized.
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       security: []
@@ -9951,33 +9808,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        401:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  errors:
-                    -
-                      code: auth-001
-                      message: Unauthorized.
+                  message: 'Too Many Attempts.'
                 properties:
-                  errors:
-                    type: array
-                    example:
-                      -
-                        code: auth-001
-                        message: Unauthorized.
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: auth-001
-                        message:
-                          type: string
-                          example: Unauthorized.
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       requestBody:
@@ -10088,33 +9930,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        401:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  errors:
-                    -
-                      code: auth-001
-                      message: Unauthorized.
+                  message: 'Too Many Attempts.'
                 properties:
-                  errors:
-                    type: array
-                    example:
-                      -
-                        code: auth-001
-                        message: Unauthorized.
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: auth-001
-                        message:
-                          type: string
-                          example: Unauthorized.
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       requestBody:
@@ -10163,33 +9990,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        401:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  errors:
-                    -
-                      code: auth-001
-                      message: Unauthorized.
+                  message: 'Too Many Attempts.'
                 properties:
-                  errors:
-                    type: array
-                    example:
-                      -
-                        code: auth-001
-                        message: Unauthorized.
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: auth-001
-                        message:
-                          type: string
-                          example: Unauthorized.
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       security: []
@@ -10200,33 +10012,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        401:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  errors:
-                    -
-                      code: auth-001
-                      message: Unauthorized.
+                  message: 'Too Many Attempts.'
                 properties:
-                  errors:
-                    type: array
-                    example:
-                      -
-                        code: auth-001
-                        message: Unauthorized.
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: auth-001
-                        message:
-                          type: string
-                          example: Unauthorized.
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       requestBody:
@@ -10421,33 +10218,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        200:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  errors:
-                    -
-                      code: zoneId
-                      message: 'Delivery Zone ID is required'
+                  message: 'Too Many Attempts.'
                 properties:
-                  errors:
-                    type: array
-                    example:
-                      -
-                        code: zoneId
-                        message: 'Delivery Zone ID is required'
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: zoneId
-                        message:
-                          type: string
-                          example: 'Delivery Zone ID is required'
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       security: []
@@ -10458,33 +10240,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        200:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  errors:
-                    -
-                      code: zoneId
-                      message: 'Delivery Zone ID is required'
+                  message: 'Too Many Attempts.'
                 properties:
-                  errors:
-                    type: array
-                    example:
-                      -
-                        code: zoneId
-                        message: 'Delivery Zone ID is required'
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: zoneId
-                        message:
-                          type: string
-                          example: 'Delivery Zone ID is required'
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       requestBody:
@@ -10509,33 +10276,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        200:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  errors:
-                    -
-                      code: zoneId
-                      message: 'Delivery Zone ID is required'
+                  message: 'Too Many Attempts.'
                 properties:
-                  errors:
-                    type: array
-                    example:
-                      -
-                        code: zoneId
-                        message: 'Delivery Zone ID is required'
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: zoneId
-                        message:
-                          type: string
-                          example: 'Delivery Zone ID is required'
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       security: []
@@ -10668,33 +10420,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        403:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  errors:
-                    -
-                      code: zoneId
-                      message: 'Delivery Zone ID is required'
+                  message: 'Too Many Attempts.'
                 properties:
-                  errors:
-                    type: array
-                    example:
-                      -
-                        code: zoneId
-                        message: 'Delivery Zone ID is required'
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: zoneId
-                        message:
-                          type: string
-                          example: 'Delivery Zone ID is required'
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       security: []
@@ -10729,18 +10466,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        500:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: 'Server Error'
+                  message: 'Too Many Attempts.'
                 properties:
                   message:
                     type: string
-                    example: 'Server Error'
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       security: []
@@ -10751,18 +10488,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        500:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: 'Server Error'
+                  message: 'Too Many Attempts.'
                 properties:
                   message:
                     type: string
-                    example: 'Server Error'
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       security: []
@@ -10773,18 +10510,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        500:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: 'Server Error'
+                  message: 'Too Many Attempts.'
                 properties:
                   message:
                     type: string
-                    example: 'Server Error'
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       security: []
@@ -10795,18 +10532,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        500:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: 'Server Error'
+                  message: 'Too Many Attempts.'
                 properties:
                   message:
                     type: string
-                    example: 'Server Error'
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       requestBody:
@@ -10831,18 +10568,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        200:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  most_tips_amount: null
+                  message: 'Too Many Attempts.'
                 properties:
-                  most_tips_amount:
+                  message:
                     type: string
-                    example: null
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       security: []
@@ -10853,15 +10590,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        200:
+        429:
           description: ''
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                example: []
+                type: object
+                example:
+                  message: 'Too Many Attempts.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       security: []
@@ -10872,18 +10612,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        500:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: 'Server Error'
+                  message: 'Too Many Attempts.'
                 properties:
                   message:
                     type: string
-                    example: 'Server Error'
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       security: []
@@ -10894,14 +10634,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        200:
+        429:
           description: ''
           content:
             application/json:
               schema:
                 type: object
-                example: {  }
-                properties: {  }
+                example:
+                  message: 'Too Many Attempts.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       security: []
@@ -10922,15 +10666,18 @@ paths:
       description: ''
       parameters: []
       responses:
-        200:
+        429:
           description: ''
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                example: []
+                type: object
+                example:
+                  message: 'Too Many Attempts.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Too Many Attempts.'
       tags:
         - Endpoints
       requestBody:

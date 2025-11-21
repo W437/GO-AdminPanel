@@ -8,14 +8,14 @@ use function Knuckles\Scribe\Config\{removeStrategies, configureStrategy};
 
 return [
     // The HTML <title> for the generated documentation.
-    'title' => 'GO-AdminPanel API Documentation',
+    'title' => 'Hopa! API Documentation',
 
     // A short description of your API. Will be included in the docs webpage, Postman collection and OpenAPI spec.
-    'description' => 'Complete API documentation for GO-AdminPanel - Restaurant Management System',
+    'description' => 'Complete API documentation for Hopa! - Restaurant & Food Delivery Platform',
 
     // Text to place in the "Introduction" section, right after the `description`. Markdown and HTML are supported.
     'intro_text' => <<<INTRO
-        Welcome to the GO-AdminPanel API documentation. This API provides comprehensive endpoints for managing restaurants, orders, customers, delivery personnel, and more.
+        Welcome to the Hopa! API documentation. This API provides comprehensive endpoints for managing restaurants, orders, customers, delivery personnel, and more.
 
         <aside>
         <b>Base URL</b>: <code>/api/v1</code><br>
@@ -195,7 +195,7 @@ return [
     // For example, if your logo is in public/img:
     // - 'logo' => '../img/logo.png' // for `static` type (output folder is public/docs)
     // - 'logo' => 'img/logo.png' // for `laravel` type
-    'logo' => false,
+    'logo' => 'assets/admin/img/hopa-logo.png',
 
     // Customize the "Last updated" value displayed in the docs by specifying tokens and formats.
     // Examples:
