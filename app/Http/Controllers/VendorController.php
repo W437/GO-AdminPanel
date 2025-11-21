@@ -149,7 +149,7 @@ class VendorController extends Controller
             $restaurant->longitude = $request->longitude;
             $restaurant->vendor_id = $vendor->id;
             $restaurant->zone_id = $request->zone_id;
-            $restaurant->delivery_time =$request->minimum_delivery_time .'-'. $request->maximum_delivery_time.'-'.$request->delivery_time_type;
+            $restaurant->delivery_time =$request->minimum_delivery_time .'-'. $request->maximum_delivery_time.' '.$request->delivery_time_type;
             $restaurant->status = 0;
             $restaurant->restaurant_model = 'none';
 

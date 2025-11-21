@@ -189,7 +189,7 @@ class VendorLoginController extends Controller
         $restaurant->tin_expire_date = $request->tin_expire_date;
         $extension = $request->has('tin_certificate_image') ? $request->file('tin_certificate_image')->getClientOriginalExtension() : 'png';
         $restaurant->tin_certificate_image = $request->has('tin_certificate_image') ? Helpers::upload('restaurant/', $extension, $request->file('tin_certificate_image')): null;
-        $restaurant->delivery_time = $request->min_delivery_time . '-' . $request->max_delivery_time . '-' . $request->delivery_time_type;
+        $restaurant->delivery_time = $request->min_delivery_time . '-' . $request->max_delivery_time . ' ' . $request->delivery_time_type;
         $restaurant->status = 0;
         $restaurant->restaurant_model = 'none';
 

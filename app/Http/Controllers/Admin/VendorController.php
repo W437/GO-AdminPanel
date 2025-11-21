@@ -180,7 +180,7 @@ class VendorController extends Controller
         $restaurant->zone_id = $request->zone_id;
 
         $restaurant->restaurant_model = 'commission';
-        $restaurant->delivery_time =$request->minimum_delivery_time .'-'. $request->maximum_delivery_time.'-'.$request->delivery_time_type;
+        $restaurant->delivery_time =$request->minimum_delivery_time .'-'. $request->maximum_delivery_time.' '.$request->delivery_time_type;
 
         if(isset($request->additional_data)  && count($request->additional_data) > 0){
             $restaurant->additional_data = json_encode($request->additional_data) ;
@@ -385,7 +385,7 @@ class VendorController extends Controller
         $restaurant->latitude = $request->latitude;
         $restaurant->longitude = $request->longitude;
         $restaurant->zone_id = $request->zone_id;
-        $restaurant->delivery_time =$request->minimum_delivery_time .'-'. $request->maximum_delivery_time.'-'.$request->delivery_time_type;
+        $restaurant->delivery_time =$request->minimum_delivery_time .'-'. $request->maximum_delivery_time.' '.$request->delivery_time_type;
 
         $restaurant->tin = $request->tin;
         $restaurant->tin_expire_date = $request->tin_expire_date;
@@ -1052,7 +1052,7 @@ class VendorController extends Controller
         $restaurant->minimum_order = $request->minimum_order;
         $restaurant->opening_time = $request->opening_time;
         $restaurant->closeing_time = $request->closeing_time;
-        $restaurant->delivery_time =$request->minimum_delivery_time .'-'. $request->maximum_delivery_time.'-'.$request->delivery_time_type;
+        $restaurant->delivery_time =$request->minimum_delivery_time .'-'. $request->maximum_delivery_time.' '.$request->delivery_time_type;
         if ($request->menu == "veg") {
             $restaurant->veg = 1;
             $restaurant->non_veg = 0;
