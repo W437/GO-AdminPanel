@@ -1,4 +1,7 @@
 function newdonutChart(id, value, labels, legendPosition = "bottom") {
+    var isDarkMode = document.documentElement.classList.contains('theme-dark');
+    var textColor = isDarkMode ? '#a7abc3' : '#373d3f';
+
     var options = {
         series: value,
         labels: labels,
@@ -8,6 +11,9 @@ function newdonutChart(id, value, labels, legendPosition = "bottom") {
             height: 420,
             type: "donut",
         },
+        theme: {
+            mode: isDarkMode ? 'dark' : 'light'
+        },
         responsive: [
             {
                 breakpoint: undefined,
@@ -16,6 +22,9 @@ function newdonutChart(id, value, labels, legendPosition = "bottom") {
         ],
         legend: {
             position: legendPosition,
+            labels: {
+                colors: textColor
+            }
         },
         tooltip: {
             enabled: false,
@@ -42,7 +51,7 @@ function newdonutChart(id, value, labels, legendPosition = "bottom") {
                             fontSize: "15px",
                             fontFamily: "Helvetica, Arial, sans-serif",
                             fontWeight: 500,
-                            color: undefined,
+                            color: textColor,
                             offsetY: -10,
                             formatter: function (val) {
                                 return val;
@@ -53,7 +62,7 @@ function newdonutChart(id, value, labels, legendPosition = "bottom") {
                             fontSize: "16px",
                             fontFamily: "Helvetica, Arial, sans-serif",
                             fontWeight: 700,
-                            color: undefined,
+                            color: textColor,
                             offsetY: 16,
                             formatter: function (val) {
                                 return val;
@@ -66,7 +75,7 @@ function newdonutChart(id, value, labels, legendPosition = "bottom") {
                             fontSize: "15px",
                             fontFamily: "Helvetica, Arial, sans-serif",
                             fontWeight: 500,
-                            color: "#373d3f",
+                            color: textColor,
                             formatter: function (w) {
                                 return w.globals.seriesTotals.reduce((a, b) => {
                                     return a + b;

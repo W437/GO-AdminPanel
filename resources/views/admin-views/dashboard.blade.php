@@ -170,6 +170,10 @@ loadchart();
             newdonutChart(id,value,labels)
         }
 
+        var isDarkMode = document.documentElement.classList.contains('theme-dark');
+        var textColor = isDarkMode ? '#a7abc3' : '#373d3f';
+        var gridColor = isDarkMode ? 'rgba(167, 171, 195, 0.2)' : '#e7e7e7';
+
         var options = {
             series: [{
                 name: '{{ translate('messages.admin_commission') }}',
@@ -249,11 +253,30 @@ loadchart();
             },
             xaxis: {
                 categories: ["{{ translate('messages.Jan') }}","{{ translate('messages.Feb') }}","{{ translate('messages.Mar') }}","{{ translate('messages.April') }}","{{ translate('messages.May') }}","{{ translate('messages.Jun') }}","{{ translate('messages.Jul') }}","{{ translate('messages.Aug') }}","{{ translate('messages.Sep') }}","{{ translate('messages.Oct') }}","{{ translate('messages.Nov') }}","{{ translate('messages.Dec') }}"],
+                labels: {
+                    style: {
+                        colors: textColor
+                    }
+                }
             },
             yaxis: {
                 title: {
-                    text: '{{ \App\CentralLogics\Helpers::currency_symbol() }}. ({{ \App\CentralLogics\Helpers::currency_code() }})'
+                    text: '{{ \App\CentralLogics\Helpers::currency_symbol() }}. ({{ \App\CentralLogics\Helpers::currency_code() }})',
+                    style: {
+                        color: textColor
+                    }
+                },
+                labels: {
+                    style: {
+                        colors: textColor
+                    }
                 }
+            },
+            grid: {
+                borderColor: gridColor
+            },
+            theme: {
+                mode: isDarkMode ? 'dark' : 'light'
             },
             fill: {
                 opacity: 1

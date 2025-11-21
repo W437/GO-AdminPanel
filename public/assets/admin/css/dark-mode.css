@@ -905,3 +905,35 @@ html.theme-dark .text-body {
 html.theme-dark a:not(.btn):hover {
     color: var(--go-accent);
 }
+
+/* Fix active tab button in business settings - ensure dark text on light background */
+html.theme-dark .nav--pills .nav-link.active,
+html.theme-dark .nav--tabs .nav-link.active {
+    background-color: #ffffff !important;
+    color: #1e2022 !important;
+    border-color: #e7eaf3 !important;
+}
+
+/* Fix purple info note (business-notes) visibility in dark mode */
+html.theme-dark .business-notes,
+html.theme-dark .blinkings .business-notes {
+    background-color: var(--go-panel-dark) !important;
+    color: var(--go-text-dark-primary) !important;
+    border-color: var(--go-border-dark) !important;
+}
+
+html.theme-dark .business-notes h6 {
+    color: var(--go-text-dark-primary) !important;
+}
+
+/* Fix sidebar search menu input background */
+html.theme-dark .sidebar--search-form input,
+html.theme-dark .sidebar--search-form .form-control {
+    background-color: var(--go-panel-dark-alt) !important;
+    color: var(--go-text-dark-primary) !important;
+    border-color: var(--go-border-dark) !important;
+}
+
+html.theme-dark .sidebar--search-form input::placeholder {
+    color: var(--go-text-dark-secondary) !important;
+}
