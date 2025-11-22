@@ -258,23 +258,61 @@
                                     </select>
                                 </div>
 
-                                <div class="col-sm-12" id="dietary_preferences">
-                                    <label class="input-label" for="dietary-preferences">
-                                        {{translate('Dietary Preferences')}}
-                                        <span class="input-label-secondary" title="{{ translate('Select dietary tags that apply to this item (Vegan, Gluten-Free, Kosher, etc.)') }}" data-toggle="tooltip">
+                                @php($dietaryPrefs = \App\Models\DietaryPreference::active()->orderBy('type')->orderBy('name')->get()->groupBy('type') ?? [])
+                                @php($productDietaryPrefs = $product->dietaryPreferences->pluck('id') ?? collect())
+
+                                <div class="col-sm-6 col-lg-6">
+                                    <label class="input-label">
+                                        {{translate('Diet Type')}}
+                                        <span class="input-label-secondary" title="{{ translate('Select diet types (Vegan, Keto, etc.)') }}" data-toggle="tooltip">
                                             <i class="tio-info-outined"></i>
                                         </span>
                                     </label>
-                                    <select name="dietary_preferences[]" class="form-control multiple-select2"  data-placeholder="{{ translate('messages.Select dietary preferences') }}" multiple>
-                                        @php($dietaryPrefs = \App\Models\DietaryPreference::active()->orderBy('type')->orderBy('name')->get()->groupBy('type') ?? [])
-                                        @php($productDietaryPrefs = $product->dietaryPreferences->pluck('id') ?? collect())
+                                    <select name="dietary_preferences[]" class="form-control multiple-select2" data-placeholder="{{ translate('Select diet types') }}" multiple>
+                                        @foreach ($dietaryPrefs['diet'] ?? [] as $pref)
+                                            <option value="{{ $pref->id }}" {{ $productDietaryPrefs->contains($pref->id) ? 'selected' : '' }}>{{ $pref->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
-                                        @foreach ($dietaryPrefs as $type => $prefs)
-                                            <optgroup label="{{ ucfirst($type) }}">
-                                                @foreach ($prefs as $pref)
-                                                    <option value="{{ $pref->id }}" {{ $productDietaryPrefs->contains($pref->id) ? 'selected' : '' }}>{{ $pref->name }}</option>
-                                                @endforeach
-                                            </optgroup>
+                                <div class="col-sm-6 col-lg-6">
+                                    <label class="input-label">
+                                        {{translate('Religious / Ethical')}}
+                                        <span class="input-label-secondary" title="{{ translate('Select religious or ethical preferences') }}" data-toggle="tooltip">
+                                            <i class="tio-info-outined"></i>
+                                        </span>
+                                    </label>
+                                    <select name="dietary_preferences[]" class="form-control multiple-select2" data-placeholder="{{ translate('Select preferences') }}" multiple>
+                                        @foreach ($dietaryPrefs['religious'] ?? [] as $pref)
+                                            <option value="{{ $pref->id }}" {{ $productDietaryPrefs->contains($pref->id) ? 'selected' : '' }}>{{ $pref->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-6">
+                                    <label class="input-label">
+                                        {{translate('Allergy-Free Options')}}
+                                        <span class="input-label-secondary" title="{{ translate('What allergens does this item NOT contain?') }}" data-toggle="tooltip">
+                                            <i class="tio-info-outined"></i>
+                                        </span>
+                                    </label>
+                                    <select name="dietary_preferences[]" class="form-control multiple-select2" data-placeholder="{{ translate('Select allergy-free options') }}" multiple>
+                                        @foreach ($dietaryPrefs['allergy'] ?? [] as $pref)
+                                            <option value="{{ $pref->id }}" {{ $productDietaryPrefs->contains($pref->id) ? 'selected' : '' }}>{{ $pref->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-6">
+                                    <label class="input-label">
+                                        {{translate('Other Attributes')}}
+                                        <span class="input-label-secondary" title="{{ translate('Additional food attributes') }}" data-toggle="tooltip">
+                                            <i class="tio-info-outined"></i>
+                                        </span>
+                                    </label>
+                                    <select name="dietary_preferences[]" class="form-control multiple-select2" data-placeholder="{{ translate('Select attributes') }}" multiple>
+                                        @foreach ($dietaryPrefs['other'] ?? [] as $pref)
+                                            <option value="{{ $pref->id }}" {{ $productDietaryPrefs->contains($pref->id) ? 'selected' : '' }}>{{ $pref->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
