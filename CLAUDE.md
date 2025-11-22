@@ -1,6 +1,11 @@
 - See @project_tips folder content.
 - Implementing, fixing, or modifying code - should be done in this repo not the SSH.
 -  The One-Way Flow: Local Repo → Git → Production (SSH)
+
+# Memory: Deployment Flow
+- **DO NOT manually `git pull` on production SSH** - GitHub Actions automatically deploys all pushed changes to production
+- After pushing to `main`, wait for GitHub Actions to complete deployment
+- Only SSH in for: database migrations, cache clearing, or emergency fixes
 - > **Golden Rule for All Coding Agents**  
 > Always treat `database/schema/mysql-schema.sql` as the single source of truth for the live database. 
 
