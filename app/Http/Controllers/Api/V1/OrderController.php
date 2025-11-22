@@ -199,6 +199,11 @@ class OrderController extends Controller
         $order->payment_method = $request->partial_payment? 'partial_payment' :$request->payment_method;
         $order->transaction_reference = null;
         $order->order_note = $request['order_note'];
+        $order->leave_at_door = $request['leave_at_door'] ?? false;
+        $order->is_gift = $request['is_gift'] ?? false;
+        $order->gift_recipient_name = $request['gift_recipient_name'] ?? null;
+        $order->gift_recipient_phone = $request['gift_recipient_phone'] ?? null;
+        $order->gift_message = $request['gift_message'] ?? null;
         $order->order_type = $request['order_type'];
         $order->restaurant_id = $request['restaurant_id'];
         $order->delivery_charge = round($delivery_charge, config('round_up_to_digit'))??0;
@@ -320,6 +325,7 @@ class OrderController extends Controller
                     'variation' => json_encode($variations),
                     'add_ons' => json_encode($addon_data['addons']),
                     'total_add_on_price' => $addon_data['total_add_on_price'],
+                    'special_instructions' => $c['special_instructions'] ?? null,
                     'created_at' => now(),
                     'updated_at' => now()
                 ];

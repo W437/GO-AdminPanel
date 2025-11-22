@@ -42,6 +42,8 @@ class Order extends Model
         'ref_bonus_amount' => 'float',
         'extra_packaging_amount' => 'float',
         'bring_change_amount'=>'integer',
+        'leave_at_door' => 'boolean',
+        'is_gift' => 'boolean',
     ];
     protected $appends = ['order_proof_full_url'];
 

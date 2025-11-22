@@ -99,6 +99,7 @@ class CartController extends Controller
         $cart->quantity = $request->quantity;
         $cart->variations = json_encode($request->variations);
         $cart->variation_options = json_encode($request?->variation_options ?? []);
+        $cart->special_instructions = $request->special_instructions ?? null;
         $cart->save();
 
         $item->carts()->save($cart);
@@ -161,6 +162,7 @@ class CartController extends Controller
         $cart->quantity = $request->quantity;
         $cart->variations = $request->variations?json_encode($request->variations):$cart->variations;
         $cart->variation_options = json_encode($request?->variation_options ?? []);
+        $cart->special_instructions = $request->special_instructions ?? $cart->special_instructions;
         $cart->save();
 
         $carts = Cart::where('user_id', $user_id)->where('is_guest',$is_guest)->get()
@@ -295,6 +297,7 @@ class CartController extends Controller
                 $cart->quantity = $single_item['quantity'];
                 $cart->variations = json_encode($single_item['variations']);
                 $cart->variation_options =  data_get($single_item,'variation_options',[] ) != null ? json_encode(data_get($single_item,'variation_options',[] )) : json_encode([]);
+                $cart->special_instructions = data_get($single_item, 'special_instructions', null);
 
                 $cart->save();
 
