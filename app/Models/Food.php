@@ -222,6 +222,11 @@ class Food extends Model
         return $this->belongsToMany(Nutrition::class);
     }
 
+    public function dietaryPreferences()
+    {
+        return $this->belongsToMany(DietaryPreference::class);
+    }
+
     protected static function boot()
     {
         parent::boot();

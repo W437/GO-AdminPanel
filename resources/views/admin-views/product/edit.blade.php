@@ -257,6 +257,28 @@
                                         @endforeach
                                     </select>
                                 </div>
+
+                                <div class="col-sm-12" id="dietary_preferences">
+                                    <label class="input-label" for="dietary-preferences">
+                                        {{translate('Dietary Preferences')}}
+                                        <span class="input-label-secondary" title="{{ translate('Select dietary tags that apply to this item (Vegan, Gluten-Free, Kosher, etc.)') }}" data-toggle="tooltip">
+                                            <i class="tio-info-outined"></i>
+                                        </span>
+                                    </label>
+                                    <select name="dietary_preferences[]" class="form-control multiple-select2"  data-placeholder="{{ translate('messages.Select dietary preferences') }}" multiple>
+                                        @php($dietaryPrefs = \App\Models\DietaryPreference::active()->orderBy('type')->orderBy('name')->get()->groupBy('type') ?? [])
+                                        @php($productDietaryPrefs = $product->dietaryPreferences->pluck('id') ?? collect())
+
+                                        @foreach ($dietaryPrefs as $type => $prefs)
+                                            <optgroup label="{{ ucfirst($type) }}">
+                                                @foreach ($prefs as $pref)
+                                                    <option value="{{ $pref->id }}" {{ $productDietaryPrefs->contains($pref->id) ? 'selected' : '' }}>{{ $pref->name }}</option>
+                                                @endforeach
+                                            </optgroup>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <div class="col-sm-6 col-lg-3" id="halal">
                                     <div class="form-check mb-0 p-4">
                                         <input class="form-check-input" name="is_halal" type="checkbox" value="1" id="flexCheckDefault" {{ $product->is_halal == 1?'checked':'' }}>

@@ -115,6 +115,9 @@ class FoodController extends Controller
             }
         }
 
+        // Dietary preferences (predefined, just get IDs)
+        $dietary_preference_ids = $request->dietary_preferences ?? [];
+
         $food = new Food;
         $food->name = $request->name[array_search('default', $request->lang)];
 
@@ -218,6 +221,7 @@ class FoodController extends Controller
         $food->tags()->sync($tag_ids);
         $food->nutritions()->sync($nutrition_ids);
         $food->allergies()->sync($allergy_ids);
+        $food->dietaryPreferences()->sync($dietary_preference_ids);
 
         if (addon_published_status('TaxModule')) {
             $SystemTaxVat = \Modules\TaxModule\Entities\SystemTaxSetup::where('is_active', 1)->where('is_default', 1)->first();
@@ -376,6 +380,9 @@ class FoodController extends Controller
             }
         }
 
+        // Dietary preferences (predefined, just get IDs)
+        $dietary_preference_ids = $request->dietary_preferences ?? [];
+
         $p = Food::withoutGlobalScope(RestaurantScope::class)->find($id);
 
         $p->name = $request->name[array_search('default', $request->lang)];
@@ -490,6 +497,7 @@ class FoodController extends Controller
         $p->tags()->sync($tag_ids);
         $p->nutritions()->sync($nutrition_ids);
         $p->allergies()->sync($allergy_ids);
+        $p->dietaryPreferences()->sync($dietary_preference_ids);
 
         if (addon_published_status('TaxModule')) {
             $taxVatIds = $p->taxVats()->pluck('tax_id')->toArray() ?? [];
