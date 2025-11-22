@@ -429,7 +429,7 @@ $order_sch = Cache::rememberForever('order_scheduled_stats', function () {
                     @if (Helpers::module_permission_check('zone'))
                         <li class="navbar-vertical-aside-has-menu {{ Request::is('admin/zone*') ? 'active' : '' }}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
-                                href="{{ route('admin.zone.home') }}"
+                                href="{{ route('admin.zone.index') }}"
                                 title="{{ translate('messages.zone_setup') }}">
                                 <i class="tio-poi-outlined nav-icon"></i>
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
