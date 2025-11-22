@@ -227,6 +227,21 @@ class Food extends Model
         return $this->belongsToMany(DietaryPreference::class);
     }
 
+    public function scopeWithDietaryPreferences($query, $preferenceIds)
+    {
+        if (empty($preferenceIds) || !is_array($preferenceIds)) {
+            return $query;
+        }
+
+        foreach ($preferenceIds as $prefId) {
+            $query->whereHas('dietaryPreferences', function($q) use ($prefId) {
+                $q->where('dietary_preferences.id', $prefId);
+            });
+        }
+
+        return $query;
+    }
+
     protected static function boot()
     {
         parent::boot();

@@ -617,7 +617,17 @@ class FoodController extends Controller
             });
         })
         ->with(['category.parent','newVariations','newVariationOptions','taxVats.tax'])
-        ->type($type)->latest()->paginate(config('default_pagination'));
+        ->type($type)
+        ->when($request->hasAny(['dietary_diet', 'dietary_cultural', 'dietary_allergy', 'dietary_other']), function($query) use($request){
+            $dietary_prefs = array_merge(
+                $request->dietary_diet ?? [],
+                $request->dietary_cultural ?? [],
+                $request->dietary_allergy ?? [],
+                $request->dietary_other ?? []
+            );
+            return $query->withDietaryPreferences($dietary_prefs);
+        })
+        ->latest()->paginate(config('default_pagination'));
         $category =$category_id !='all'? Category::findOrFail($category_id):null;
                 $addonIds = collect($foods->items())
             ->pluck('add_ons')

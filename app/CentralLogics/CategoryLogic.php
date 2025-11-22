@@ -45,6 +45,9 @@ class CategoryLogic
         ->when($additional_data['non_veg'] == 1 && $additional_data['veg'] == 0  , function($query) {
             $query->where('veg',0);
         })
+        ->when(isset($additional_data['dietary_preferences']) && !empty($additional_data['dietary_preferences']), function($query) use($additional_data) {
+            $query->withDietaryPreferences($additional_data['dietary_preferences']);
+        })
         ->when($additional_data['avg_rating'] > 0 , function($query) use($additional_data) {
             $query->where('avg_rating','>=' , $additional_data['avg_rating']);
         })

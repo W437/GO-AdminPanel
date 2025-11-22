@@ -19,6 +19,25 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
+    private function parseDietaryPreferences($request)
+    {
+        if (!$request->has('dietary_preferences')) {
+            return null;
+        }
+
+        $prefs = $request->dietary_preferences;
+
+        if (is_array($prefs)) {
+            return array_map('intval', array_filter($prefs));
+        }
+
+        if (is_string($prefs)) {
+            return array_map('intval', array_filter(explode(',', $prefs)));
+        }
+
+        return null;
+    }
+
     public function get_latest_products(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -33,8 +52,9 @@ class ProductController extends Controller
         }
 
         $type = $request->query('type', 'all');
+        $dietary_prefs = $this->parseDietaryPreferences($request);
 
-        $products = ProductLogic::get_latest_products(limit:$request['limit'], offset:$request['offset'],restaurant_id: $request['restaurant_id'],category_id: $request['category_id'], type:$type);
+        $products = ProductLogic::get_latest_products(limit:$request['limit'], offset:$request['offset'],restaurant_id: $request['restaurant_id'],category_id: $request['category_id'], type:$type, dietary_preferences:$dietary_prefs);
         $products['products'] = Helpers::product_data_formatting(data:$products['products'],multi_data: true, trans:false,local: app()->getLocale());
         return response()->json($products, 200);
     }
@@ -93,7 +113,9 @@ class ProductController extends Controller
             ->when($request->restaurant_id, function($query) use($request){
                 return $query->where('restaurant_id', $request->restaurant_id);
             })
-
+            ->when($this->parseDietaryPreferences($request), function($query) use($request){
+                return $query->withDietaryPreferences($this->parseDietaryPreferences($request));
+            })
             ->when($min && $max, function($query)use($min,$max){
                 $query->whereBetween('price',[$min,$max]);
             })
@@ -249,7 +271,8 @@ class ProductController extends Controller
         $longitude= $request->header('longitude');
         $latitude= $request->header('latitude');
         $zone_id= json_decode($request->header('zoneId'), true);
-        $products = ProductLogic::popular_products(zone_id:$zone_id, limit:$request['limit'],offset: $request['offset'],type: $type,longitude:$longitude,latitude:$latitude);
+        $dietary_prefs = $this->parseDietaryPreferences($request);
+        $products = ProductLogic::popular_products(zone_id:$zone_id, limit:$request['limit'],offset: $request['offset'],type: $type,longitude:$longitude,latitude:$latitude,dietary_preferences:$dietary_prefs);
         $products['products'] = Helpers::product_data_formatting(data:$products['products'], multi_data:true, trans:false, local:app()->getLocale());
         return response()->json($products, 200);
     }
@@ -268,7 +291,8 @@ class ProductController extends Controller
         $zone_id= json_decode($request->header('zoneId'), true);
         $longitude= $request->header('longitude');
         $latitude= $request->header('latitude');
-        $products = ProductLogic::most_reviewed_products(zone_id:$zone_id,limit: $request['limit'], offset:$request['offset'], type:$type,longitude:$longitude,latitude:$latitude);
+        $dietary_prefs = $this->parseDietaryPreferences($request);
+        $products = ProductLogic::most_reviewed_products(zone_id:$zone_id,limit: $request['limit'], offset:$request['offset'], type:$type,longitude:$longitude,latitude:$latitude,dietary_preferences:$dietary_prefs);
         $products['products'] = Helpers::product_data_formatting(data:$products['products'],multi_data: true, trans:false, local:app()->getLocale());
         return response()->json($products, 200);
     }
@@ -431,7 +455,8 @@ class ProductController extends Controller
         $type = $request->query('type', 'all');
         $key = explode(' ', $request['name']);
         $zone_id= json_decode($request->header('zoneId'), true);
-        $products = ProductLogic::recommended_products(zone_id:$zone_id, restaurant_id:$request->restaurant_id,limit:$request['limit'],offset: $request['offset'],type: $type ,name:$key );
+        $dietary_prefs = $this->parseDietaryPreferences($request);
+        $products = ProductLogic::recommended_products(zone_id:$zone_id, restaurant_id:$request->restaurant_id,limit:$request['limit'],offset: $request['offset'],type: $type ,name:$key ,dietary_preferences:$dietary_prefs);
         $products['products'] = Helpers::product_data_formatting(data:$products['products'],multi_data: true, trans:false, local:app()->getLocale());
         return response()->json($products, 200);
     }

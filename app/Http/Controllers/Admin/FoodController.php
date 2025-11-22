@@ -807,6 +807,15 @@ class FoodController extends Controller
             });
         })
         ->type($type)
+        ->when($request->hasAny(['dietary_diet', 'dietary_cultural', 'dietary_allergy', 'dietary_other']), function($query) use($request){
+            $dietary_prefs = array_merge(
+                $request->dietary_diet ?? [],
+                $request->dietary_cultural ?? [],
+                $request->dietary_allergy ?? [],
+                $request->dietary_other ?? []
+            );
+            return $query->withDietaryPreferences($dietary_prefs);
+        })
         ->latest()
         ->paginate(config('default_pagination'));
 

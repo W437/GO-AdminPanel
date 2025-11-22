@@ -278,8 +278,8 @@
 
                                 <div class="col-sm-6 col-lg-6">
                                     <label class="input-label">
-                                        {{translate('Religious / Ethical')}}
-                                        <span class="input-label-secondary" title="{{ translate('Select religious or ethical preferences') }}" data-toggle="tooltip">
+                                        {{translate('Cultural Preferences')}}
+                                        <span class="input-label-secondary" title="{{ translate('Select cultural or traditional preferences') }}" data-toggle="tooltip">
                                             <i class="tio-info-outined"></i>
                                         </span>
                                     </label>

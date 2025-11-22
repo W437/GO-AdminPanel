@@ -97,6 +97,9 @@ class DataFormatter
         $data['halal_tag_status'] =  (int) $data->restaurant->restaurant_config?->halal_tag_status??0;
         $data['nutritions_name']= $data?->nutritions ? Nutrition::whereIn('id',$data?->nutritions->pluck('id') )->pluck('nutrition') : null;
         $data['allergies_name']= $data?->allergies ?Allergy::whereIn('id',$data?->allergies->pluck('id') )->pluck('allergy') : null;
+        $data['dietary_preferences'] = $data?->dietaryPreferences ? $data->dietaryPreferences->map(function($pref){
+            return ['id' => $pref->id, 'name' => $pref->name, 'type' => $pref->type];
+        })->groupBy('type')->toArray() : [];
         $data['free_delivery'] =  (int) $data->restaurant->free_delivery ?? 0;
         $data['min_delivery_time'] =  (int) explode('-',$data->restaurant->delivery_time)[0] ?? 0;
         $data['max_delivery_time'] =  (int) explode('-',$data->restaurant->delivery_time)[1] ?? 0;
@@ -186,6 +189,9 @@ class DataFormatter
                 $item['halal_tag_status'] =  (int) $item->restaurant->restaurant_config?->halal_tag_status??0;
                 $item['nutritions_name']= $item?->nutritions ? Nutrition::whereIn('id',$item?->nutritions->pluck('id') )->pluck('nutrition') : null;
                 $item['allergies_name']= $item?->allergies ?Allergy::whereIn('id',$item?->allergies->pluck('id') )->pluck('allergy') : null;
+                $item['dietary_preferences'] = $item?->dietaryPreferences ? $item->dietaryPreferences->map(function($pref){
+                    return ['id' => $pref->id, 'name' => $pref->name, 'type' => $pref->type];
+                })->groupBy('type')->toArray() : [];
 
                if(Helpers::getDeliveryFee($item->restaurant)  ==  'free_delivery'){
                     $item['free_delivery'] =  (int)  1;

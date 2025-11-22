@@ -24,7 +24,7 @@ class ProductLogic
                     ->first();
     }
 
-    public static function get_latest_products($limit, $offset, $restaurant_id, $category_id, $type='all')
+    public static function get_latest_products($limit, $offset, $restaurant_id, $category_id, $type='all', $dietary_preferences=null)
     {
         $paginator = Food::active()->type($type);
         if($category_id != 0)
@@ -32,6 +32,9 @@ class ProductLogic
             $paginator = $paginator->whereHas('category',function($q)use($category_id){
                 return $q->whereId($category_id)->orWhere('parent_id', $category_id);
             });
+        }
+        if($dietary_preferences) {
+            $paginator = $paginator->withDietaryPreferences($dietary_preferences);
         }
         $paginator = $paginator->where('restaurant_id', $restaurant_id)->latest()->paginate($limit, ['*'], 'page', $offset);
 
@@ -56,7 +59,7 @@ class ProductLogic
         ->get();
     }
 
-    public static function search_products($name, $zone_id, $limit = 10, $offset = 1)
+    public static function search_products($name, $zone_id, $limit = 10, $offset = 1, $dietary_preferences=null)
     {
         $key = explode(' ', $name);
         $paginator = Food::active()->whereHas('restaurant', function($q)use($zone_id){
@@ -65,7 +68,11 @@ class ProductLogic
             foreach ($key as $value) {
                 $q->orWhere('name', 'like', "%{$value}%");
             }
-        })->paginate($limit, ['*'], 'page', $offset);
+        })
+        ->when($dietary_preferences, function($q) use ($dietary_preferences){
+            return $q->withDietaryPreferences($dietary_preferences);
+        })
+        ->paginate($limit, ['*'], 'page', $offset);
 
         return [
             'total_size' => $paginator->total(),
@@ -75,7 +82,7 @@ class ProductLogic
         ];
     }
 
-    public static function popular_products($zone_id, $limit = null, $offset = null, $type='all',$longitude=0,$latitude=0)
+    public static function popular_products($zone_id, $limit = null, $offset = null, $type='all',$longitude=0,$latitude=0,$dietary_preferences=null)
     {
         $popular_food_default_status = \App\Models\BusinessSetting::where('key', 'popular_food_default_status')->first();
         $popular_food_default_status = $popular_food_default_status ? $popular_food_default_status->value : 1;
@@ -92,7 +99,11 @@ class ProductLogic
             if ($popular_food_default_status == '1'){
                 $paginator = Food::whereHas('restaurant', function($q)use($zone_id){
                     $q->whereIn('zone_id', $zone_id)->Weekday();
-                })->active()->type($type)->has('reviews')->popular()->paginate($limit, ['*'], 'page', $offset);
+                })->active()->type($type)
+                ->when($dietary_preferences, function($q) use ($dietary_preferences){
+                    return $q->withDietaryPreferences($dietary_preferences);
+                })
+                ->has('reviews')->popular()->paginate($limit, ['*'], 'page', $offset);
             }
 
             if ($popular_food_default_status == '0'){
@@ -114,7 +125,10 @@ class ProductLogic
                         $subQuery->selectRaw('IF(((select count(*) from `restaurant_schedule` where `restaurants`.`id` = `restaurant_schedule`.`restaurant_id` and `restaurant_schedule`.`day` = ? and `restaurant_schedule`.`opening_time` < ? and `restaurant_schedule`.`closing_time` > ?) > 0), true, false) as open', [now()->dayOfWeek, now()->format('H:i:s'), now()->format('H:i:s')])
                             ->from('restaurants')
                             ->whereColumn('restaurants.id', 'food.restaurant_id');
-                    }, 'open');
+                    }, 'open')
+                    ->when($dietary_preferences, function($q) use ($dietary_preferences){
+                        return $q->withDietaryPreferences($dietary_preferences);
+                    });
 
                 if($popular_food_sort_by_unavailable == 'remove'){
                     $query = $query->available($time);
@@ -231,7 +245,7 @@ class ProductLogic
     }
 
 
-    public static function most_reviewed_products($zone_id, $limit = null, $offset = null, $type='all',$longitude=0,$latitude=0)
+    public static function most_reviewed_products($zone_id, $limit = null, $offset = null, $type='all',$longitude=0,$latitude=0,$dietary_preferences=null)
     {
         $best_reviewed_food_default_status = \App\Models\BusinessSetting::where('key', 'best_reviewed_food_default_status')->first();
         $best_reviewed_food_default_status = $best_reviewed_food_default_status ? $best_reviewed_food_default_status->value : 1;
@@ -258,7 +272,10 @@ class ProductLogic
                         ->whereColumn('restaurants.id', 'food.restaurant_id');
                 }, 'temp_available')
                 ->has('reviews')
-                ->withCount('reviews')->type($type);
+                ->withCount('reviews')->type($type)
+                ->when($dietary_preferences, function($q) use ($dietary_preferences){
+                    return $q->withDietaryPreferences($dietary_preferences);
+                });
 
             if($best_reviewed_food_default_status == '1'){
                 $query = $query->orderBy('reviews_count','desc');
@@ -519,7 +536,7 @@ class ProductLogic
 
 
 
-    public static function recommended_products($zone_id,$restaurant_id,$limit = null, $offset = null, $type='all',$name=null)
+    public static function recommended_products($zone_id,$restaurant_id,$limit = null, $offset = null, $type='all',$name=null,$dietary_preferences=null)
     {
         $data =[];
         if($limit != null && $offset != null)
@@ -541,11 +558,19 @@ class ProductLogic
                     });
                 });
             })
-            ->active()->type($type)->Recommended()->paginate($limit, ['*'], 'page', $offset);
+            ->active()->type($type)
+            ->when($dietary_preferences, function($q) use ($dietary_preferences){
+                return $q->withDietaryPreferences($dietary_preferences);
+            })
+            ->Recommended()->paginate($limit, ['*'], 'page', $offset);
                 $data = $paginator->items();
         }
         else{
-            $paginator = Food::where('restaurant_id', $restaurant_id)->active()->type($type)->whereHas('restaurant', function($q)use($zone_id){
+            $paginator = Food::where('restaurant_id', $restaurant_id)->active()->type($type)
+            ->when($dietary_preferences, function($q) use ($dietary_preferences){
+                return $q->withDietaryPreferences($dietary_preferences);
+            })
+            ->whereHas('restaurant', function($q)use($zone_id){
                 $q->whereIn('zone_id', $zone_id)->Weekday();
             })->Recommended()
             ->when(isset($name) , function($query)use($name){

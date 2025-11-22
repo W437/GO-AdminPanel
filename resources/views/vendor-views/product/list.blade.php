@@ -28,6 +28,88 @@
             </div>
         </div>
         <!-- End Page Header -->
+
+        <!-- Dietary Preference Filters -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="tio-filter-list"></i> {{ translate('Dietary Preference Filters') }}
+                </h5>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('vendor.food.list') }}" method="GET">
+                    <input type="hidden" name="type" value="{{ request('type', 'all') }}">
+                    <input type="hidden" name="category_id" value="{{ request('category_id', 'all') }}">
+
+                    <div class="row g-3">
+                        @php($dietaryPrefs = \App\Models\DietaryPreference::active()->get()->groupBy('type'))
+
+                        <div class="col-md-3">
+                            <label class="form-label">{{ translate('Diet Type') }}</label>
+                            <select name="dietary_diet[]" class="form-control js-select2-custom" multiple data-placeholder="{{ translate('Select diet types') }}">
+                                @foreach($dietaryPrefs['diet'] ?? [] as $pref)
+                                    <option value="{{ $pref->id }}" {{ in_array($pref->id, request('dietary_diet', [])) ? 'selected' : '' }}>
+                                        {{ $pref->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="form-label">{{ translate('Cultural Preferences') }}</label>
+                            <select name="dietary_cultural[]" class="form-control js-select2-custom" multiple data-placeholder="{{ translate('Select preferences') }}">
+                                @foreach($dietaryPrefs['religious'] ?? [] as $pref)
+                                    <option value="{{ $pref->id }}" {{ in_array($pref->id, request('dietary_cultural', [])) ? 'selected' : '' }}>
+                                        {{ $pref->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="form-label">{{ translate('Allergy-Free Options') }}</label>
+                            <select name="dietary_allergy[]" class="form-control js-select2-custom" multiple data-placeholder="{{ translate('Select allergy-free') }}">
+                                @foreach($dietaryPrefs['allergy'] ?? [] as $pref)
+                                    <option value="{{ $pref->id }}" {{ in_array($pref->id, request('dietary_allergy', [])) ? 'selected' : '' }}>
+                                        {{ $pref->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="form-label">{{ translate('Other Attributes') }}</label>
+                            <select name="dietary_other[]" class="form-control js-select2-custom" multiple data-placeholder="{{ translate('Select attributes') }}">
+                                @foreach($dietaryPrefs['other'] ?? [] as $pref)
+                                    <option value="{{ $pref->id }}" {{ in_array($pref->id, request('dietary_other', [])) ? 'selected' : '' }}>
+                                        {{ $pref->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="tio-filter-list"></i> {{ translate('Apply Filters') }}
+                            </button>
+                            <a href="{{ route('vendor.food.list') }}" class="btn btn-secondary">
+                                <i class="tio-clear"></i> {{ translate('Clear Filters') }}
+                            </a>
+                            @if(request()->hasAny(['dietary_diet', 'dietary_cultural', 'dietary_allergy', 'dietary_other']))
+                                <span class="badge badge-soft-info ml-2">
+                                    <i class="tio-checkmark-circle"></i>
+                                    {{ translate('Dietary filters active') }}
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- End Dietary Preference Filters -->
+
         <!-- Card -->
         <div class="card">
             <!-- Header -->
