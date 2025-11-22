@@ -90,3 +90,18 @@ $("#customFileEg1").change(function() {
 $('#category_id').on('change', function () {
     parent_category_id = $(this).val();
 });
+
+// Always Available Toggle
+$('#always_available_toggle').on('change', function() {
+    if ($(this).is(':checked')) {
+        // Set to 24/7 availability
+        $('#available_time_starts').val('00:00').prop('required', false).prop('readonly', true);
+        $('#available_time_ends').val('23:59').prop('required', false).prop('readonly', true);
+        $('#availability_time_fields').css('opacity', '0.5');
+    } else {
+        // Re-enable manual time selection
+        $('#available_time_starts').val('').prop('required', true).prop('readonly', false);
+        $('#available_time_ends').val('').prop('required', true).prop('readonly', false);
+        $('#availability_time_fields').css('opacity', '1');
+    }
+});

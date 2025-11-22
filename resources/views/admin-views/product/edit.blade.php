@@ -300,7 +300,15 @@
                             </h5>
                         </div>
                         <div class="card-body">
-                            <div class="row g-2">
+                            <div class="form-group mb-3">
+                                <label class="switcher">
+                                    <input type="checkbox" class="switcher_input" id="always_available_toggle" {{ ($product['available_time_starts'] == '00:00' && $product['available_time_ends'] == '23:59') ? 'checked' : '' }}>
+                                    <span class="switcher_control"></span>
+                                    <span class="switcher_label">{{ translate('messages.always_available') }}</span>
+                                </label>
+                                <small class="form-text text-muted">{{ translate('messages.enable_if_item_is_available_24/7') }}</small>
+                            </div>
+                            <div class="row g-2" id="availability_time_fields" style="opacity: {{ ($product['available_time_starts'] == '00:00' && $product['available_time_ends'] == '23:59') ? '0.5' : '1' }}">
                                 <div class="col-sm-6">
                                     <div class="form-group mb-0">
                                         <label class="input-label"
@@ -310,7 +318,7 @@
                                             </span></label>
                                         <input type="time" name="available_time_starts" class="form-control"
                                             id="available_time_starts"  value="{{ $product['available_time_starts'] }}"
-                                            placeholder="{{ translate('messages.Ex:_10:30_am') }} " required>
+                                            placeholder="{{ translate('messages.Ex:_10:30_am') }} " required {{ ($product['available_time_starts'] == '00:00' && $product['available_time_ends'] == '23:59') ? 'readonly' : '' }}>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -321,7 +329,7 @@
                                             data-original-title="{{ translate('messages.Required.')}}"> *
                                             </span></label>
                                         <input type="time" name="available_time_ends" class="form-control" value="{{ $product['available_time_ends'] }}"
-                                            id="available_time_ends" placeholder="5:45 pm" required>
+                                            id="available_time_ends" placeholder="5:45 pm" required {{ ($product['available_time_starts'] == '00:00' && $product['available_time_ends'] == '23:59') ? 'readonly' : '' }}>
                                     </div>
                                 </div>
                             </div>
@@ -496,7 +504,7 @@
                             </h5>
                         </div>
                         <div class="card-body">
-                            <input type="text" class="form-control" name="tags"  value="@foreach($product->tags as $c) {{$c->tag.','}} @endforeach" placeholder="Enter tags" data-role="tagsinput">
+                            <input type="text" class="form-control" name="tags"  value="@foreach($product->tags as $c) {{$c->tag.','}} @endforeach" placeholder="Enter tags" data-role="tagsinput" style="background-color: var(--bs-body-bg); color: var(--bs-body-color);">
                         </div>
                     </div>
                 </div>
@@ -966,5 +974,20 @@
         $('#reset_btn').click(function(){
             location.reload(true);
         })
+
+        // Always Available Toggle
+        $('#always_available_toggle').on('change', function() {
+            if ($(this).is(':checked')) {
+                // Set to 24/7 availability
+                $('#available_time_starts').val('00:00').prop('required', false).prop('readonly', true);
+                $('#available_time_ends').val('23:59').prop('required', false).prop('readonly', true);
+                $('#availability_time_fields').css('opacity', '0.5');
+            } else {
+                // Re-enable manual time selection
+                $('#available_time_starts').prop('required', true).prop('readonly', false);
+                $('#available_time_ends').prop('required', true).prop('readonly', false);
+                $('#availability_time_fields').css('opacity', '1');
+            }
+        });
     </script>
 @endpush

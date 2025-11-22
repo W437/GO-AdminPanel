@@ -305,7 +305,15 @@
                             </h5>
                         </div>
                         <div class="card-body">
-                            <div class="row g-2">
+                            <div class="form-group mb-3">
+                                <label class="switcher">
+                                    <input type="checkbox" class="switcher_input" id="always_available_toggle">
+                                    <span class="switcher_control"></span>
+                                    <span class="switcher_label">{{ translate('messages.always_available') }}</span>
+                                </label>
+                                <small class="form-text text-muted">{{ translate('messages.enable_if_item_is_available_24/7') }}</small>
+                            </div>
+                            <div class="row g-2" id="availability_time_fields">
                                 <div class="col-sm-6">
                                     <div class="form-group mb-0">
                                         <label class="input-label"
@@ -488,7 +496,7 @@
                             </h5>
                         </div>
                         <div class="card-body">
-                            <input type="text" class="form-control" name="tags" placeholder="Enter tags" data-role="tagsinput">
+                            <input type="text" class="form-control" name="tags" placeholder="Enter tags" data-role="tagsinput" style="background-color: var(--bs-body-bg); color: var(--bs-body-color);">
                         </div>
                     </div>
                 </div>
